@@ -1,0 +1,136 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Test \#1
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\intro}{
+\noindent There are a total number of 120 points available (100 are needed for a grade of 100\%).
+
+\noindent Show your work and clearly label your answers. \emph{No scrap paper, calculators, or notes are allowed}. 
+
+\noindent To get credit on a problem, you \emph{must} give a \emph{clear, well-written} explanation. An answer alone will not suffice.
+
+\noindent You have 90 minutes to complete this test. 
+%\vspace{5mm}
+\bigskip
+
+\noindent READ, AND PRINT AND SIGN YOUR NAME BEFORE BEGINNING THE TEST. \\
+I will neither give nor receive unauthorized assistance on this test. \\
+Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+ 
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\header
+
+\intro
+
+\vspace{20mm}
+
+\prob{1} ((2+3+5)x3 pts) Give the domain, range, and inverse of each of the following functions: 
+\begin{itemize}
+\item[(a) ] $f(x) = \ln(x^3 + 2)$
+\item[(b) ] $g(x) = \sqrt{9 - x^2}$
+\item[(c) ] $y = \arctan\left(\frac{x}{2}\right)$
+\end{itemize}
+
+\pagebreak 
+
+\header
+
+\prob{2} (5+5 pts)
+\begin{itemize}
+\item[(a) ] State and prove the Inverse Derivative Theorem.
+\item[(b) ] Use (a) to find the slope of the line tangent to the inverse of $y = x^2 - 5$ at the point $(a, f^{-1}(a)) = (-4,1)$. 
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{3} (10 pts) % 5.3
+
+Compute the equation of the line tangent to the \emph{inverse} of the function 
+\[ f(x) = 3 \arcsin(x-1) \] at the point $(a, f^{-1}(a)) = (\frac{\pi}{2}, \frac{3}{2})$. 
+
+\pagebreak
+
+\header
+
+\prob{4} (10+5 pts) % 5.6
+\begin{itemize}
+\item[(a) ] Compute \[ \frac{d}{dx} \left( \sin( \arctan(x^2) ) \right) \]
+and write your answer with \emph{no trigonometric functions} in it.
+\item[(b) ] Evaluate the derivative found in (a) at $x = \frac{1}{2}$.
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{5} (10 pts) % 5.7
+Compute \[ \int_0^1 \frac{x^2}{x^6 + 6} dx. \]
+
+\pagebreak 
+
+\header
+
+\prob{6} (5+5 pts) % 7.1
+
+\begin{itemize}
+\item[(a) ] Sketch the graph of the region completely enclosed by the curves 
+\begin{align*}
+f(x) & = 13x+12 \text{ and } g(x) = x^3.
+\end{align*}
+(Hint: Guess one of the intersection points, and use that to help find the others, \emph{before} sketching. How many intersections are there?)
+\item[(b) ] Compute the area of the region sketched in (a).
+\end{itemize}
+
+
+\pagebreak
+
+\header
+
+\prob{7} (5+10+10+10 pts) % 7.2, 7.3, 7.4
+
+\begin{itemize}
+\item[(a) ] Sketch the graph of the region contained by the curves 
+\[ y = 0, \,\, y = (x-4)^2 + 1, \,\, x = 2, \,\, x = 6. \] 
+\item[(b) ] Compute the volume of the solid obtained by revolving the region in (a) around the $x$-axis \emph{using the washer method}.
+\item[(c) ] Compute the volume of this solid from (a) \emph{using the shell method}. \\
+(Hint: compute the volume of \emph{half} of the solid, and mulitply your answer by 2.)
+\item[(d) ] Set up, but do not compute, the surface area of this solid.
+\end{itemize}
+
+
+
+\end{document}

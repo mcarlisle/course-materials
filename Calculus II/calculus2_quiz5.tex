@@ -1,0 +1,140 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Quiz \#5
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\namefield}{
+\noindent Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+\newcommand{\inst}[2]{
+Show your work and clearly label your answers on this quiz. \emph{No scrap paper, calculators, or notes are allowed} (or needed). This quiz is scored out of #1 points. (There are #2 points possible.) You have 60 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} show work. Even if you can do the work in your head, the point of these exercises is to get you to articulate your thought processes.
+}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\header
+
+\inst{100}{120}
+
+
+% 9.1
+(5+3+2 pts each) For each sequence, 
+\begin{itemize}
+\item[(a) ] list the first 5 terms;
+\item[(b) ] say if the sequence converges (and to what limit) or diverges (and how);
+\item[(c) ] say if the sequence is: bounded/unbounded, strictly/monotonic increasing/decreasing.
+\end{itemize}
+
+\prob{1} $a_n = \cos(\frac{n \pi}{3})$, $n \geq 0$
+
+\vspace{30mm}
+
+\prob{2} $b_n = \frac{4 n^2}{n^2 + 5}$, $n \geq 1$
+
+\vspace{30mm}
+
+\prob{3} $c_1 = 0.1$, $c_2 = 3$, $c_{n+2} = c_n c_{n+1}$, $n \geq 1$
+
+\vspace{30mm}
+
+\prob{4} $d_1 = 1$, $d_2 = 4$, $d_{n+2} = d_n d_{n+1}$, $n \geq 1$
+
+\pagebreak
+
+\header
+
+(5+3+2 pts each) For each series, 
+\begin{itemize}
+\item[(a) ] list the first 5 terms in the sequence of partial sums;
+\item[(b) ] say if the series converges (and to what limit) or diverges (and how);
+\item[(c) ] say if the series is: bounded/unbounded, strictly/monotonic increasing/decreasing.
+\end{itemize}
+
+\prob{5} $\sum\limits_{n = 0}^{\infty} \left( -\frac{2}{5} \right)^n$
+
+\vspace{25mm}
+
+\prob{6} $\sum\limits_{n = 1}^{\infty} \frac{3}{n}$
+
+\vspace{25mm}
+
+\prob{7} $\sum\limits_{n = 1}^{\infty} \frac{3}{2^n}$
+
+\vspace{25mm}
+
+\prob{8} $\sum\limits_{n = 1}^{\infty} \ln\left(\frac{n}{n+2}\right)$
+
+\pagebreak
+
+\header
+
+(5+5 pts each) For each decimal, 
+\begin{itemize}
+\item[(a) ] rewrite the decimal as a geometric series;
+\item[(b) ] rewrite the decimal as a ratio of whole numbers (in lowest terms).
+\end{itemize}
+
+\prob{9} $0.\overline{45}$
+
+\vspace{60mm} 
+
+\prob{10} $0.3\overline{2}$
+
+\pagebreak
+
+\header
+
+(4+4+2 pts each) 
+\begin{itemize}
+\item[(a) ] Use the integral test to determine if the series converges or diverges. 
+\item[(b) ] Use the comparison test to determine if the series converges or diverges. 
+\item[(c) ] Give the limit, if the series converges; explain the divergence if the series diverges.
+\end{itemize}
+
+\vspace{10mm}
+
+\prob{11}
+$\sum\limits_{n=1}^{\infty} \frac{5}{n^2}$
+
+\vspace{60mm}
+
+\prob{12} 
+$\sum\limits_{n=2}^{\infty} \frac{6n^2 - 5}{6n^3 - 15n + 2}$
+
+
+
+\end{document}

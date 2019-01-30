@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Quiz \#2
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\namefield}{
+\noindent Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+
+\newcommand{\inst}[2]{
+Show your work and clearly label your answers on this quiz. \emph{No scrap paper, calculators, or notes are allowed} (or needed). This quiz is scored out of #1 points. (There are #2 points possible.) You have 30 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} show work. Even if you can do the work in your head, the point of these exercises is to get you to articulate your thought processes.
+}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\header
+
+\inst{40}{50}
+
+
+\prob{1} (5+10 pts) % 7.1
+
+\begin{itemize}
+\item[(a) ] Sketch the graph of the region completely enclosed by the curves 
+\begin{align*}
+f(x) & = 4 - x^2 \text{ and } g(x) = x^2 + 2x.
+\end{align*}
+\item[(b) ] Compute the area of the region sketched in (a).
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{2} (5+10+10 pts) % 7.2, 7.3
+
+\begin{itemize}
+\item[(a) ] Sketch the graph of the region contained by the curves 
+\[ y = \frac{2}{x}, \,\, x = 1, \,\, x=2, \,\, y = 0. \] 
+\item[(b) ] Compute the volume of the solid obtained by revolving the curve in (a) around the $y$-axis \emph{using the washer method}. Explain all your steps.
+\item[(c) ] Compute the volume of the solid obtained by revolving the curve in (a) around the $y$-axis \emph{using the shell method}. Explain all your steps.
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{3} (10 pts) % 7.4
+
+What is the arc length of the curve $y = \sqrt{1 - x^2}$ over the interval $x \in [-1,1]$?
+
+
+\end{document}

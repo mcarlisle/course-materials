@@ -1,0 +1,149 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Sample Final Exam
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\namefield}{
+Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+\newcommand{\intro}{
+\noindent There are a total number of 110 points available (100 are needed for a grade of 100\%).
+
+\noindent Show your work and clearly label your answers. \emph{No scrap paper, calculators, or notes are allowed}. 
+
+\noindent To get credit on a problem, you \emph{must} give a \emph{clear, well-written} explanation. An answer alone will not suffice.
+
+\noindent You have 2 hours to complete this test. 
+%\vspace{5mm}
+\bigskip
+
+\noindent READ, AND PRINT AND SIGN YOUR NAME BEFORE BEGINNING THE TEST. \\
+I will neither give nor receive unauthorized assistance on this test. \\
+Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\header
+
+%\inst{45}{57}
+
+%\intro
+
+
+\prob{1} %(10 pts) % 5.3
+Compute the equation of the line tangent to the \emph{inverse} of the function $f(x) = 4^{3x-1}$ at the point $(a, f^{-1}(a)) = (16,1)$.
+
+\prob{2} %(10+5 pts) % 5.6
+Compute \[ \frac{d}{dx} \left( \cos( \arcsin(x^2) ) \right) \] and evaluate the derivative at $x = 1$.
+
+\prob{3} %(5+10+10 pts) % 7.2, 7.3
+\begin{itemize}
+\item[(a) ] Sketch the graph of the region contained by the curves 
+\[ y = x^3, \,\, x = 0, \,\, y=0, \,\, y = 8. \] 
+\item[(b) ] Compute the volume of the solid obtained by revolving the curve in (a) around the $x$-axis.
+\end{itemize}
+
+\prob{4} %(10 pts) % 8.3
+\[ \int_0^{\pi} \sin^3(3x) \cos^2(3x) dx =  \]
+
+\prob{5} %(10 pts) % 8.4
+\[ \int \sqrt{100 - x^2} dx =  \]
+
+\prob{6} %(5+5 pts) % 8.5
+\begin{itemize}
+\item[(a) ] 
+\[ \lim_{x \to 0} \frac{\sqrt{25-x^2} - 5}{x^2} = \]
+\item[(b) ] 
+\[ \lim_{x \to \frac{\pi}{2}} \frac{\cos(5x)}{\cos(3x)} = \]
+\end{itemize}
+
+\prob{7} %(10 pts) % 8.8
+\[ \int_1^{\infty} \frac{\ln(x)}{x^2} dx = \]
+
+\pagebreak
+
+\header
+
+% 9.1
+%(5+3+2 pts each) 
+For each sequence in Problems 8 and 9, 
+\begin{itemize}
+\item[(a) ] say if the sequence converges (and to what limit) or diverges (and how);
+\item[(b) ] say if the sequence is: bounded/unbounded, strictly/monotonic increasing/decreasing.
+\end{itemize}
+
+\prob{8} $b_n = \frac{7 n^2}{n^2 + 1}$, $n \geq 1$
+
+\prob{9} $c_1 = 0.1$, $c_2 = 3$, $c_{n+2} = c_n c_{n+1}$, $n \geq 1$
+
+%\prob{12} \[ \sum_{n = 0}^{\infty} \left( -\frac{2}{5} \right)^n \]
+
+\vspace{5mm}
+
+\prob{10} \[ \sum_{n = 1}^{\infty} \ln\left(\frac{n+2}{n+1}\right) = \]
+
+\prob{11} 
+\begin{itemize}
+\item[(a) ] Rewrite $6.\overline{24}$ as a geometric series.
+\item[(b) ] Rewrite $6.\overline{24}$ as a ratio of whole numbers (in lowest terms).
+\end{itemize}
+
+
+%(4+4+2 pts each) 
+
+%\prob{15} \[ \sum_{n=2}^{\infty} \frac{6n^2 - 5}{6n^3 - 15n + 2}  \]
+
+\prob{12} Test the series for convergence. If it converges, compute the limit or give bounds within 0.25 of the correct value.
+\[ \sum_{n = 1}^{\infty} \frac{(-1)^n}{n^2} = \]
+
+%\vspace{60mm}
+
+%\prob{4}  \[ \sum_{n = 1}^{\infty} \frac{5n-2}{2^n} \]
+
+%(5+5+5 pts each) 
+\prob{13} For \[ f(x) = 2 e^{3x-1}, \]
+give:
+\begin{itemize}
+\item[(a) ] the fourth degree MacLaurin polynomial;
+\item[(b) ] the fourth degree Taylor polynomial around $a = 2$; 
+\item[(c) ] the interval of convergence for the Taylor series around $a=2$. 
+\end{itemize}
+
+
+%\prob{13} \[ f(x) = 2\ln(x + 2) \]
+
+
+
+\end{document}

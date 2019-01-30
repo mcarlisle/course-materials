@@ -1,0 +1,105 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Quiz \#4
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\namefield}{
+\noindent Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+\newcommand{\inst}[2]{
+Show your work and clearly label your answers on this quiz. \emph{No scrap paper, calculators, or notes are allowed} (or needed). This quiz is scored out of #1 points. (There are #2 points possible.) You have 30 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} show work. Even if you can do the work in your head, the point of these exercises is to get you to articulate your thought processes.
+}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\header
+
+\inst{50}{60}
+
+
+\prob{1} (10 pts) % 8.5
+
+\[ \int \frac{x+25}{x^2 + 24x + 148} dx = \]
+
+\vspace{60mm} 
+
+%\prob{2} (10 pts)
+
+%\[ \int \frac{x}{84x^4 - 1} dx = \]
+
+
+\pagebreak
+
+\header
+
+\prob{2} (10+5 pts) % 4.6
+
+Use the Trapezoidal Rule, with $n=6$, to approximate $\int_0^3 (x^2 + 4) dx$, and compare to the exact answer of the integral.
+
+(Hint: $1/2$ on the outside, and 1, 2, 2, ..., 2, 1 on the inside.)
+\pagebreak
+
+\header
+
+\prob{3} (5+5+5 pts) % 8.7
+
+\begin{itemize}
+\item[(a) ] $\lim\limits_{x \to 5} \frac{e^{5-x}}{(x-5)^2} = $
+\item[(b) ] $\lim\limits_{x \to 0} \frac{\sqrt{25-x^2} - 5}{x^2} = $
+\item[(c) ] $\lim\limits_{x \to \frac{\pi}{2}} \frac{\cos(5x)}{\cos(3x)} = $
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{4} (10+10 pts) % 8.8
+
+\begin{itemize}
+\item[(a) ] Find the area of the region bounded by $x=0$, $y=0$, and $y = x^2 e^{-x}$; that is, compute 
+\[ \int_0^{\infty} x^2 e^{-x} dx = \]
+\item[(b) ] Compute the volume of the solid formed by revolving the curve $y = e^{-x}$, starting at $x=0$ and going right (limit as $x \to \infty$) around the $x$-axis.
+
+\vspace{5mm}
+
+(Conclusion: there are some abstract shapes that have infinite length and finite area, and abstract solids that have infinite surface area but contain finite volume. \\
+This phenomenon is referred to as \emph{Gabriel's horn} or \emph{Torricelli's trumpet}.)
+\end{itemize}
+
+
+
+\end{document}

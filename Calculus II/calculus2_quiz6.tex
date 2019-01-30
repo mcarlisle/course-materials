@@ -1,0 +1,99 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Quiz \#6
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\namefield}{
+\noindent Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+
+\newcommand{\inst}[2]{
+Show your work and clearly label your answers on this quiz. \emph{No scrap paper, calculators, or notes are allowed} (or needed). This quiz is scored out of #1 points. (There are #2 points possible.) You have 60 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} show work. Even if you can do the work in your head, the point of these exercises is to get you to articulate your thought processes.
+}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\header
+
+\inst{45}{57}
+
+\vspace{10mm} 
+(3 pts each test) For each series in \#1-3, use at least three different tests to attempt to answer if the series converges absolutely, converges conditionally, or diverges; if the test fails to give information, also say that. (You must attempt each test at least once over the three problems.) 
+\begin{itemize}
+\item[(a) ] integral test;
+\item[(b) ] comparison test;
+\item[(c) ] alternating series test; 
+\item[(c) ] ratio test; 
+\item[(d) ] root test.
+\end{itemize}
+
+\prob{1} $\sum\limits_{n = 1}^{\infty} \frac{3}{2^n}$
+
+\pagebreak
+
+\header
+
+\prob{2} $\sum\limits_{n = 1}^{\infty} \frac{\sin(\frac{n\pi}{2})}{n}$
+
+\vspace{70mm}
+
+\prob{3} $\sum\limits_{n = 1}^{\infty} \frac{(-3)^n}{n}$
+
+%\vspace{60mm}
+
+%\prob{4} $\sum\limits_{n = 1}^{\infty} \frac{5n-2}{2^n}$
+
+\pagebreak
+
+\header
+
+(5+5+5 pts each) For each function, give:
+\begin{itemize}
+\item[(a) ] the fourth degree MacLaurin polynomial;
+\item[(b) ] the fourth degree Taylor polynomial around $a = 4$; 
+\item[(c) ] the interval of convergence for the Taylor series in (b). 
+\end{itemize}
+
+\prob{4} $f(x) = \ln(x + 2)$
+
+\vspace{65mm} 
+
+\prob{5} $g(x) = \sqrt{x + 5}$
+
+
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Quiz \#1
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\namefield}{
+\noindent Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+
+
+\newcommand{\inst}[2]{
+Show your work and clearly label your answers on this quiz. \emph{No scrap paper, calculators, or notes are allowed} (or needed). This quiz is scored out of #1 points. (There are #2 points possible.) You have 30 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} show work. Even if you can do the work in your head, the point of these exercises is to get you to articulate your thought processes.
+}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\header
+
+\inst{55}{65}
+
+
+\prob{1} (10x3 pts) % 5.3
+For each function, give a domain (perhaps restricted) on which the function is one-to-one. Give the range of the function under that domain, and the inverse function.
+\begin{itemize}
+\item[(a) ] $f(x) = \frac{2x + 5}{x + 3}$
+\item[(b) ] $g(x) = \sqrt{ \sqrt{x} - 10}$
+\item[(c) ] $h(x) = \arcsin(x - 1)$
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{2} (10 pts) % 5.3
+
+Compute the equation of the line tangent to the \emph{inverse} of the function $f(x) = 8 - x^3$ at the point $(a, f^{-1}(a)) = (7,1)$. 
+
+\pagebreak
+
+\header
+
+\prob{3} (10+5 pts) % 5.6
+Compute \[ \frac{d}{dx} \left( \cos( \arcsin(\sqrt{x}) ) \right) \] and evaluate the derivative at $x = \frac{1}{4}$.
+(Hint: Notice that much of this problem simplifies!)
+
+\pagebreak
+
+\header
+
+\prob{4} (10 pts) % 5.7
+Compute \[ \int_0^1 \frac{x}{x^4 + 4} dx. \]
+Hint: 
+\[ \frac{d}{dx} \left(\arctan \left(u \right) \right) = \frac{du}{u^2 + 1}. \]
+
+
+\end{document}

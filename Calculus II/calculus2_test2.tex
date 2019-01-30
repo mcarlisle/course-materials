@@ -1,0 +1,133 @@
+\documentclass[10pt]{article}
+%\setlength{\oddsidemargin}{.5in}
+%\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{5.5in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-0.5in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.4in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 3010, Fall 2017
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{10mm} \noindent \textbf{Problem #1} \,\,}
+\newcommand{\header}{
+\begin{center}
+Calculus II Test \#2
+\end{center}
+
+\vspace{2mm}
+
+}
+
+\newcommand{\intro}{
+\noindent There are a total number of 110 points available (100 are needed for a grade of 100\%).
+
+\noindent Show your work and clearly label your answers. \emph{No scrap paper, calculators, or notes are allowed}. 
+
+\noindent To get credit on a problem, you \emph{must} give a \emph{clear, well-written} explanation. An answer alone will not suffice.
+
+\noindent You have 90 minutes to complete this test. 
+%\vspace{5mm}
+\bigskip
+
+\noindent READ, AND PRINT AND SIGN YOUR NAME BEFORE BEGINNING THE TEST. \\
+I will neither give nor receive unauthorized assistance on this test. \\
+Printed Name \underline{\hspace{50mm}} \,\,\, Signature \underline{\hspace{50mm}}
+}
+
+ 
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\header
+
+\intro
+
+\vspace{20mm}
+
+\prob{1} (10+5 pts)
+
+\begin{itemize}
+\item[(a) ] $\int x^2 \cos(5x) dx = $ \\
+\item[(b) ]$\int_0^{\pi} x^2 \cos(5x) dx = $
+\end{itemize}
+
+\pagebreak 
+
+\header
+
+\prob{2} (10 pts)
+
+\[ \int \frac{2}{\sqrt{81-4x^2}} dx =  \]
+
+\pagebreak
+
+\header
+
+\prob{3} (10 pts) 
+
+\[ \int \sin(2x)^6 \cos(2x)^3 dx =  \]
+
+\pagebreak
+
+\header
+
+\prob{4} (10 pts) 
+
+\[ \int \frac{x}{84x^2 - 1} dx = \]
+
+\pagebreak
+
+\header
+
+\prob{5} (10+5 pts) 
+
+Use Simpson's Rule, with $n=6$, to approximate $\int_0^2 (x^2 + 4) dx$, and compare to the exact answer of the integral.
+
+\[ \text{Hint: } \,\,\,\,\, \int_a^b f(x) dx \approx \frac{b-a}{3n}[f(x_0) + 4 f(x_1) + 2 f(x_2) + 4 f(x_3) + \cdots + 4 f(x_{n-1}) + f(x_n)]. \]
+
+\pagebreak 
+
+\header
+
+\prob{6} (10+10 pts) 
+
+\begin{itemize}
+\item[(a) ] $\lim\limits_{x \to 3} \frac{e^{3-x}}{(x+3)^2} = $
+\item[(b) ] $\lim\limits_{x \to \pi} \frac{\sin(6x)}{\sin(3x)} = $
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{7} (10+10 pts) 
+
+\begin{itemize}
+\item[(a) ] Find the area of the region bounded by $y = 5$ and $y = 5 - x^2 e^{-x}$.
+\item[(b) ] Compute the volume of the solid formed by revolving the curve $y = e^{-x}$, starting at $x=1$ and going right (limit as $x \to \infty$) around the $x$-axis.
+\end{itemize}
+
+\pagebreak
+
+\header
+
+\prob{8} (10 pts)
+
+Compute the area of the region bounded by the three curves 
+\[ y = \sqrt{4 - x^2}, \,\, y = \sqrt{1 - (x-1)^2}, \,\, \text{ and } y = -\sqrt{1 - (x+1)^2}. \]
+(Hint: Think geometrically.)
+
+
+\end{document}
