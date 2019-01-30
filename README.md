@@ -1,5 +1,5 @@
 # course-materials
-lecture slides, notes, quizzes, exams, code from old courses I've taught (of course, all errors are my own)
+lecture slides, notes, quizzes, exams, code from some courses I've taught
 
 General notes: 
 
