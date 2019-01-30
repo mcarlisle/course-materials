@@ -1,0 +1,67 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 2610, Fall 2016
+% github.com/mcarlisle/lecture-notes (posted Jan 2019)
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{center}
+Calculus I Quiz \#2
+\end{center}
+
+\noindent\textbf{Problem 1} Let $f(x) = \frac{4}{(x-6)^2} + 3$.
+\begin{itemize}
+\item[a) ] What are the domain and range of $y = f(x)$? 
+\item[b) ] Where is $f(x)$ continuous? 
+\item[c) ] What are the asymptotes of $f(x)$? 
+\end{itemize}
+
+\vspace{25mm}
+
+\noindent For Problems 2 and 3 below, you may use that 
+\[ \lim_{x \to 0} \frac{\sin x}{x} = 1, \,\, \lim_{x \to 0} \frac{\cos x - 1}{x} = 0 \]
+and 
+\[ \sin(x + \Delta x) = \sin(x) \cos(\Delta x) + \cos(x) \sin(\Delta x) \]
+but you should already know that $\sin(0) = 0$ and $\cos(0) = 1$. If you can't calculate it in radians, just write the number plugged in, i.e. $\sin(7)$ if you're asked about $\sin(x)$ at $x=7$ (since we don't use calculators in here). If a limit does not exist, use ``DNE''.
+
+\vspace{10mm}
+
+\noindent\textbf{Problem 2} 
+Evaluate the following limits. 
+\begin{itemize}
+\item[a) ] $\lim\limits_{x \to 4} \frac{\sin(x-4)}{x}$
+\item[b) ] $\lim\limits_{x \to 5} \frac{\sin(x-5)}{(x-5)}$
+\item[c) ] $\lim\limits_{x \to -\pi/2} \frac{\sin(x)}{(x)}$
+\item[d) ] $\lim\limits_{\Delta x \to 0} \frac{\sin (x + \Delta x) - \sin x}{\Delta x}$
+\end{itemize}
+
+\vspace{25mm}
+
+\noindent\textbf{Problem 3} Calculate the derivatives of the following functions. Tell where the derivatives exist and where they do not.
+\begin{itemize}
+\item[a) ] $f(x) = 6x^2 - 8x + 13$
+\item[b) ] $g(x) = |(x+1)^3|$
+\item[c) ] $h(x) = \left\{\begin{array}{ll} x^3 - 2 & \text{ if } x \geq 2 \\ x^3 - x & \text{ if } x < 2 \end{array}\right.$
+\item[d) ] $j(x) = [\cos(x)]^{-2} [\sin(x)]^2$ 
+\end{itemize}
+
+
+\end{document}

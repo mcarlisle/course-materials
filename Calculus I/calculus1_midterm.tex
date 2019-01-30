@@ -1,0 +1,192 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 2610, Fall 2016
+% github.com/mcarlisle/lecture-notes (posted Jan 2019)
+
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prob}[1]{\vspace{5mm} \noindent \textbf{Problem #1} \,\,}
+
+\newcommand{\header}{\begin{center}
+Calculus I Midterm Exam 
+\end{center}
+}
+
+\newcommand{\intro}{
+This test is worth a total of 100 points (out of 110). 
+
+Write your name on every one of the four pages of this test. 
+
+Write all work, labeled per problem. Circle your answers on each problem. 
+
+Work must be shown to receive credit for a problem. 
+
+(Even if you can ``do the problem in your head'', you can write down the steps you used.) 
+
+Calculators are not permitted.
+
+%\vspace{5mm}
+\bigskip
+
+\noindent READ, AND PRINT AND SIGN YOUR NAME BEFORE BEGINNING THE TEST. \\
+I will neither give nor receive unauthorized assistance on this exam. \\
+Printed Name \underline{\hspace{60mm}} \,\,\, Signature \underline{\hspace{60mm}}
+}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\header
+
+\intro
+
+\vspace{20mm}
+
+\noindent (\#1-2: 5 points each) Give the following limits. If the limit does not exist, write ``DNE''.
+
+\prob{1} \[ \lim_{x \to 5} \frac{\sin(2x-10)}{3x-15} =  \] % simple 
+
+\vspace{40mm}
+
+\prob{2} \[ \lim_{x \to -1} \frac{x}{x^2 - 1} = \] % 1.4 p. 79 #44
+
+%\prob{3} $\lim_{x \to 3} \left\{ \begin{array}{ll} -2x, & x \leq 2 \\ x^2 - 4x + 1, & x > 2 \end{array} \right.$
+
+\pagebreak
+
+\header 
+
+%\vspace{20mm}
+
+\noindent (\#3-5: 5 points each) Find the constants that make each function continuous on the entire real line, and describe why with limits. % 
+
+\prob{3} $f(x) = \left\{ \begin{array}{ll} x^3, & x \leq 2 \\ ax^2, & x > 2 \end{array} \right.$  % 1.4 p. 80 #65
+
+\vspace{50mm}
+
+\prob{4} $f(x) = \left\{ \begin{array}{ll} 2, & x \leq -1 \\ ax + b, & -1 < x < 3 \\ -2, & x \geq 3 \end{array} \right.$ \\ % 1.4 p. 80 #67
+
+\vspace{50mm}
+
+%\pagebreak
+
+%\header
+
+\prob{5} $f(x) = \left\{ \begin{array}{ll} \frac{x^2 - a^2}{x - a}, & x \neq a \\ 8, & x = a \end{array} \right.$ \\ % 1.4 p. 80 #68
+
+%\vspace{30mm}
+
+\pagebreak
+
+\header
+
+
+\prob{6} (10 points) State the definition of the derivative of a function $f(x)$: % 4 defns @ 5 pts each
+\begin{itemize}
+\item[a) ] in words;
+\item[b) ] with a limit.
+\end{itemize}
+
+\vspace{50mm}
+
+\prob{7} (5 points) State the product rule for the product of the three differentiable functions $f(x)$, $g(x)$, and $h(x)$. 
+
+\vspace{50mm}
+
+\prob{8} (5 points) State the chain (onion) rule for the composition of differentiable functions $f(x)$ (outer) by $g(x)$ (inner). 
+
+
+\pagebreak
+
+\header
+
+\noindent (\#9-11: 10 points each) Give $\frac{dy}{dx}$ for each function and evaluate at the given point $(x,y)$. \\ If the derivative does not exist, write ``DNE''. % 2 implicit @ 10 pts each
+
+\prob{9} $y^2 = \frac{x^2 - 49}{x^2 + 49}$; (7,0) \\ %2.5 p. 146 #23
+
+\vspace{40mm}
+
+%$(x+y)^3 = x^3 + y^3$; (-1, 1) \\ %2.5 p. 146 #24
+
+%\prob{10} $x^{2/3} + y^{2/3} = 5$ ; (8,1) \\ %2.5 p. 146 #25
+
+%$x^3 + y^3 = 6xy - 1$ ; (2,3) \\ %2.5 p. 146 #26
+
+%$\tan(x+y) = x$ ; (0,0) \\ %2.5 p. 146 #27
+
+\prob{10} $x \cos y = 1$ ; $(2, \pi/3)$ \\ %2.5 p. 146 #28
+
+\vspace{40mm}
+
+%\noindent (10 points) Give $\frac{d^2y}{dx^2}$ in terms of $x$, $y$, and $y'$. % 1 implicit @ 10 pts 
+
+%\vspace{10mm}
+
+\prob{11} $x^2 y^2 - 2x = 3$; $(1, \sqrt{5})$ %2.5 p. 147 #46
+
+\vspace{40mm}
+
+%$1 - xy = x - y$ \\ %2.5 p. 147 #48
+
+%$y^2 = x^3$ \\ %2.5 p. 147 #49
+
+
+\prob{12} (5 points) What is the equation of the line tangent to the curve at the point given in Problem 11?
+
+
+\pagebreak
+
+\header
+
+\prob{13} (20 points) %For each function and interval given: 
+\[ f(x) = \left\{ \begin{array}{ll} -x^3 + 1, & x \leq 0 \\ -x^2 + 2x, & x > 0 \end{array} \right. \]
+\begin{itemize}
+\item[a) ] Describe the continuity of the function.
+\item[b) ] Find the asymptotes (horizontal and vertical) of the function, if any.
+\item[c) ] Find the critical numbers of the function, if any.
+\item[d) ] Find the open intervals on which the function is increasing and decreasing.
+\item[e) ] Find all absolute (global) and relative (local) extrema of the function.
+\item[f) ] Describe the concavity of the function, and give any points of inflection.
+\item[g) ] Sketch the graph of the function.
+\end{itemize}
+
+%\vspace{10mm}
+
+%\prob{12} $f(x) = x^{1/3} + 1$ \\ % 3.3 p. 186 #27
+
+%$f(x) = (x-3)^{1/3}$ \\ % 3.3 p. 186 #30
+
+%\prob{13} $f(x) = \frac{2x}{x+3}$ \\ % 3.3 p. 186 #34
+
+%$f(x) = \frac{x^2 - 2x + 1}{x + 1}$ \\ % 3.3 p. 186 #37
+
+
+%\vspace{55mm}
+
+\pagebreak 
+
+\header
+
+\prob{14} (10 points) Give the $y$ that minimizes the total length of three line segments: \\
+one from $(-3,0)$ to $(0,y)$, one from $(3,0)$ to $(0,y)$, and one from $(0,y)$ to $(0,5)$, with $0 \leq y \leq 5$. \\
+(Sketch and label a graph to understand the question.)
+
+%(10 points) Find the maximal total area of a regular hexagon and an equilateral triangle with total perimeter 30.
+
+
+\end{document}
