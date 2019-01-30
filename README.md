@@ -3,7 +3,7 @@ lecture slides, notes, quizzes, exams, code from old courses I've taught (of cou
 
 General notes: 
 
-I have only posted one version of each item (usually there are multiple versions of each quiz and exam).
+I have only posted one version of each item (usually there are multiple versions of each quiz and exam, and all materials change slightly as time goes on).
 
 Quizzes are short in-class exercise sets. They typically have 3-5 questions on them, and, depending on the quiz, were given 20-30 minutes for completion. 
 
