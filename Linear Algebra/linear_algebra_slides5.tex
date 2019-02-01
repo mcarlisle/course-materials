@@ -1,0 +1,415 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+
+\title[Determinants]{Linear Algebra and Matrix Methods \\
+Determinants }
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Determinant answers ``Is this square matrix invertible?''}
+
+The \textbf{determinant} of a square\footnote{We only compute determinants for square matrices.} matrix $A$ is a number that simplifies the question of whether or not the matrix is invertible. 
+
+\vspace{5mm}
+
+Denoted $det(A)$ or $|A|$, the matrix $A$ is invertible iff $det(A) \neq 0$:
+
+\vspace{3mm}
+
+\[ det(A^{-1}) = (det(A))^{-1} = \frac{1}{det(A)}. \]
+
+\vspace{5mm}
+
+If $det(A) = 0$, then not being allowed to divide by zero signals a lack of invertibility of $A$. 
+
+}
+
+
+
+\frame{ \frametitle{Determinants of 2x2 matrices}
+
+The determinant of the 2x2 matrix 
+
+\vspace{3mm}
+
+\[ A = \mrr{a}{b}{c}{d} \]
+
+is 
+
+\[ det(A) = ad - bc. \]
+
+\vspace{3mm}
+
+If $ad \neq bc$, then the inverse of $A$ is 
+
+\vspace{3mm}
+
+\[ A^{-1} = \frac{1}{det(A)} \mrr{d}{-b}{-c}{a}. \]
+
+
+}
+
+
+\frame{ \frametitle{Properties of determinants of matrices}
+
+\begin{itemize}
+\item $det(I) = 1$ for any size identity matrix.
+\vspace{3mm}
+\item For a permutation matrix $P$, $det(P) = (-1)^s$, where $s$ is the number of row swaps from $I$ that makes $P$.
+\vspace{3mm}
+\item If $A$ is triangular (lower or upper, or diagonal - both!), then $det(A)$ is the product of its diagonal entries: 
+\[ det(A) = \prod_{i=1}^n a_{ii}. \]
+\vspace{3mm}
+\item Scaling an $n \times n$ matrix $A$ by a constant $c$ scales $det(A)$ by $c^n$: 
+\[ det(A) = D \implies det(cA) = c^n D. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of determinants of matrices}
+
+\begin{itemize}
+\item Scaling only one row of $A$ scales the determinant by just that amount. For example, 
+\begin{align*} 
+det\mrr{2}{4}{5}{-9} & = -18-20 = -38 \\
+\implies det\mrr{2}{4}{-10}{18} & = -2(-38) = 36 + 40 = 76. 
+\end{align*}
+\item $det(A)$ is a linear function of each row separately: 
+\[ det\mrr{a+a'}{b+b'}{c}{d} = det\mrr{a}{b}{c}{d} + det\mrr{a'}{b'}{c}{d}. \]
+\item Thus, in general, 
+\[ det(A + B) \neq det(A) + det(B). \]
+\end{itemize}
+
+}
+
+\frame{ \frametitle{Properties of determinants of matrices}
+
+\begin{itemize}
+\item For example,
+\begin{align*}
+det\mrr{2}{0}{0}{2} = 4 \neq det\mrr{1}{0}{0}{1} +  det\mrr{1}{0}{0}{1} = 1 + 1 = 2.
+\end{align*}
+\item If two rows are equal, then $det(A) = 0$. \\
+(Think: equal rows in $A$ causes ``0=0'' or ``0=1'' in $A\vec{x} = b$.)
+\vspace{3mm}
+\item Generalizing, if one row is a linear combination of any of the other rows of $A$, then $det(A) = 0$. (Same reason.)
+\vspace{3mm}
+\item An all-zero row makes $det(A) = 0$. (Same reason.)
+\vspace{3mm}
+\item Row addition (\emph{not} scaling) operations do \emph{not} change $det(A)$. 
+\vspace{3mm}
+\item $det(A) = det(A^t)$: any ``row'' property is also for ``columns''.
+\vspace{3mm}
+\item $det(AB) = det(A) \cdot det(B)$. 
+\end{itemize}
+
+}
+
+\frame{ \frametitle{In general, determinants are hard to compute.}
+
+Computing a $2 \times 2$ determinant is easy, but in general, an $n \times n$ determinant takes a large number of computations to find. 
+
+\vspace{5mm}
+
+There are ways to make it simpler: 
+\vspace{3mm}
+\begin{itemize}
+\item \textbf{Factorization} yields \textbf{pivots} to multiply easily.
+\vspace{3mm}
+\item Computing \textbf{recursively} via \textbf{cofactors} allows simpler computations.
+\vspace{3mm}
+\item Otherwise, directly calculating via the ``big formula'' with \textbf{permutations} uses $n!$ terms for an $n \times n$ matrix.
+\end{itemize}
+
+}
+
+\frame{ \frametitle{Computing a determinant via pivots}
+
+We have previously seen that, if a square matrix $A$ is invertible, then it has a factorization 
+\[ PA = LU \]
+where $P$ is a permutation matrix, $L$ is lower triangular with diagonal 1s, and $U$ is upper triangular. If row swaps are not needed, this can be written 
+\[ A = LU, \]
+or 
+\[ A = LDU \]
+if we factor the diagonal $D$ off of $U$. 
+All of these forms make it very simple to compute $det(A)$. 
+
+}
+
+\frame{ \frametitle{Computing a determinant via pivots}
+
+In the form $PA = LU$, we have 
+\begin{align*}
+det(A) = \frac{det(L) det(U)}{det(P)} 
+\end{align*}
+where
+\begin{itemize}
+\item $det(P) = (-1)^s$ if $s$ row swaps are needed for factorization, 
+\vspace{3mm}
+\item $det(L) = 1^n = 1$, 
+\vspace{3mm}
+\item $det(U) = \prod_{i=1}^n u_{ii}$ if $u_{ii}$ are the diagonal elements of $U$. 
+\end{itemize}
+
+}
+
+\frame{ \frametitle{Computing a determinant via pivots}
+
+In the form $A = LDU$, with triangular $L$ and $U$ having 1 diagonals, and $D$ a diagonal matrix, \vspace{3mm}
+\begin{itemize}
+\item $det(L) = det(U) = 1^n =  1$
+\vspace{3mm}
+\item $det(D) = \prod_{i=1}^n d_{ii}$
+\end{itemize}
+\[ \implies det(A) = det(L) det(D) det(U) = det(D) = \prod_{i=1}^n d_{ii}. \]
+
+}
+
+\frame{ \frametitle{The ``big formula'' for determinants}
+
+To construct the ``big formula'' for the determinant of an $n \times n$ matrix $A$, first note that there are $n!$ \textbf{permutations} $\sigma$ of the elements $\{1, 2, ..., n\}$: 
+\[ \sigma: \{1, 2, ..., n\} \to \{1, 2, ..., n\} \]
+We denote the set of all permutations\footnote{also known as the \textbf{symmetric group} on $n$ elements} on $\{1, 2, ..., n\}$ by $S_n$. 
+
+There are $n!$ different permutation matrices of size $n \times n$, corresponding to the $n!$ elements of $S_n$. Thus, we will denote the permutation matrix corresponding to $\sigma$ by $P_{\sigma}$.
+
+\vspace{5mm}
+
+The formula is 
+\[ det(A) = \sum_{\sigma \in S_n} det(P_{\sigma}) a_{1 \sigma(1)} a_{2 \sigma(2)} \cdots a_{n \sigma(n)} \]
+
+}
+
+
+\frame{ \frametitle{The ``big formula'' for determinants: $3 \times 3$}
+
+Here is the complete $3 \times 3$ case. Let 
+
+\[ A = \mrrr{a_{11}}{a_{12}}{a_{13}}{a_{21}}{a_{22}}{a_{23}}{a_{31}}{a_{32}}{a_{33}}. \]
+
+There are $3! = 6$ permutations of $\{1,2,3\}$: 
+\begin{itemize}
+\item $\frac{3!}{2} = 3$ ``even'' permutations, with 0 or 2 swaps: 
+\[ \cvvv{1 \to 1}{2 \to 2}{3 \to 3}, \,\, \cvvv{1 \to 2}{2 \to 3}{3 \to 1}, \,\, \cvvv{1 \to 3}{2 \to 1}{3 \to 2}, \]
+\item and $\frac{3!}{2} = 3$ ``odd'' permutations, with 1 swap:
+\[ \cvvv{1 \to 2}{2 \to 1}{3 \to 3}, \,\, \cvvv{1 \to 3}{2 \to 2}{3 \to 1}, \,\, \cvvv{1 \to 1}{2 \to 3}{3 \to 2}. \]
+\end{itemize}
+}
+
+
+\frame{ \frametitle{The ``big formula'' for determinants: $3 \times 3$}
+
+Thus, 
+\begin{align*} 
+det(A) & = a_{11} a_{22} a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21} a_{32} \\
+& - a_{12} a_{21} a_{33} - a_{13} a_{22} a_{31} - a_{11} a_{23} a_{32}.
+\end{align*}
+
+\vspace{10mm}
+
+The $4 \times 4$ case has $4! = 24$ terms; the $5 \times 5$ has $5! = 120$ terms....
+}
+
+
+\frame{ \frametitle{Cofactors: Determinants via recursion}
+
+The vast number of ways to factor terms in the big formula hints at the fact that we can isolate smaller blocks in a matrix, called \textbf{cofactor matrices}, and define the determinant recursively. 
+
+\vspace{5mm}
+
+Define $M_{ij}$ as the $n-1 \times n-1$ submatrix of $A$ constructed by deleting row $i$ and column $j$, and let $C_{ij} = (-1)^{i+j} det(M_{ij})$. 
+
+\vspace{5mm}
+
+$det(M_{ij})$ is called the $(i,j)$-\textbf{minor} of $A$; $C_{ij}$ is the $(i,j)$-\textbf{cofactor}.
+
+\vspace{5mm}
+
+Then, choose one row, row $i$, to delete, and index through all columns. We have the \textbf{cofactor formula} 
+\[ det(A) = \sum_{j=1}^n a_{ij} C_{ij}. \]
+%Note that $C_{ij}$ is a collection of $(n-1)!$ terms from the big formula that all share $a_{ij}$, with $a_{ij}$ factored out (hence the term \textbf{cofactor}). 
+
+}
+
+\frame{ \frametitle{The cofactor formula for determinants: $3 \times 3$}
+
+If we choose row 1 to delete, then the big formula can be rewritten  
+\begin{align*} 
+M_{11} & = \mrr{a_{22}}{a_{23}}{a_{32}}{a_{33}}, \,\, M_{12} = \mrr{a_{21}}{a_{23}}{a_{31}}{a_{33}}, \,\, M_{13} = \mrr{a_{21}}{a_{22}}{a_{31}}{a_{32}} \\
+ & \\
+det(A) & = (-1)^{1+1} a_{11} (a_{22} a_{33} - a_{23} a_{32}) \\
+ & \,\,\,\,\,\, + (-1)^{1+2} a_{12} (a_{21} a_{33} - a_{23} a_{31})  \\
+ & \,\,\,\,\,\,\,\,\, + (-1)^{2+2} a_{13} (a_{21} a_{32} - a_{22} a_{31}) \\
+ & = a_{11} a_{22} a_{33} + a_{12} a_{23} a_{31} + a_{13} a_{21} a_{32} \\
+ & \,\,\,\,\,\, - a_{12} a_{21} a_{33} - a_{13} a_{22} a_{31} - a_{11} a_{23} a_{32}.
+\end{align*}
+Note that, since $det(A) = det(A^t)$, we could also fix a column to delete, and index over rows.
+}
+
+
+\frame{ \frametitle{Cramer's Rule: Cofactors}
+
+Throughout this section, we assume $det(A) \neq 0$, so our square system has a unique solution.
+
+\vspace{5mm}
+
+\textbf{Cramer's Rule} is a method by which the solution of $A \vec{x} = b$ looks more like one-dimensional algebra than the $LU$ decomposition we saw earlier. 
+
+\vspace{5mm}
+
+If $ax = b$ is a standard basic algebra product, then the \textbf{cofactor} of the factor $a$ is $x = \frac{b}{a}$. We generalize this method of solution with the cofactors seen earlier.
+
+}
+
+
+\frame{ \frametitle{Cramer's Rule: Cofactors}
+
+Let $X_j$ be the square matrix that replaces column $j$ in $I$ with $\vec{x}$. 
+
+\begin{ex}
+\[ X_2 = \mrrr{1}{x_1}{0}{0}{x_2}{0}{0}{x_3}{1} \]
+\end{ex}
+Let $B_j$ be the square matrix that replaces column $j$ in $A$ with $b$. 
+
+\begin{ex}
+
+$$A = \mrrr{1}{-4}{5}{-3}{2}{0}{6}{-11}{9}, \,\, {\color{blue} b = \cvvv{10}{20}{30} }
+\implies B_3 = \mrrr{1}{-4}{ {\color{blue}10}}{-3}{2}{ {\color{blue}20}}{6}{-11}{ {\color{blue}30}}.$$
+
+\end{ex}
+
+Cramer's Rule is a way to solve $A\vec{x} = b$ via determinants.
+
+}
+
+
+\frame{ \frametitle{Cramer's Rule for solving $A\vec{x} = b$}
+
+Each term $x_j$ in the solution vector $\vec{x}$ can be found via taking determinants of the matrix equation  
+\[ A X_j = B_j. \]
+Since $det(X_j) = x_j$, this gives us 
+
+\vspace{5mm}
+
+\textbf{Cramer's Rule I}: If $A\vec{x} = b$ has a unique solution, the solution is 
+\[ x_j = \frac{det(B_j)}{det(A)}, \,\, j = 1, 2, ..., n. \]
+
+
+Attempting to solve this system directly requires computing $n+1$ determinants, each at the cost of summing $n!$ products. %, which is more computationally expensive than the $LU$ elimination method.
+
+}
+
+
+\frame{ \frametitle{Cramer's Rule for finding $A^{-1}$}
+
+We can also use a cofactor-based method for computing $A^{-1}$. 
+
+\vspace{5mm}
+
+\textbf{Cramer's Rule II}: If $det(A) \neq 0$, and $C_{ij}$ are $A$'s cofactors, then the entries of $A^{-1}$ are 
+\[ (A^{-1})_{ij} = \frac{C_{ji}}{det(A)}. \]
+Setting $C$ as the \textbf{cofactor matrix} with $C_{ij}$ as entry $(i,j)$, we have
+\[ A^{-1} = \frac{1}{det(A)} C^t. \]
+
+}
+
+
+\frame{ \frametitle{Application: cross product}
+
+Let $u, v \in \R^3$. The \textbf{cross product} of $u$ and $v$, denoted $u \times v$, is defined by 
+\[ u \times v = (||u|| \cdot ||v|| \cdot \sin(\theta)) \cdot n, \]
+where $n \in \R^3$ has the following properties:
+\begin{itemize}
+\item $\theta$ is the angle between $u$ and $v$
+\item $n \perp u$
+\item $n \perp v$
+\item $||n|| = 1$
+\item $n$ is in the direction based on the ``right hand rule'' of physics.
+\end{itemize}
+
+\vspace{5mm}
+
+Compare this definition to the \textbf{dot product} of $u$ and $v$:
+\[ u \cdot v = ||u|| \cdot ||v|| \cdot \cos(\theta). \]
+
+}
+
+
+\frame{ \frametitle{Application: cross product}
+
+Note that the three standard basis vectors in $\R^3$, when used in some physics and engineering contexts, are written as 
+\[ i = e_1, \,\, j = e_2, \,\, k = e_3, \] 
+with the following relationship via the cross product\footnote{This relationship involves a deeper mathematical meaning, via the \emph{quaternions}, which extend the complex numbers $\mathbb{C}$ to three ``imaginary'' units. The cross product defines unit quaternion multiplication, which is not commutative.}: 
+\[ i \times j = k, \,\, j \times i = -k. \]
+
+}
+
+
+\frame{ \frametitle{Application: cross product}
+
+The cross product can be computed by using the cofactor method of determinant computation across row 1 of the following ``matrix'': 
+
+\begin{align*}
+u \times v & = \text{``det''}\mrrr{i}{j}{k}{u_1}{u_2}{u_3}{v_1}{v_2}{v_3} \\
+ & = det\mrr{u_2}{u_3}{v_2}{v_3} i - det\mrr{u_1}{u_3}{v_1}{v_3} j + det\mrr{u_1}{u_2}{v_1}{v_2} k.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Application: cross product, area}
+
+The length of the cross product of $u \times v$ is the area of the parallelogram formed by the vectors $u$ and $v$, with diagonal $u + v$. 
+
+ \[ A_{||} = ||u \times v|| = ||u|| \cdot ||v|| \cdot |\sin(\theta)| \] 
+ 
+\vspace{5mm}
+
+Thus, the area of the triangle formed by $u$ and $v$ is 
+\[ A_{\triangle} = \frac{1}{2} ||u \times v|| =  \frac{1}{2} ||u|| \cdot ||v|| \cdot |\sin(\theta)|. \]
+
+
+}
+
+
+\frame{ \frametitle{Applications: cross product, volume}
+
+\begin{thm}
+In general, if $A$ is an $m \times n$ matrix, then the volume of the parallelpiped $P$ formed in $\R^n$ by the $m$ rows of $A$ is computed via 
+\[ vol(P) = \sqrt{det(A A^t)}. \]
+\end{thm}
+
+
+}
+
+
+\frame{ \frametitle{Applications: cross product, area}
+
+If $P$ is the parallelogram in $\R^n$ formed by $u$ and $v$, and $\theta$ is the angle between them, then 
+\begin{align*}
+A = \cvv{u}{v} \implies A A^t & = \mrr{||u||^2}{u \cdot v}{u \cdot v}{||v||^2} \\
+\implies vol(P) = \sqrt{det(A A^t)} & = \sqrt{||u||^2 ||v||^2 - (u \cdot v)^2} \\
+ & = ||u|| \cdot ||v|| \sqrt{1 - \left(\frac{u \cdot v}{||u|| \cdot ||v||}\right)^2} \\
+ & = ||u|| \cdot ||v|| \sqrt{1 - \cos^2(\theta)} \\
+ & = ||u|| \cdot ||v|| \cdot |\sin(\theta)|.
+\end{align*}
+In $\R^3$, this is $area(P) = ||u \times v||$. 
+
+}
+
+
+\end{document}

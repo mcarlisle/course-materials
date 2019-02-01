@@ -1,0 +1,794 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+
+\title[Vector Spaces, Subspaces]{Linear Algebra and Matrix Methods \\ 
+Vector Spaces, Subspaces }
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{From Ordered $n$-tuples of Real Numbers to...}
+
+So far we have dealt with vectors of sequences of real numbers (with real scalar multiplication), and how can be used in solving \textbf{systems of linear equations}. 
+
+\vspace{5mm}
+
+While $\R^n$ is the most useful vector space we know about right now, there are many other  mathematical objects that can be described as \textbf{vectors}. The spaces they exist in are called \textbf{vector spaces}. 
+
+
+}
+
+
+\frame{ \frametitle{Abstract Vector Spaces}
+
+If the elements of a space $V$ have the following properties, we call $V$ a \textbf{real vector space}.\footnote{We can replace the scalar field $\R$ with $\C$ for a \textbf{complex vector space}. \\
+This happens, for example, in quantum mechanics.} 
+
+\vspace{5mm}
+
+\begin{itemize}
+\item \textbf{linearity} over $\R$: The operations of \textbf{scalar multiplication} by real numbers and \textbf{vector addition} are \textbf{closed} in $V$. This means $V$ contains all \textbf{linear combinations} of its elements: 
+
+\[ v, w \in V \text{ and } a, b \in \R \implies av + bw \in V. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Abstract Vector Spaces}
+
+\begin{itemize}
+\item \textbf{vector addition is commutative}: If $v, w \in V$, then 
+\[ v + w = w + v. \]
+\item \textbf{vector addition is associative}: If $v, w, x \in V$, then 
+\[ v + (w + x) = (v + w) + x. \]
+\end{itemize}
+}
+
+
+\frame{ \frametitle{Abstract Vector Spaces}
+
+\begin{itemize}
+\item \textbf{scalar multiplication is associative}: 
+if $a, b \in \R$ and $v \in V$, then 
+\begin{align*}
+a(bv) & = (ab)v
+\end{align*}
+\item \textbf{scalar multiplication is distributive}\footnote{We don't need to mention properties of real number arithmetic because we are focusing here on how scalars operate on vectors. Also, if we replace $\R$ with $\C$ as the scalar field, scalar multiplication is \emph{not} commutative. As that is not one of the properties we require, complex vector spaces are OK.}: 
+if $a \in \R$ and $v , w \in V$, then 
+\begin{align*}
+a(v + w) & = av + aw.
+\end{align*}
+\end{itemize}
+}
+
+
+\frame{ \frametitle{Abstract Vector Spaces}
+
+\begin{itemize}
+\item \textbf{scalar multiplicative identity}: The real number $1$ acts as a multiplicative identity for scalars: for any $v \in V$, 
+\[ 1 v = v. \] 
+\item \textbf{vector additive identity}: There exists a vector called \textbf{zero} (denoted 0) in $V$ such that 
+\[ \forall v \in V, \,\, v + 0 = 0 + v = v. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Abstract Vector Spaces}
+
+\begin{itemize}
+\item \textbf{vector additive inverses}: For each $v \in V$, there exists a unique $w \in V$, called the \textbf{additive inverse} of $v$, such that 
+\[ v + w = w + v = 0. \]
+We denote $w = -v$, and call $w$ ``negative $v$''. 
+\end{itemize}
+
+\vspace{5mm}
+
+Note that vector multiplication is \emph{not} considered in the vector space properties. 
+
+}
+
+
+\frame{ \frametitle{Some Examples of Real Vector Spaces}
+
+Certainly, $\R^n$ is a real vector space, and the one we will focus on. However, there are other very important vector spaces that may not be as obvious at first glance. 
+
+\vspace{5mm}
+
+\begin{itemize}
+\item $F(\R^n, \R^m) = \{ f \, | \, f: \R^n \to \R^m \}$ 
+\end{itemize}
+
+The set of real-vector-valued functions of a real vector contains all linear combinations of functions.
+
+\vspace{5mm}
+
+Let $f(x) = \sin(x)$ and $g(x) = x^3 - 5x + 2$. Then $f, g \in F(\R, \R)$, and so we know that 
+\[ h := 10f - 3.4g \in F(\R, \R) \]
+as well. In fact, 
+\[ h(x) = 10 \sin(x) - 3.4 x^3 + 17x - 6.8. \]
+
+}
+
+
+\frame{ \frametitle{Some Examples of Real Vector Spaces}
+
+\begin{itemize}
+\item $M_{n \times n}(\R) = \{ M \, | \, M $ is an $n \times n$ matrix with entries in $\R \}$
+\end{itemize}
+Yes, it may look strange to call matrices ``vectors'', but the space of square matrices of the same size satisfies all the properties of a vector space. 
+
+\[ A = \mrr{4}{5}{-2}{0}, \,\, B = \mrr{-1}{2}{0}{6} \in M_{2 \times 2}(\R) \]
+
+}
+
+
+\frame{ \frametitle{Vector Subspaces}
+
+A subset $W \subseteq V$ is called a \textbf{vector subspace} of $V$ if $W$ \emph{also} satisfies the linearity property of a vector space (closed under linear combinations). This means $W$ is a vector space in its own right. 
+
+\vspace{5mm}
+
+There are many subsets of $V$ that are \emph{not} subspaces of $V$. 
+
+}
+
+
+\frame{ \frametitle{Vector Subspaces}
+
+Some observations: 
+\begin{itemize}
+\item If $W$ is a subspace of $V$, then $0 \in W$. 
+\item The simplest subspaces of $V$ to describe are $V$ itself and the \textbf{trivial subspace} $\{0\}$. The rest are ``in between'', subset-wise.
+\end{itemize}
+
+\vspace{5mm}
+
+Note that the trivial subspace $\{0\}$ is \emph{not} the empty set $\emptyset$. 
+
+\vspace{5mm}
+
+The empty set is \emph{not} a vector space (why)?
+
+
+}
+
+
+\frame{ \frametitle{Vector Subspaces: Examples}
+
+Some examples of vector subspaces are: 
+
+\begin{itemize}
+\item $C(\R) \subseteq F(\R, \R)$, the subspace of continuous real-valued functions, is a vector subspace of all real-valued functions.
+\item The space of $n \times n$ \emph{diagonal} matrices is a subspace of $M_{n \times n}(\R)$.
+\item Any line through the origin is a vector subspace of $\R^n$.
+\item Any plane through the origin is a vector subspace of $\R^n$.
+\end{itemize}
+
+
+}
+
+
+
+\frame{ \frametitle{Vector Subspaces of $\R^n$}
+
+Consider a plane through the origin of $\R^3$. This plane can be described as a two-dimensional subspace, since the plane can be represented by one equation, with fixed $a, b, c \in \R$, $a \neq 0$: 
+\[ ax_1 + bx_2 + cx_3 = 0. \]
+This one equation only needs two variables to describe its set of vectors. Call this plane P. Then,
+\begin{align*}
+P & = \{ (x_1, x_2, x_3) \in \R^3 \, | \, ax_1 + bx_2 + cx_3 = 0 \} \\
+ & = \left\{ (x_1, x_2, x_3) \in \R^3 \, | \, x_1 = \frac{1}{a}(-bx_2 + -cx_3) \right\} \\
+ & = \left\{ \left(\frac{1}{a}(-bx_2 + -cx_3), x_2, x_3\right) \in \R^3 \right\}.
+\end{align*}
+We will call $x_1$ a \textbf{pivot variable}, and $x_2$ and $x_3$ \textbf{free variables}. 
+
+}
+
+
+\frame{ \frametitle{Linear span of a set of vectors}
+
+Let $S = \{v_1, v_2, ..., v_m\} \subseteq V$ be a set of vectors. 
+
+\vspace{5mm}
+
+The \textbf{(linear) span} of the set $S$ is the set of all linear combinations of vectors in $S$: 
+\[ span(S) := \{ c_1 v_1 + c_2 v_2 + \cdots + c_m v_m \, | \, c_i \in \R, i=1,2,...,m \}. \]
+Note that, since setting all $c_i = 0$ is a possibility, $0 \in span(S)$.
+
+\vspace{5mm}
+
+$span(S)$ is a vector subspace of $V$.
+
+\vspace{5mm}
+
+This type of subspace is crucial to our analysis.
+
+}
+
+
+\frame{ \frametitle{A vector subspace is a linear span}
+
+Back to our example plane: 
+\begin{align*}
+P & = \{ (x_1, x_2, x_3) \in \R^3 \, | \, ax_1 + bx_2 + cx_3 = 0 \} \\
+ & = \left\{ \left(\frac{1}{a}(-bx_2 + -cx_3), x_2, x_3\right) \in \R^3 \right\}.
+\end{align*}
+
+We can decompose this representation of vectors in $P$ by rewriting per variable, getting $P$ as the span of two vectors in $\R^3$. We call these two vectors \textbf{special solutions}. 
+\begin{align*}
+P & = \left\{ x_2 \cvvv{-\frac{b}{a}}{1}{0} + x_3 \cvvv{-\frac{c}{a}}{0}{1} \, \bigg| \, x_2, x_3 \in \R \right\} \\
+ & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right).
+\end{align*}
+
+
+}
+
+
+\frame{ \frametitle{Any vector (sub)space is a linear span}
+
+Seeing the original space $\R^3$ in the same fashion, using the \textbf{standard basis vectors}, we have 
+\begin{align*}
+\R^3 & = \left\{ x_1 \cvvv{1}{0}{0} + x_2 \cvvv{0}{1}{0} + x_3 \cvvv{0}{0}{1} \, \bigg| \, x_1, x_2, x_3 \in \R \right\} \\
+ & = span\left(\left\{\cvvv{1}{0}{0}, \cvvv{0}{1}{0}, \cvvv{0}{0}{1}\right\} \right). \\
+P & = \left\{ x_2 \cvvv{-\frac{b}{a}}{1}{0} + x_3 \cvvv{-\frac{c}{a}}{0}{1} \, \bigg| \, x_2, x_3 \in \R \right\} \\
+ & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Column space of a matrix $A$}
+
+Consider a real-entry $m \times n$ matrix $A$. 
+
+\vspace{5mm}
+
+We can use the ``column view'' of $A$ to write $A$ as 
+\[ A = \rvvvv{a_1}{a_2}{\cdots}{a_n}, \]
+an ordered collection of $n$ column vectors, $a_1, a_2, ..., a_n \in \R^m$. 
+
+}
+
+
+\frame{ \frametitle{Column space of a matrix $A$}
+
+The column view of $A$ turns the matrix equation 
+\[ A \vec{x} = b \] %; \,\, \vec{x} = \cvvvv{x_1}{x_2}{\vdots}{x_n}, \,\, b \in \R^m \]
+with vector $\vec{x} = \cvvvv{x_1}{x_2}{\ddots}{x_n} \in \R^n$, vector $b \in \R^m$, into 
+\[ x_1 a_1 + x_2 a_2 + \cdots + x_n a_n = b, \]
+a linear combination equation. 
+
+\vspace{5mm}
+
+Note that $x_1, x_2, ..., x_n \in \R$ are the scalars here.
+
+}
+
+
+\frame{ \frametitle{Column space of a matrix $A$: a subspace of $\R^m$}
+
+When does $A \vec{x} = b$ have a solution? Precisely when 
+\[ x_1 a_1 + x_2 a_2 + \cdots + x_n a_n = b. \]
+In other words, if $b$ is a linear combination of the columns of $A$, then $\vec{x}$ is a solution to $A \vec{x} = b$. 
+
+}
+
+
+\frame{ \frametitle{Column space of a matrix $A$: a subspace of $\R^m$}
+
+Define the \textbf{column space} $C(A)$ of the matrix $A$ as the set of all linear combinations of the columns of $A$; that is, 
+\[ C(A) := span(\{a_1, a_2, ..., a_n\}). \]
+$C(A)$ is a subspace of $\R^m$. 
+
+}
+
+
+\frame{ \frametitle{Whither solutions $\vec{x}$ of $A \vec{x} = b$?}
+
+If $b \in C(A)$, then $A \vec{x} = b$ has a solution $\vec{x}$.
+
+\vspace{5mm}
+
+We'll restate the structure of $C(A)$: 
+
+\[ C(A) = \{ b \in \R^m \, | \, \exists \vec{x} \in \R^n: \,\, A \vec{x} = b\}. \]
+
+Certainly, the zero vector\footnote{By now you should be comfortable with the fact that the symbol $0$ will be used to represent any size zero vector, and $I$ any size identity matrix, that context demands.} with $m$ zeroes $0 = \cvvvv{0}{0}{\vdots}{0} \in C(A)$. 
+
+}
+
+
+\frame{ \frametitle{First, check $A \vec{x} = 0$: Null space of $A$: a subspace of $\R^n$}
+
+The special case $b = 0 \in \R^m$ will be especially helpful, as it helps define a complementary subspace. 
+
+\vspace{5mm}
+
+First, note that the equation $A \vec{x} = 0$ always has a solution: $\vec{x} = 0$. 
+
+\vspace{5mm}
+
+Is this the \emph{only} solution, or are there \emph{infinitely many more}?
+
+}
+
+
+\frame{ \frametitle{First, check $A \vec{x} = 0$: Null space of $A$: a subspace of $\R^n$}
+
+Define the \textbf{null space} $N(A)$ of the matrix $A$ as the set of all solutions $\vec{x}$ to the \emph{null equation} $A \vec{x} = 0$: 
+
+\vspace{3mm}
+
+\[ N(A) := \{ \vec{x} \in \R^n \, | \, A \vec{x} = 0 \}. \]
+
+\vspace{5mm}
+
+$N(A)$ is a subspace of $\R^n$. 
+
+}
+
+
+\frame{ \frametitle{A solution of $A \vec{x} = b$ is a sum}
+
+If $\vec{x}_n \in N(A)$, then $A \vec{x}_n = 0$. 
+
+\vspace{5mm}
+
+If $\vec{x}_p$ solves $A \vec{x} = b$, we will call $\vec{x}_p$ a \textbf{particular solution} of the equation. 
+
+\vspace{5mm}
+
+By linearity, we have 
+\[ A (\vec{x}_n + \vec{x}_p) = A \vec{x}_n + A \vec{x}_p = 0 + b = b. \]
+Hence, $\vec{x}_n + \vec{x}_p$ is \emph{also} a solution to $A \vec{x} = b$. 
+
+\vspace{5mm}
+
+To find \emph{all} solutions to $A \vec{x} = b$, we need to solve $A \vec{x} = 0$. 
+
+}
+
+
+\frame{ \frametitle{To solve $A \vec{x} = 0$: }
+
+What are the solutions to $A \vec{x} = 0$? 
+
+\vspace{5mm}
+
+We will solve using the same augmented matrix technique we used to solve square systems of equations, generalizing to a matrix $A$ of any rectangular shape. Start with 
+\[ [ A \, | \, 0 ]. \]
+Use downward, forward elimination, starting in the upper-left corner. Pivot on the digonal. If you ever zero out a diagonal entry, pivot to the right of that diagonal and continue.
+
+\vspace{5mm}
+
+If you zero out any of the bottom rows, that's okay.
+}
+
+
+\frame{ \frametitle{To solve $A \vec{x} = 0$: Reduced row echelon form}
+
+Then, scale the pivots to 1, and back substitute to get as close as possible to the identity matrix. 
+
+\vspace{5mm}
+
+The bottom left portion of the matrix should only have pivot 1s, and 0s below. The upper right portion ideally has only 0s above pivots; some nonzero entries above pivots may be unavoidable.\footnote{We will see several numerical examples in class.}
+
+\vspace{5mm}
+
+The goal is a form called \textbf{reduced row echelon form (rref)}, which has as-diagonal-as-possible 1 entries (still) called \textbf{pivots}. 
+
+\vspace{5mm}
+
+The variable on any column with a pivot is called a \textbf{pivot variable}; any other column has a \textbf{free variable}. 
+
+}
+
+
+\frame{ \frametitle{Rank, Solutions}
+
+We will call the resulting matrix $R = rref(A)$. The number of pivots in $R$ is called the \textbf{rank} of the matrix $A$, and denoted by $r$. 
+
+\vspace{5mm}
+
+Note that $\vec{x}$ solves $A \vec{x} = 0$ if and only if $\vec{x}$ also solves $R\vec{x} = 0$. 
+\[ A \vec{x} = 0 \iff R \vec{x} = 0. \,\, \therefore \,\, N(R) = N(A). \]
+
+}
+
+
+\frame{ \frametitle{Rank, Solutions}
+
+To construct solutions $\vec{x}$ to $R\vec{x} = 0$, solve each pivot variable as a function of the free variables. 
+
+\vspace{5mm}
+
+Looking back at our $1 \times 3$ system $ax_1 + bx_2 + cx_3 = 0$: 
+\begin{align*}
+P & = \left\{ \cvvv{-\frac{b}{a}x_2 + -\frac{c}{a} x_3}{x_2}{x_3} \, \bigg| \, x_2, x_3 \in \R \right\}.
+\end{align*}
+There is $r=1$ pivot variable and $n-r=2$ free variables. 
+
+}
+
+
+\frame{ \frametitle{Nullity, Special Solutions}
+
+For each free variable in $\vec{x}$ solving $R \vec{x} = 0$, set that free variable to 1 and the other free variables to 0. The resulting vector (which has only numbers in it) is called a \textbf{special solution} of $A\vec{x} = 0$. 
+
+\vspace{5mm}
+
+Looking back at our example of a plane in space: 
+\begin{align*}
+P & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right).
+\end{align*}
+
+\vspace{5mm}
+
+Let $S$ be the set of special solutions of $A$. Then $|S| = n-r$ and 
+\[ N(A) = span(S). \]
+If $S = \emptyset$, then $N(A) = \{0\}$. We call $n-r$ the \textbf{nullity} of $A$. 
+
+}
+
+
+
+\frame{ \frametitle{Cases on the dimensions of $A$}
+
+We relate the rank $r$ to the dimensions $m \times n$ of $A$: 
+
+\begin{itemize}
+\item $1 \leq r \leq \min(m,n)$
+\vspace{3mm}
+\item $C(A)$ is spanned by $r$ vectors; $C(A) = \R^m$ if $r=m$
+\vspace{3mm}
+\item $R$ has $n-r$ zero rows if $r < n$
+\vspace{3mm}
+\item $N(A)$ is the span of $n-r$ special solutions; \\$N(A) = \{0\}$ if $r=n$
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Cases on the dimensions of $A$}
+
+\begin{itemize}
+\item $A \vec{x} = b$, $b \neq 0$, has 
+\vspace{3mm}
+\begin{itemize}
+\item no solutions if $r < m$ and ``0 = 1'' occurs ($b \not \in C(A)$) \\
+(\textbf{overdetermined}: a contradiction exists in the equations)
+\vspace{3mm}
+\item a unique solution if $r = m = n$ (and so $A^{-1}$ exists) \\
+(one equation per variable in the solution: $x_i = c_i$, $i=1,...,r$)
+\vspace{3mm}
+\item infinitely many solutions if $r < n$ and only ``0 = 0'' occurs \\
+(\textbf{underdetermined}: not enough pivots to fill all variables)
+\end{itemize}
+\end{itemize}
+
+\vspace{5mm}
+
+If $r = m$, we say $A$ has \textbf{full row rank}, since all rows have pivots.  
+
+\vspace{5mm}
+
+Similarly, if $r = n$, we say $A$ has \textbf{full column rank}.
+
+}
+
+
+\frame{ \frametitle{Linear Independence}
+
+A set of vectors are called \textbf{linearly dependent} if there is some nonzero linear combination of them that makes the zero vector. This means the vectors all share a subspace.
+
+\[ \{ v_1, ..., v_k \} \text{ dependent} \iff \exists c_1, ..., c_k \in \R, \text{ not all } 0 : \]
+\[ c_1 v_1 + \cdots + c_k v_k = 0. \] 
+
+\begin{itemize}
+\item Two vectors on the same line are linearly dependent. 
+\vspace{3mm}
+\item Three vectors in the same plane are linearly dependent.
+\end{itemize}
+
+\vspace{5mm}
+
+If the only linear combination of a set of vectors that makes 0 is 0 of each of them, we call the set \textbf{linearly independent}. 
+
+}
+
+
+\frame{ \frametitle{Dimension of a Vector Space}
+
+The \textbf{dimension} of a vector space $V$ is the maximum number of linearly independent vectors from $V$ that span all of $V$.
+
+\vspace{5mm}
+
+We will denote the dimension of the vector space $V$ by $dim(V)$. 
+
+\vspace{5mm}
+
+If $S$ is a set of vectors and $A$ is the matrix using the elements of $S$ as columns, then 
+\[ S \text{ is a linearly independent set } \iff N(A) = \{0\}. \] 
+If $S \subseteq \R^m$, then $S$ cannot be a linearly independent set if $|S| > m$. 
+
+}
+
+
+\frame{ \frametitle{Dimension of $\R^m$ is $dim(\R^m) = m$}
+
+$S$ is called a \textbf{maximally linearly independent set}, or a \textbf{basis}, of $V$ if $S$ is a linearly independent set and $span(S) = V$.  
+
+\vspace{5mm}
+
+In this case, $dim(V) = |S|$. 
+
+\vspace{5mm}
+
+The \textbf{standard basis} of $\R^m$ is the set of $m$ orthonormal vectors with 1 in one coordinate and 0 elsewhere: 
+\[ \left\{ e_1 = \cvvvv{1}{0}{\vdots}{0}, e_2 = \cvvvv{0}{1}{\vdots}{0}, \dots, e_m = \cvvvv{0}{0}{\vdots}{1} \right\}. \]
+Thus, $dim(\R^m) = m$, and any \emph{other} basis will also have $m$ vectors.
+
+}
+
+
+\frame{ \frametitle{A matrix of basis columns is invertible}
+
+If $S$ is a basis of $\R^m$, and $A$ is a matrix whose columns are the elements of $S$, then $A$ is square and invertible. 
+
+\vspace{5mm}
+
+The order of the columns does not matter; this is always true. (Although, our rref technique may require some initial transformations to get pivots in the ``correct'' places.)
+
+\vspace{5mm}
+
+There are infinitely many bases of $\R^m$, and all contain exactly $m$ vectors. The vectors need only be linearly independent, not necessarily orthogonal, or unit length.
+
+
+}
+
+
+\frame{ \frametitle{The Four Fundamental Subspaces of a Matrix $A$}
+
+Recall that the \textbf{transpose} of an $m \times n$ matrix $A$, denoted $A^t$, is the $n \times m$ matrix where the rows of $A$ are the columns of $A^t$. 
+
+\vspace{5mm}
+
+We have seen two vector spaces related to the matrix $A$: 
+\begin{itemize}
+\vspace{3mm}
+\item the \textbf{column space} $C(A)$ (also called the \textbf{image} of $A$), \\
+ consisting of all $b \in \R^m$ that allow $A \vec{x} = b$ to be solved, and 
+\vspace{3mm}
+\item the \textbf{null space} $N(A)$ (also called the \textbf{kernel} of $A$), \\ 
+consisting of all $\vec{x} \in \R^n$ solving $A\vec{x} = 0$. 
+\end{itemize} 
+
+}
+
+
+\frame{ \frametitle{The Four Fundamental Subspaces of a Matrix $A$}
+
+The transpose $A^t$ also has a column space and a null space; in reference to the original matrix $A$, we call them 
+
+\begin{itemize}
+\vspace{3mm}
+\item the \textbf{row space} $C(A^t)$ (also called the \textbf{coimage} of $A$), \\
+ consisting of all $c \in \R^n$ that allow $A^t \vec{y} = c$ to be solved, and 
+\vspace{3mm}
+\item the \textbf{left null space} $N(A^t)$ (also called the \textbf{cokernel} of $A$), \\ 
+ consisting of all $\vec{y} \in \R^m$ solving $A^t \vec{y} = 0$. 
+\end{itemize} 
+
+\vspace{3mm}
+These can both be stated in terms of the matrix $A$ with left-multiplication by the vector $\vec{y}^t$ by applying the transpose: 
+\[ A^t \vec{y} = c \iff \vec{y}^t A = c^t. \]
+
+}
+
+
+\frame{ \frametitle{The Four Fundamental Subspaces of a Matrix $A$: Why?}
+
+Why mention $A^t$ in describing how to solve systems using $A$? Because the two systems 
+\[ A\vec{x} = b \text{ and } A^t \vec{y} = c \]
+are deeply related; in particular, 
+\[ \vec{x}^t c = b^t \vec{y}, \text{ or, equivalently, } c^t \vec{x} = \vec{y}^t b. \]
+Notice that $\vec{x}, c \in \R^n$ but $b, \vec{y} \in \R^m$. In dot product notation, 
+\[ \vec{x} \cdot c = b \cdot \vec{y}. \]
+
+}
+
+
+\frame{ \frametitle{Sum of Two Vector Subspaces}
+
+Let $V$ and $W$ be two vector spaces.
+
+\vspace{5mm}
+
+Define the \textbf{sum} of $V$ and $W$ to be the vector space of all the sums of one element of $V$ and one element of $W$: 
+\[ V + W = \{ v + w \, | \, v \in V, w \in W \}. \]
+The sum makes linear combinations of elements of $V$ and $W$ to form a (larger) vector space (if neither contains the other). 
+
+\vspace{5mm}
+
+If $V$ and $W$ have nontrivial overlap (the zero vector is considered trivial), then there are multiple ways to represent vectors in the intersection as a sum of vectors from each space.
+
+}
+
+
+\frame{ \frametitle{Sum of Two Vector Subspaces}
+
+\begin{example}
+Let $V$ and $W$ be two plane subspaces of $\R^3$ defined by 
+\begin{align*}
+V & = span\left(\left\{e_1, e_2\right\}\right), \,\,\, W = span\left(\left\{e_1, e_3\right\}\right), 
+\end{align*}
+where $\{e_1, e_2, e_3\}$ is the standard basis of $\R^3$. 
+
+\vspace{5mm}
+
+Then any vector in $V + W$ that has an element of the line intersection 
+\[ V \cap W = span\left(\left\{e_1\right\}\right) \] 
+can be written in two ways inside $V + W$: 
+\end{example}
+ 
+}
+
+
+\frame{ \frametitle{Sum of Two Vector Subspaces: non-unique representation}
+
+$v_1 = a e_1 + b e_2 \in V$, $w_1 = c e_3 \in W$: 
+\[ \cvvv{a}{b}{c} = a e_1 + b e_2 + c e_3 = v_1 + w_1 = \cvvv{a}{b}{0} + \cvvv{0}{0}{c}; \]
+$v_2 = b e_2 \in V$, $w_2 = a e_1 + c e_3 \in W$: 
+\[ \cvvv{a}{b}{c} = a e_1 + b e_2 + c e_3 = v_2 + w_2 = \cvvv{0}{b}{0} + \cvvv{a}{0}{c}. \]
+
+}
+
+
+
+\frame{ \frametitle{Direct Sum of Two Independent Vector Subspaces}
+
+Let $V$ and $W$ be two vector subspaces of the same space $Z$ such that $V \cap W = \{0\}$. 
+
+\vspace{5mm}
+
+Then any vector $z \in Z$ has a \emph{unique} representation as a sum $z = v + w$ with $v \in V$ and $w \in W$. When this is the case, we call $V + W$ the \textbf{direct sum} of $V$ and $W$, and denote it $V \oplus W$.
+
+ 
+}
+
+
+\frame{ \frametitle{Direct Sum: unique representation}
+
+\begin{example}
+Let $V$ and $W$ be two line subspaces of $\R^4$ defined by 
+\begin{align*}
+V & = span\left(\left\{e_1 + e_3\right\}\right), \,\,\, W = span\left(\left\{e_3 + e_4\right\}\right).
+\end{align*}
+
+\vspace{5mm}
+
+Then any vector in $z \in V \oplus W$ has only one representation: 
+\[ z = \cvvvv{a}{0}{a+b}{b} = v + w: \,\, v = a (e_1 + e_3), \,\, w = b (e_3 + e_4). \]
+
+\end{example}
+ 
+}
+
+
+
+\frame{ \frametitle{Orthogonal Vector Subspaces}
+
+Let $V$ and $W$ be two vector subspaces of the same space $Z$.
+
+\vspace{5mm}
+
+We call $V$ and $W$ \textbf{orthogonal} if every pair of vectors $(v,w) \in V \times W$ are orthogonal: 
+\[ V \perp W \iff \forall v \in V, w \in W: \,\, v \perp w. \]
+
+\vspace{5mm}
+
+If $V \perp W$, then necessarily we have $V \cap W = \{0\}$. 
+
+\vspace{5mm}
+
+Note that two vector subspaces may have a direct sum $V \oplus W$ whether or not they are orthogonal.
+
+}
+
+
+\frame{ \frametitle{Orthogonal Direct Sum: unique orthogonal representation}
+
+\begin{example}
+Let $V$ and $W$ be two line subspaces of $\R^4$ defined by 
+\begin{align*}
+V & = span\left(\left\{e_1 + e_3\right\}\right), \,\,\, W = span\left(\left\{e_2 + e_4\right\}\right).
+\end{align*}
+
+\vspace{5mm}
+
+Then any vector in $z \in V \oplus W$ has only one representation: 
+\[ z = \cvvvv{a}{b}{a}{b} = v + w: \,\, v = a (e_1 + e_3), \,\, w = b (e_2 + e_4). \]
+Furthermore, $v \perp w$. 
+\end{example}
+ 
+}
+
+
+\frame{ \frametitle{The Fundamental Theorem of Linear Algebra, Part I}
+
+If the function $A: \R^n \to \R^m$ is an $m \times n$ matrix with rank $r$, then: 
+
+\begin{itemize}
+\vspace{3mm}
+\item the function $A^t: \R^m \to \R^n$ is an $n \times m$ matrix (obviously), 
+\vspace{3mm}
+\item $dim(C(A)) = dim(C(A^t)) = r$, 
+\vspace{3mm}
+\item $dim(N(A)) = n - r$ and $dim(N(A^t)) = m - r$, 
+\vspace{3mm}
+\item $C(A) \oplus N(A^t) = \R^m$, 
+\vspace{3mm}
+\item $C(A^t) \oplus N(A) = \R^n$, 
+\vspace{3mm}
+\item $C(A) \perp N(A^t)$ and $C(A^t) \perp N(A)$.
+\end{itemize}
+
+\vspace{5mm}
+
+The two direct sums above are orthogonal. 
+
+}
+
+
+\frame{ \frametitle{FTLA: Consequences}
+
+Thus, every vector $v \in \R^n$ has a unique representation as a sum 
+\[ v = \vec{x}_n + c, \]
+where $\vec{x}_n \in N(A)$, $c \in C(A^t)$, and $\vec{x}_n \perp c$. 
+
+\vspace{5mm}
+
+Likewise, every vector $z \in \R^m$ has a unique representation as a sum 
+\[ z = \vec{y}_n + b, \]
+where $\vec{y}_n \in N(A^t)$, $b \in C(A)$, and $\vec{y}_n \perp b$. 
+
+\vspace{5mm}
+
+Note that, if $R = rref(A)$, then 
+
+\[ N(A) = N(R), \text{ and } C(A^t) = C(R^t), \text{ but } C(A) \neq C(R). \]
+
+
+}
+
+
+\frame{ \frametitle{Multiplying by a matrix might mean information loss}
+
+If we apply $A$ to $v = \vec{x}_n + c$, we get 
+\[ Av = A(\vec{x}_n + c) = A\vec{x}_n + Ac = Ac, \]
+since $\vec{x}_n \in N(A)$, so $A\vec{x}_n = 0$. 
+
+\vspace{5mm}
+
+If $\vec{x}_n \neq 0$, then $dim(N(A)) > 0$, $A$ is not invertible, and there is a kind of ``information loss'' when applying $A$: we move from a point in an $m$-dimensional space, $v \in \R^m$, to a point in an $r$-dimensional space, $Av \in C(A)$, with $r < m$. 
+
+\vspace{5mm}
+
+We will explore this notion in the next chapter, under the concept of \textbf{projection}. 
+
+}
+
+
+
+\end{document}

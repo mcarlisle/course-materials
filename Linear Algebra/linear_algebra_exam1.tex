@@ -1,0 +1,104 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mjcquiz}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 4100, Spring 2018
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\newcommand{\examprobs}{
+\textbf{NOTE}: Graphing calculators are \emph{not} allowed. 
+
+\vspace{10mm}
+
+For each of the following systems of equations, do the following: 
+\begin{itemize}
+\item[(i) ] (5 pts) Convert the system into a matrix equation of the form $A \vec{x} = b$. 
+\item[(ii) ] (5 pts) Give the dot product of each pair of column vectors of $A$. \\
+(For example, if $A$ has four columns, then you will compute ${4 \choose 2} = 6$ dot products.)
+\item[(iii) ] (5 pts) Give the unit vector in the direction of each column vector of $A$. 
+\item[(iv) ] (10 pts) Attempt to solve the system $A \vec{x} = b$. Clearly state your result, whether the system has no solution, a unique solution, or infinitely many solutions.
+\item[(v) ] (10 pts) If the system has a unique solution, compute the factorization $A = LDU$ and the inverse $A^{-1}$. If the system does not have a unique solution, state why this factorization does not exist.
+\end{itemize}
+}
+
+\newcommand{\answershere}[1]{\vspace{130mm}
+\begin{center}
+\line(1,0){400}
+\end{center}
+\textbf{Write answers for Problem #1 clearly here:}}
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\headerexam{Linear Algebra}{Exam \#1}
+
+\instexam{100}{120}
+
+\examprobs
+
+\pagebreak
+
+\headerexam{Linear Algebra}{Exam \#1}
+
+\prob{1} 
+
+\begin{align*}  % unique solution
+-x + 3y + -2z & = 7 \\
+-4x + 14y - 6z & = -10 \\
+3x - 10y  & = 4
+\end{align*}
+
+%\answershere{1}
+
+\pagebreak
+
+
+\headerexam{Linear Algebra}{Exam \#1}
+
+\prob{2}
+
+\begin{align*}  % no solutions
+-x + 3y + -2z & = 7 \\
+-4x + 14y - 6z & = -10 \\
+3x - 10y + 5z & = 4
+\end{align*}
+
+%\answershere{2}
+
+\pagebreak
+
+
+\headerexam{Linear Algebra}{Exam \#1}
+
+\prob{3}
+
+\begin{align*}  % infinitely solutions
+-x + 3y + -2z & = 0 \\
+-4x + 14y - 6z & = 0 \\
+3x - 10y + 5z & = 0
+\end{align*}
+
+%\answershere{3}
+
+
+\end{document}

@@ -1,0 +1,71 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mjcquiz}
+
+%\usepackage{../mathstuf}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 4100, Spring 2018
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+
+\usepackage{mjcquiz}
+\newcommand{\headerq}{\header{Linear Algebra}{\#2}}
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\headerq
+
+\instcalc{40}{50}{45}
+
+\prob{1} (5 x 4 points) \\
+Let $A$ be a $3 \times 3$ matrix.
+\begin{itemize}
+\item[(a) ] What is the matrix $P$ that makes the product $PA$ switch rows 1 and 3 of $A$?
+\item[(b) ] What is the matrix $E$ that makes the product $EA$ scale row 2 of $A$ by 5?
+\item[(c) ] What is the matrix $F^t$ that makes the product $AF$ add 6 times column 3 of $A$ to column 2?
+\item[(d) ] What is the matrix $G^{-1}$ that makes the product $AG$ scale column 1 of $A$ by -4?
+\end{itemize}
+Hint: Try examples on a sample $3 \times 3$ matrix, such as 
+\[ A = \mrrr{4}{-3}{2}{8}{6}{0}{0}{5}{-1}. \]
+
+
+\pagebreak
+
+\headerq
+
+
+\prob{2} (10 x 3 points) \\
+Consider the linear system $A\vec{x} = b$ given by the equations 
+\begin{align*}
+4x + 8y + 5z & = 10 \\
+8x - 2y + 3z & = 18 \\
+2x - 7y - 2z & = 5.
+\end{align*}
+\begin{itemize}
+\item[(a) ] Solve the system of equations. 
+\item[(b) ] Give the $LDU$ factorization of the system's coefficient matrix.
+\item[(c) ] Give the inverse of the system's coefficient matrix.
+\end{itemize}
+(Hint: $L$ and $U$ should have 1 on their diagonals, and if you follow the elimination/substitution method, you'll do all three parts of the problem simultaneously. Be sure ALL answers are CLEARLY written and labeled. Check your answers.)
+
+
+
+\end{document}

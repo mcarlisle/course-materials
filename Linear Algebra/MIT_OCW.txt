@@ -1,0 +1,1 @@
+I strongly suggest also examining the MIT OpenCourseWare materials associated with the textbook: https://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/

@@ -1,0 +1,62 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mjcquiz}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 4100, Spring 2018
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\newcommand{\headerq}{\header{Linear Algebra}{\#6}}
+
+\newcommand{\quiz}[1]{
+\namefield
+
+\headerq
+
+\instcalc{50}{60}
+
+\[ \text{ Consider } A = \left[ \begin{array}{ccc} #1 \end{array}\right]. \]
+\prob{1} (10+10 pts) What are the eigenvalues and eigenvectors of $A$?
+
+\pagebreak
+\headerq
+
+\prob{2} (10 pts) Diagonalize $A$. 
+
+\pagebreak
+\headerq
+
+\prob{3} (10 pts) Compute $A^4$.
+
+\pagebreak
+\headerq
+
+\prob{4} (5+5 pts) Verify the trace and determinant of $A$ with the eigenvalues of $A$.
+
+\vspace{60mm}
+
+\prob{5} (10 pts) Describe the ellipsoid given by transforming the unit sphere in $\mathbb{R}^3$ by the quadratic form induced by $A$. (Writing out the equation is enough.)
+
+}
+
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+\quiz{5 & 1 & 0 \\ 1 & 6 & -1 \\ 0 & -1 & 5}
+
+\end{document}

@@ -1,0 +1,938 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+
+\title[Eigenvalues and Eigenvectors]{Linear Algebra and Matrix Methods \\
+Eigenvalues and Eigenvectors }
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Eigenvectors, Eigenvalues: ``proper'' directions, scalings}
+
+So far, we've seen ways to solve a system of linear equations, 
+\[ A \vec{x} = b. \]
+If $A \vec{x} = b$ has no solution, then the least squares (best fit) solution to 
+\[ A^t A \hat{x} = A^t b \]
+will suffice for ``as close as we can get''. 
+
+\vspace{5mm}
+
+If $A \vec{x} = b$ has a solution, then $b \in C(A)$.
+
+\vspace{5mm}
+
+We are now interested in the special case where $b$ is a scaling of $\vec{x}$. 
+
+}
+
+
+\frame{ \frametitle{Eigenvectors, Eigenvalues: ``proper'' directions, scalings}
+
+\textbf{Goal}: Solve the $n \times n$ (square) system 
+\[ A \vec{x} = \lambda \vec{x} \]
+for $\vec{x}$ and $\lambda$. 
+
+\vspace{5mm}
+
+These are considered the ``proper''\footnote{The ``eigen'' in these terms is German for ``proper'' or ``characteristic''.} directions of the matrix $A$, where transformation by the matrix $A$ is equivalent to merely scaling that direction.
+
+}
+
+
+\frame{ \frametitle{Eigenvectors, Eigenvalues: ``proper'' directions, scalings}
+
+If there are solutions to this \textbf{eigenproblem}\footnote{Some of the examples in this chapter require you to understand arithmetic with complex numbers, i.e. from $\C = \{a + bi \, | \, a, b \in \R, i^2 = -1\}$.} 
+\[ A \vec{x} = \lambda \vec{x}, \]
+we will call the values in each pair $(\vec{x}, \lambda)$ by the names 
+\begin{center}
+\textbf{eigenvector} for each $\vec{x} \in \C^n$ 
+\end{center}
+and 
+\begin{center}
+\textbf{eigenvalue} for each $\lambda \in \C$. 
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Eigenvectors and eigenvalues via nullspaces}
+
+How can we solve this system? 
+
+\vspace{5mm}
+
+Typically, if you want to solve an equation for a variable, you'll get all instances of that variable on the same side of the equals sign.
+
+\vspace{5mm}
+
+We'll do that here: seeing that scaling a vector by $\lambda$ is the same as multiplying the vector by the scaled identity matrix $\lambda I$, 
+\[ A \vec{x} = \lambda \vec{x} \implies A \vec{x} - \lambda \vec{x} = 0 \implies (A - \lambda I)\vec{x} = 0. \]
+
+Thus, if $\vec{x}$ is an eigenvector of $A$, then $\vec{x} \in N(A - \lambda I)$. 
+
+}
+
+
+\frame{ \frametitle{Eigenvectors and eigenvalues via determinants}
+
+$\vec{x} = 0$ is always a solution. However, the eigenvector $0$ has \emph{any} $\lambda \in \C$ as an eigenvalue; this tells us nothing about the matrix $A$. 
+
+\vspace{5mm}
+
+If a nontrivial $\vec{x}$ solves the eigenproblem, we see that the columns of $A - \lambda I$ are linearly dependent; that is, 
+
+\[ det(A - \lambda I) = 0. \]
+
+}
+
+
+\frame{ \frametitle{Eigenvectors and eigenvalues via determinants}
+
+\[ det(A - \lambda I) = 0. \]
+
+This is the \textbf{characteristic equation} we need to solve, for $\lambda \in \C$. 
+
+\vspace{5mm}
+
+This also explains why we say $\lambda \in \C$ and $\vec{x} \in \C^n$:
+\[ det(A - \lambda I) = 0 \]
+is an $n$th degree polynomial equation in $\lambda$, with $n$ roots (with multiplicity) in $\C$.
+
+}
+
+
+\frame{ \frametitle{Roots of the eigenequation: spectrum of the matrix}
+
+Unfortunately for the desire for a solution to the characteristic equation, we know\footnote{thanks to Neils Abel (1802-1829)} that there is no general method of find roots of polynomials of degree $n \geq 5$.
+
+\vspace{5mm}
+
+That said, we can use various techniques to solve this problem.
+
+}
+
+
+\frame{ \frametitle{Roots of the eigenequation: spectrum of the matrix}
+
+Define the \textbf{trace} of a square matrix $A$ as the sum of its diagonal: 
+
+\[ tr(A) = \sum_{i=1}^n a_{ii}. \]
+
+\vspace{3mm}
+
+Then, if $\lambda_1, \lambda_2, ..., \lambda_n \in \C$ are the $n$ roots of the characteristic equation of $A$ (i.e. the \textbf{spectrum} of $A$), we have 
+
+\vspace{3mm}
+
+\[ det(A) = \prod_{i=1}^n \lambda_i \,\, \text{ and } \,\, tr(A) = \sum_{i=1}^n \lambda_i. \]
+
+}
+
+
+\frame{ \frametitle{Roots of the eigenequation: exponentiation}
+
+\begin{itemize}
+\item Repeated multiplication by $A$ on an eigenvector repeats scaling by $\lambda$: for any $k \in \N$,
+
+\[ A(A\vec{x}) = A(\lambda \vec{x}) \implies A^2 \vec{x} = \lambda^2 \vec{x} \implies A^k \vec{x} = \lambda^k \vec{x}. \] 
+
+\vspace{3mm}
+
+\item If $A$ is invertible, then all of the eigenvalues of $A$ are nonzero. \\
+
+\vspace{3mm}
+
+If $\vec{x}$ is an eigenvector of $A$ with eigenvalue $\lambda$, \\
+then $\vec{x}$ is also an eigenvector of $A^{-1}$, with eigenvalue $\lambda^{-1}$: 
+
+\begin{align*} 
+A\vec{x} = \lambda \vec{x} & \implies A^{-1} A\vec{x} = \lambda A^{-1} \vec{x} = \vec{x} \\
+ & \implies A^{-1} \vec{x} = \lambda^{-1} \vec{x}.
+\end{align*}
+
+\vspace{3mm}
+
+\item If $A$ is singular, then $det(A) = 0$, and $\lambda = 0$ is one of its eigenvalues.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Roots of the eigenequation: triangular, projection}
+
+\begin{itemize}
+\item If $A$ is triangular, then $A$'s eigenvalues are the diagonal entries.
+\vspace{3mm}
+\item If $A$ is symmetric ($A^t = A$), then $A$'s eigenvalues are in $\R$.
+\vspace{3mm}
+\item If $A = P$ is a projection matrix, then the idempotency of $P$ determines $\lambda$:  since $P^2 = P$, we get 
+\[ \lambda^2 \vec{x} = P^2\vec{x} = P\vec{x} = \lambda \vec{x} \vspace{3mm}
+\implies \lambda \in \{0,1\}. \]
+
+The eigenvector(s) $\vec{x}$ paired with 
+\begin{itemize}
+\item $\lambda = 1$ have $P\vec{x}_1 = \vec{x}_1$, and so project to themselves under $P$ ($\vec{x}_1 \in C(P) = C(P^t)$ since $P$ is symmetric); 
+\vspace{3mm}
+\item $\lambda = 0$ have $P\vec{x}_0 = 0$, and so project to 0 under $P$ ($\vec{x} \in N(P)$).
+\end{itemize}
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Roots of the eigenequation: orthogonal}
+
+\begin{itemize}
+\item If $A = Q$ is orthogonal ($Q^{-1} = Q^t$), then 
+
+\begin{align*} 
+Q\vec{x} = \lambda \vec{x} & \implies (Q \vec{x})^t (Q \vec{x}) = (\lambda \vec{x})^t (\lambda \vec{x}) \\
+ & \implies \vec{x}^t Q^t Q \vec{x} = \vec{x}^t \vec{x} = ||\vec{x}||^2 = \lambda^2 ||\vec{x}||^2 \\  & \implies \lambda \in \{-1, 1\}.
+\end{align*}
+
+\vspace{3mm}
+
+In particular, if $A = R$ is a reflection matrix, $R$ is orthogonal and symmetric, implying $R$ is an involution ($R^2  = I$). Thus, 
+
+\vspace{3mm}
+
+\[ R\vec{x} = \lambda \vec{x} \implies R^2\vec{x} = \lambda^2 \vec{x} = \vec{x} \implies \lambda \in \{-1,1\}. \]
+
+\vspace{3mm}
+
+\item If $A$ is \textbf{skew-symmetric} ($A^t = -A$), then $A$'s eigenvalues are ``pure imaginary'': $\lambda = bi \in \C$ for $b \in \R$. 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Example: 2x2 matrix}
+
+Find the eigenvalues and eigenvectors of $A = \mrr{1}{2}{2}{4}$. 
+
+\vspace{3mm} 
+
+\[ det(A) = 4-4 = 0 \]
+ and $A$ is symmetric, so both eigenvalues are real.
+
+\vspace{3mm} 
+
+Thus, $A$ is singular, and so one of $A$'s eigenvalues is 0.
+
+\vspace{5mm}
+
+Find the eigenvalues: 
+\begin{align*}
+det(A - \lambda I) = 0 & \implies det\mrr{1-\lambda}{2}{2}{4-\lambda} = 0 \\
+ & \implies (1-\lambda)(4-\lambda) - 4 = 0 \\
+ & \lambda^2 - 5\lambda = 0 \implies \lambda = 0, 5.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: 2x2 matrix}
+
+To find the eigenvectors, we need to solve 
+\begin{align*}
+(A - \lambda I)\vec{x} = 0
+\end{align*}
+for each $\lambda$. 
+
+\vspace{5mm}
+
+The eigenvectors associated with $\lambda = 0$ are: 
+\begin{align*}
+A\vec{x} = 0 \implies & \text{ (compute rref(A))} \implies x_1 = -2x_2 \implies \vec{x}_n = x_2\cvv{-2}{1}. 
+\end{align*}
+The eigenvectors associated with $\lambda = 5$ are: 
+\begin{align*}
+(A - 5I)\vec{x} = 0 \implies & \mrr{1-5}{2}{2}{4-5} \vec{x} = 0 \\
+ \implies \text{ (compute rref(A-5I))} \implies & x_1 = \frac{1}{2}x_2 \implies \vec{x}_n = x_2\cvv{\frac{1}{2}}{1}. 
+\end{align*}
+
+
+}
+
+
+\frame{ \frametitle{Example: 3x3 matrix}
+
+Find the eigenvalues and eigenvectors of $A = \mrrr{1}{5}{4}{-6}{3}{7}{0}{0}{2}$. 
+
+\vspace{5mm}
+
+Note: $A$ is invertible: 
+\[det(A) = 2[1(3) - 5(-6)] = 66 \neq 0. \]
+Thus, $A$'s eigenvalues are all nonzero.
+
+\vspace{5mm}
+
+First, find the eigenvalues: 
+\begin{align*}
+det(A - \lambda I) = 0 & \implies det\mrrr{1-\lambda}{5}{4}{-6}{3-\lambda}{7}{0}{0}{2-\lambda} = 0 \\
+ & \implies (2-\lambda)[(1-\lambda)(3-\lambda) + 30] = 0 \\
+ & \implies \lambda = 2 \text{ is an eigenvalue.}
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: 3x3 matrix, conjugate pair}
+
+There are two more: factoring out the $2 - \lambda$ term, we have 
+\begin{align*}
+(1-\lambda)(3-\lambda) + 30 = 0 \implies & 3 - 4\lambda + \lambda^2 + 30 = 0 \\
+\implies & \lambda^2 - 4\lambda + 33 = 0 \\
+\implies & \lambda = \frac{4 \pm \sqrt{16 - 4(1)(33)}}{2} = 2 \pm i\sqrt{29}. 
+\end{align*}
+These are the other two eigenvalues.
+
+\vspace{3mm}
+
+Note that they are a conjugate pair of complex numbers. 
+
+}
+
+
+\frame{ \frametitle{Example: 3x3 matrix, conjugate pair}
+
+Now for the eigenvectors: solving $(A - 2I)\vec{x} = 0$ for $\lambda = 2$ yields 
+\begin{align*}
+\lambda = 2: & & \vec{x}_n & = x_3 \cvvv{\frac{31}{29}}{-\frac{17}{29}}{1}, \text{ or } x_3 \cvvv{31}{-17}{29}. 
+\end{align*}
+The conjugate pair of complex eigenvalues have complex conjugate pair eigenvectors: 
+\begin{align*}
+\lambda = 2 + i \sqrt{29}: & & \vec{x}_n & = x_2 \cvvv{\frac{1}{6}(1 - i\sqrt{29})}{1}{0} \\ 
+\lambda = 2 - i \sqrt{29}: & & \vec{x}_n & = x_2 \cvvv{\frac{1}{6}(1 + i\sqrt{29})}{1}{0}. 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: eigenvalue multiplicity}
+
+Find the eigenvalues and eigenvectors of $A = \mrr{5}{2}{0}{5}$. 
+
+\vspace{5mm}
+
+This one is easy: $A$ is triangular, so clearly the eigenvalues are $\lambda = 5$ with multiplicity 2. 
+
+\vspace{5mm}
+
+What are the eigenvectors? 
+\begin{align*}
+(A - 5I)\vec{x} = 0 \implies & 2x_2 = 0 \implies \vec{x}_n = x_1 \cvv{1}{0}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Diagonalization of an invertible matrix}
+
+We know an $n \times n$ matrix $A$ has, with multiplicity, $n$ pairs of eigenvectors and eigenvalues. Label them 
+\[ (\lambda_1, \vec{x}_1), (\lambda_2, \vec{x}_2), ..., (\lambda_n, \vec{x}_n). \]
+
+If the $n$ eigenvectors of $A$ are \emph{linearly independent}, then we can construct an invertible \textbf{eigenvector matrix} 
+\[ X = \left( \vec{x}_1 \,\, \vec{x}_2 \,\, \cdots \,\, \vec{x}_n \right) \]
+of the $n$ eigenvectors (which, naturally, are a basis of $\R^n$), and a corresponding diagonal \textbf{eigenvalue matrix} 
+\[ \Lambda = \begin{pmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & 0 \\
+0 & 0 & \cdots & \lambda_n
+\end{pmatrix}. \]
+}
+
+
+\frame{ \frametitle{Diagonalization of an invertible matrix}
+
+Since $A \vec{x}_i = \lambda_i \vec{x}_i$ for all $i=1,2,...,n$, and $X$ is invertible, we have 
+\[ AX = X\Lambda \implies X^{-1} A X = \Lambda, \]
+or 
+\[ A = X \Lambda X^{-1}, \]
+called the \textbf{diagonalization} of $A$. 
+
+\vspace{5mm}
+
+Note that the exponentiation property of eigenvalues is easy to see: 
+\[ A^n = (X \Lambda X^{-1})^n = (X \Lambda X^{-1})(X \Lambda X^{-1}) \cdots (X \Lambda X^{-1}) = X \Lambda^n X^{-1}, \]
+comfirming the notion that the eigenvalues of $A^n$ are $\lambda^n$, with the same eigenvectors as $A$.
+
+}
+
+
+\frame{ \frametitle{Finding eigenvalues is not a linear operation}
+
+Certain ``shortcuts'' to computing eigenvalues do not work: 
+
+\vspace{5mm}
+
+If $A$ and $B$ are $n \times n$ matrices, with the sets of eigenvalues $\{\lambda_i\}_{i=1}^n$ for $A$ and $\{\beta_i\}_{i=1}^n$ for $B$, then: 
+
+\begin{itemize}
+\vspace{3mm}
+\item $A+B$ does \emph{not} have the eigenvalues $\lambda_i + \beta_i$ \emph{unless} both $A$ and $B$ are diagonal.
+\vspace{3mm}
+\item $AB$ does \emph{not} have the eigenvalues $\lambda_i \beta_i$. 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Finding eigenvalues is not a linear operation}
+
+However, 
+\vspace{3mm}
+\begin{prop}
+Assume $A$ and $B$ are diagonalizable, with diagonalizations 
+\[ A = X\Lambda X^{-1}, \,\, B = TKT^{-1}. \]
+Then 
+\[ X = T \iff AB = BA. \]
+\end{prop}
+
+}
+
+
+\frame{ \frametitle{Invertibility vs Diagonalizability?}
+
+If any eigenvalue has multiplicity, then $A$ is only diagonalizable if the \textbf{geometric multiplicity} of each eigenvalue's nullspace, 
+
+\vspace{3mm}
+
+\[ m_G(\lambda) = dim(N(A - \lambda I)), \] 
+
+\vspace{5mm}
+
+equals the \textbf{arithmetic multiplicity} of the eigenvalue, 
+
+\vspace{3mm}
+
+\[ m_A(\lambda) = \text{multiplicity of } \lambda \text{ in } det(A - \lambda I) = 0. \] 
+
+}
+
+
+\frame{ \frametitle{Invertibility vs Diagonalizability?}
+
+Note that $m_A(\lambda) \geq m_G(\lambda)$ always holds. 
+
+\vspace{5mm}
+
+If all $n$ eigenvalues differ, then for each, 
+\[ m_G(\lambda) = m_A(\lambda) = 1, \] 
+and $A$ is diagonalizable (even if one of the eigenvalues is 0). 
+
+\vspace{5mm}
+
+If the $n$ eigenvectors of the matrix $A$ are independent, then all eigenvalues differ, and $A$ can be diagonalized. 
+
+}
+
+
+\frame{ \frametitle{Similar Matrices}
+
+If $A$ is diagonalizable, in form 
+\[ A = X \Lambda X^{-1}, \]
+there are multiple forms, depending on the scalings and orderings of the eigenvectors in $X$. 
+
+\vspace{5mm}
+
+We will extend the conjugation paradigm to nondiagonalizable $A$. 
+
+\vspace{5mm}
+
+Let $M$ be an invertible matrix. Then we call 
+\[ B = M^{-1} A M \] 
+\textbf{similar} to $A$. 
+
+}
+
+
+\frame{ \frametitle{Similar Matrices}
+
+If $A$ is diagonalizable, then $\Lambda$ is similar to $A$. In general, 
+
+\vspace{5mm}
+
+\begin{prop}
+$A$ and $M^{-1} A M$ have the same eigenvalues, and if $\vec{x}$ is an eigenvector of $A$, then $M^{-1} \vec{x}$ is an eigenvector of $M^{-1} A M$. 
+\end{prop}
+
+\vspace{5mm}
+
+\pf 
+\begin{align*} 
+A\vec{x} = \lambda \vec{x} \implies (M^{-1} A M)(M^{-1} \vec{x}) & = M^{-1} A \vec{x} \\
+ & = M^{-1} \lambda \vec{x} = \lambda (M^{-1} \vec{x}). \,\, \blacksquare 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Some similarity-invariant properties}
+
+What properties are \emph{invariant} (do not change) under the transformation $A \mapsto M^{-1} A M$? 
+
+\begin{itemize}
+\item eigenvalues
+\vspace{3mm}
+\item trace
+\vspace{3mm}
+\item determinant
+\vspace{3mm}
+\item rank
+\vspace{3mm}
+\item \# of independent eigenvectors
+\vspace{3mm}
+\item Jordan form
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Some similarity-variant properties}
+
+What properties \emph{do} change under this transformation? 
+
+\begin{itemize}
+\item eigenvectors (from $\vec{x}$ to $M^{-1} \vec{x}$)
+\vspace{3mm}
+\item all four subspaces ($C(A)$ to $C(M^{-1} A M)$, etc.)
+\vspace{3mm}
+\item singular values (in SVD)
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Initial, long-term distributions}
+
+Once again examining powers of $A$, let $c \in \R^n$. \\
+Then the eigenvectors of $A$ make a basis of $\R^n$, \\
+and so $c$ can be represented via $X$ in the form 
+\[ c = \cvvvv{c_1}{c_2}{\ddots}{c_n}, \,\, A = X\Lambda X^{-1} \implies Xc = \sum_{i=1}^n c_i \vec{x}_i. \]
+Set $u_0 = Xc$ and define $u_k = A^k u_0$. We can quickly calculate $u_k$: 
+\begin{align*}
+u_k = A^k u_0 & = A^k (c_1 \vec{x}_1 + c_2 \vec{x}_2 + \cdots + c_n \vec{x}_n) \\
+ & = c_1 \lambda_1^k \vec{x}_1 + c_2 \lambda_2^k \vec{x}_2 + \cdots + c_n \lambda_n^k \vec{x}_n.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Initial, long-term distributions (Markov matrices)}
+
+Consider a particle $Y_t$ at each time $t$ moving along the states $\{1, 2, ..., n\}$ with one-step probabilities 
+\[ p_{ij} = P(Y_{t+1} = i \, | \, Y_{t} = j). \]
+
+\vspace{5mm}
+
+If $A$ is a \textbf{Markov matrix}\footnote{I am leaving out many important probability-based details here.}, whose entries are $a_{ij} = p_{ij}$, then $A^k$ is the matrix of $k$-step probabilities 
+\[ P(Y_{t+k} = i \, | \, Y_{t} = j). \]
+
+}
+
+
+\frame{ \frametitle{Initial, long-term distributions (Markov matrices)}
+
+If we define $u_0$ as the \textbf{initial distribution}\footnote{a probability mass function of the initial position $Y_0$ of the $n$ possible states in the system} of $Y_0$, and define $u_k$ iteratively, as 
+\[ u_{k+1} = A u_k, \] 
+then the \textbf{long-term distribution} of $Y$ is found by sending $k \to \infty$. 
+
+}
+
+
+\frame{ \frametitle{Initial, long-term distributions (Markov matrices)}
+
+A property of Markov matrices is that all of their eigenvalues have the property $|\lambda_i| \leq 1$, and, in particular, one of them \emph{is} 1: we label this one $\lambda_1 = 1$. 
+
+\vspace{5mm}
+
+Thus, the \textbf{long-term distribution} of $Y$ is the eigenvector $\vec{x}_1$, as we increase $k$ in the $k$-step distribution $u_k$: recall, if $u_0 = Xc$, then  
+\begin{align*}
+u_k = c_1 \lambda_1^k \vec{x}_1 + c_2 \lambda_2^k \vec{x}_2 + \cdots + c_n \lambda_n^k \vec{x}_n.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Initial, long-term distributions (Markov matrices)}
+
+As $k \to \infty$, $\lambda_i^k \to 0$ for $i > 1$ since $|\lambda_i| < 1$. But $\lambda_1 = 1$, so we get the limit 
+
+\[ u_{\infty} = \lim_{k \to \infty} u_k = \lim_{k \to \infty} c_1 \lambda_1^k \vec{x}_1 + c_2 \lambda_2^k \vec{x}_2 + \cdots + c_n \lambda_n^k \vec{x}_n = c_1 \vec{x}_1. \]
+
+\vspace{3mm}
+
+The scaling of $u_{\infty}$ that yields a probability vector is called $\pi$, the \textbf{long-term}, or \textbf{steady state}, distribution of $Y$.
+
+}
+
+
+\frame{ \frametitle{The exponential of a square matrix}
+
+We can compute power series-like objects using exponentiation.
+
+\vspace{5mm}
+
+Recall, for any $r, t \in \R$, the natural expoential $e^{rt}$ can be defined as a power series: 
+\[ e^{rt} = \sum_{n=0}^{\infty} \frac{1}{n!} (rt)^n = 1 + rt + \frac{1}{2}(rt)^2 + \frac{1}{6}(rt)^3 + \cdots . \]
+Likewise, if $A$ is a square matrix and $t \in \R$, we will ignore the scalar convention of writing scalars on the left, and define the matrix exponential by 
+\[ e^{At} = \sum_{n=0}^{\infty} \frac{1}{n!} (At)^n = I + At + \frac{1}{2}(At)^2 + \frac{1}{6}(At)^3 + \cdots . \]
+
+}
+
+
+\frame{ \frametitle{The exponential of a diagonalizable matrix}
+
+If $A$ is diagonalizable, then $A = X \Lambda X^{-1}$ for some eigenvalue matrix $\Lambda$ and eigenvector matrix $X$. 
+
+\vspace{5mm}
+
+Then the exponential is easy to compute: 
+\begin{align*} 
+e^{At} & = I + At + \frac{1}{2}(At)^2 + \frac{1}{6}(At)^3 + \cdots \\
+ & = I + X \Lambda t X^{-1} + \frac{1}{2} (X \Lambda t X^{-1})^2 + \frac{1}{6}(X \Lambda t X^{-1})^3 + \cdots \\
+ & = I + X (\Lambda t) X^{-1} + \frac{1}{2} X (\Lambda t)^2 X^{-1} + \frac{1}{6}X (\Lambda t)^3 X^{-1} + \cdots \\
+ & = X e^{\Lambda t} X^{-1}. 
+\end{align*}
+$\therefore$ the eigenvalues of $e^{At}$ are $e^{\Lambda t}$, with the same eigenvectors as $A$.
+
+}
+
+
+\frame{ \frametitle{The complex exponential as a diagonalizable matrix}
+
+Consider the matrix $A = \mrr{0}{1}{-1}{0}$. 
+
+\vspace{3mm}
+
+Its powers have period 4, and $e^{At}$ is orthogonal: 
+\[ A^2 = \mrr{-1}{0}{0}{1}, \,\, A^3 = \mrr{0}{-1}{1}{0}, \,\, A^4 = \mrr{1}{0}{0}{1} = I. \]
+Thus, 
+\[ e^{At} = \mrr{1 - \frac{1}{2}t^2 + \frac{1}{4}t^4 - \cdots}{t - \frac{1}{3}t^3 + \frac{1}{5}t^5 - \cdots}{-\left(t - \frac{1}{3}t^3 + \frac{1}{5}t^5 - \cdots\right)}{1 - \frac{1}{2}t^2 + \frac{1}{4}t^4 - \cdots}. \]
+
+}
+
+
+\frame{ \frametitle{The complex exponential as a diagonalizable matrix}
+
+We can rewrite this form of $e^{At}$ in power series terms: 
+
+\begin{align*} 
+e^{At} & = \mrr{\sum_{n=0}^{\infty} \frac{(-1)^n t^{2n+1}}{(2n+1)!}}{\sum_{n=0}^{\infty} \frac{(-1)^{n} t^{2n}}{(2n)!}}{-\sum_{n=0}^{\infty} \frac{(-1)^{n} t^{2n}}{(2n)!}}{\sum_{n=0}^{\infty} \frac{(-1)^n t^{2n+1}}{(2n+1)!}} = \mrr{\cos(t)}{\sin(t)}{-\sin(t)}{\cos(t)},
+\end{align*}
+
+\vspace{3mm}
+
+the two-dimensional rotation matrix. 
+
+}
+
+
+\frame{ \frametitle{The complex exponential as a diagonalizable matrix}
+
+The eigenvalue/eigenvector pairs of $A$ are 
+\[ (\lambda_1, \vec{x}_1) = \left(i, \cvv{1}{i}\right), \,\, (\lambda_2, \vec{x}_2) = \left(-i, \cvv{1}{-i}\right). \]
+
+The eigenvalue/eigenvector pairs of $e^{At}$ are 
+\[ (e^{\lambda_1 t}, \vec{x}_1) = \left(e^{it}, \cvv{1}{i}\right), \,\, (e^{\lambda_2 t}, \vec{x}_2) = \left(e^{-it}, \cvv{1}{-i}\right). \]
+
+Note the connection to \textbf{Euler's formula}: 
+\[ e^{it} = \cos(t) + i \sin(t). \]
+
+}
+
+
+\frame{ \frametitle{Symmetric Matrices}
+
+Recall, a \textbf{symmetric matrix} $A$ is a square matrix such that 
+
+\[ A = A^t. \] 
+
+\vspace{5mm}
+
+If $A$ is symmetric and has independent columns, then $A$ is diagonalizable, and so 
+
+\begin{align*}
+A = X \Lambda X^{-1} & \implies A^t = (X \Lambda X^{-1})^t = (X^{-1})^t \Lambda^t X^t = A.
+\end{align*}
+
+\vspace{3mm} 
+
+\textbf{Fact}: \,\, $X^{-1} = X^t$, \,\, i.e. $X$ is orthogonal.
+
+}
+
+
+\frame{ \frametitle{Spectral Theorem}
+
+\begin{thm}
+Let $A$ be a real-valued, symmetric matrix. \\
+Then its eigenvector matrix $X$ is orthogonal, \\
+i.e. $X^t X = I$, and can be chosen as unit length vectors.
+
+\vspace{5mm}
+
+We will relabel this $X$ as $Q$ and write $A = Q \Lambda Q^t$. 
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Spectral Theorem: Supporting Propositions}
+
+\begin{prop}
+$A$ real-valued, symmetric $\implies$ $A$'s eigenvalues are real-valued.
+\end{prop}
+
+\vspace{5mm}
+
+\pf Suppose $A \vec{x} = \lambda \vec{x}$. Denote by $\overline{\lambda}$ the complex conjugate of $\lambda$: that is, if $\lambda = a + bi$, then $\overline{\lambda} = a - bi$. 
+
+\vspace{5mm}
+
+We will prove that $\lambda = \overline{\lambda}$, which implies $b = 0$, and so $\lambda = a \in \R$. 
+
+}
+
+
+\frame{ \frametitle{Spectral Theorem: Supporting Propositions}
+
+\pf (continued) 
+
+\vspace{5mm}
+
+Thus, $A = \overline{A}$ since $A$ is real-valued, and so 
+\begin{align*}
+A \vec{x} = \lambda \vec{x} & \implies \overline{A \vec{x}} = \overline{\lambda \vec{x}} \implies A \overline{\vec{x}} = \overline{\lambda} \overline{\vec{x}}.
+\end{align*}
+
+Transposing, we have 
+\begin{align*}
+\overline{\vec{x}}^t A^t = \overline{\vec{x}}^t \overline{\lambda} & \implies \overline{\vec{x}}^t A = \overline{\vec{x}}^t \overline{\lambda} \\
+ & \implies \overline{\vec{x}}^t A \vec{x} = \overline{\vec{x}}^t \overline{\lambda} \vec{x} \\
+ & \implies \overline{\vec{x}}^t \lambda \vec{x} = \overline{\vec{x}}^t \overline{\lambda} \vec{x}  \implies \lambda (\overline{\vec{x}}^t \vec{x}) = \overline{\lambda} (\overline{\vec{x}}^t \vec{x}). 
+\end{align*}
+But $\overline{\vec{x}}^t \vec{x}$ is a scalar. Thus, $\lambda = \overline{\lambda}$. \,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Spectral Theorem: Supporting Propositions}
+
+\begin{prop}
+Let $A$ be a real-valued, symmetric matrix. Then, if $\vec{x}_i$ and $\vec{x}_j$ are eigenvectors corresponding to the eigenvalues $\lambda_i$ and $\lambda_j$, $i \neq j$, and $\lambda_i \neq \lambda_j$, then $\vec{x}_i \perp \vec{x}_j$. 
+\end{prop}
+
+\vspace{5mm}
+
+\pf \,\, We are given $A \vec{x}_i = \lambda_i \vec{x}_i$, $A \vec{x}_j = \lambda_j \vec{x}_j$, $\lambda_i \neq \lambda_j$, and $A = A^t$. Thus, 
+\begin{align*}
+\lambda_i (\vec{x}_i^t \vec{x}_j) &  = (\lambda_i \vec{x}_i^t) \vec{x}_j = (\lambda_i \vec{x}_i)^t \vec{x}_j \\
+ & = (A \vec{x}_i)^t \vec{x}_j = \vec{x}_i^t A^t \vec{x}_j = \vec{x}_i^t (A \vec{x}_j) \\
+ & = \vec{x}_i^t \lambda_j \vec{x}_j = \lambda_j (\vec{x}_i^t \vec{x}_j).
+\end{align*}
+Therefore, $\lambda_i = \lambda_j$ or $\vec{x}_i^t \vec{x}_j = 0$. As we are given $\lambda_i \neq \lambda_j$, it must then be that $\vec{x}_i^t \vec{x}_j = 0$, i.e. $\vec{x}_i \perp \vec{x}_j$. \,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Pivots vs Eigenvalues}
+
+We know that, if $A$ is triangular, then the eigenvalues of $A$ are the diagonal entries, i.e. the pivots, of $A$. 
+
+\vspace{5mm}
+
+However, this is not true for a non-triangular matrix. For a matrix $A = LDU$, the pivots of $A$ correspond to the diagonal entries of $D$, which are \emph{not} the eigenvalues of $A$. 
+
+}
+
+
+\frame{ \frametitle{Pivots vs Eigenvalues}
+
+We have the following ``compromise'' result: 
+
+\vspace{5mm}
+
+If $d_1, d_2, ..., d_n$ are the diagonal entries of $D$, i.e. the pivots of $A$, and $\lambda_1, \lambda_2, ..., \lambda_n$ are the eigenvalues of $A$, then 
+\[ det(A) = \prod_{i=1}^n \lambda_i = \prod_{i=1}^n d_i = det(D). \] 
+
+}
+
+
+
+\frame{ \frametitle{Pivots vs Eigenvalues: Symmetric}
+
+If $A$ is symmetric, then the signs of pivots and eigenvalues agree:
+\[ \#\text{ positive pivots of } A = A^t = \#\text{ positive eigenvalues of } A = A^t. \]
+
+If all eigenvalues of $A$ are positive (and hence all pivots are positive), then we call $A$ is \textbf{positive definite} matrix. 
+
+\vspace{3mm} 
+
+(We will have another definition of this term shortly.)
+ 
+ 
+
+}
+
+
+\frame{ \frametitle{Schur's Theorem}
+
+\begin{thm}
+If $A$ is a square, complex-valued matrix, then $A$ has a decomposition called \textbf{Schur form}, 
+\[ A = QTQ^{-1}, \]
+where 
+\begin{itemize}
+\item $Q$ is a \textbf{unitary} matrix, i.e. $Q^{-1} = \overline{Q}^t$, its \textbf{conjugate transpose}, and 
+\item $T$ is upper triangular.
+\end{itemize}
+
+\vspace{5mm}
+
+If $A$ is a square, real-valued matrix, then the Schur form of $A$ has $Q$ an orthogonal matrix. If $A$ is also symmetric, then $T$ is diagonal.
+
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Positive Definite Matrices}
+
+An $n \times n$ matrix $A$ is called \textbf{symmetric positive definite (SPD)} \\
+if $A$ is symmetric and satisfies all of the equivalent\footnote{satisfying one satisfies them all!} properties: 
+\begin{itemize}
+\vspace{3mm}
+\item $\vec{x}^t A \vec{x} > 0$ for any $\vec{x} \neq 0 \in \R^n$ (the ``energy'' definition)
+\vspace{3mm}
+\item all $n$ pivots $d_i > 0$
+\vspace{3mm}
+\item all $n$ eigenvalues $\lambda_i > 0$
+\vspace{3mm}
+\item all $n$ upper-left determinants (deleting successive bottom row/column pairs) $> 0$
+\vspace{3mm}
+\item $A = R^t R$ for some $R$ with independent columns.
+\end{itemize}
+\vspace{3mm}
+If we relax the first (really, any) property to $\geq 0$, any $A$ satisfying is called \textbf{symmetric positive semi-definite (SPSD)}. 
+
+}
+
+
+\frame{ \frametitle{Positive Definite Matrices: Cholesky decomposition}
+
+If all the inequalities are flipped, we call $A$ \textbf{symmetric negative (semi)definite}.
+
+\vspace{5mm}
+
+If $A$ has positive and negative eigenvalues, we call $A$ \textbf{indefinite}.
+
+\vspace{5mm}
+
+The last property, 
+
+\begin{itemize}
+\item $A = R^t R$ for some $R$ with independent columns,
+\end{itemize}
+
+is the \textbf{Cholesky decomposition} of $A$; more to the point, 
+\[ A = LDU \implies A = LDL^t = (L \sqrt{D})(L \sqrt{D})^t, \]
+i.e. $R = (L \sqrt{D})^t$.
+
+}
+
+
+\frame{ \frametitle{Positive Definite Matrices: two decompositions}
+
+If $A$ is SPD, then there is a decomposition for pivots and another for eigenvalues: 
+\[ A = LDL^t \] 
+gives the pivots in $D$ (with triangular bookends), and 
+\[ A = Q \Lambda Q^t \]
+gives the eigenvalues in $\Lambda$ (with orthogonal bookends). 
+
+}
+
+
+\frame{ \frametitle{Positive Definite Matrices: closed under addition, 2x2}
+
+For once, arithmetic intuition holds: if $A$ and $B$ are SPD, \\
+then so is $A+B$: 
+\[ \vec{x}^t (A + B) \vec{x} = \vec{x}^t A \vec{x} + \vec{x}^t B \vec{x} > 0. \]
+The converse, of course, is not necessarily true.
+
+\vspace{5mm}
+
+A 2x2 matrix $A = \mrr{a}{b}{b}{c}$ is SPD $\iff$ $a > 0$ and $ac - b^2 > 0$. 
+
+}
+
+
+\frame{ \frametitle{Positive Semidefinite Matrices: Quadratic Forms, Ellipses}
+
+Note the energy definition of an SPSD matrix: 
+\begin{itemize}
+\item $\vec{x}^t A \vec{x} \geq 0$ for any $\vec{x} \neq 0 \in \R^n$.
+\end{itemize}
+This kind of function, $f(\vec{x}) = \vec{x}^t A \vec{x}$, is called a \textbf{quadratic form}.
+
+\vspace{5mm}
+
+If $A$ is SPSD, then the equation
+\[ \vec{x}^t A \vec{x} = 1 \]
+defines an $n$-dimensional ellipsoid in $\R^n$, centered at the origin. 
+
+\vspace{5mm}
+
+In particular, the equation in $\R^2$, 
+\begin{align*} 
+\vec{x}^t A \vec{x} & = 1, \\
+i.e. \,\, \rvv{x}{y}\mrr{a}{b}{b}{c}\cvv{x}{y} & = ax^2 + 2bxy + cy^2 = 1, 
+\end{align*}
+defines an ellipse. 
+
+}
+
+
+\frame{ \frametitle{Positive Semidefinite Matrices: principal axis theorem}
+
+This ellipse 
+\begin{align*} 
+\vec{x}^t A \vec{x} = ax^2 + 2bxy + cy^2 = 1
+\end{align*}
+is tilted and stretched from the unit circle
+\[ \vec{x}^t I \vec{x} = x^2 + y^2 = 1 \]
+in that its eigenvectors point in the directions of the minor and major axes, and the eigenvalues determine the lengths of the axes: this is stated in the \textbf{Principal Axis Theorem}.
+
+}
+
+
+\frame{ \frametitle{Positive Semidefinite Matrices: principal axis theorem}
+
+Factoring the matrix $A = Q \Lambda Q^t$ yields a way to ``standardize'' the ellipse equation in the following way:  
+\begin{align*} 
+\vec{x}^t A \vec{x} = (\vec{x}^t Q) \Lambda (Q^t \vec{x}) = 1.
+\end{align*}
+
+Writing $C = \cvv{c_1}{c_2} = Q^t \vec{x}$, the change into ``ellipse coordinates'', we get 
+\begin{align*} 
+\vec{x}^t A \vec{x} = C^t \Lambda C = \lambda_1 c_1^2 + \lambda_2 c_2^2 = 1.
+\end{align*}
+This implies that, if $\vec{x}_1$ and $\vec{x}_2$ the eigenvectors of $A$, the axes are in the directions of $\vec{x}_1$ and $\vec{x}_2$, with axis half-lengths $\frac{1}{\sqrt{\lambda_1}}$ and $\frac{1}{\sqrt{\lambda_2}}$.
+
+}
+
+
+\end{document}

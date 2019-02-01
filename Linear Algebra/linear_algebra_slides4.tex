@@ -1,0 +1,854 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+
+\title[Orthogonality and Projection]{Linear Algebra and Matrix Methods \\
+Orthogonality and Projection }
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{A vector subspace is ``missing something'' from its parent}
+
+Let $V$ be a vector space, and $W$ a proper subspace of $V$ ($W \neq V$). 
+
+\vspace{5mm}
+
+$W$, then, is somehow ``missing'' something from $V$; in particular, 
+
+\vspace{3mm}
+
+\[ dim(W) < dim(V). \]
+
+\vspace{5mm}
+
+It takes less vectors to describe elements of $W$ than it does for $V$. 
+
+}
+
+
+\frame{ \frametitle{Multiplying by a matrix transforms a vector... }
+
+If we apply an $m \times n$ matrix $A$ to a vector $v \in \R^n$ with decomposition given by the Fundamental Theorem of Linear Algebra as 
+\[ v = \vec{x}_n + c: \,\,  \vec{x}_n \in N(A), \,\, c \in C(A^t), \] 
+we get 
+\[ b = Av = A(\vec{x}_n + c) = A\vec{x}_n + Ac = 0 + Ac = Ac, \]
+where $b \in C(A)$. We can see that $c$ is the vector of coefficients that determines ``how much'' of each column vector of $A$ goes into building the vector $b$. 
+
+\vspace{5mm}
+
+So what ``happens'' to the vector $\vec{x}_n$? It contributes nothing to $b$. 
+
+}
+
+
+\frame{ \frametitle{... but might lead to information loss.}
+
+If $dim(N(A)) = n-r > 0$, $A$ is not invertible, and there is a kind of ``information loss'' when applying $A$: we move from a point in an $n$-dimensional space, 
+\[ v \in \R^n; \,\, dim(\R^n) = n, \] 
+to a point in an $r$-dimensional space, 
+\[ Av \in C(A); \,\, dim(C(A)) = r < n. \]
+The \textbf{image} $C(A)$ does not represent ``all'' of $A$, dimension-wise.\footnote{We are not forgetting that $C(A)$ is a subspace of $\R^m$, not $\R^n$.}
+
+\vspace{5mm}
+
+The \textbf{kernel} $N(A)$ gets its dimension(s) from $\R^n$... 
+\begin{flushright}
+... and sends them to 0.
+\end{flushright}
+}
+
+
+\frame{ \frametitle{Orthogonal Complements}
+
+If $W$ is a vector subspace of $V$, with $dim(W) = r \leq n = dim(V)$, then the \textbf{orthogonal complement} of $W$, denoted $W^{\perp}$ (``$W$-perp''), is the vector subspace of $V$ such that 
+\[ W \perp W^{\perp} \text{ and } W \oplus W^{\perp} = V. \]
+That is, $W$ and $W^{\perp}$ form an orthogonal direct sum that equals $V$.
+
+\vspace{5mm}
+
+Note that 
+
+\[ dim(W^{\perp}) = n - r \text{ and } (W^{\perp})^{\perp} = W. \] 
+
+}
+
+
+\frame{ \frametitle{Counting Basis Vectors: FTLA II: Perp}
+
+If $W$ is a vector subspace of $V$, with $dim(W) = r \leq n = dim(V)$, and if $S$ is a basis for $W$, then $|S| = r$.
+
+\vspace{5mm}
+
+$W^{\perp}$ has a basis $T$ with $|T| = n-r$. 
+
+\vspace{5mm}
+
+The union $S \cup T$ is a basis for $V$. 
+
+\vspace{5mm}
+
+\textbf{Fundamental Theorem of Linear Algebra, Part II}: 
+\[ N(A) = C(A^{t})^{\perp} \text{ and } N(A^t) = C(A)^{\perp}. \]
+
+}
+
+
+\frame{ \frametitle{Counting Basis Vectors: Orthogonal Complementarity}
+
+If $dim(C(A)) = r$, then any basis of $C(A)$ has $r$ vectors. 
+
+\vspace{5mm}
+
+Any basis of $N(A^t)$ has $m-r$ vectors, all orthogonal to all of $C(A)$, that can be considered the ``missing'' basis vectors from $C(A)$ to span all of $\R^m$. 
+
+\vspace{5mm}
+
+Likewise for $C(A^t)$ and $N(A)$: a basis of $C(A^t)$ has $r$ vectors, and a basis of $N(A)$ has $n-r$ vectors, all orthogonal to $C(A^t)$. The union of these two bases is a basis of $\R^n$. 
+
+\vspace{5mm}
+
+$dim(C(A)) = dim(C(A^t)) = r = rank(A)$ connects the two views.
+
+}
+
+
+
+\frame{ \frametitle{Counting Basis Vectors: Rank-Nullity Theorem}
+
+This fact is captured generally in the \textbf{Rank-Nullity Theorem}.
+
+\vspace{5mm}
+
+For any linear transformation $A: \R^n \to \R^m$, 
+\begin{align*}
+rank(A) + nullity(A) & = dim(im(A)) + dim(ker(A)) \\
+ & = dim(C(A)) + dim(N(A)) \\
+ & = r + (n-r) = n.
+\end{align*}
+
+Likewise for $A^t: \R^m \to \R^n$, 
+\begin{align*}
+rank(A^t) + nullity(A^t) & = dim(im(A^t)) + dim(ker(A^t)) \\
+ & = dim(C(A^t)) + dim(N(A^t)) \\
+ & = r + (m-r) = m.
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Validating orthogonality: four fundamental subspaces of $A$}
+
+We will check that, for an $m \times n$ matrix $A \in \R^{m \times n}$, we have that 
+\[ N(A) \perp C(A^{t}) \text{ and } N(A^t) \perp C(A). \]
+Recall that, if $A \vec{x} = b$ and $A^t \vec{y} = c$, then 
+\[ \vec{x} \cdot c = b \cdot \vec{y}. \]
+First, let $c \in C(A^{t})$ and $\vec{x} \in N(A)$ (as columns). Then 
+\[ A\vec{x} = 0 \text{ and } \exists \vec{y} \in \R^m: A^t \vec{y} = c. \]
+Then their dot product shows that $\vec{x} \perp c$: 
+\[ \vec{x} \cdot c = \vec{x}^t c = \vec{x}^t (A^t \vec{y}) = (\vec{x}^t A^t) \vec{y} = (A\vec{x})^t \vec{y} = 0^t \vec{y} = 0. \]
+
+The argument for $b \perp \vec{y}$ is similar.
+
+}
+
+
+\frame{ \frametitle{Projections: shadows onto a subspace}
+
+A \textbf{projection matrix} is a symmetric matrix $P$ such that $P^2 = P$. 
+
+\vspace{5mm}
+
+(The property $P^2 = P$ is called \textbf{idempotency}.)
+
+\vspace{5mm}
+
+What does this mean for a vector that is projected by $P$?
+
+}
+
+
+\frame{ \frametitle{Projections: shadows onto a subspace}
+
+Upon repeated projection by the same matrix, no more information is ``lost'' after the first time. The projection is fixed from then on.
+
+\vspace{5mm}
+
+Let $\vec{x} \in \R^n$, and let $P$ be an $n \times n$ projection matrix.
+
+\vspace{5mm}
+
+Then $P\vec{x} = p$ for some $p \in \R^n$. This means $p \in C(P)$. 
+
+}
+
+
+
+\frame{ \frametitle{Projections: shadows onto a subspace}
+
+But if we apply $P$ again, 
+\[ P^2 \vec{x} = P\vec{x} = p \]
+as well. Applying the associative property, 
+\[ P^2 \vec{x} = P(P\vec{x}) = Pp = p, \]
+which means that $p$ maps to itself under $P$. That is, $Pp = Ip$. 
+
+}
+
+
+\frame{ \frametitle{Projections in the context of the FTLA}
+
+Let $A \in \R^{m \times n}$ be an $m \times n$ matrix. 
+
+\vspace{5mm}
+
+Recall that, according to the FTLA, any $b \in \R^m$ can be written as a unique sum 
+\[ b = p + e, \] 
+of a vector in $p \in C(A)$ and a vector in $e \in N(A^t)$, with $p \perp e$.
+
+\vspace{5mm}
+
+We'll use the notation 
+\begin{itemize}
+\item $p$ for ``projection'' (onto $C(A)$), and 
+\item $e$ for ``error'' (the ``lost information'', relative to $A$). 
+\end{itemize}
+
+There exists a projection matrix $P$ and $\vec{x} \in \R^n$ such that 
+\[ Pp = A \vec{x} = p, \,\, Pe = A^t e = 0. \]
+
+}
+
+
+\frame{ \frametitle{``Simplest'' projection: reduce the number of coordinates}
+
+For example, consider the projection matrix 
+$P = \mrrr{1}{0}{0}{0}{0}{0}{0}{0}{1}$, 
+which projects a vector $b \in \R^3$ onto the vector in $\R^3$ with only its first and third coordinates. 
+
+\vspace{5mm}
+
+That is, if $b = \cvvv{b_1}{b_2}{b_3}$, then $Pb = \mrrr{1}{0}{0}{0}{0}{0}{0}{0}{1} \cvvv{b_1}{b_2}{b_3}= \cvvv{b_1}{0}{b_3}$.
+
+\vspace{5mm}
+
+We can write $b = p + e = \cvvv{b_1}{0}{b_3} + \cvvv{0}{b_2}{0}$; 
+$e = b - p$ is a dimension's worth of  ``error'' that $P$ ``loses'' in the projection.
+
+}
+
+
+
+\frame{ \frametitle{Understanding the projection matrix $P$ of the matrix $A$}
+
+Fix a vector $b \in \R^m$ and a matrix $A \in \R^{m \times n}$. 
+
+\vspace{5mm}
+
+Then there exists a projection matrix $P \in \R^{m \times m}$ \\
+that sends $b \in \R^m$ into $C(A)$: $\exists \vec{x} \in \R^n$ such that 
+\[ Pb = A\vec{x} = p. \]
+We also have that $b = p + e$ for some $p \in C(A)$ and $e \in N(A^t)$.
+\[ \text{Thus, } Pb = P(p + e) = Pp + Pe = Pp + 0 = p; \,\, p \perp e. \]
+
+}
+
+
+\frame{ \frametitle{Understanding the projection matrix $P$ of the matrix $A$}
+
+If $A \vec{x} = b = p + e$ has a solution $\vec{x}$ (unique or not), then $b \in C(A)$, and projection by $P$ onto $C(A)$ ``loses no information''; there is no ``error'' in solving. 
+
+\[ \exists \vec{x}: A \vec{x} = b \iff p = b, \,\, e = 0. \]
+
+\vspace{3mm}
+
+If $A \vec{x} = b = p + e$ has \emph{no} solution, then $b \not \in C(A)$, and there is some error in attempting a solution: projection by $P$ ``loses information''. The ``closest we can get'' is $p$.
+\[ \not \exists \vec{x}: A \vec{x} = b \iff p \neq b, \,\, e = b - p \neq 0. \]
+Either way, 
+\[ Pb = p; \,\,\,\, Pe = P(b - p) = Pb - Pp = p - p = 0. \]
+
+}
+
+
+\frame{ \frametitle{Understanding the projection matrix $P$: projects $b$ to $p$}
+
+We can factor this error equation to learn about how projection works. Since $P^2 = P$, then the matrix 
+\[ P - P^2 = (I-P)P = P(I-P) = 0. \]
+If $b = p + e$ such that $Pb = p$ and $Pe = 0$, then 
+\begin{align*}
+(P - P^2)b = 0 & \implies (I - P)Pb = 0 \\
+& \implies (I - P)p = 0 \therefore p \in N(I - P). 
+\end{align*}
+A projection vector $p$ of $P$ is a null (error) vector of $I - P$. 
+
+}
+
+
+\frame{ \frametitle{Understanding the matrix $I-P$: also a projection}
+
+If $P$ is a projection matrix, then $I - P$ is also a projection matrix: using the facts that $I$ and $P$ are projections, and multiplication by $I$ is commutative: 
+\begin{align*}
+I^2 = I, \,\, P^2 = P, \,\, IP = PI = P, 
+\end{align*}
+we have 
+\begin{align*}
+(I - P)^2 = (I-P)(I-P) & = I^2 - PI - IP + P^2 \\
+ & = I - 2P + P = I - P. 
+\end{align*}
+Thus, $I-P$ satisfies the projection matrix property.
+
+}
+
+
+\frame{ \frametitle{Understanding the projection matrix $I-P$: projects $b$ to $e$}
+
+What happens to the $P$-error vector $e$ under $I - P$? 
+\begin{align*}
+(I-P)e & = e - Pe = e - 0 = e.
+\end{align*}
+Thus, $e$ is projected onto itself under $I-P$. 
+
+\vspace{5mm}
+
+To summarize: if $P$ is a projection matrix, then so is $I-P$. 
+
+}
+
+
+\frame{ \frametitle{Understanding the projection matrix $I-P$: projects $b$ to $e$}
+
+If $b \in \R^m$ has decomposition $b = p + e$, where 
+\begin{itemize}
+\vspace{3mm}
+\item $p$ is the projection of $b$ by $P$ and 
+\vspace{3mm}
+\item $e$ is the error under $P$, 
+\end{itemize}
+\vspace{3mm}
+then 
+\begin{itemize}
+\vspace{3mm}
+\item $e$ is the projection of $b$ by $I-P$ and 
+\vspace{3mm}
+\item $p$ is the error under $I-P$. 
+\end{itemize}
+
+
+}
+
+
+
+\frame{ \frametitle{Calculating the projection matrix $P$ of the matrix $A$}
+
+Reconsidering $P$ via the identity: if $b \in \R^m$, then the decomposition $b = p + e$ can be written in terms of $P$ by 
+\begin{align*}
+I & = P + (I - P) \\
+\implies b = Ib & = (P + (I - P))b \\
+ & = Pb + (I - P)b \\
+ & = p + e. 
+\end{align*}
+
+What is $P$, in terms of $A$?
+
+}
+
+
+
+\frame{ \frametitle{Calculating the projection matrix $P$ of the matrix $A$}
+
+We will compute $P$ from what we know about the error vector $e$. \\
+If $p = Pb = A\hat{x}$ is the ``best fit'' solution to the attempted $A \vec{x} = b$, with $b = p + e$, and $P$ the projection matrix onto $C(A)$, we have 
+\begin{align*}
+e & = b - p \\
+ & = b - Pb \\
+ & = b - A\hat{x} \\
+\implies A^t e & = A^t(b - A\hat{x}) \\
+ & = A^t b - A^t A \hat{x} \\
+ & = 0 \,\, (\text{since } e \in N(A^t)) \\
+\implies A^t b & = A^t A \hat{x}.
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Calculating the projection matrix $P$ of the matrix $A$}
+
+We will now mention some important aspects of $A^t A$: 
+\begin{itemize} 
+\item $A^t A$ is a symmetric matrix with independent columns, \\and so $A^t A$ is invertible.
+\end{itemize}
+
+\vspace{5mm}
+
+With this knowledge, we continue our derivation with $(A^t A)^{-1}$: 
+\begin{align*}
+A^t b & = A^t A \hat{x} \\
+\implies (A^t A)^{-1} A^t b & = (A^t A)^{-1} A^t A \hat{x} \\
+\implies (A^t A)^{-1} A^t b & = (A^t A)^{-1} (A^t A) \hat{x} \\
+\implies (A^t A)^{-1} A^t b & = \hat{x} \\
+\implies A (A^t A)^{-1} A^t b & = A \hat{x} = p.
+\end{align*}
+
+Our conclusion: $P = A (A^t A)^{-1} A^t$. 
+
+}
+
+
+
+\frame{ \frametitle{The projection matrix $P$ of the matrix $A$ solves $A \hat{x} = Pb$}
+
+By this construction of the projection $P$ onto $C(A)$, the matrix 
+\[ P = A (A^t A)^{-1} A^t, \]
+we can see that, whether or not the equation 
+\[ A \vec{x} = b \]
+can be solved for $\vec{x}$, there is always a solution $\hat{x}$ to the equation 
+\[ A \hat{x} = Pb. \]
+That projection solution $\hat{x}$ is, by applying most of $P$ to both sides, and noticing that $A^t P = A^t$, 
+\begin{align*} 
+\hat{x} = (A^t A)^{-1} A^t b.
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Example: Projection onto a line}
+
+Suppose $A$ is a column vector ($m \times 1$). As a vector, call it $a$.
+
+\vspace{5mm}
+
+How do you project the vector $b \in \R^m$ onto the line 
+\[ C(A) = \{ca \, | \, c \in \R\}? \] 
+
+If $\exists x \in \R$ such that $x a = b$, then $b \in C(A)$ and you are done. 
+
+\vspace{5mm}
+
+If there is no such $x$, then we need to solve the projection equation instead: 
+\[ \hat{x} a = Pb = p \implies b - \hat{x} a = b - p = e. \]
+
+}
+
+
+\frame{ \frametitle{Example: Projection onto a line}
+
+From here, we have 
+\begin{align*}
+b - \hat{x} a & = e \\
+\implies a \cdot (b - \hat{x} a) & = a \cdot e = 0 \,\, (\text{since } a \perp e) \\
+\implies a \cdot b & = \hat{x} a \cdot a \,\, (\text{since } \hat{x} \text{ is a scalar}) \\
+\implies \frac{a \cdot b}{a \cdot a} & = \hat{x}. 
+\end{align*}
+This should look very similar to the general case, where $\hat{x} \in \R^n$: 
+\[ \hat{x} = (A^t A)^{-1} A^t b. \]
+
+
+}
+
+
+\frame{ \frametitle{Projection: Pythagorean Theorem (what else is new)}
+
+The error vector $e = b - p$ of a vector $b \in \R^m$ is the \emph{minimum distance} possible between $b$ and its projection $p$ under $A$.
+
+\vspace{5mm}
+
+Whenever the word ``distance'' is uttered... 
+\begin{flushright}
+... the Pythagorean Theorem is lurking nearby.
+\end{flushright}
+
+\vspace{5mm}
+
+If the error $e$ is the minimum distance between $p$ and $b$, \\
+and $p \perp e$, then $e$ and $p$ are the legs of a triangle, \\
+and $b$ is the hypotenuse: examining vector lengths, that gives us 
+
+\[ ||b||^2 = ||p||^2 + ||e||^2. \]
+
+
+
+}
+
+
+\frame{ \frametitle{Projection: Pythagorean Theorem (error is minimized)}
+
+We will verify this fact, and cast the error $e$ as the vector with \emph{minimum} distance, with the \emph{least square} error from the intended ``solution'' to $A \vec{x} = b$. 
+
+\vspace{5mm}
+
+Thus, we will call $p$ the \textbf{least squares}, or \textbf{best fit}, \textbf{approximation} to $b$ under $A$, and $e$ the \textbf{least square error}. 
+
+}
+
+
+\frame{ \frametitle{Projection = Least squares approximation under $A$}
+
+Let $x \in \R^n$ be \emph{any} vector (not necessarily a minimizing one). Given the decomposition $b = p + e$ for $b \in \R^m$, we can write $e$ in terms of $b$, $p$, and \emph{any} $x \in \R^n$:  
+\begin{align*}
+b & = p + e \\
+\implies e & = b - p = (Ax - p) - (Ax - b), 
+\end{align*}
+where, since $p, Ax \in C(A)$, we have $e \perp Ax$, and so $e \perp Ax - p$. 
+
+}
+
+
+\frame{ \frametitle{Projection = Least squares approximation under $A$}
+
+Thus, the Pythagorean Theorem also holds under the lengths 
+\[ ||Ax - b||^2 = ||Ax - p||^2 + ||e||^2. \]
+
+If $p = Pb$ minimizes the error in computing (or failing to compute) $A\vec{x} = b$, then the error between $A \hat{x}$ and $p$ is 0: 
+\[ ||A \hat{x} - p|| = 0. \]
+
+This verifies that the least squares solution $\hat{x}$ minimizes the error of any $x \in \R^n$: 
+\[ ||A\hat{x} - b||^2 = ||e||^2 \leq \inf_{x \in \R^n} ||Ax - b||^2. \]
+
+}
+
+
+\frame{ \frametitle{Least squares approximation: best fit curve to data}
+
+One common application of linear projection is in constructing the \textbf{best fit curve} to a set of data points. 
+
+\vspace{5mm}
+
+Say we have a set of $m$ points in $\R^2$: 
+\[ \{ (x_1, y_1), (x_2, y_2), ..., (x_m, y_m) \}. \]
+If the data fits the function $y = f(x)$ perfectly, we would be able to write this data set as 
+\[ \{ (x_1, y_1 = f(x_1)), (x_2, y_2 = f(x_2)), ..., (x_m, y_m = f(x_m)) \}. \]
+However, this is not typically the case with real-world data. 
+
+}
+
+
+\frame{ \frametitle{Least squares approximation: best fit curve to data}
+
+If we declare that $f$ uses $n+1$ parameters $c_0, c_1, c_2, ..., c_n$ in its definition, what is the vector of parameters 
+\[ c = (c_0, c_1, c_2, ..., c_n) \] 
+that minimize the error in considering these $m$ data points under $f$, i.e. minimizes the mean squared error $||Ac - b||^2$? 
+%\[ \left(\sum_{i=1}^m |y_i - f(x_i)|^2\right)^{1/2}? \]
+
+\vspace{5mm}
+
+In this problem, we are given $f$, and solve for best fit of $c$. 
+
+}
+
+
+\frame{ \frametitle{Least squares example: best fit line}
+
+\begin{example}
+Find the best fit line to the points $\{ (0,6), (1,0), (2,0) \}$. 
+\end{example}
+
+\vspace{5mm}
+
+The best fit line is of form $f(x) = c_0 + c_1 x$, so we will solve for the parameter vector $c = \cvv{c_0}{c_1}$. 
+
+\vspace{5mm}
+
+This means the system of equations generated by the data is 
+\begin{align*}
+c_0 + 0c_1 & = 6 \\
+c_0 + 1c_1 & = 0 \\
+c_0 + 2c_1 & = 0,
+\end{align*}
+which clearly does not have a solution. We want the best fit.
+
+}
+
+
+\frame{ \frametitle{Least squares example: best fit line}
+
+Our system is the matrix equation $Ac = b$, where 
+\[ A = \cvvv{1 \,\, 0}{1 \,\, 1}{1 \,\, 2}, \,\, c = \cvv{c_0}{c_1}, \,\, b = \cvvv{6}{0}{0}. \]
+The best fit parameter solution $\hat{c}$ is given by  
+\[ \hat{c} = (A^t A)^{-1} A^t b = \cvv{5}{-3}, \]
+which gives the best fit line
+\[ f(x) = c_0 x + c_1 = 5-3x. \]
+
+
+}
+
+
+\frame{ \frametitle{Least squares example: best fit line}
+
+How close is the best fit? 
+\begin{align*} 
+p & = A \hat{c} = \cvvv{1 \,\, 0}{1 \,\, 1}{1 \,\, 2} \cvv{5}{-3} = \cvvv{5}{2}{-1} \\
+e & = b - p = \cvvv{6}{0}{0} - \cvvv{5}{2}{-1} = \cvvv{1}{-2}{1} \\
+\implies ||e||^2 & = e \cdot e = 6.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Least squares example: best fit line with calculus}
+
+Let's do the same problem, but with calculus this time. Compute the error $E(c) = ||e||^2$ for a general pair of parameters for the line, $c = \cvv{c_0}{c_1}$ for the line $f(x) = c_0 + c_1 x$; this yields the square error 
+\begin{align*} 
+E(c) & = ||Ac - b||^2 \\
+ & = \left|\left| \cvvv{c_0 - 6}{c_0 + c_1}{c_0 + 2c_1} \right|\right|^2 = (c_0 - 6)^2 + (c_0 + c_1)^2 + (c_0 + 2c_1)^2. 
+\end{align*}
+
+We'll take this square error and minimize it via the second derivative test on $c_0$ and $c_1$. 
+
+}
+
+
+\frame{ \frametitle{Least squares example: best fit line with calculus}
+
+$E(c)$ has a critical point at $c$ when its first partial derivatives are 0: 
+\begin{align*}
+E(c) & = (c_0 - 6)^2 + (c_0 + c_1)^2 + (c_0 + 2c_1)^2 \\
+\\
+\frac{\partial E}{\partial c_1} & = 0 + 2(c_0 + c_1) + 2(c_0 + 2c_1)(2) = 6c_0 + 10 c_1 \\
+\\
+\frac{\partial E}{\partial c_0} & = 2(c_0 - 6) + 2(c_0 + c_1) + 2(c_0 + 2c_1) = 6 c_0 + 6c_1 - 12 \\
+\\
+\frac{\partial^2 E}{\partial c_1^2} & = 10 > 0, \,\, \frac{\partial^2 E}{\partial c_0^2} = 6 > 0 \text{ (concave up; critical point is a min)} \\
+\\
+\implies & 6c_0 + 10c_1 = 0, \,\, 6 c_0 + 6c_1 = 12 \implies c = \cvv{c_0}{c_1} = \cvv{5}{-3}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Least squares approximation: best fit line, general}
+
+In general, the best fit line $f(x) = c_0 + c_1 x$, which takes a parameter $c \in \R^{2}$, minimizes its error on a set of $m$ data points 
+\[ \{(x_1, y_1), (x_2, y_2), ..., (x_m, y_m) \} \]
+by solving the projection equation $A\hat{c} = Py$ for the vector $y \in \R^m$ and the matrix $A \in \R^{m \times 2}$ defined by 
+\[ A = \cvvvv{1 \,\,\, x_1}{1 \,\,\, x_2}{ \vdots \,\,\,\,\, \vdots }{1 \,\,\, x_m}, \,\,\, \hat{c} = \cvv{c_0}{c_1}, \,\,\, y = \cvvvv{y_1}{y_2}{\vdots}{y_m}. \]
+We can simplify this to the $2 \times 2$ system $A^t A \hat{c} = A^t y$, using 
+\[ A^t A = \mrr{m}{\sum_{i=1}^m x_i}{\sum_{i=1}^m x_i}{\sum_{i=1}^m x_i^2}, \,\, A^t y = \cvv{\sum_{i=1}^m y_i}{\sum_{i=1}^m x_i y_i}. \]
+
+}
+
+
+\frame{ \frametitle{Least squares approximation: best fit polynomial, general}
+
+In general, the best fit $n$th degree polynomial 
+\[ f(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_n x^n = \sum_{i=0}^n c_i x^i, \]
+which takes a parameter $c \in \R^{n+1}$, minimizes its error on a set of $m$ data points 
+\[ \{(x_1, y_1), (x_2, y_2), ..., (x_m, y_m) \} \]
+by solving the projection equation $A\hat{c} = Py$ for the vector $y \in \R^m$ and matrix $A \in \R^{m \times (n+1)}$ defined by 
+\[ A = \cvvvv{1 \,\,\, x_1 \,\,\, x_1^2 \,\,\, \cdots \,\,\, x_1^n}{1 \,\,\, x_2 \,\,\, x_2^2 \,\,\, \cdots \,\,\, x_2^n}{ \ddots }{1 \,\,\, x_m \,\,\, x_m^2 \,\,\, \cdots \,\,\, x_m^n}, \,\,\, y = \cvvvv{y_1}{y_2}{\vdots}{y_m}. \]
+
+}
+
+
+\frame{ \frametitle{A Nice Basis?}
+
+In projection and best fitting, we need a matrix $A$ of column vectors that are \textbf{linearly independent}. This means the columns of $A$ are a \textbf{basis} of $C(A)$. 
+
+\vspace{5mm}
+
+But to do these computations, we need $A^t A$, which can itself be cumbersome to compute. 
+
+\vspace{5mm}
+
+If we have a ``nice'' basis to take columns from, the calculation of $A^t A$ would be easy. 
+
+\vspace{5mm}
+
+We'll say the ``nicest'' type of basis is an \textbf{orthonormal basis}. 
+
+}
+
+
+\frame{ \frametitle{Orthogonal, Orthonormal Set}
+
+A set of vectors $\{q_1, q_2, ..., q_n\}$ is called \textbf{orthogonal} if they are all pairwise orthogonal. We call the set \textbf{orthonormal} if the set is orthogonal and all unit vectors; that is, 
+\[ q_i \cdot q_j = \delta_{ij} = \left\{ \begin{array}{ll} 0 & \text{ if } i \neq j \\ 1 & \text{ if } i = j.\end{array} \right. \]
+$\delta_{ij}$ is a function called the \textbf{Kronecker delta function}.\footnote{Not to be confused with a \textbf{Dirac delta function}, which is not a function, but what is called a \textbf{generalized function}, or \textbf{distribution}, which gives an integral positive weight only at a ``point mass''. This type of function is used, for example, to write (discrete) probability \emph{mass} functions as probability \emph{densities} with point masses, so you can always write an integral for a CDF.}
+
+}
+
+
+\frame{ \frametitle{Orthogonal Matrix, Orthonormal Basis}
+
+If a matrix $Q = \rvvvv{q_1}{q_2}{\cdots}{q_n}$ has an orthonormal set for its columns, then 
+\[ Q^t Q = I, \]
+and we call $Q$ an \textbf{orthogonal matrix}. 
+
+\vspace{5mm}
+
+If, in addition, $Q$ is square, then $Q Q^t = I$, $Q$ is invertible with 
+\[ Q^{-1} = Q^t, \] 
+and the column set of $Q$ is an \textbf{orthonormal basis} for $\R^n$.
+
+\vspace{5mm}
+
+(Some texts reserve the term \textbf{orthogonal matrix} for square matrices $Q$ only.)
+
+\vspace{5mm}
+
+}
+
+
+\frame{ \frametitle{Orthogonal Matrix Examples: Rotation, Permutation}
+
+The simplest nontrivial example of an orthogonal matrix is a \textbf{rotation matrix}: for any $0 \leq \theta < 2\pi$, 
+\[ Q = \mrr{\cos \theta}{-\sin\theta}{\sin\theta}{\cos\theta} \]
+will rotate the point $\cvv{x}{y} \in \R^2$ counterclockwise by $\theta$ radians.
+
+\vspace{5mm}
+
+Any permutation matrix\footnote{Just because permutation and projection matrices both use $P$ as their representative symbols, they are not the same type of matrix. Context matters.} $P$ is orthogonal: 
+\[ P = \cvvvv{0 \,\,\, 0 \,\,\, 1 \,\,\, 0}{1 \,\,\, 0 \,\,\, 0 \,\,\, 0}{0 \,\,\, 1 \,\,\, 0 \,\,\, 0}{0 \,\,\, 0 \,\,\, 0 \,\,\, 1} \implies P^t = \cvvvv{0 \,\,\, 1 \,\,\, 0 \,\,\, 0}{0 \,\,\, 0 \,\,\, 1 \,\,\, 0}{1 \,\,\, 0 \,\,\, 0 \,\,\, 0}{0 \,\,\, 0 \,\,\, 0 \,\,\, 1} \implies P^t P = I. \]
+
+}
+
+
+\frame{ \frametitle{Orthogonal Matrix Examples: Reflection}
+
+If $u \in \R^n$ is a unit column vector, then the \textbf{outer product} $u u^t$ is an $n \times n$ matrix (of rank one), and the matrix 
+\[ Q = I - 2 u u^t \]
+is a \textbf{reflection matrix}, under which $Q v \in \R^n$ is the reflection of $v \in \R^n$ across the line spanned by $u$. 
+
+\vspace{5mm}
+
+Note: $Q^t Q = I$, and $Q^t = I - 2u u^t = Q$, so reflection matrices are \textbf{involutions}; they are their own inverses. (Reflection of a reflection is the original position: $Q^2 v = v$.)
+
+}
+
+
+\frame{ \frametitle{Orthogonal Matrices are Isometric}
+
+An orthogonal matrix preserves the length of a vector it multiplies: 
+\[ ||Qv|| = ||v||, \]
+meaning $Q$ is a type of operation called an \textbf{isometry}. 
+
+\vspace{5mm} 
+
+This is a special case of preserving dot products, meaning $Q$ also preserves angles: 
+\[ (Qv) \cdot (Qw) = (Qv)^t (Qw) = v^t (Q^t Q) w = v^t I w = v \cdot w \]
+\[ \implies \cos \theta = \frac{(Qv) \cdot (Qw)}{||Qv|| \cdot ||Qw||} = \frac{v \cdot w}{||v|| \cdot ||w||}. \]
+In particular, preserving angle means preserving orthogonality.
+
+}
+
+
+\frame{ \frametitle{Orthogonal matrices make easy-to-compute projections}
+
+How about projections? We started commenting on orthogonal matrices because their transpose multiplication was easy. 
+
+\vspace{5mm}
+
+The projection matrix onto the orthogonal matrix $Q$'s column space $C(Q)$ is 
+\[ P = Q(Q^t Q)^{-1} Q^t = Q Q^t. \]
+This is where the distinction between a square and non-square $Q$ is crucial. If $Q$ is square, then $Q$ is invertible, so since every equation $Q \vec{x} = b$ is solvable, $P = I$.
+
+\vspace{5mm}
+
+In the square case, once again, $Q^t = Q^{-1}$ and $Q \vec{x} = b$ is solved by 
+\[ \vec{x} = Q^{-1} b = Q^t b. \]
+$C(Q) = C(Q^t) = \R^n$ and $N(Q^t) = N(Q) = \{0\}$. 
+
+}
+
+
+\frame{ \frametitle{Gram-Schmidt orthogonalization: orthonormalize a basis}
+
+Say $S = \{a_1, a_2, ..., a_n\}$ is a set of $n$ independent vectors in $\R^n$. Then $S$ is a basis of $\R^n$, but it may be difficult to compute with. 
+
+\vspace{5mm}
+
+The \textbf{Gram-Schmidt} orthogonalization process is a procedure to convert a basis of $\R^n$ into an orthonormal basis.\footnote{This process can be used on a set of less than $n$ independent vectors, and end up with an orthonormal set. You only end with a basis if you start with one.}
+
+\vspace{5mm}
+
+The order of the basis vectors matters in the process: the first vector determines the first direction, and successive vectors are twisted to be orthogonal to all the previous ones and scaled. 
+
+}
+
+
+\frame{ \frametitle{Gram-Schmidt orthogonalization: twist, then scale; repeat.}
+
+Start with the basis $\{a_1, a_2, ..., a_n\}$. 
+
+\begin{enumerate}
+\item Set $b_1 = a_1$. Then $q_1 = \frac{b_1}{||b_1||}$. 
+\item Set $b_2 = a_2 - \left( \frac{b_1 \cdot a_2}{b_1 \cdot b_1} \right) b_1$, the orthogonal projection of $a_2$ onto the line spanned by $b_1$, subtracted from $a_2$. \\
+Then $b_2 \perp b_1$. Scale it: $q_2 = \frac{b_2}{||b_2||}$.
+\item Set $b_3 = a_3 - \left( \frac{b_1 \cdot a_3}{b_1 \cdot b_1} \right) b_1 - \left( \frac{b_2 \cdot a_3}{b_2 \cdot b_2} \right) b_2$. \\
+Then $b_3 \perp b_1$ and $b_3 \perp b_2$. Scale it: $q_3 = \frac{b_3}{||b_3||}$. 
+\item Successively, continue: 
+\[ b_k = a_k - \sum_{i=1}^{k-1} \left( \frac{b_i \cdot a_k}{b_i \cdot b_i} \right) b_i; \,\,\,\, q_k = \frac{b_k}{||b_k||}, \,\,\,\, k = 2, ..., n. \]
+\end{enumerate}
+
+End with the orthonormal basis $\{q_1, q_2, ..., q_n\}$. 
+
+}
+
+
+\frame{ \frametitle{How the orthogonalization works; matrix form}
+
+First, it is clear that $||q_k|| = 1$ for every $k$. To account for orthogonality: 
+\begin{itemize}
+\item $q_1$ is on the same line as $a_1$. 
+\item $q_2$ is in the plane spanned by $a_1$ and $a_2$, but $q_2 \perp q_1$. 
+\item $q_3$ is in the space spanned by $a_1$, $a_2$, and $a_3$, but $q_3 \perp q_1$, $q_2$.
+\item $q_k \in span(\{a_1, a_2, ..., a_k\})$ and $q_k \perp q_1, ..., q_{k-1}$. 
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{$A = QR$ properties, least squares solutions}
+
+The matrix factorization is $A = QR$, where $Q$ is orthogonal and $R$ is square upper-triangular.
+
+\vspace{5mm}
+
+Since $Q^t Q = I$, we also have $R = Q^t A$, where $r_{ij} = q_i \cdot a_j$. \\
+If $i > j$, $r_{ij} = 0$. This is true whether or not $A$ and $Q$ are square.
+
+\vspace{5mm}
+
+In fact, if $A$ is not square, but its columns are independent, then we can still use the $QR$-decomposition to get orthonormal columns in $Q$, and $R$ will still be square and upper-triangular.
+
+\vspace{5mm}
+
+Thus, $R$ is invertible. We can use this fact to compute projection solutions for $A$. 
+
+}
+
+
+
+\frame{ \frametitle{$A = QR$ properties, least squares solutions}
+
+Let $A = QR$. Then 
+\begin{align*}
+A^t A & = (QR)^t (QR) = R^t Q^t Q R = R^t R.
+\end{align*}
+Since $R$ is invertible, so is $R^t$. Thus, $R^{-1}$ and $(R^t)^{-1} = (R^{-1})^t$ both exist. 
+
+\vspace{5mm} 
+
+The least squares approximation to $A \vec{x} = b$ is 
+\begin{align*}
+A^t A \hat{x} = A^t b \implies R^t R \hat{x} & = R^t Q^t b \\
+\implies R \hat{x} & = Q^t b \implies \hat{x} = R^{-1} Q^t b.
+\end{align*}
+As usual, if $A \vec{x} = b$ has a solution, $\hat{x}$ is the projection term.
+
+}
+
+
+
+\end{document}

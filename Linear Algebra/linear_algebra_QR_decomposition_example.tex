@@ -1,0 +1,105 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mjcquiz}
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{center}
+Liner Algebra\\
+$A = QR$ Decomposition Example
+\end{center}
+
+
+Consider the 3x3 matrix $A$ of independent column vectors in $\R^3$: 
+\[ A = \mrrr{1}{0}{2}{1}{1}{3}{1}{0}{1}. \]
+
+What we would like to do is the following: 
+\begin{itemize}
+\item[(a) ] Apply the \textbf{Gram-Schmidt orthogonalization} process to the columns $\{a_1, a_2, a_3\}$ of $A$ (which are a basis of $\R^3$) to get an \emph{orthonormal} basis of $\R^3$, $\{q_1, q_2, q_3\}$, which preserve the directions of the $a_i$ as best as possible (in the order given). 
+\item[(b) ] Give the $QR$ factorization of $A$, built from the G-S orthogonalization.
+\item[(c) ] Show how $A = QR$ can be used to solve a system $A \vec{x} = b$. 
+\end{itemize}
+
+\section{Gram-Schmidt Orthogonalization}
+
+The G-S process is as follows: using the vector labels $b_i$ as intermediate vectors between the original vectors $a_i$ and the target vectors $q_i$: 
+\begin{itemize}
+\item First, set $b_1 = a_1$ and $q_1 = \frac{1}{||b_1||} b_1$. Thus, $q_1$ is unit length and in the direction of $a_1$. 
+\item Next, set 
+\[ b_2 = a_2 - \frac{b_1 \cdot a_2}{b_1 \cdot b_1} b_1. \]
+You may recognize the vector $\frac{b_1 \cdot a_2}{b_1 \cdot b_1} b_1 = proj_{b_1}(a_2)$ as the projection vector of $a_2$ onto the line spanned by $b_1$. Thus, the vector $b_2$ is the error vector between this projection and $a_2$. As such, $b_2 \perp b_1$.
+
+Scale $b_2$ to unit length by setting $q_2 = \frac{1}{||b_2||} b_2$. Thus, $q_1$ and $q_2$ are unit length and $q_1 \perp q_2$.
+\item Finally, set $b_3$ as the remainder from $a_3$ after subtracting off the projections of $a_3$ onto the lines of $b_1$ and $b_2$: 
+\[ b_3 = a_3 - \frac{b_1 \cdot a_3}{b_1 \cdot b_1} b_1 - \frac{b_2 \cdot a_3}{b_2 \cdot b_2} b_2 = a_3 - proj_{b_1}(a_3) - proj_{b_2}(a_3). \]
+Finally, scale $b_3$ to unit length: $q_3 = \frac{1}{||b_3||} b_3$.
+\end{itemize}
+
+The resultant set of vectors $\{q_1, q_2, q_3\}$ are unit length and pairwise orthgonal; hence, this is an \emph{orthonormal set} of vectors.
+
+To do the computation for our example, we first write out the column vectors 
+\[ a_1 = \cvvv{1}{0}{2}, \,\, a_2 = \cvvv{0}{1}{0}, \,\, a_3 = \cvvv{2}{3}{1}, \]
+and compute all the necessary dot products as we compute new vectors: 
+\begin{align*}
+b_1 & = \cvvv{1}{1}{1}:  & \begin{array}{ll} 
+b_1 \cdot b_1 & = 6 \implies ||b_1|| = \sqrt{b_1 \cdot b_1} = \sqrt{6} \\
+b_1 \cdot a_2 & = 1 \\
+b_1 \cdot a_3 & = 6 
+\end{array} & \implies q_1 = \frac{1}{\sqrt{3}}\cvvv{1}{1}{1} \\
+b_2 & = \cvvv{-\frac{1}{3}}{\frac{2}{3}}{-\frac{1}{3}}: &  \begin{array}{ll} 
+b_2 \cdot b_2 & = \frac{6}{9} \implies ||b_2|| = \sqrt{b_2 \cdot b_2} = \frac{\sqrt{6}}{3} \\
+b_2 \cdot a_3 & = \frac{7}{3}
+\end{array} & \implies q_2 = \frac{1}{\sqrt{6}}\cvvv{-1}{2}{-1} \\
+b_3 & = \cvvv{-\frac{3}{2}}{0}{\frac{3}{2}}: &  \begin{array}{ll} 
+b_3 \cdot b_3 & = \frac{18}{4} \implies ||b_3|| = \sqrt{b_3 \cdot b_3} = \frac{3\sqrt{2}}{2} 
+\end{array} & \implies q_3 = \frac{1}{\sqrt{2}}\cvvv{-1}{0}{1}.
+\end{align*}
+Note that $||q_i|| = 1$ for $i=1,2,3$, and $q_i \cdot q_j = 0$ if $i \neq j$. 
+
+
+\section{$QR$ Decomposition}
+
+The decomposition of $A = QR$ will have the following structure: 
+\begin{itemize}
+\item $Q$ is an \textbf{orthogonal matrix}, meaning $Q^t Q = I$ and the columns of $Q$ are unit length; in addition, since $Q$ is square, $Q$ is invertible with $Q^{-1} = Q^t$; 
+\item $R$ is an \textbf{upper triangular matrix}.
+\end{itemize}
+
+\vspace{5mm}
+
+From the G-S orthogonalization, we have 
+\[ Q = \mrrr{\frac{1}{\sqrt{3}}}{-\frac{1}{\sqrt{6}}}{-\frac{1}{\sqrt{2}}}{\frac{1}{\sqrt{3}}}{\frac{2}{\sqrt{6}}}{0}{\frac{1}{\sqrt{3}}}{-\frac{1}{\sqrt{6}}}{\frac{1}{\sqrt{2}}} = \frac{1}{\sqrt{6}} \mrrr{\sqrt{2}}{-1}{-\sqrt{3}}{\sqrt{2}}{2}{0}{\sqrt{2}}{-1}{\sqrt{3}}. \]
+
+Since $Q$ is a square orthogonal matrix, we can easily compute $R$ via 
+\[ A = QR \implies R = Q^{-1} A = Q^t A 
+%= \mrrr{\sqrt{3}}{2\sqrt{3}}{\frac{1}{\sqrt{3}}}{0}{2}{0}{0}{0}{-\sqrt{3}}
+ = \frac{1}{\sqrt{6}} \mrrr{3\sqrt{2}}{\sqrt{2}}{6\sqrt{2}}{0}{2}{0}{0}{0}{-\sqrt{3}}. \]
+Since $R$ is upper triangular with nonzero diagonal entries, $R$ is invertible. %In fact, since $R$ is upper triangular, we already have the form $R = DU$, and so can find $R^{-1}$ by scaling and back substitution: 
+%\begin{align*} 
+%R = \frac{1}{\sqrt{6}} \mrrr{3\sqrt{2}}{6\sqrt{2}}{\sqrt{2}}{0}{2}{0}{0}{0}{-\sqrt{3}} = DU 
+%& = \mrrr{\sqrt{3}}{0}{0}{0}{\frac{2}{\sqrt{6}}}{0}{0}{0}{\frac{3}{\sqrt{2}}} \mrrr{1}{\frac{1}{3}}{\frac{1}{3}}{0}{1}{\frac{7}{2}}{0}{0}{1} \\
+%\implies R^{-1} = U^{-1} D^{-1} & = \mrrr{1}{-\frac{1}{3}}{\frac{5}{6}}{0}{1}{-\frac{7}{2}}{0}{0}{1} \mrrr{\frac{1}{\sqrt{3}}}{0}{0}{0}{\frac{\sqrt{6}}{2}}{0}{0}{0}{\frac{\sqrt{2}}{3}} = \mrrr{\frac{1}{\sqrt{3}}}{-\sqrt{6}}{\frac{5\sqrt{2}}{18}}{0}{\frac{\sqrt{6}}{2}}{-\frac{7\sqrt{2}}{6}}{0}{0}{\frac{\sqrt{2}}{3}}. 
+%\end{align*}
+
+Having this decomposition makes solving a system using $A$ relatively easy: to solve $A\vec{x} = b$, 
+\[ A^{-1} = (QR)^{-1} = R^{-1} Q^{-1} = R^{-1} Q^t, \]
+so 
+\[ A \vec{x} = b \implies \vec{x} = A^{-1} b = R^{-1} Q^t b. \]
+
+\end{document}

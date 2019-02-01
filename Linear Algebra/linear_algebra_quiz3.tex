@@ -1,0 +1,67 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mjcquiz}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 4100, Spring 2018
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+\newcommand{\headerq}{\header{Linear Algebra}{\#3}}
+
+\newcommand{\quiz}[1]{
+\namefield
+
+\headerq
+
+\instcalc{55}{65}{40}
+
+\prob{1} (10+5+10+5 pts) Consider the system $A \vec{x} = b$ given by  
+% 3 x 5 system
+#1
+\begin{itemize}
+\item[(a) ] What is the reduced row echelon form of the coefficient matrix $A$? 
+\item[(b) ] What are the pivot variables? What are the free variables?
+\item[(c) ] What is the solution $\vec{x}$ to the system $A \vec{x} = b$? Give in terms of the special solution(s). 
+\item[(d) ] What is the dimension of the solution set? What geometric shape does the solution have, inside what space? 
+\end{itemize}
+
+\pagebreak
+
+\headerq
+
+\prob{2} (10+5+10+5+5 pts) Consider the system $A^t \vec{y} = 0$ given by $A$ in Problem 1. 
+% 5 x 3 system
+\begin{itemize}
+\item[(a) ] What is the reduced row echelon form of the coefficient matrix $A^t$? 
+\item[(b) ] What are the pivot variables? What are the free variables?
+\item[(c) ] What is the solution $\vec{y}$ to the system $A^t \vec{y} = 0$? Give in terms of the special solution(s). 
+\item[(d) ] What is the dimension of the solution set? What geometric shape does the solution have, inside what space? 
+\item[(e) ] What is $b \cdot \vec{y}$? What does that hint to you about the spaces in which these vectors exist?
+\end{itemize}
+}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+\quiz{\begin{align*}
+4 x_1 + 12 x_2 - 8 x_3 - 32 x_4 - 24 x_5 & = 24 \\
+-12 x_1 - 36 x_2 + 22 x_3 + 86 x_4 + 70 x_5 & = -72 \\
+20 x_1 + 60 x_2 - 44 x_3 - 180 x_4 - 124 x_5 & = 120.
+\end{align*}}
+
+
+\end{document}

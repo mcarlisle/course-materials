@@ -1,0 +1,84 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{../mathstuf}
+
+% Michael Carlisle, Baruch College, CUNY, MTH 4100, Spring 2018
+% github.com/mcarlisle/course-materials (posted Jan 2019)
+
+
+\usepackage{mjcquiz}
+\newcommand{\headerq}{\header{Linear Algebra}{\#1}}
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\namefield
+
+\header{Linear Algebra}{\#1}
+
+\instnocalc{50}{60}{30}
+
+\prob{1} (5 x 4 points) 
+\begin{itemize}
+\item[(a) ] Give the lengths of the three sides of the triangle formed by the vectors $v$, $w$, and $v-w$, for $v$ and $w$ given below.
+\item[(b) ] Give $\cos \theta$, where $\theta$ is the angle between the vectors $v$ and $w$. 
+\item[(c) ] Show that the triangle inequality holds for this triangle.
+\item[(d) ] Show, numerically, that the unit vectors in the direction of $v$ and $w$ also make the angle $\theta$ found in (b).
+\end{itemize}
+(Hint: draw some pictures to help.)
+\[ v =\cvv{4}{2}, \,\, w = \cvv{2}{3} \]
+
+\pagebreak
+
+\headerq
+
+\prob{2} (5 x 3 points)
+\begin{itemize}
+\item[(a) ] Write the system of linear equations as a matrix-vector equation, labeling each term.
+\item[(b) ] Rewrite (a) in ``column view'' (as a linear combination of columns), labeling each term.
+\item[(c) ] Rewrite (a) in ``row view'' (as dot products of rows), labeling each term.
+\end{itemize}
+(Hint: make sure every variable is represented.)
+\begin{align*}
+3x - 2y + z & = 6 \\
+8x \,\,\,\,\,\,\,\,\,\, - 4z & = 2
+\end{align*}
+
+\pagebreak
+
+\headerq
+
+\prob{3} (5 x 3 points)
+Given the matrices 
+\[ A = \left( \begin{array}{ccc} 1 & 2 & 3 \\ 4 & 6 & 6 \\ 7 & 8 & 10 \end{array} \right), \,\,\,\,\, E = \left( \begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 3 & 0 & 1 \end{array} \right), \]
+\begin{itemize}
+\item[(a) ] What is $EA$? 
+\item[(b) ] What is $AE$?
+\item[(c) ] What is $3A - 5E$? 
+\end{itemize}
+
+\pagebreak
+
+\headerq
+
+\prob{4} (10 points) 
+What is the value of $a$ that makes $v \perp w$, if 
+\[ v = \cvvvv{1}{6}{-3}{4} \text{ and } w = \cvvvv{5}{-2}{a}{0}? \]
+
+
+\end{document}

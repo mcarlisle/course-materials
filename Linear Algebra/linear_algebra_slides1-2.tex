@@ -1,0 +1,1219 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+
+\title[Intro to Vectors, Solving Linear Equations]{Linear Algebra and Matrix Methods \\ Chapters 1-2: \\
+Introduction to Vectors, \\ Solving Linear Equations }
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+
+\frame{ \frametitle{A simple example: two equations in two variables}
+
+How do we solve this system of equations? 
+
+\begin{align*}
+4x + 2y & = 6 \\
+-10x + 5y & = -20
+\end{align*}
+
+\vspace{5mm}
+
+Right at the outset, the question is tricky... 
+
+\begin{center}
+IS there a solution to this system of equations? 
+\end{center}
+
+} 
+
+
+\frame{ \frametitle{A simple example: two equations in two variables}
+
+How do we solve this system of equations? 
+
+\begin{align*}
+4x + 2y & = 6 \\
+-10x + 5y & = -20
+\end{align*}
+
+\vspace{5mm}
+
+There are three possible cases: 
+\begin{itemize}
+\item There are NO SOLUTIONS.
+\item There is EXACTLY ONE SOLUTION.
+\item There are INFINITELY MANY SOLUTIONS.
+\end{itemize}
+
+
+
+}
+
+
+\frame{ \frametitle{Vectors in two dimensions}
+
+We are going to analyze a lot of this kind of system. 
+
+\vspace{5mm}
+
+An ordered pair $(x,y)$ is a \textbf{vector} in the two-dimensional plane of real numbers $\R^2$. 
+
+\vspace{5mm}
+
+When written like 
+\[ \rvv{x}{y} \]
+\hspace{55mm} we call this a \textbf{row vector}. 
+
+\vspace{5mm}
+
+When written like 
+\[ \cvv{x}{y} \]
+\hspace{55mm} we call this a \textbf{column vector}. 
+
+}
+
+
+\frame{ \frametitle{Considering each equation}
+
+Look at the first equation: 
+\begin{align*}
+4x + 2y & = 6 
+\end{align*}
+
+\vspace{5mm}
+
+There are an infinite number of solutions $(x,y)$ to this single equation: these solutions form a \emph{line} in the plane.
+\begin{align*}
+L_1 = \{ (x, y): \,\, 4x + 2y = 6  \}
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Considering each equation}
+
+Likewise, there are an infinite number of solutions $(x,y)$ to the second equation, all of which also form a line in the plane.
+\begin{align*}
+L_2 = \{ (x, y): \,\, -10x + 5y = -20  \}
+\end{align*}
+
+\vspace{5mm}
+
+The solution of the system of equations is their intersection: 
+\[ L_1 \cap L_2. \]
+
+}
+
+
+\frame{ \frametitle{Considering each variable}
+
+We can consider all coefficients for one variable, and the right hand side, as column vectors. 
+
+\vspace{5mm}
+
+This transforms the system of equations into one equation, where the variables are multiplied by vectors: 
+
+\vspace{5mm}
+
+When written like this, 
+\[ x \cvv{4}{-10} + y \cvv{2}{5} = \cvv{6}{-20}, \]
+our system is now one equation, with vector arithmetic.
+
+}
+
+
+\frame{ \frametitle{What is a vector?}
+
+But what is this vector arithmetic we see here?
+
+\vspace{10mm}
+
+ ... wait, what even \emph{is} a vector?
+
+}
+
+
+\frame{ \frametitle{Vector arithmetic: scalar multiplication}
+
+A vector $(x,y)$ in two dimensions is an arrow, starting from the origin, and pointing at the point $(x,y)$ in the plane.
+
+\vspace{10mm}
+
+\textbf{Scalar multiplication} of a vector by a real number is \emph{scaling} the vector: stretching or shrinking it to a different length. The real number doing the scaling is called (you guessed it) a \textbf{scalar}. 
+
+}
+
+
+\frame{ \frametitle{Vector arithmetic: scalar multiplication}
+
+To do scalar multiplication, multiply each coordinate by the scalar. 
+
+\[ 5.2 \cvv{4}{-10} = \cvv{5.2 \cdot 4}{5.2 \cdot -10} = \cvv{20.8}{-52} \]
+
+\vspace{10mm} 
+
+If the scalar is negative, the vector ``changes'' ``direction''. 
+
+\[ -3.1 \cvv{5}{2} = \cvv{-3.1 \cdot 5}{-3.1 \cdot 2} = \cvv{-15.5}{-6.2} \]
+
+}
+
+
+\frame{ \frametitle{Vector arithmetic: vector addition}
+
+\textbf{Vector addition} is done by adding the coordinates of each vector. 
+
+\[ \cvv{4}{-10} + \cvv{9}{3} = \cvv{4 + 9}{-10 + 3} = \cvv{13}{-7} \]
+
+\vspace{5mm}
+
+Graphically, we can draw the second vector as starting at the tip of the first vector; the sum is where the second vector now ends. 
+
+}
+
+
+\frame{ \frametitle{Vector arithmetic: vector addition}
+
+The sum of two vectors is called a \textbf{linear combination}. 
+
+\vspace{5mm}
+
+Vector addition, like ``regular'' scalar addition, is \textbf{commutative}: 
+
+\[ \cvv{4}{-10} + \cvv{9}{3} = \cvv{4 + 9}{-10 + 3} = \cvv{9 + 4}{3 + -10} = \cvv{9}{3} + \cvv{4}{-10}. \]
+
+}
+
+
+\frame{ \frametitle{Solving a system (column view): scalars = variables}
+
+To solve the column vector equation 
+\[ x a_1 + y a_2 = b, \]
+where 
+\[ a_1 = \cvv{4}{-10}, a_2 = \cvv{2}{5}, b = \cvv{6}{-20}, \]
+we ask, 
+
+\begin{center}
+How do we scale $a_1$ and $a_2$, then add them, to get $b$?
+\end{center}
+
+A more ``linear algebra''-type way of saying this is, 
+
+\begin{center}
+What \textbf{linear combination} of $a_1$ and $a_2$ is $b$?
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Dot product of two vectors}
+
+The \textbf{dot product} of two vectors of the same size is the sum of the products of their coordinates, in sequence. 
+
+\vspace{5mm}
+
+In two dimensions, consider two vectors $(1, 6)$ and $(-3, 5)$. 
+
+\vspace{5mm}
+
+Their dot product is 
+
+\[ (1, 6) \cdot (-3, 5) = (1 \cdot -3) + (6 \cdot 5) = -3 + 30 = 27. \]
+
+}
+
+
+\frame{ \frametitle{Length (norm) of a vector}
+
+The \textbf{length} (\textbf{Euclidean norm}) of a vector is the square root of its dot product. We use doubled absolute value bars to denote length.
+
+\[ ||(1,6)|| = \sqrt{(1,6) \cdot (1,6)} = \sqrt{1^2 + 6^2} = \sqrt{37}. \] 
+
+}
+
+
+\frame{ \frametitle{Dot product, angle between vectors}
+
+In general, if $v = \rvvv{v_1}{v_2 ...}{v_n}$ and $w = \rvvv{w_1}{w_2 ...}{w_n}$ are two vectors in $\R^n$, their dot product can be written in the summation notation 
+
+\[ v \cdot w = \sum_{i=1}^n v_i w_i. \]
+
+\vspace{5mm}
+
+This number is related to the cosine of the angle $\theta$ between the two vectors $v$ and $w$, regardless of the dimension of the space of their vectors: 
+
+\[ \cos(\theta) = \frac{v \cdot w}{||v|| \cdot ||w||}. \]
+
+}
+
+
+\frame{ \frametitle{Cauchy-Bunyakovsky-Schwarz inequality}
+
+In fact, since $-1 \leq \cos(\theta) \leq 1$ for any angle $0 \leq \theta < 2\pi$, there is a result called the \textbf{Cauchy-Bunyakovsky-Schwarz inequality}: 
+
+\[ |v \cdot w| \leq ||v|| \cdot ||w||. \]
+
+}
+
+
+\frame{ \frametitle{Orthogonal vectors}
+
+A special case of the dot product is when $v \cdot w = 0$; in this case $\cos(\theta) = 0$, and so $v$ and $w$ make a right angle. In this case, we call $v$ and $w$ \textbf{orthogonal} or \textbf{perpendicular}, and use the notation 
+
+\[ v \perp w \iff v \cdot w = 0. \]
+
+\vspace{5mm}
+
+Note that the \textbf{zero vector}, the vector of all 0 (for any size), is orthogonal to any other vector of its size.
+
+}
+
+
+\frame{ \frametitle{Unit, orthonormal, standard vectors}
+
+If the length of a vector $v$ is $||v|| = 1$, we call it a \textbf{unit} vector.
+
+\vspace{5mm}
+
+Two orthogonal unit vectors $v$ and $w$ are called \textbf{orthonormal}. 
+
+\vspace{5mm}
+
+The \textbf{standard unit vectors} in $\R^n$ are $n$ vectors, each with a 1 in one coordinate, and 0 in every other coordinate. We denote them 
+
+\[ \{e_1, e_2, ..., e_n\}. \]
+
+}
+
+
+\frame{ \frametitle{Unit, orthonormal, standard vectors}
+
+For the plane $\R^2$, these are 
+\[ e_1 = \cvv{1}{0}, e_2 = \cvv{0}{1} \]
+and in three-dimensional space $\R^3$, these are 
+\[ e_1 = \cvvv{1}{0}{0}, e_2 = \cvvv{0}{1}{0}, e_3 = \cvvv{0}{0}{1}. \]
+
+
+}
+
+
+
+\frame{ \frametitle{Length = Distance from 0 to end = Pythagorean Theorem}
+
+The length of a vector is the distance from the point 0 = (0,0) to the point at the end of the vector. 
+
+\vspace{10mm}
+
+This is the hypotenuse of a right triangle that should be familiar from trigonometry: use the Pythagorean Theorem (also known as the Distance Formula) to find the length.
+
+}
+
+
+\frame{ \frametitle{Length = Distance from 0 to end = Pythagorean Theorem}
+
+If two vectors $v$ and $w$ are orthogonal, then the Pythagorean Theorem can also be used to describe the length of their difference: 
+
+\vspace{5mm}
+
+\[ v \perp w \implies ||v||^2 + ||w||^2 = ||v - w||^2 \]
+
+}
+
+
+
+\frame{ \frametitle{Vector: direction and length, Triangle Inequality}
+
+For any nonzero vector $v$, 
+\[ u = \frac{1}{||v||} v \]
+is a unit vector.
+
+\vspace{5mm}
+
+Thus, a vector encodes the notions of ``length'' and ``direction''. 
+
+\vspace{5mm}
+
+In fact, the difference in directions offers another inequality, since the difference of two vectors creates a triangle: 
+
+\[ \textbf{Triangle Inequality:} \,\, ||v|| + ||w|| \geq ||v-w|| \]
+
+}
+
+
+\frame{ \frametitle{Matrix view of the system of equations}
+
+A \textbf{matrix} is a row vector of column vectors, lined up together. \\
+(Equivalently, a matrix is a column vector of row vectors.)
+
+\vspace{5mm}
+
+We can write the columns of coefficient vectors from the system of equations as 
+\[ A = \rvv{a_1}{a_2} = \mrr{4}{2}{-10}{5}. \]
+
+}
+
+
+\frame{ \frametitle{Matrix view of the system of equations}
+
+We can write the coefficients from each equation similarly as row vectors: 
+\[ r_1 = \rvv{4}{2}, \,\, r_2 = \rvv{-10}{5} \]
+giving the same matrix 
+\[ A = \cvv{r_1}{r_2} = \mrr{4}{2}{-10}{5}. \]
+
+}
+
+
+\frame{ \frametitle{Matrix view of the system of equations}
+
+Thus, the system of equations 
+\begin{align*}
+4x + 2y & = 6 \\
+-10x + 5y & = -20
+\end{align*}
+can be written, placing the variables in a column vector 
+\[ \vec{x} = \cvv{x}{y}, \] 
+as one matrix-vector equation 
+\[ A\vec{x} = b. \]
+To understand this, we'll need to explain \textbf{matrix multiplication}. 
+
+}
+
+
+\frame{ \frametitle{Matrix multiplication}
+
+The \textbf{dimensions} of a matrix are 
+\begin{center}
+\# rows $\times$ \# columns, 
+\end{center}
+which we will typically write as $m \times n$. We can multiply two matrices $A$ and $B$, and get product $AB$ (the order is important here), only if the \# of rows of $A$ = \# of columns of $B$. 
+
+\vspace{5mm}
+
+That is, if $A$ is $m \times n$ and $B$ is $r \times s$, then the matrix product $AB$ only exists if $n = r$. The dimensions of $AB$ are $m \times s$.
+
+\vspace{5mm}
+
+Thus, matrix multiplication is NOT commutative; in general, the products $AB$ and $BA$ are different matrices, and only both exist if $m = s$ and $n = r$.
+
+}
+
+
+\frame{ \frametitle{Matrix multiplication}
+
+But what \emph{is} the matrix product $AB$? 
+
+\vspace{5mm}
+
+Let us assume $A$ is $m \times n$ and $B$ is $n \times p$, so that the matrix product $M = AB$ exists. $M$ is $m \times p$. 
+
+\vspace{5mm}
+
+Writing the rows of $A$ with notation $r_i$, $i = 1, 2, ..., m$ and the columns of $B$ as $c_j$, $j=1, 2, ..., p$, 
+
+\[ A = \cvvvv{r_1}{r_2}{...}{r_m}, \,\, B = \rvvvv{c_1}{c_2}{...}{c_p} \]
+
+}
+
+
+\frame{ \frametitle{Matrix multiplication}
+
+... then the entry of $M$ in row $i$, column $j$ is the dot product 
+\[ m_{ij} = r_i \cdot c_j = \sum_{k=1}^n a_{ik} b_{kj}, \]
+where $a_{ik}$ is entry $k$ in row $i$, and $b_{kj}$ is entry $k$ in column $j$. 
+
+\vspace{5mm}
+
+We denote $M = (m_{ij})_{m \times p}$ to emphasize the (row, col) structure. 
+
+}
+
+
+\frame{ \frametitle{Matrix multiplication}
+
+\begin{center}
+A row vector in $\R^n$ is a $1 \times n$ matrix; \\
+a column vector in $\R^n$ is a $n \times 1$ matrix.
+\end{center}
+
+\vspace{5mm}
+
+If $M = AB$ as previously described, we can consider $M$ to be a row vector of matrix-vector products: 
+\[ M = \rvvvv{Ac_1}{Ac_2}{...}{Ac_p} = \cvvvv{r_1 B}{r_2 B}{...}{r_m B}. \]
+
+}
+
+
+\frame{ \frametitle{Scalar multiplication}
+
+Now that we've addressed the hard part of matrix arithmetic, the easy parts are just like vector arithmetic: 
+
+\begin{itemize}
+\item \textbf{scalar multiplication}: A matrix can be scaled by a real number by multiplying each element by that number. 
+
+\vspace{5mm}
+
+If $c \in \R$ and $A$ is a matrix with entry $a_{ij}$ in row $i$, column $j$, then $cA$ is the matrix with entry $c a_{ij}$ in that position. 
+
+\vspace{5mm}
+
+For example, if 
+\[ A = \begin{pmatrix} 2 & -4 & 5 \\ 6 & 6 & 7 \end{pmatrix}, \]
+then 
+\[ -3A = \begin{pmatrix} -6 & 12 & -15 \\ -18 & -18 & -21 \end{pmatrix}. \]
+\end{itemize} 
+
+}
+
+
+\frame{ \frametitle{Matrix addition}
+
+\begin{itemize}
+\item \textbf{matrix addition}: Two matrices of the same dimensions can be added by adding their corresponding elements.
+
+\vspace{5mm}
+
+For example, if 
+\[ A = \begin{pmatrix} 2 & -4 & 5 \\ 6 & 6 & 7 \end{pmatrix} \text{ and }  
+B = \begin{pmatrix}10 & 8 & 0 \\ -1 & -9 & 2\end{pmatrix}, \]
+then 
+\[ A+B = \begin{pmatrix}12 & 4 & 5 \\ 5 & -3 & 9\end{pmatrix}. \]
+
+\vspace{5mm}
+
+Note that two matrices with different dimensions cannot be added together.
+\end{itemize} 
+
+}
+
+
+\frame{ \frametitle{Matrix view of the system of linear equations}
+
+Back to the view of a system of equations 
+
+\vspace{5mm}
+
+\begin{align*}
+4x + 2y & = 6 \\
+-10x + 5y & = -20
+\end{align*}
+
+\vspace{5mm}
+as 
+
+\vspace{5mm}
+
+\[ A\vec{x} = b... \]
+
+}
+
+
+\frame{ \frametitle{Matrix view of the system of linear equations}
+
+In the row view, this product is 
+
+\vspace{5mm}
+
+\[ \cvv{r_1 \cdot \vec{x}}{r_2 \cdot \vec{x}} = \cvv{b_1}{b_2}. \]
+
+\vspace{5mm}
+
+In the column view, this product is 
+
+\vspace{5mm}
+
+\[ x a_1 + y a_2 = b. \]
+
+\vspace{5mm}
+
+These views all mean the same thing.
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations}
+
+For this simple $2 \times 2$ system, we are familiar with solving. 
+
+\vspace{5mm}
+
+What if the system was much larger? $10 \times 10$, or $200 \times 200$?
+
+\vspace{5mm}
+
+We need a general technique that we will discover from the simplest case: a $1 \times 1$ ``system''.
+
+\vspace{5mm}
+
+Let $a, b \in \R$ with $a \neq 0$. What is the solution $x$ of the equation 
+\[ ax = b \,\, ? \]
+This is easy: 
+\[ x = \frac{b}{a}. \]
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations... }
+
+This fraction $\frac{b}{a}$ is the product $a^{-1} b$, where $a^{-1}$ is the reciprocal \textbf{(multiplicative inverse)} of $a \in \R$: the number such that 
+
+\vspace{5mm}
+
+\[ a^{-1} a = a a^{-1} = 1. \]
+
+\vspace{10mm}
+
+1 is the \textbf{multiplicative identity} of the real numbers. 
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations... }
+
+But be careful here: we know, for real numbers, 
+
+\[ a^{-1} b = b a^{-1} \]
+
+\vspace{2mm}
+
+since regular real number multiplication is commutative. 
+
+\vspace{5mm}
+
+Matrix multiplication is \emph{not} commutative. (It \emph{is} associative.)
+
+\vspace{5mm}
+
+We will stick to the order of terms with which we are presented.
+
+}
+
+
+\frame{ \frametitle{... requires a matrix inverse. }
+
+The solution $x$ to the equation 
+
+\[ ax = b \]
+
+is 
+
+\[ a^{-1} ax = a^{-1} b \implies x = a^{-1} b. \]
+
+\vspace{5mm}
+
+What, then, is the solution to the system $A \vec{x} = b$? 
+
+}
+
+
+\frame{ \frametitle{... requires a matrix inverse. }
+
+If a \textbf{matrix inverse} $A^{-1}$ exists, a matrix such that 
+
+\vspace{4mm}
+
+\[ A^{-1} A = A A^{-1} = I, \]
+
+\vspace{5mm}
+
+with $I$ the \textbf{identity matrix} (for that size matrix), then the solution to the system is, specifically using \emph{left multiplication},  
+
+\vspace{5mm}
+
+\[ A \vec{x} = b \implies A^{-1} A \vec{x} = A^{-1} b \implies \vec{x} = A^{-1} b. \]
+
+}
+
+
+\frame{ \frametitle{When does a matrix inverse exist?}
+
+There are many requirements for a matrix inverse $A^{-1}$ to exist.
+
+\vspace{10mm}
+
+First, $A$ must be a \textbf{square} matrix: its dimensions must be $n \times n$.
+
+\vspace{10mm}
+
+Second, the column vectors must be \textbf{linearly independent}; we will define this more rigorously later. 
+
+}
+
+
+\frame{ \frametitle{When does a matrix inverse exist?}
+
+Let's see a $3 \times 3$ example of each of the three kinds of systems mentioned at the beginning: 
+
+\vspace{5mm}
+
+\begin{itemize}
+\item There are NO SOLUTIONS.
+\item There is EXACTLY ONE SOLUTION.
+\item There are INFINITELY MANY SOLUTIONS.
+\end{itemize}
+
+
+}
+
+
+\frame{ \frametitle{Dimension of a Space of Real Number-Scaled Vectors}
+
+The \textbf{dimension} of a set of vectors is the maximum number of vectors required to uniquely describe \emph{any} point in the space \emph{as a linear combination}. 
+ 
+\vspace{10mm}
+
+The term ``dimension'' does not apply to the empty set $\emptyset$.
+
+\vspace{10mm}
+
+A set with only one vector has dimension 0: you cannot express any other vectors via linear combination. Geometrically, this is a point.
+
+
+}
+
+
+\frame{ \frametitle{Dimension of a Space of Real Number-Scaled Vectors}
+
+If the dimension of the set of vectors is greater than 0, then the set has infinitely many vectors in it. Geometrically, 
+\begin{itemize}
+\item dimension = 1: line
+\item dimension = 2: plane
+\item dimension = 3: space
+\item dimension $>$ 3: while we still call this ``space'', we can't easily visualize this kind of space.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{3 x 3 Systems}
+
+No solutions: 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+-6x - 8y - 8z & = -8 \\
+3x + 4y + 5z & = 9
+\end{align*}
+
+Unique solution: 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+-6x - 8y - 8z & = -8 \\
+x - y + 2z & = 5
+\end{align*}
+
+Infinitely many solutions: 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+-6x - 8y - 8z & = -8 \\
+z & = 2
+\end{align*}
+
+
+}
+
+
+\frame{ \frametitle{One equation, three variables: a plane of solutions}
+
+One equation in three variables, such as 
+\[ 3x + 4y + 5z = 6, \]
+requires two numbers to describe a point in its solution set. 
+
+\vspace{5mm}
+
+That is, the set 
+\[ \{ (x,y,z) \in \R^3: 3x + 4y + 5z = 6 \} \]
+has dimension 2. 
+
+\vspace{5mm}
+
+Why? If you pick any $x, y \in \R$, then $z$ is determined: 
+\[ z = \frac{1}{5} (-3x - 4y + 6). \]
+
+}
+
+
+\frame{ \frametitle{One equation, three variables: a plane of solutions}
+
+As a system, this one equation in three variables has infinitely many solutions: these solutions constitute a plane. 
+
+\vspace{10mm}
+
+We can rewrite the solution set as 
+\[ \left\{ \left(x,y,z\right): x, y \in \R, z = \frac{1}{5} (-3x - 4y + 6) \right\}. \]
+
+}
+
+
+\frame{ \frametitle{Two equations, three variables: plane, line, or no solution}
+
+By adding a second equation in three variables, making a system of two equations, we may have any of the following scenarios: 
+
+\vspace{5mm}
+
+\begin{itemize}
+\item \textbf{redundancy}: If the new equation is a linear combination of previous equations in a system, then the new equation causes no change to the system solution. A shorthand for this scenario is ``0 = 0'' - no new information.
+\item \textbf{reduce the solution set dimension by 1}: Two intersecting planes have the common solution set of a line;
+\item \textbf{inconsistency}: If the new equation is a parallel plane to a previous equation, then there is no common solution for all equations. A shorthand is ``0 = 1'', a contradiction. 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Two equations, three variables: plane (0 = 0)}
+
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+9x + 12y + 15z & = 18
+\end{align*}
+The second equation is the first equation multiplied by 3 on both sides. They are, basically, the same equation. 
+
+\vspace{5mm}
+
+Adding $\frac{1}{3}$ times ``row (equation) 1'' to row 2, the system ``reduces'': 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+0 & = 0
+\end{align*}
+and we really only have the one equation system we started with.
+
+}
+
+
+\frame{ \frametitle{Two equations, three variables: line (dim reduced by 1)}
+
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+-6x - 8y - 8z & = -8
+\end{align*}
+
+These are two intersecting planes. The solution has dimension 1:
+\[ \{ (x,y,z): 3x + 4y + 5z = 6 \text{ and } -6x - 8y - 8z = -8 \} \]
+For each value of $x$, say $x = c$, the system reduces to a $2 \times 2$ system in $y$ and $z$: 
+\begin{align*}
+4y + 5z & = 6 + -3c \\
+-8y - 8z & = -8 + 6c
+\end{align*}
+which is a system that has a one-point solution $\{(y,z)\}$, where each is a function of $c$.
+
+}
+
+
+\frame{ \frametitle{Two equations, three variables: inconsistency (0 = 1)}
+
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+3x + 4y + 5z & = 9
+\end{align*}
+These two equations represent parallel planes. 
+
+\vspace{5mm}
+
+If we subtract row 1 from row 2, then the system reduces to 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+0 & = 3
+\end{align*}
+which clearly is impossible. 
+
+
+}
+
+
+
+\frame{ \frametitle{Unique solution of a system of linear equations}
+
+What does it take to have a unique, one-point solution to a system of linear equations? 
+
+\vspace{5mm}
+
+Each equation of $n$ variables ideally reduces the solution set dimension by 1. 
+
+\vspace{5mm}
+
+To have a unique solution: 
+\begin{itemize}
+\item $n$ equations in $n$ variables
+\item all $n$ equations are linearly independent \\
+(none is a linear combination of any subset of the others)
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Unique solution of a system of linear equations}
+
+To have a unique solution: 
+\begin{itemize}
+\item $n$ equations in $n$ variables
+\item all $n$ equations are linearly independent (none is a linear combination of any subset of the others)
+\end{itemize}
+
+\vspace{5mm}
+
+To \emph{compute} a unique solution: 
+\begin{itemize}
+\item reduce the system to a \textbf{triangular system} via the process of \textbf{elimination}, or \textbf{Gauss-Jordan reduction}
+\item use \textbf{back substitution} from the bottom to get the solution.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Unique solution $\iff$ inverse matrix exists}
+
+If a system of $n$ equations in $n$ variables can be written as the matrix-vector equation 
+\[ A \vec{x} = b, \]
+then the system has a unique solution $\vec{x}$ iff $A^{-1}$ exists; then, 
+\[ \vec{x} = A^{-1} b. \]
+If $A^{-1}$ exists, we call $A$ an \textbf{invertible} or \textbf{nonsingular} matrix. 
+
+\vspace{5mm}
+
+If $A^{-1}$ does not exist, we call $A$ \textbf{non-invertible} or \textbf{singular}. 
+
+
+}
+
+
+\frame{ \frametitle{Identity matrix}
+
+If a square matrix $A$ is invertible, then the product 
+\[ A A^{-1} = A^{-1} A = I, \]
+the \textbf{identity matrix}, which generalizes the concept of the number ``1'' for square matrices. 
+
+\vspace{5mm}
+
+$I$ has 1 on the \textbf{diagonal} (row index = col index) and 0 elsewhere.
+\[ I = \mrrr{1}{0}{0}{0}{1}{0}{0}{0}{1} \]
+
+Multiplying a vector or matrix by $I$ leaves it unchanged (much like $1 \cdot 5 = 5$).
+\[ I A = \mrrr{1}{0}{0}{0}{1}{0}{0}{0}{1} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} = \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \]
+
+
+}
+
+
+\frame{ \frametitle{Inverse, Identity matrices}
+
+Note that, in the special case of multplying by an inverse matrix, 
+\[ A A^{-1} = A^{-1} A = I, \]
+multiplication is \emph{commutative} - you can switch the order.
+
+\vspace{5mm}
+
+Another property of inverse matrices: just like in number division, 
+\[ \frac{1}{(1/a)} = a, \]
+we have that the inverse of the inverse matrix is the original matrix: 
+\[ (A^{-1})^{-1} = A. \]
+
+}
+
+
+\frame{ \frametitle{Elementary row operations}
+
+Solving a system involves \textbf{elementary row operations}. 
+
+\vspace{5mm}
+
+(Recall, we refer to each equation as a row.) 
+
+\vspace{5mm}
+
+There are three elementary row operations: 
+\begin{itemize}
+\item swap two rows
+\item scale (multiply) a row
+\item add a scaled row to another row
+\end{itemize}
+
+\vspace{5mm}
+
+For each of these operations, there is an \textbf{elementary matrix}, with one change of $I$, that does this operation via left multiplication on the system.
+
+}
+
+
+\frame{ \frametitle{Elementary row operations: swap two rows}
+
+To \textbf{swap two rows}, use an elementary \textbf{permutation matrix}. 
+
+\vspace{5mm} 
+
+For example, to \textbf{swap two rows} 2 and 3, use 
+\[ P_{2,3} = \mrrr{1}{0}{0}{0}{0}{1}{0}{1}{0} \]
+(In practice, we'll avoid this one by handling swaps outside of our solving process. Note that, intuitively, rerranging the equations in a system does not change the solution.) For example, 
+\[ P_{2,3} A = \mrrr{1}{0}{0}{0}{0}{1}{0}{1}{0} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8}
+ = \mrrr{3}{4}{5}{-6}{-8}{-8}{1}{-1}{2}.  \]
+
+}
+
+
+\frame{ \frametitle{Elementary row operations: scale one row}
+
+To \textbf{scale row $k$ by the scalar $c$}, use the elementary matrix $E_{k,c}$, which is the modification of $I$ where the row $k$ diagonal is $c$ instead of 1. For example,  
+\[ E_{2,8} = \mrrr{1}{0}{0}{0}{8}{0}{0}{0}{1} \text{ changes } A = \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \]
+to 
+\[ E_{2,8} A = \mrrr{1}{0}{0}{0}{8}{0}{0}{0}{1} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} = \mrrr{3}{4}{5}{8}{-8}{16}{-6}{-8}{-8}. \]
+
+}
+
+
+\frame{ \frametitle{Elementary row operations: scale row AND add to another}
+
+To \textbf{add the $c$-scaled row $k$ to row $j$}, leaving only row $j$ changed, use the elementary matrix $E_{k,j,c}$, which is the modification of $I$ where the row $j$, column $k$ entry is changed from 0 to $c$. For example, $E_{1,2,-3}$ causes the change 
+\[ \text{row } 2 \rightarrow -3 \cdot \text{row }1 + \text{row } 2: \]
+\[ E_{1,2,-3} A = \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} = \mrrr{3}{4}{5}{-8}{-13}{-13}{-6}{-8}{-8}. \]
+
+}
+
+
+\frame{ \frametitle{Elementary matrices affect rows or columns}
+
+An elementary matrix changes the \emph{rows} of a matrix if multiplying \emph{on the left}. 
+
+\vspace{5mm}
+
+An elementary matrix changes the \emph{columns} of a matrix if multiplying \emph{on the right}. 
+
+\[ \text{row } 2 \rightarrow -3 \cdot \text{row }1 + \text{row } 2: \]
+\[ E_{1,2,-3} A = \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} = \mrrr{3}{4}{5}{-8}{-13}{-13}{-6}{-8}{-8}. \]
+
+\[ \text{col } 1 \rightarrow -3 \cdot \text{col }2 + \text{col } 1: \]
+\[ A E_{1,2,-3} = \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} = \mrrr{-9}{4}{5}{4}{-1}{2}{18}{-8}{-8}. \]
+
+}
+
+
+\frame{ \frametitle{Elementary matrix inverses: swap back}
+
+Each kind of elementary matrix has an inverse matrix that is also an elementary matrix of the same type.
+
+\vspace{5mm}
+
+To \textbf{swap two rows back}, use the \textbf{same elementary permutation matrix} - order of the row indices in the notation doesn't matter! 
+
+\vspace{5mm} 
+
+For example, to \textbf{swap two rows} 2 and 3 back to their original positions, just swap rows 3 and 2! Same action! 
+
+\[ P_{j,k}^{-1} = P_{k,j} = P_{j,k} \]
+
+\[ P_{2,3}^{-1} = P_{3,2} = P_{2,3} = \mrrr{1}{0}{0}{0}{0}{1}{0}{1}{0}. \]
+
+}
+
+
+\frame{ \frametitle{Elementary matrix inverses: scale one row}
+
+To \textbf{undo scaling row $k$ by the scalar $c$}, use the elementary matrix $E_{k,\frac{1}{c}}$, which scales row $k$ by $\frac{1}{c}$. 
+\[ E_{k,c}^{-1} = E_{k,\frac{1}{c}} \]
+For example,  
+\[ E_{2,8} = \mrrr{1}{0}{0}{0}{8}{0}{0}{0}{1}; \,\, E_{2,8}^{-1} = E_{2,\frac{1}{8}} = \mrrr{1}{0}{0}{0}{\frac{1}{8}}{0}{0}{0}{1}. \]
+
+}
+
+
+\frame{ \frametitle{Elementary matrix inverses: scale and subtract}
+
+To \textbf{undo adding the $c$-scaled row $k$ to row $j$}, leaving only row $j$ changed, just subtract that scaled row: 
+\[ E_{k,j,c}^{-1} = E_{k,j-c} \]
+For example, 
+\[ E_{1,2,-3} = \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1}; \,\, E_{1,2,-3}^{-1} = E_{1,2,3} = \mrrr{1}{0}{0}{3}{1}{0}{0}{0}{1}. \]
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations}
+
+Now we will outline the process to solve an arbitrarily large square system of linear equations ($n$ equations in $n$ variables).
+
+\vspace{5mm}
+
+If this process works, not only will we solve the system of equations 
+\[ A \vec{x} = b, \] 
+but we will have a \textbf{factorization} of the matrix $A$ into the product of three matrices: 
+\[ A = LDU, \]
+where 
+\begin{itemize}
+\item $L$ is a \textbf{lower triangular} matrix with diagonal 1s and 0s above;
+\item $D$ is a \textbf{diagonal} matrix, with nonzeros on the diagonal and 0s elsewhere;
+\item $U$ is an \textbf{upper triangular} matrix with diagonal 1s and 0s below.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations}
+
+First, we will assume this process works, and so there exists a factorization 
+\[ A = LDU. \]
+If this process fails at any point, then the rows of $A$ must be rearranged, or there is not a unique solution to the system.
+
+\begin{itemize}
+\item[1. ] Commit forward, downward elimination of variables by left multiplying elementary matrices on the equation 
+\[ A \vec{x} = b, \,\,\text{ that is, } \,\, LDU\vec{x} = b, \] 
+until it is in the form 
+\[ DU \vec{x} = L^{-1} b. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations}
+
+\begin{itemize}
+\item[2. ] Scale each equation so that the leading variable on each is 1. 
+This will change the system from 
+\[ DU \vec{x} = L^{-1} c \]
+into 
+\[ U \vec{x} = D^{-1} L^{-1} b. \]
+\item[3. ] Upward, backward substitution of variables, starting at the bottom, yielding the  solution 
+\[ \vec{x} = U^{-1} D^{-1} L^{-1} b. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations, factoring $A = LDU$}
+
+In other words, we compute the inverse matrix 
+\[ A^{-1} = U^{-1} D^{-1} L^{-1} \]
+and apply it to 
+\[ A \vec{x} = b \]
+to get 
+\[ \vec{x} = A^{-1} b. \]
+Since $L^{-1}$, $D^{-1}$, and $U^{-1}$ are all products of elementary matrices, we can find their inverses $L$, $D$, and $U$ to find the factorization 
+\[ A = LDU. \]  
+
+}
+
+
+\frame{ \frametitle{Computing the solution, factorization of a linear system}
+
+We will use the technique of an \textbf{augmented matrix} to do our calculations by hand.
+
+\vspace{5mm}
+
+This allows us to do computations on $A$ and $b$ simultaneously. 
+
+\vspace{5mm}
+
+We start with $A \vec{x} = b$ in the form 
+\[ \left[ A \, \bigg| \, b \right] \]
+and attempt to end with the solution $\vec{x} = A^{-1} b$ in the form 
+\[ \left[ I \, \bigg| \, A^{-1} b \right] \]
+by committing left multiplication of elementary matrices. 
+
+}
+
+
+\frame{ \frametitle{Computing using an augmented matrix}
+
+We will call the diagonal entries on the left side \textbf{pivots}. 
+
+\vspace{5mm}
+
+Our goal is to make the pivots 1 (representing 1 of each variable) and 0 elsewhere on the left side, by eliminating variable coefficients below each pivot.
+
+\vspace{5mm}
+
+If ever a pivot is zeroed out, this process fails for the given row organization of $A$. 
+
+}
+
+
+\frame{ \frametitle{Computing using an augmented matrix}
+
+If ever a 
+\begin{center}
+``0 = 0'' \\
+(underdetermined system; infinitely many solutions)
+\end{center} 
+or 
+\begin{center} 
+``0 = 1'' \\
+(overdetermined system; no solutions) 
+\end{center} 
+occurs, then \emph{no} reorganization of the rows of $A$ will work, and the system does not have a unique solution.
+
+}
+
+
+\frame{ \frametitle{Transposes}
+
+If $v$ is a row vector, then its \textbf{transpose}, denoted $v^t$, is a column vector with the same entries. 
+
+\vspace{5mm}
+
+If $v$ is a column vector, then its \textbf{transpose} is a row vector. 
+
+\vspace{5mm}
+
+The dot product of two row vectors $v$ and $w$ is the same value as the matrix product $v w^t$. 
+
+\vspace{5mm}
+
+The dot product of two column vectors $v$ and $w$ is the same value as the matrix product $v^t w$. 
+
+\vspace{5mm}
+
+In general, the \textbf{transpose} of the $m \times n$ matrix $A$ is the $n \times m$ matrix $A^t$ that changes rows to columns.
+}
+
+
+\frame{ \frametitle{Properties of Transposes}
+
+\begin{itemize}
+\item $(A^t)^t = A$
+\item $(A + B)^t = A^t + B^t$
+\item $A$ is called a \textbf{symmetric matrix} if $A^t = A$. 
+\item Diagonal matrices are clearly symmetric: $D^t = D$. 
+\item If the product $AB$ exists, then $(AB)^t = B^t A^t$.
+\item $A\vec{x} = b$ is the same system as $\vec{x}^t A^t = b^t$.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of Inverses}
+
+\begin{itemize}
+\item $(A^{-1})^{-1} = A$
+\item $(A^{-1})^{t} = (A^t)^{-1}$
+\item $A$ is called an \textbf{involution} if $A^{-1} = A$. This means $A^2 = I$. 
+\item If the product $AB$ exists, and $A$ and $B$ are both invertible, then $(AB)^{-1} = B^{-1} A^{-1}$.
+\item $A\vec{x} = b$ is solved by $\vec{x} = A^{-1} b$, if $A^{-1}$ exists.
+\item If $A = LDU$ and $A$ is symmetric, then $U = L^t$, yielding the factorization $A = LDL^t$. 
+\item Call an invertible square matrix $A$ \textbf{orthogonal} if $A^t = A^{-1}$. Then the columns $a_1, a_2, ..., a_n$ of $A$ are all orthonormal:
+\[ A = \rvvvv{a_1}{a_2}{...}{a_n} \implies A^{-1} A = A^t A = I. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of Permutations}
+
+\begin{itemize}
+\item All permutation matrices $P$ are square. 
+\item Permutation matrices are orthogonal.
+\item If a square matrix $A$ is invertible, but does not allow our elimination process to work to factor $A = LDU$, then some permutation of the system $PA$ will. 
+
+\vspace{3mm}
+
+(We will not go through the process of seeing how to decide how to determine such a $P$ here.)
+\end{itemize}
+
+}
+
+
+\end{document}

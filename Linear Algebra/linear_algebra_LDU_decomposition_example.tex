@@ -1,0 +1,295 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mjcquiz}
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\begin{center}
+Linear Algebra\\
+$A = LDU$ Decomposition Examples
+\end{center}
+
+
+Consider the 3x3 linear system $A\vec{x} = b$ given by the equations 
+%Unique solution: 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+x - y + 2z & = 5 \\
+-6x - 8y - 8z & = -8.
+\end{align*}
+
+What we would like to do is the following: 
+\begin{itemize}
+\item[(a) ] Solve the system of equations. 
+\item[(b) ] Give the $LDU$ factorization of the system's coefficient matrix.\footnote{There is a factorization called $PA = LU$; the $P$ is a permutation matrix, which is sometimes needed if row swaps are required. We will ignore this step here, and only see systems where no row swaps are needed. Also, the $U$ in a more traditional $PA = LU$ factorization is our $DU$; we factor the scaling diagonals into their own matrix to line up with other factorizations we will see in the future.}
+\item[(c) ] Give the inverse of the system's coefficient matrix.
+\end{itemize}
+
+The decomposition of $A = LDU$ will have the following structure: 
+\begin{itemize}
+\item $L$ is a \textbf{lower triangular matrix} (all entries above the diagonal are 0), and all diagonal entries are 1: this matrix corresponds to the \textbf{down/forward elimination} part of the process;
+\item $D$ is a \textbf{diagonal matrix} (all entries above and below the diagonal are 0): this matrix corresponds to the \textbf{scaling} part of the process; 
+\item $U$ is an \textbf{upper triangular matrix} (all entries below the diagonal are 0), and all diagonal entries are 1: this matrix corresponds to the \textbf{up/backward substitution} part of the process.
+\end{itemize}
+Following this elimination/scaling/substitution method, we'll do all three parts of the problem simultaneously.
+
+\vspace{5mm}
+
+Please note that, while this entire process is governed by left multiplication of $A$ by elementary matrices, the same process could be done to the columns of $A$ by multiplying on the right. However, our focus here is on \emph{reducing equations}, so we use elementary matrices to correspond to row operations on $A$. This way, at any point in the process, you could convert your augmented matrix back into a set of equations, which is noticably ``simpler'' than the one you started with.
+
+First, we convert the system of equations into the matrix equation $A \vec{x} = b $: 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+x - y + 2z & = 5 \\
+-6x - 8y - 8z & = -8 
+\end{align*}
+becomes $A \vec{x} = b$: 
+\[ \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \cvvv{x}{y}{z} = \cvvv{6}{5}{-8}. \]
+
+Next, we set up our \textbf{augmented matrix} for this system: 
+\[ [A \, | \, b] =  \]
+
+
+Our overall goal is to convert this system, via row operations, through the process 
+\begin{align*}
+[A \, | \, b] \xrightarrow{\text{elimination}} [DU \, | \, L^{-1} b] \xrightarrow{\text{scaling}} [U \, | \, D^{-1} L^{-1} b] 
+ \xrightarrow{\text{substitution}} [ I \, | \, U^{-1} D^{-1} L^{-1} b = A^{-1} b], 
+\end{align*}
+yielding the solution $\vec{x} = A^{-1} b$, and, simultaneously, the factorization $A^{-1} = U^{-1} D^{-1} L^{-1}$, which gives us $A = LDU$. 
+
+
+\section{Elimination}
+
+First, we eliminate downward by adding rows above to rows below, \emph{eliminating} the lower triangle into zeroes. We'll denote row $j$ by $R_j$.
+
+\begin{align*} 
+[A \, | b]  = & \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5 &  6 \\
+1 & -1 & 2 &  5 \\ 
+-6 & -8 & -8 &  -8
+\end{array}\right] \\
+\xrightarrow{R_2 = -\frac{1}{3} R_1 + R_2} 
+& \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5  & 6 \\
+{\bf 0} & {\bf -7/3} & {\bf 1/3} &  {\bf 3} \\ 
+-6 & -8 & -8 &  -8
+\end{array}\right] \\
+\xrightarrow{R_3 = 2 R_1 + R_3} 
+  & \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5 &  6 \\
+0 & -7/3 & 1/3 & 3\\ 
+{\bf 0} & {\bf 0} & {\bf 2} & {\bf 4}
+\end{array}\right] = [DU \, | \, L^{-1} b]. 
+\end{align*}
+As this point we have completed elimination and acquired 
+\[ DU = \left[ \begin{array}{ccc}
+3 & 4 & 5  \\
+0 & -7/3 & 1/3 \\ 
+0 & 0 & 2
+\end{array}\right], \,\,\, 
+L^{-1} = 
+\left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+0 & 1 & 0 \\ 
+2 & 0 & 1
+\end{array}\right]\left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+-1/3 & 1 & 0 \\ 
+0 & 0 & 1
+\end{array}\right]
+ = \left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+-1/3 & 1 & 0 \\ 
+2 & 0 & 1
+\end{array}\right]. \]
+Thus, 
+\[ L = 
+\left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+-1/3 & 1 & 0 \\ 
+0 & 0 & 1
+\end{array}\right]^{-1} 
+\left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+0 & 1 & 0 \\ 
+2 & 0 & 1
+\end{array}\right]^{-1}
+ = \left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+1/3 & 1 & 0 \\ 
+-2 & 0 & 1
+\end{array}\right]. \]
+$L$ is lower triangular, and its diagonal entries are 1.
+
+\section{Scaling}
+
+Next, we scale the diagonal \textbf{pivots} all to 1: 
+\begin{align*} 
+[DU \, | \, L^{-1} b]  = & \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5 &  6 \\
+0 & -7/3 & 1/3 & 3\\ 
+0 & 0 & 2 & 4
+\end{array}\right] \\
+\xrightarrow{R_1 = \frac{1}{3} R_1, R_2 = -\frac{3}{7} R_2, R_3 = \frac{1}{2} R_3} 
+& \left[ \begin{array}{ccc|ccc|c}
+1 & \frac{4}{3} & \frac{5}{3}  & 2 \\
+0 & 1 & -\frac{1}{7}  &  -\frac{9}{7} \\ 
+0 & 0 & 1 & 2
+\end{array}\right] = [U \, | \, D^{-1} L^{-1} b]. 
+\end{align*}
+We now have the scaling factor $D$: 
+\[ D^{-1} = \left[ \begin{array}{ccc}
+\frac{1}{3} & 0 & 0 \\ 0 & -\frac{3}{7} & 0 \\ 0 & 0 & \frac{1}{2}
+\end{array}\right] \implies D = \left[ \begin{array}{ccc}
+3 & 0 & 0 \\ 0 & -\frac{7}{3} & 0 \\ 0 & 0 & 2
+\end{array}\right]. \]
+We also know one of the solution values: $z = 2$. 
+We also have the final factor, $U$: 
+\[ U = \left[ \begin{array}{ccc}
+1 & \frac{4}{3} & \frac{5}{3}  \\
+0 & 1 & -\frac{1}{7}  \\ 
+0 & 0 & 1 
+\end{array}\right] \]
+We will calculate $U^{-1}$ during the substitution phase. 
+
+\section{Substitution}
+
+Repeat the process you used in elimination, but do it upward to eliminate the upper triangle.
+\begin{align*} 
+[U \, | \, D^{-1} L^{-1} b] = & \left[ \begin{array}{ccc|c}
+1 & \frac{4}{3} & \frac{5}{3}  & 2 \\
+0 & 1 & -\frac{1}{7}  &  -\frac{9}{7} \\ 
+0 & 0 & 1 & 2
+\end{array}\right] \\
+\xrightarrow{R_2 = \frac{1}{7} R_3 + R_2} & \left[ \begin{array}{ccc|ccc|c}
+1 & 4/3 & 5/3 & 2 \\
+{\bf 0} & {\bf 1} & {\bf 0} & {\bf -1} \\ 
+0 & 0 & 1 & 2
+\end{array}\right] \\
+\xrightarrow{R_1 = R_1 - \frac{4}{3} R_2 - \frac{5}{3} R_3} & \left[ \begin{array}{ccc|ccc|c}
+{\bf 1} & {\bf 0} & {\bf 0} & {\bf 0} \\
+0 & 1 & 0 & -1 \\ 
+0 & 0 & 1 &  2
+\end{array}\right]
+ = [ I \, | \, U^{-1} D^{-1} L^{-1} b = A^{-1} b = \vec{x} ].
+\end{align*}
+
+Thus, our unique solution is 
+\[ \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \cvvv{x}{y}{z} = \cvvv{6}{5}{-8} \implies \vec{x} = \cvvv{0}{-1}{2} \]
+and our factorization of $A$ is 
+\[ A = LDU = 
+\left[ \begin{array}{ccc}
+1 & 0 & 0  \\
+1/3 & 1 & 0 \\ 
+-2 & 0 & 1
+\end{array}\right]
+\left[ \begin{array}{ccc}
+3 & 0 & 0 \\ 0 & -\frac{7}{3} & 0 \\ 0 & 0 & 2
+\end{array}\right]
+\left[ \begin{array}{ccc}
+1 & \frac{4}{3} & \frac{5}{3}  \\
+0 & 1 & -\frac{1}{7}  \\ 
+0 & 0 & 1 
+\end{array}\right]. \]
+
+
+\section{An example with no solutions}
+
+An example of an inconsistent system of equations is 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+3x + 4y + 5z & = 9 \\
+-6x - 8y - 8z & = -8.
+\end{align*}
+To see this, attempt to solve the system in the same fashion. Attempting elimination yields 
+\begin{align*} 
+[A \, | b]  = & \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5 &  6 \\
+3 & 4 & 5 &  9 \\
+-6 & -8 & -8 &  -8
+\end{array}\right] \\
+\xrightarrow{R_2 = - R_1 + R_2} 
+& \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5  & 6 \\
+{\bf 0} & {\bf 0} & {\bf 0} &  {\bf 3} \\ 
+-6 & -8 & -8 &  -8
+\end{array}\right] 
+\end{align*}
+which reduces the system of equations to 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+0 & = 3 \\
+-6x - 8y - 8z & = -8.
+\end{align*}
+This system is clearly nonsense, as $0 = 3$ is a contradiction. Hence, this system has no solution.
+
+
+\section{An example with infinitely many solutions}
+
+An example of an underdetermined system of equations is 
+\begin{align*}
+3x + 4y + 5z & = 6 \\
+-6x - 8y - 10z & = -12 \\
+z & = 2.
+\end{align*}
+To see this, attempt to solve the system in the same fashion. Attempting elimination yields 
+\begin{align*} 
+[A \, | b]  = & \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5 &  6 \\
+-6 & -8 & -10 & -12 \\
+0 & 0 & 1 & 2
+\end{array}\right] \\
+\xrightarrow{R_2 = 2 R_1 + R_2} 
+& \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5  & 6 \\
+{\bf 0} & {\bf 0} & {\bf 0} &  {\bf 0} \\ 
+0 & 0 & 1 & 2
+\end{array}\right].
+\end{align*}
+If we continue with the process, we scale, then substitute to reduce the system to 
+\begin{align*} 
+& \left[ \begin{array}{ccc|ccc|c}
+3 & 4 & 5  & 6 \\
+{\bf 0} & {\bf 0} & {\bf 0} &  {\bf 0} \\ 
+0 & 0 & 1 & 2
+\end{array}\right] \\
+\xrightarrow{R_1 = \frac{1}{3} R_1} & 
+\left[ \begin{array}{ccc|ccc|c}
+1 & \frac{4}{3} & \frac{5}{3}  & 2 \\
+{\bf 0} & {\bf 0} & {\bf 0} &  {\bf 0} \\ 
+0 & 0 & 1 & 2
+\end{array}\right] \\
+\xrightarrow{R_1 = R_1 - \frac{5}{3} R_3} & 
+\left[ \begin{array}{ccc|ccc|c}
+{\bf 1} & {\bf \frac{4}{3}} & {\bf 0} & {\bf -\frac{4}{3}} \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 2
+\end{array}\right],
+\end{align*}
+which, moving the $y$ term to the right hand side, corresponds to the system of equations
+\begin{align*}
+x & = -\frac{4}{3}y - \frac{4}{3} \\
+0 & = 0 \\
+z & = 2.
+\end{align*}
+Instead of having a ``$y = $'' equation for a unique solution, the $0 = 0$ equation contributes no information, and more specifically no reduction of dimension, to the solution set. Also, the system clearly has an infinite number of solutions in the variable $y$ (which we will call a \textbf{free variable}; $x$ and $z$ are \textbf{pivot variables}, having pivots in the final reduction). The solution can be written as 
+\[ A \vec{x} = b \implies \vec{x} = \cvvv{-\frac{4}{3}y - \frac{4}{3}}{y}{2} = y \cvvv{-\frac{4}{3}}{1}{0} + \cvvv{-\frac{4}{3}}{0}{2}, \,\, y \in \mathbb{R}. \]
+These two vectors have names: the scaled-by-any-$y$ vector $\vec{x}_n = \cvvv{-\frac{4}{3}}{1}{0}$ is a \textbf{special solution}, since it solves the system $A \vec{x} = 0$ (try it!), and exists in the \textbf{nullspace} $N(A)$ of the matrix $A$; the second vector $\vec{x}_p = \cvvv{-\frac{4}{3}}{0}{2}$ is the \textbf{particular solution} for the given vector $b$, and exists in the \textbf{row space} $C(A^t)$ of the matrix $A$. We'll see these terms in Chapter 3.
+
+\end{document}
