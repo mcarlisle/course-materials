@@ -1,0 +1,787 @@
+\documentclass{beamer}
+
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Approximations of the binomial distribution]{Introduction to Probability \\ Approximations of the binomial distribution}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Bin($n,p$) with large $n$}
+
+The PDF of the discrete binomial random variable $Bin(n,p)$, 
+\[ p(k) = {n \choose k} p^k (1-p)^{n-k}, \,\, k = 0, 1, 2, ..., n-1, n, \]
+shows one of two very particular patterns in its shape as the number of independent trials $n$ gets larger. 
+
+}
+
+
+\frame{ \frametitle{Bin($n,p$) with large $n$: approximations}
+
+If $p$ is close to 0.5, this shape appears like a \emph{bell curve} with exponentially-falling tails, much like a \textbf{Gaussian} distribution.
+
+\vspace{5mm}
+
+If $p$ is close to 0, this shape appears like a \textbf{Poisson} distribution. 
+
+\vspace{5mm}
+
+We will see details on how well we can use these distributions to approximate binomials with large $n$. 
+
+}
+
+
+\frame{ \frametitle{Approximations of RVs by easier-to-calculate RVs}
+
+Recall some properties of $S_n \sim Bin(n,p)$: 
+\begin{itemize}
+\item $E(S_n) = np$
+\item $Var(S_n) = np(1-p)$
+\item $S_n \sim \sum_{i=1}^n X_i$, where $X_i \sim Bern(p)$ are IID.
+\end{itemize}
+
+\vspace{5mm}
+
+We will examine, for $n$ large:
+\begin{itemize}
+\item $Bin(n,p)$ approximated by a normal (when $p$ is near $\frac{1}{2}$), \\
+via the \textbf{de Moivre-Laplace Theorem} \\
+(a special case of the \textbf{Central Limit Theorem}), and 
+\item $Bin(n,p)$ approximated by a Poisson (when $p$ is near 0), \\
+via the \textbf{law of rare events}.
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{Normal (Gaussian) random variable: PDF}
+
+\textbf{Normal (Gaussian)} random variables are used to model vast amounts of physical, social, and financial processes. 
+
+\vspace{5mm}
+
+$X \sim N(\mu, \sigma^2)$ (with $\mu = E(X)$ and $\sigma^2 = Var(X)$) if $X$ has PDF 
+\[ f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}. \]
+
+%\onslide<2->
+
+$Z \sim N(0,1)$ is called a \textbf{standard normal random variable}. 
+
+}
+
+
+\frame{ \frametitle{Normalizing constant of the normal PDF}
+
+Since any PDF $f$ must satisfy
+\[ \int_{-\infty}^{\infty} f(x) dx = 1, \]
+then we have the following from the standard normal PDF:
+\begin{align*}
+\int_{-\infty}^{\infty} e^{-\frac{x^2}{2}} dx = \sqrt{2\pi}.
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Normal (Gaussian) random variable: CDF}
+
+The CDF of $X \sim N(\mu, \sigma^2)$, 
+\[ F(x) = P(X \leq x) = \int_{-\infty}^x \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(t-\mu)^2}{2\sigma^2}} dt, \]
+has no closed form (no simple formula). As this is a very important distribution, we need a way to calculate this CDF in a reasonable fashion. 
+
+\vspace{5mm}
+
+The CDF of $Z \sim N(0,1)$ also has no closed form, but is denoted $N(x)$ or $\Phi(x)$. It is defined by 
+\[ N(x) = \Phi(x) = \int_{-\infty}^x \frac{1}{\sqrt{2\pi}} e^{-\frac{t^2}{2}} dt. \]
+Calculations for $\Phi(x)$ are listed on a \textbf{z-table}. 
+
+}
+
+
+
+\frame{ \frametitle{Standardization}
+
+A \textbf{standard} random variable has mean 0 and variance 1. 
+
+\vspace{3mm}
+
+For a random variable $X$ with mean $E(X) = \mu$ and variance $Var(X) = \sigma^2$, the \textbf{standardized} version of $X$ is 
+\[ Z = \frac{X - \mu}{\sigma}. \]
+We use this transformation often in discussing normal random variables, to turn questions about probabilities for $X$ into probabilities for $Z$ (which can then be read off the $Z$-table). 
+
+}
+
+
+\frame{ \frametitle{de Moivre-Laplace (Central Limit) Theorem}
+
+One of the fundamental limit theorems of probability theory is the \textbf{Central Limit Theorem} (CLT); when stated for binomial RVs, this is called the \textbf{de Moivre-Laplace Theorem}:
+
+}
+
+
+\frame{ \frametitle{de Moivre-Laplace (Central Limit) Theorem}
+
+\begin{thm}
+If $S_n \sim Bin(n,p)$ with fixed $0 < p < 1$. Then, with 
+\[ \mu_n = E(S_n) = np \text{ and } \sigma_n^2 = Var(S_n) = np(1-p), \]
+and the standardized RVs 
+\[ Z_n = \frac{ S_n - \mu_n }{ \sigma_n }, \]
+we have \emph{convergence in distribution} to a standard normal random variable: $Z_n \to Z \sim N(0,1)$ as $n \to \infty$; for any $-\infty \leq a \leq b \leq \infty$, 
+\[ \lim_{n \to \infty} F_{Z_n}(b) - F_{Z_n}(a) = \lim_{n \to \infty} P\left( a < Z_n \leq b \right) = \Phi(b) - \Phi(a). \]
+\end{thm}
+
+}
+
+
+
+\frame{ \frametitle{Binomial Approximation via normal distribution}
+
+CLT approximation is precisely the motivation behind many important models in finance (for example, the \textbf{binomial tree} model for stock price evolution with a large number of coin flips $n$).
+
+\vspace{5mm}
+
+As a rule of thumb, we'll expect the approximation 
+\[ P\left( a <  \frac{ S_n - np }{ \sqrt{np(1-p)} } \leq b \right) \approx \Phi(b) - \Phi(a) \]
+of the standardization of $S_n \sim Bin(n,p)$ to be good if 
+\[ Var(S_n) = np(1-p) > 10. \] 
+
+}
+
+
+\frame{ \frametitle{Binomial Approximation via normal distribution}
+
+\begin{ex}
+Let's play a game. 
+
+\vspace{3mm}
+
+I flip a fair coin 100 times: if it lands heads 60 or more times, you win \$10. If not, you win nothing. 
+
+\vspace{3mm}
+
+What is a fair price for this game?
+\end{ex}
+
+\vspace{3mm}
+
+(This is a simplified model for a special type of stock option called a \textbf{European digital call option}.)
+
+}
+
+
+\frame{ \frametitle{Binomial Approximation via normal distribution}
+
+Let $S_n \sim Bin(n=100, p=1/2)$ count the number of heads on flipped.
+
+\vspace{5mm}
+
+Since $np(1-p) = 100(0.5)(0.5) = 25 > 10$, we can reasonably approximate these probabilities via CLT. Specifically, we want 
+
+\begin{align*} 
+P(S_n \geq 60) & = P\left( \frac{S_n - np}{\sqrt{np(1-p)}} \geq \frac{60 - np}{\sqrt{np(1-p)}} \right) \\
+ & \approx P\left( Z \geq \frac{60 - 50}{5} \right) \\
+ & = P(Z \geq 2) = 1 - N(2) \approx 1 - 0.9772 = 0.0228.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Applications of the CLT: Binomial Approximation}
+
+According to this approximation, the probability of winning \$10 is approximately 0.0228, and so the probability of winning nothing is approximately 1 - 0.0228 = 0.9772. 
+
+\vspace{5mm}
+
+Hence, the fair price of the game is 
+
+\[ 0.0228(10) + 0.9772(0) = 0.228, \]
+
+or about 22.8 cents for a small house advantage.
+
+}
+
+
+\frame{ \frametitle{Applications of the CLT: Binomial Approximation}
+
+The actual probability is 
+\[ P(Y \geq 60) = \sum_{j=60}^{100} {100 \choose j} (0.5)^{100} \approx 0.028444. \]
+The difference between 28.44 cents (actual) and 22.8 cents seems high - is there a way to make the approximation better than this? 
+
+}
+
+
+\frame{ \frametitle{Continuity Correction for Discrete Random Variables}
+
+\textbf{Continuity correction} adjusts the binomial approximation slightly, by accounting for the discrepancy between a smooth PDF curve's integral and the blocky rectangles of a histogram.
+
+\vspace{5mm}
+
+To use the continuity correction, add or subtract 0.5 in the appropriate direction to the integer value you are approximating: \\
+if $a, b \in \Z$, use the correction on $S_n \sim Bin(n,p)$ to check 
+\[ P(a \leq S_n \leq b) = P(a - 0.5 \leq S_n \leq b + 0.5). \]
+
+%\vspace{5mm}
+
+We will apply the continuity correction to our example.
+
+}
+
+
+\frame{ \frametitle{Continuity Correction: Digital Option Attempt \#2}
+
+$P(S_n \geq 60)$ is better approximated by $P(S_n \geq 59.5)$.
+
+\begin{align*} 
+P(S_n \geq 60) & \approx P\left( Z \geq \frac{59.5 - 50}{5} \right) \\
+ & = P(Z \geq 1.9) = 1 - N(1.9) \approx 1 - 0.9713 = 0.0287,
+\end{align*}
+giving a much closer approximation of a fair price of 28.7 cents against the actual computation of 28.44 cents. 
+
+}
+
+
+\frame{ \frametitle{``three $\sigma$ rule''}
+
+Recall the standard deviation ($\sigma$) distances from the either side of the mean: 
+\begin{align*}
+\Phi(1) - \Phi(-1) \approx 2(0.3413) = 0.6826  \,\, \text{ (1 std dev from mean) }\\
+\Phi(2) - \Phi(-2) \approx 2(0.4772) = 0.9554 \,\, \text{ (2 std dev from mean) }\\
+\Phi(3) - \Phi(-3) \approx 2(0.4987) = 0.9974 \,\, \text{ (3 std dev from mean) }
+\end{align*}
+These numbers give good guidelines for how much of a distribution to expect a certain distance from the mean. 
+
+\vspace{5mm}
+
+The so-called ``$3-\sigma$ rule'' says that the vast majority - over 99.7\% - of the values of a normal random variable will land within 3 standard deviations of the mean.
+
+}
+
+
+\frame{ \frametitle{Stirling's Approximation}
+
+Use the notation $a_n \sim b_n$ to mean that the sequences of real numbers $(a_n)$ and $(b_n)$ are \textbf{asymptotically equal} to each other; that is, 
+\[ a_n \sim b_n \iff \lim_{n \to \infty} \frac{a_n}{b_n} = 1. \]
+
+\vspace{5mm}
+
+This notation is used to describe an important result, known as \textbf{Stirling's approximation}, or \textbf{Stirling's formula}, which relates approximates $n!$ for large $n$ in terms of exponentials: 
+
+\[ \textbf{Stirling's formula}: \,\, n! \sim n^n e^{-n} \sqrt{2 \pi n}. \]
+
+}
+
+
+\frame{ \frametitle{Sketch of Proof of de Moivre-Laplace Theorem}
+
+Stirling's formula can be used to approximate binomial probabilities with exponentials: for large $n$, we have, with $	q = 1-p$, 
+\begin{align*}
+{n \choose k} p^k q^{n-k} & = \frac{n! p^k q^{n-k}}{k!(n-k)!} \\
+ & \sim \frac{n^n e^{-n} \sqrt{2 \pi n} p^k q^{n-k}}{k^k e^{-k} \sqrt{2 \pi k} (n-k)^{n-k} e^{-(n-k)} \sqrt{2 \pi (n-k)}} \\
+ & \approx \frac{1}{\sqrt{2\pi npq}} \exp\left( -\frac{(k - np)^2}{2npq} \right), 
+\end{align*}
+which, when applied to our standardized binomial probability, gives 
+\[ P\left( a <  \frac{ S_n - np }{ \sqrt{npq} } \leq b \right) = \sum_{k = \lceil np + a \sqrt{npq}\rceil}^{\lfloor np + b \sqrt{npq} \rfloor} {n \choose k} p^k q^{n-k} \approx \Phi(b) - \Phi(a). \]
+
+}
+
+
+\frame{ \frametitle{Law of Large Numbers (binomial)}
+
+Various \textbf{Laws of Large Numbers} (LLN) states that a sum of IID random variables with finite mean have their \textbf{sample average} converge to their mean. 
+
+\vspace{5mm}
+
+We will first see this for binomials: 
+
+\begin{thm}
+For any $\ve > 0$, and $S_n \sim Bin(n,p)$, 
+\[ \lim_{n \to \infty} P\left(\left|\frac{S_n}{n} - p\right| < \ve\right) = 1. \]
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Law of Large Numbers (binomial)}
+
+That is, the probability that the sample average 
+\[ \overline{X}_n = \frac{1}{n}\sum_{j=1}^n X_j = \frac{S_n}{n} \]
+is within $\ve$ of the probabilistic average, i.e. mean $\mu = p$ of $X_i \sim Bern(p)$, goes to 1 as the number of samples $n$ increases. 
+
+}
+
+
+\frame{ \frametitle{Confidence Intervals}
+
+The $100r\%$ \textbf{confidence interval} of a random variable $X$ is the interval, centered on its mean, inside which the probability of that variable being in that interval is $r$. 
+
+\vspace{5mm}
+
+We can compute confidence intervals to know when we can reliably (up to the percent we have chosen) believe an estimated value is ``close'' to its ``true mean''.
+
+}
+
+\frame{ \frametitle{Confidence Intervals}
+
+For example, we know that, for large $n$, the sample average of $n$ $Bern(p)$ trials is $\frac{S_n}{n}$, with $S_n \sim Bin(n,p)$. By the LLN, 
+\[ \lim_{n \to \infty} P\left(\left|\frac{S_n}{n} - p\right| < \ve\right) = 1. \]
+Presume that we do not know $p$, but we run many trials to estimate $p$. 
+If we call $\hat{p} = \frac{S_n}{n}$ an \textbf{estimator} of $p$, how many trials must we run to be ``reasonably sure'' that $\hat{p}$ is ``close'' to $p$?
+
+\vspace{5mm}
+
+That question can be rigorously answered with a fixed $\ve > 0$, the LLN, and the CLT.
+
+}
+
+
+\frame{ \frametitle{Confidence Intervals}
+
+Let's examine 
+\[ P\left(\left|\hat{p} - p\right| < \ve\right) \]
+for large $n$. Rewriting and using the CLT, we see 
+\begin{align*}
+P\left(\left|\frac{S_n}{n} - p\right| < \ve\right) & = P\left(-\ve < \frac{S_n}{n} - p < \ve\right) \\
+ & = P\left(-n\ve < S_n - np < n\ve\right) \\
+ & = P\left(\frac{-n\ve}{\sqrt{np(1-p)}} < \frac{S_n - np}{\sqrt{np(1-p)}} < \frac{n\ve}{\sqrt{np(1-p)}}\right) \\
+ & \approx \Phi\left(\frac{n\ve}{\sqrt{np(1-p)}}\right) - \Phi\left(\frac{-n\ve}{\sqrt{np(1-p)}}\right) \\
+ & = 2 \Phi\left(\frac{\ve\sqrt{n}}{\sqrt{p(1-p)}}\right) - 1.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Confidence Intervals}
+
+The normal approximation to the binomial probability with $\hat{p} = \frac{S_n}{n}$, 
+\begin{align*}
+P\left(\left|\hat{p} - p\right| < \ve\right) \approx 2 \Phi\left(\frac{\ve\sqrt{n}}{\sqrt{p(1-p)}}\right) - 1,
+\end{align*}
+can be simplified further. 
+
+\vspace{5mm}
+
+Since we do not know $p$, we can get a lower bound for all values of $p$. First, note that, for $0 < p < 1$, the ``most random'' a coin flip can be is fair, i.e. $p = \frac{1}{2}$. 
+
+\vspace{5mm}
+
+This intuition (or, better, some calculus) yields 
+\[ \sqrt{p(1-p)} \leq \sqrt{\frac{1}{4}} = \frac{1}{2} \implies \frac{\ve\sqrt{n}}{\sqrt{p(1-p)}} \geq 2 \ve\sqrt{n}. \]
+
+}
+
+
+\frame{ \frametitle{Confidence Intervals}
+
+Thus, since the CDF $\Phi$ is increasing, we have a bound that works for all $p$: 
+\begin{align*}
+P\left(\left|\hat{p} - p\right| < \ve\right) \geq 2 \Phi\left(2\ve\sqrt{n}\right) - 1.
+\end{align*}
+
+The $100r\%$ \textbf{confidence interval} that our probability estimator $\hat{p}$ is within $\ve$ of its true probability $p$ is the interval $(\hat{p} - \ve, \hat{p} + \ve)$ such that 
+\begin{align*}
+P\left(\left|\hat{p} - p\right| < \ve\right) \geq 2 \Phi\left(2\ve\sqrt{n}\right) - 1 \geq r,
+\end{align*}
+which reduces to 
+\[ 100r\% \text{ confidence that } p \in (\hat{p} - \ve, \hat{p} + \ve): \,\, \Phi\left(2\ve\sqrt{n}\right) = \frac{1+r}{2} \]
+in four parameters: $\ve$, $r$, $\hat{p}$, and $n$. 
+
+}
+
+
+\frame{ \frametitle{Confidence Intervals}
+
+Different questions can be asked about confidence intervals, and all deal with having three parameters of 
+\[ 100r\% \text{ confidence that } p \in (\hat{p} - \ve, \hat{p} + \ve): \,\, \Phi\left(2\ve\sqrt{n}\right) = \frac{1+r}{2} \]
+and solving for the fourth.
+
+}
+
+
+\frame{ \frametitle{Confidence Intervals}
+
+\[ 100r\% \text{ confidence that } p \in (\hat{p} - \ve, \hat{p} + \ve): \,\, \Phi\left(2\ve\sqrt{n}\right) = \frac{1+r}{2} \]
+
+\begin{itemize}
+\item How many trials $n$ must be run to be $100r\%$ confident our sample probability $\hat{p}$ is within $\ve$ of the true probability $p$? (Compute $n$.)
+\item Find the $100r\%$ confidence interval for the true probability $p$ after $n$ trials yields sample probability $\hat{p}$. (Compute $\ve$). 
+\item How confident are we that $p$ is in the given confidence interval? (Compute $r$.)
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Example: How Many Die Rolls to Be Reasonably Certain?}
+
+We believe we have a fair die (with ``true probability'' $p = \frac{1}{6}$ of rolling a 2). 
+
+\vspace{5mm}
+
+How many times should we roll the die to be at least $95\%$ confident that the relative frequency of a 2 appearing is within $0.01$ of its actual probability of $\frac{1}{6}$?
+
+}
+
+
+\frame{ \frametitle{Example: How Many Die Rolls to Be Reasonably Certain?}
+
+Let's pose the question with the variables we know: 
+
+\vspace{5mm}
+
+How many times $n$ should we roll the die to be at least $100r = 95\%$ certain that the relative frequency $\hat{p}$ of a 2 appearing is within $\ve = 0.01$ of its actual probability of $p = \frac{1}{6}$?
+
+}
+
+
+\frame{ \frametitle{Example: How Many Die Rolls to Be Reasonably Certain?}
+
+\[ 100r\% \text{ confidence that } p \in (\hat{p} - \ve, \hat{p} + \ve): \,\, \Phi\left(2\ve\sqrt{n}\right) = \frac{1+r}{2} \]
+becomes 
+\[ 95\% \text{ confidence that } \frac{1}{6} \in (\hat{p} - 0.01, \hat{p} + 0.01) \]
+with 
+\[ \Phi\left(0.02\sqrt{n}\right) \geq \frac{1.95}{2} = 0.975 \implies 0.02\sqrt{n} \approx 1.96, \]
+which gives $\sqrt{n} \geq \frac{1.96}{0.02} = 98$, or $n \geq 98^2 =  9604$ rolls.
+
+}
+
+
+\frame{ \frametitle{Example: How Many Die Rolls to Be Reasonably Certain?}
+
+We can improve this estimate if we don't use the worst case scenario for $\sqrt{p(1-p)} \leq \frac{1}{2}$, and instead plug in $p = \frac{1}{6}$. This yields 
+\[ 95\% \text{ confidence that } \frac{1}{6} \in (\hat{p} - 0.01, \hat{p} + 0.01) \]
+with 
+\begin{align*}
+\Phi\left(\frac{0.01\sqrt{n}}{\sqrt{\frac{1}{6}\cdot\frac{5}{6}}}\right) & = 0.975 \\
+\implies \Phi\left(\frac{0.06\sqrt{n}}{\sqrt{5}}\right) & \geq 0.975 \implies \frac{0.06\sqrt{n}}{\sqrt{5}} \geq 1.96,
+\end{align*}
+which gives the much better estimate $\sqrt{n} \geq \frac{1.96\sqrt{5}}{0.06} \approx 73.044887$, or $n \geq 5336$ rolls.
+
+}
+
+
+\frame{ \frametitle{Maximum Likelihood Estimation}
+
+If we take $p$ to be a variable parameter, we can do calculus on a PMF or PDF that uses $p$ to determine the most ``likely'' value for a random variable to take.
+
+\vspace{5mm}
+
+For a random variable $X$ whose PMF or PDF uses a parameter we will call $p$, define the \textbf{likelihood function} 
+
+\[ L(p) = P(X = k) \] 
+
+\vspace{3mm}
+
+as a function of $p \in [0,1]$, for \emph{fixed} $k$. 
+
+}
+
+
+\frame{ \frametitle{Maximum Likelihood Estimation}
+
+Then calculus derivative tests can tell us the maximum of $L(p)$, which is the $p$ that makes $k$ the most likely value $X$ will take. 
+
+\vspace{5mm}
+
+We call the value $\hat{p} = \sup_{p \in [0,1]}$ the \textbf{maximum likelihood estimator (MLE)}, and it should be clear that $\hat{p}$ is a function of $k$.  
+
+}
+
+
+
+\frame{ \frametitle{Maximum Likelihood Estimation}
+
+In our earlier die-rolling example, we had the sample average $\hat{p} = \frac{S_n}{n}$ as our random variable, with $S_n \sim Bin(n,p)$. \\
+For a fixed $k$, the likelihood function is 
+\[ L(p) = P\left(\frac{S_n}{n} = \frac{k}{n}\right) = {n \choose k} p^k (1-p)^{n-k}, \]
+whose derivative with respect to $p$ is at a critical point if 
+\begin{align*} 
+L'(p) & = {n \choose k} (kp^{k-1} (1-p)^{n-k} - (n-k) (1-p)^{n-k-1} p^k) \\
+% & = {n \choose k} p^{k-1} (1-p)^{n-k-1} (k(1-p) - (n-k) p) \\
+ & = {n \choose k} p^{k-1} (1-p)^{n-k-1} (k - np) = 0. 
+\end{align*}
+The first derivative test says $L(p)$ has a maximum at $\hat{p} = \frac{k}{n} = \frac{S_n}{n}$, which (again) justifies its use as an estimator for $p$.
+
+}
+
+
+\frame{ \frametitle{Example: polling}
+
+Random \textbf{polling} is, ideally, modeled like drawing balls from urns \emph{without replacement} (since you must not ask the same person twice). 
+
+\vspace{5mm}
+
+However, pulling people from a very large population offers a very small chance we happen to double up, and so we will maintain our near-independence assumption. 
+
+}
+
+
+\frame{ \frametitle{Example: polling}
+
+Say we poll $n = 1061$ people\footnote{http://news.gallup.com/poll/3712/landing-man-moon-publics-view.aspx, July 20, 1999}, at random from the population\footnote{No poll is ``perfect''. Poll design and execution is exceedingly difficult.}, asking if they believe the US moon landing in 1969 was real or staged. 64 of them say it was staged. 
+
+\vspace{5mm}
+
+What is the 95\% confidence interval, using our sample average of $\hat{p} = \frac{64}{1061} \approx 6\%$ in this poll, that captures the overall population's ``true belief probability'' $p$ on this question? 
+
+}
+
+
+\frame{ \frametitle{Confidence in the moon landing}
+
+We assume that $S_n \sim Bin(n,p)$ is the number of people in our poll that believe the moon landing was staged, and set our sample average as 
+
+\[ \hat{p} = \frac{S_n}{n} = \frac{64}{1061} \approx 0.06. \]
+
+}
+
+
+\frame{ \frametitle{Confidence in the moon landing}
+
+We want to compute $\ve$ such that, for ``true'' belief percentage $p$, 
+
+\[ \text{ we have } 95\% \text{ confidence that } p \in (0.06 - \ve, 0.06 + \ve) \]
+
+with worst case scenario 
+
+\[ \Phi\left(2\ve\sqrt{n}\right) \geq 0.975 \implies \ve \geq \frac{1.96}{2\sqrt{1061}} \approx 0.03. \]
+
+This gives a $95\%$ confidence interval of $p \in (0.03, 0.09)$.\footnote{Compare: 
+\texttt{http://www.rasmussenreports.com/public\_content/\\
+lifestyle/general\_lifestyle/july\_2014/have\_we\_got\_a\_conspiracy\\
+\_for\_you\_9\_11\_jfk\_obama\_s\_citizenship}, 
+which claim a 2012 poll with $n = 1000$ and $p \in (0.02, 0.08)$, and a 2014 poll with $p \in (0.11, 0.17)$, both at 95\% confidence. Polling is hard.}
+
+}
+
+
+\frame{ \frametitle{Poisson random variables}
+
+$X$ is called a \textbf{Poisson} \textbf{random variable} with parameter $\lambda$ (written Poisson($\lambda$)) if the PMF of $X$ is 
+\[ p_X(k) = e^{-\lambda} \frac{\lambda^k}{k!}, \, k = 0, 1, 2,3, .... \]
+This counts the number of ``rare events'' with ``average'' rate of occurrence $\lambda$.
+
+\vspace{5mm}
+
+We can use a Poisson($\lambda$) to approximate a Bin($n,p$), using $\lambda = np$, if the number of trials $n$ is ``large'' and success probability $p$ is ``small''.
+
+}
+
+
+\frame{ \frametitle{Properties of Poisson random variables}
+
+For $X \sim Poisson(\lambda)$, 
+\begin{itemize}
+\item $E(X) = \lambda$
+\item $Var(X) = \lambda$
+\item $P(X = 0) = e^{-\lambda}$
+\item $P(X > 0) = 1 - e^{-\lambda}$
+\item \textbf{Poisson approximation of binomial}: If $X \sim Bin(n,p)$ and $Y \sim Poisson(\lambda = np)$, then for any subset $A \subseteq \{0,1,2,...\}$, 
+\[ |P(X \in A) - P(Y \in A)| \leq np^2. \]
+Thus, if $p$ is ``small'' relative to $n$, $Y$ can be considered a good approximation to $X$. 
+\end{itemize}
+
+
+
+}
+
+
+\frame{ \frametitle{Binomial approximated by Poisson: ``law of rare events''}
+
+If the number of IID ``success/failure'' trials $n$ is large, and the ``success'' probability $p$ is small, then we can approximate extreme events of a $Bin(n,p)$ RV by a Poisson$(\lambda = np)$. 
+
+\vspace{5mm}
+
+\begin{ex}
+Assume the probability of a nuclear reactor accident each year is $p = 10^{-5}$ (``US utility requirements are 1 in 100,000 years''), there are $100$ reactors in operation in the US, and each reactor operates independently each year.\footnote{Basic data from \texttt{http://www.world-nuclear.org/\\information-library/safety-and-security/safety-of-plants/\\safety-of-nuclear-power-reactors.aspx}. Independent operation and 100 instead of 99 plants are simplifying assumptions.} 
+
+\vspace{5mm}
+
+Approximate the probability that there is an accident some time in the next 25 years. 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Binomial approximated by Poisson: ``law of rare events''}
+
+Let $X = $ the number of accidents. 
+
+\vspace{5mm}
+
+The actual probability we want, using these numbers, is for $n = 100(25) = 2500$ ``trials'' of ``waiting a year on each reactor for an accident'', with ``success'' probability $p = 10^{-5}$. %[Obviously, there are simplifications in place here in our assumptions.] 
+Then, 
+\begin{align*} 
+P(X \geq 1) & = 1 - P(X = 0) = 1 - {2500 \choose 0} (1 - 10^{-5})^{2500} \\
+ & = 1 - 0.99999^{2500} \approx 1 - 0.97531 = 0.02469,
+\end{align*}
+just under $2.5\%$. 
+
+}
+
+
+\frame{ \frametitle{Binomial approximated by Poisson: ``law of rare events''}
+
+This actual probability might suffer from minor roundoff error, depending on the algorithm used to calculate it.
+
+\vspace{5mm}
+
+Approximating via $Y \sim$ Poisson($\lambda = np = \frac{2500}{10^5} = 0.025$), 
+\[ P(X \geq 1) \approx P(Y > 0) = 1 - P(Y = 0) = 1 - e^{-\lambda} \approx 0.02469. \]
+
+}
+
+
+\frame{ \frametitle{Binomial approximated by Poisson: ``law of rare events''}
+
+If, instead, we use the sample average\footnote{(generously referring to only 2 of the 3 major accidents that have occured in ``over 17,000 cumulative reactor-years of commercial nuclear power operation in 33 countries'')} 
+
+\[ \hat{p} = \frac{2}{18000} \approx 0.00011 \] 
+
+instead of $p = 10^{-5}$, our estimates increase sharply: 
+
+\begin{align*} 
+P(X \geq 1) & = 1 - P(X = 0) = 1 - {2500 \choose 0} (1 - 0.00011)^{2500} \\
+ & = 1 - 0.999889^{2500} \approx 0.242547.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Binomial approximated by Poisson: ``law of rare events''}
+
+The Poisson approximation is, with $\lambda = 2500\hat{p} \approx 0.2777778$, 
+
+\vspace{5mm}
+
+\[ P(Y > 0) = 1 - P(Y = 0) = 1 - e^{-\lambda} \approx 0.242535. \]
+
+\vspace{5mm}
+
+Note that 
+
+\[ n\hat{p}^2 \approx 2500(0.00011)^2 \approx 0.000031, \]
+
+so the Poisson approximation is (again) validated.
+
+}
+
+
+\frame{ \frametitle{Geometric random variables}
+
+$X$ is called a \textbf{geometric random variable} \emph{with parameter } $p$ (written Geom($p$)) if its PMF is 
+\[ p_X(k) = p(1-p)^{k-1}, \, k = 1, 2, ....\]
+This RV represents the number of trials up to a ``success'' in a run of repeated IID experiments with ``success'' probability $p$. That is, $k-1$ ``failures'', and then ``success'' on trial $k$. 
+
+\vspace{2mm}
+
+\begin{ex}
+``Roll a 5 on a die'' has success probability $\frac{1}{6}$, and so failure probability $\frac{5}{6}$. Thus, for $X \sim$ Geom($\frac{1}{6}$), the probability it takes exactly 4 rolls to get the first 5 is 
+\[ p_X(4) = \left(\frac{1}{6}\right) \left(\frac{5}{6}\right)^3. \]
+\end{ex}
+
+}
+
+
+
+\frame{ \frametitle{Exponential random variables}
+
+An \textbf{exponential} random variable models the amount of time it takes for a given impending event to occur as exponential decay. $X \sim Exp(\lambda)$ has PDF 
+\[ f(x) = \lambda e^{-\lambda x} 1_{(0,\infty)}(x). \]
+
+\vspace{3mm}
+
+If $X \sim Exp(\lambda)$, then its CDF is given by 
+\[ F(x) = P(X \leq x) = \int_{-\infty}^{x} \lambda e^{-\lambda t} 1_{(0,\infty)}(t) dt = \left\{ 
+\begin{array}{cl}
+0 & x \leq 0 \\
+1 - e^{-\lambda x} & x > 0.
+\end{array}
+\right. \]
+
+
+}
+
+
+\frame{ \frametitle{Properties of geometric and exponential random variables}
+
+If $X \sim Geom(p)$ and $T \sim Exp(\lambda)$, then 
+
+\begin{itemize}
+\item $E(X) = \frac{1}{p}$
+\item $E(T) = \frac{1}{\lambda}$
+\item $Var(X) = \frac{1-p}{p^2}$
+\item $Var(T) = \frac{1}{\lambda^2}$
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of geometric and exponential random variables}
+
+\begin{itemize}
+\item If $T_n$ is a RV such that $nT_n \sim Geom(\frac{\lambda}{n})$ for large enough $n$, then 
+\[ \lim_{n \to \infty} P(T_n > t) = e^{-\lambda t}, \]
+i.e. $T_n \to T$ in distribution (``weakly''). 
+\item Geometric random variables are the only discrete random variables that have a special property called \textbf{memorylessness}. 
+\item Exponential random variables are the only continuous random variables that have the \textbf{memorylessness} property.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Memorylessness of Exponential Random Variables}
+
+
+\textbf{Memorylessness}: If $X \sim Exp(\lambda)$ (a stopwatch for some event), then for $s, t \geq 0$, 
+\[ P(X > s+t \, | \, X > t) = P(X > s). \]
+Informally, the amount of time you've waited for $X$'s event to occur ``resets'', probabilistically, if you acknowledge that you've waited a certain amount of time.
+
+}
+
+
+\frame{ \frametitle{Memorylessness of Exponential Random Variables}
+
+\textbf{Memorylessness}: If $X \sim Exp(\lambda)$, then for $s, t > 0$, 
+\[ P(X > s+t \, | \, X > t) = P(X > s). \]
+
+\pf First, note that $X > s+t \implies X > t$, so 
+\[ P(X > s+t \, | \, X > t) = \frac{P(X > s+t, \, X > t)}{P(X > t)} = \frac{P(X > s+t)}{P(X > t)}. \]
+Next, the \textbf{right tail probability} of an exponential RV is 
+\[ P(X > t) = \int_{t}^{\infty} \lambda e^{-\lambda x} dx = e^{-\lambda t}. \]
+Hence, 
+\[ \frac{e^{-\lambda (t+s)}}{e^{-\lambda t}} = P(X > s+t \, | \, X > t) = P(X > s) = e^{-\lambda s}. \,\, \blacksquare\]
+
+}
+
+
+\frame{ \frametitle{Gamma random variables}
+
+%Compare the exponential to the geometric 
+
+Exponential random variables are a special case of \textbf{Gamma} random variables. 
+
+\vspace{3mm}
+
+$X \sim Gamma(\alpha, \beta)$ (with $\alpha$ the ``rate'' parameter and $\beta$ the ``shape'' parameter) if its PDF is 
+\[ f(x) = \frac{\alpha(\alpha x)^{\beta - 1} e^{-\alpha x}}{\Gamma(\beta)} 1_{(0,\infty)}(x), \]
+where the \textbf{Gamma function} is $\Gamma(x) = \int_{0}^{\infty} t^x e^{-t} dt$, which is the general form of factorial: $\Gamma(n) = (n-1)!$ for $n \in \N$. 
+
+\vspace{3mm}
+
+$Exp(\lambda) \sim Gamma(\lambda, 1)$, and for $n \in \N$, a $Gamma(\lambda, n)$ RV models the sum of $n$ IID $Exp(\lambda)$ (counts the total time for $n$ consecutive events of the same type to occur). 
+
+}
+
+
+\end{document}

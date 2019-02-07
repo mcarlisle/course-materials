@@ -1,0 +1,523 @@
+\documentclass{beamer}
+
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Transforms and transformations]{Introduction to Probability \\ Transforms and transformations}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\frame{ \frametitle{Moment generating function}
+
+So far we have two ways to describe a random variable $X$: 
+\begin{itemize}
+\item its PMF $p_X$ (discrete) / its PDF $f(x)$ (continuous) 
+\item its CDF $F$.
+\end{itemize}
+We will now gain a third way: its \textbf{moment generating function}. 
+
+\vspace{3mm}
+
+First, we define the \textbf{$n$th moment} of a random variable $X$ as $E(X^n)$ (which may or may not be finite). The \textbf{moment generating function} of $X$ is given by $M_X(t) = E(e^{tX})$. 
+
+\begin{align*}
+\textbf{discrete}: & \,\,\, M_X(t) = E(e^{tX}) = \sum_{n=0}^{\infty} e^{tn} p_X(n) \\
+\textbf{continuous}: & \,\,\, M_X(t) = E(e^{tX}) = \int_{-\infty}^{\infty} e^{tx} f_X(x) dx
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Examples}
+
+For $X \in Geom(p)$, 
+\begin{align*}
+M_X(t) & = \sum_{n=1}^{\infty} e^{tn} (1-p)^{n-1} p = \frac{p}{1-p}\sum_{n=1}^{\infty} (e^{t} (1-p))^n \\
+ & = \frac{p}{1-p} \cdot \frac{e^{t} (1-p)}{1 - e^{t} (1-p)} = \left\{ \begin{array}{cl} \infty & t \geq -\ln(1-p) \\ \frac{pe^{t}}{1 - e^{t} (1-p)} & t < -\ln(1-p) \end{array}\right. 
+\end{align*}
+%\onslide<2->
+For $X \in Exp(\lambda)$, 
+\begin{align*}
+M_X(t) & = \int_{0}^{\infty} e^{tx} \lambda e^{-\lambda x} dx = \frac{ \lambda e^{(t-\lambda) x}}{t-\lambda}\bigg|_0^{\infty} = \left\{ \begin{array}{cl} \infty & t \geq \lambda \\ \frac{ \lambda }{\lambda - t} & t < \lambda \end{array}\right. 
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Properties of the MGF}
+
+What's the point of the MGF? As its name implies, it \emph{generates the moments of} $X$. 
+
+\vspace{3mm}
+
+Recall, the \textbf{$n$th moment} of $X$ is $E(X^n)$. 
+
+\vspace{3mm}
+
+To see how we can get $E(X^n)$ from $M_X(t)$, we need some calculus. The MGF $M_X(t)$ is a differentiable function of $t$ (where it is defined). 
+
+\vspace{3mm}
+
+We are able to switch integrals and derivatives on $t$ and $X$ to isolate the moments. For example, to recover the mean $E(X)$ from $M_X(t)$: 
+\begin{align*}
+M_X(t) & = E(e^{tX}) \\
+\implies M'_X(t) & = \frac{d}{dt} E(e^{tX}) = E\left( \frac{d}{dt} e^{tX} \right) = E\left( X e^{tX} \right) \\
+\implies M'_X(0) & = E\left( X e^{0X} \right) = E(X).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Properties of the MGF}
+
+\begin{thm}
+In general, if $M^{(n)}_X(t) = \frac{d^n}{dt^n} M_X(t)$, then $M^{(n)}_X(0) = E(X^n)$.
+\end{thm}
+
+\vspace{3mm}
+
+\pf This is easily seen: each successive derivative with respect to $t$ brings down another copy of $X$ in the MGF, since $X$ is not a function of $t$, so it acts as a constant multiple upon successive differentiation with respect to $t$. 
+\[ M^{(n)}_X(t) = E(X^n e^{tX}). \] 
+Thus, 
+\[ M^{(n)}_X(0) = E(X^n e^{0X}) = E(X^n).  \,\, \blacksquare \]
+
+}
+
+
+\frame{ \frametitle{Calculating moments with the MGF}
+
+Using the MGF, what is the variance of $X \sim Exp(3)$? \\
+From earlier, if $X \sim Exp(\lambda)$, 
+\begin{align*}
+M_X(t) & = \left\{ \begin{array}{cl} 
+\infty & t \geq \lambda \\ 
+\frac{ \lambda }{\lambda - t} & t < \lambda 
+\end{array}\right. 
+\end{align*}
+%Thus, for $X \sim Exp(3)$, $M_X(t) = \frac{3}{3-t}$ for $t < 3$, and $\infty$ for $t \geq 3$. 
+
+%\vspace{3mm}
+%\onslide<2->
+
+The first two moments and variance of $X$ are: 
+\begin{align*}
+E(X) & = M'_X(0) = \left( \frac{3}{(3-t)^2}\right)\bigg|_{t=0} = \frac{1}{3} \\
+E(X^2) & = M''_X(0) = \left( \frac{6}{(3-t)^3}\right)\bigg|_{t=0} = \frac{2}{9} \\
+Var(X) & = E(X^2) - E(X)^2 = \frac{2}{9} - \frac{1}{9} = \frac{1}{9}.
+\end{align*}
+(In general, for $X \sim Exp(\lambda)$, $E(X) = \frac{1}{\lambda}$ and $Var(X) = \frac{1}{\lambda^2}$.)
+
+
+}
+
+
+\frame{ \frametitle{Independent random variables implies expectation factors}
+
+If two random variables, $X$ and $Y$, are independent\footnote{We will define this more rigorously later; for now, stick with the intuition of ``independent experimental trials''.}, then the expected value of their product splits: 
+\[ X \perp Y \implies E(XY) = E(X) E(Y), \]
+and, in general, if $g$ and $h$ are functions, 
+\[ X \perp Y \implies E(g(X) h(Y)) = E(g(X)) E(h(Y)). \]
+
+\vspace{5mm}
+
+THE CONVERSE IS NOT TRUE IN GENERAL!
+
+\[ E(XY) = E(X) E(Y) \text{ does NOT imply that } X \perp Y. \]
+
+}
+
+
+\frame{ \frametitle{Independent random variables implies expectation factors}
+
+\begin{ex}
+Let $X$ be a random variable, and $Y = X$. Clearly, $X$ and $Y$ are dependent on each other. In fact, the only way we get 
+\[ E(XY) = E(X^2) = E(X) E(Y) = E(X)^2 \]
+is if $X$ is a constant. (Why?)
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Properties of MGF}
+
+Let $M_X(t) = E(e^{tX})$ be the moment generating function (MGF) of the random variable $X$. Then: 
+
+\begin{itemize}
+\item If $X = c \in \R$ is a constant (not random), then 
+\[ M_X(t) = E(e^{tX}) = e^{tc}. \]
+\item If $a, b \in \R$, and $Y = aX+b$, then 
+\[ M_Y(t) = E(e^{tY}) = E(e^{taX + tb}) = e^{tb} E(e^{taX}) = e^{tb} M_{X}(ta). \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of MGF}
+
+\begin{itemize}
+\item If $X_1, X_2, X_3, ..., X_n$ are IID, and $Y_n = \sum_{j=1}^n X_j$, \\
+then all the $X_j$ have the same MGF, $m_{X_1}(t)$, and 
+\begin{align*} 
+M_{Y_n}(t) = M_{ \sum_{j=1}^n X_j}(t) & = E\left(e^{t \sum_{j=1}^n X_j}\right) \\
+ = E\left(\prod_{j=1}^n e^{t X_j}\right) & = \prod_{j=1}^n E\left(e^{t X_j}\right) = \prod_{j=1}^n m_{X_j}(t) = M_{X_1}(t)^n. 
+\end{align*}
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Equivalence of two RVs in distribution}
+
+Let $X$ and $Y$ be two random variables on $(\Omega, \mc{F}, P)$. \\
+We say that $X$ and $Y$ are \textbf{equal in distribution}, denoted in any of the following ways: 
+\[ X \stackrel{d}{=} Y, \,\, X \stackrel{(d)}{=} Y, \,\, X \stackrel{\mathcal{D}}{=} Y, \]
+if for any\footnote{Technically, only $B \in \mathcal{B}(\R)$, the \textbf{Borel} subsets of $\R$, are needed, which then imply the statement for all \textbf{Lebesgue measurable} subsets of $\R$.} subset $B \subseteq \R$, 
+\[ P(X \in B) = P(Y \in B). \]
+Note that $X$ and $Y$ need not be equal on an outcome-by-outcome basis to be equal in distribution: consider the fair coin flip example 
+\[ X(H) = Y(T) = 1, \,\, X(T) = Y(H) = -1 \]
+
+}
+
+
+\frame{ \frametitle{MGF uniquely identifies a distribution (just like CDF)}
+
+The moment generating function of a random variable $X$ is a unique way to describe $X$, just as the CDF is.
+
+\vspace{3mm}
+
+We can calculate the MGF of various functions of random variables to see if their MGFs tell us anything interesting. 
+
+\vspace{3mm}
+%\onslide<2->
+
+\begin{ex}
+Let $X_1, X_2, X_3, ... \sim Bern(p)$ be IID. \\
+What is the distribution of $Y_n = \sum_{j=1}^n X_j$?
+\end{ex}
+
+\vspace{3mm}
+
+Answer: $Y_n \sim Bin(n,p)$... but how do we know? \\
+We'll prove it via MGFs.
+
+}
+
+
+
+\frame{ \frametitle{Sum of n IID Bernoulli(p) is Binomial(n,p): Proof via MGF}
+
+\pf First, we'll calculate the MGFs of $X_1 \sim Bern(p)$ and $B_n \sim Bin(n,p)$. 
+
+\vspace{3mm}
+
+Recalling that the PMF of $X_1 \sim Bern(p)$ is 
+\[ p_{X_1}(x) = p 1_{\{1\}}(x) + (1-p) 1_{\{0\}}(x), \]
+we get the MGF of $X_1$: 
+\[ M_{X_1}(t) = E(e^{X_1 t}) = pe^{1t} + (1-p)e^{0t} = pe^t + 1 - p. \]
+
+}
+
+
+\frame{ \frametitle{Sum of n IID Bernoulli(p) is Binomial(n,p): Proof via MGF}
+
+Next, recalling that the PMF of $B_n \sim Bin(n,p)$ is 
+\[ p_{B_n}(x) = \sum_{j=0}^n {n \choose j} p^j (1-p)^{n-j} 1_{\{j\}}(x), \,\, x = 0, 1, 2, ..., n, \]
+we get the MGF of $B_n$: 
+\begin{align*}
+M_{B_n}(t) = E(e^{B_n t}) & = \sum_{j=0}^n e^{jt} {n \choose j} p^j (1-p)^{n-j} \\
+ & = \sum_{j=0}^n {n \choose j} (p e^t)^j (1-p)^{n-j} \\
+\text{(binomial theorem) } & = (pe^t + 1-p)^n.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Sum of n IID Bernoulli(p) is Binomial(n,p): Proof via MGF}
+
+Therefore, since 
+\[ M_{X_1}(t) = E(e^{X_1 t}) = pe^{1t} + (1-p)e^{0t} = pe^t + 1 - p. \]
+and 
+\begin{align*}
+M_{B_n}(t) = E(e^{B_n t}) = (pe^t + 1-p)^n,
+\end{align*}
+we can easily see that 
+\[ M_{B_n}(t) = M_{X_1}(t)^n. \]
+However, we know that, since $Y_n = \sum_{j=1}^n X_j$, we also have 
+\[ M_{Y_n}(t) = M_{ \sum_{j=1}^n X_j}(t) = m_{X_1}(t)^n. \]
+Therefore, 
+\[ M_{Y_n}(t) = M_{B_n}(t) \implies Y_n \sim B_n \sim Bin(n,p). \]
+
+
+}
+
+
+\frame{ \frametitle{MGF uniquely identifies a distribution (just like CDF)}
+
+This last statement is true because of the following theorem: 
+
+\vspace{5mm}
+
+\begin{thm}
+If $X$ and $Y$ are two RVs on $(\Omega, \mc{F}, P)$, and $\exists \delta > 0$ such that 
+\[ M_X(t) = M_Y(t) < \infty \] 
+for all $t \in (-\delta, \delta)$, then $X \stackrel{d}{=} Y$. 
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Functions of Continuous RV: CDF, PDF}
+
+If $X$ is an RV, and $g: \R \to \R$ is a function, \\then $Y = g(X)$ is also a RV. 
+
+\vspace{5mm}
+
+The CDF of $Y = g(X)$ can be calculated relatively easily if $g$ is an \emph{invertible} function. 
+For example, if $g$ is increasing, $g^{-1}$ is as well: 
+\begin{align*}
+F_Y(a) = P(Y \leq a) & = P(g(X) \leq a) \\
+ & = P(X \leq g^{-1}(a)) = F_X(g^{-1}(a)),
+\end{align*}
+or if $g$ is decreasing, note the flip in the inequality: 
+\begin{align*} 
+F_Y(a) = P(Y \leq a) & = P(g(X) \leq a) \\
+ & = P(X \geq g^{-1}(a)) = 1 - F_X(g^{-1}(a)).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Functions of Continuous RV: CDF, PDF}
+
+
+To get the PDF of $Y = g(X)$ from $X$, differentiate the CDF: \\in either case, the chain rule states 
+\[ f_Y(a) = f_x(g^{-1}(a)) |(g^{-1})'(a)|. \]
+For non-invertible functions, this is still sometimes possible but must be calculated on a case-by-case basis.
+
+}
+
+
+\frame{ \frametitle{Transforming $Unif(0,1)$ into other RVs}
+
+Recall, a \textbf{standard uniform random variable} is a continuous RV with distribution $U \sim Unif(0,1)$. 
+
+\vspace{5mm}
+
+This kind of RV is particularly easy to transform into other kinds of RVs; in fact, this is the basis for \textbf{Monte Carlo simulation}. 
+
+%\vspace{5mm}
+
+}
+
+
+\frame{ \frametitle{Transforming $Unif(0,1)$ into $Unif(a,b)$}
+
+
+\begin{ex}
+If $U \sim Unif(0,1)$, then, for any $a, b \in \R$ such that $a < b$, 
+\[ V = a + (b-a)U \sim Unif(a,b). \] 
+\end{ex}
+
+
+Why? Look at $F_V$:
+\begin{align*} 
+F_V(x) = P(V \leq x) & = P(a + (b-a)U \leq x) = P\left(U \leq \frac{x-a}{b-a}\right) \\
+ & = \left\{ \begin{array}{cl}
+0 & x \leq a \\
+\frac{x-a}{b-a} & a < x < b \\
+1 & x \geq b,
+\end{array}
+\right.
+\end{align*}
+which is precisely the CDF of $Unif(a,b)$. 
+
+}
+
+
+
+\frame{ \frametitle{Transforming $Unif(a,b)$ into something else}
+
+For $X \sim Unif(4,10)$, what are the CDF and PDF of $Y = X^3 - 50$?
+
+\vspace{3mm}
+
+Our function is $g(x) = x^3 - 50$, so that $Y = g(X)$. 
+
+\vspace{3mm}
+
+$g$ is an increasing function, with inverse function 
+
+\[ x = g^{-1}(y) = (y + 50)^{1/3}. \]
+
+\vspace{3mm}
+
+The CDF and PDF of $X$ are 
+\begin{align*} 
+F_X(a) & = \frac{a-4}{6} 1_{(4,10)}(a) + 1_{[10,\infty)}(a), \\
+f_X(a) & = \frac{1}{6} 1_{(4,10)}(a).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Transforming $Unif(a,b)$ into something else}
+
+Hence, the CDF and PDF of $Y$ are 
+\begin{align*}
+F_Y(a) & = F_X( (a + 50)^{1/3} ) \\
+ & = \frac{ (a + 50)^{1/3} - 4}{6} 1_{(4,10)}((a + 50)^{1/3}) \\
+ & = \frac{ (a + 50)^{1/3} - 4}{6} 1_{(14,950)}(a) + 1_{[950,\infty)}(a) \\
+ \\
+f_Y(a) & = f_X( (a + 50)^{1/3} ) | (a + 50)^{1/3} )' | \\
+ & = \frac{1}{6} 1_{(14,950)}(a) \left(\frac{1}{3}(a+50)^{-2/3}\right).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Inverse Transform Method}
+
+Let us go in the other direction. If you have a target distribution $V$, what function $y = g(x)$ transforms $U \sim Unif(0,1)$ to $V = g(U)$?
+
+\vspace{5mm}
+
+Assume $V$ is a continuous RV. We will discover an invertible function $g$ via the \textbf{inverse transform method}.
+
+\vspace{5mm}
+
+Noting that we require, $\forall x \in \R$, $0 \leq g^{-1}(x) \leq 1$, we have the CDF of $V$ in the form 
+\begin{align*}
+F_V(x) & = P(V \leq x) = P(g(U) \leq x) \\
+ & = P(U \leq g^{-1}(x)) = \left\{ \begin{array}{ll} 1 & \text{ if } x > \max(V), \\
+g^{-1}(x) & \min(V) \leq x \leq \max(V), \\
+0 & x < \min(V).
+\end{array} \right. 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Inverse Transform Method}
+
+
+Thus, we have the \textbf{Inverse Transform Method}: 
+
+\vspace{5mm}
+
+The increasing, invertible function $g$ that transforms 
+
+\[ U \sim Unif(0,1) \] 
+
+into the continuous random variable 
+
+\[ V = g(U) \] 
+
+is the inverse of the CDF of $V$; that is, $g$ is $V$'s quantile function. 
+
+\[ V = g(U) \iff g(p) = F_V^{-1}(p) = Q_V(p), \,\, 0 \leq p \leq 1. \]
+
+
+}
+
+
+\frame{ \frametitle{Transforming $Unif(0,1)$ into $Exp(\lambda)$}
+
+\begin{ex}
+What function $g$ turns $U \sim Unif(0,1)$ into $V \sim Exp(\lambda)$?
+\begin{align*}
+F_V(x) & = (1 - e^{-\lambda x}) 1_{(0,\infty)}(x) 
+\implies g(p) = Q_V(p) = -\frac{\ln\left(1-p\right)}{\lambda}.
+\end{align*}
+\end{ex}
+
+Thus, $U \sim Unif(0,1) \implies V = -\frac{\ln\left(1-U\right)}{\lambda} \sim Exp(\lambda)$. 
+
+\vspace{5mm}
+
+\textbf{Check}: If $0 < x < \infty$, 
+\begin{align*} 
+F_V(x) = P(V \leq x) & = P\left( -\frac{\ln\left(1-U\right)}{\lambda} \leq x \right) = P\left( \ln\left(1-U\right) \geq -\lambda x \right) \\
+ & = P\left( 1-U \geq e^{-\lambda x} \right) = P\left( U \leq 1 - e^{-\lambda x} \right) \\
+ & = 1 - e^{-\lambda x}. \,\, \checkmark
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Transforming $Unif(0,1)$ into a Discrete RV}
+
+We can also turn $U \sim Unif(0,1)$ into a discrete RV.\footnote{This method can be extended to $X(\Omega)$ with a countable number of values, but we will only show a finite example here.} 
+
+\vspace{5mm}
+
+If $X(\Omega) = \{a_1, a_2, ..., a_n\}$ for a discrete RV $X$, we can use $U$ to model $X$ by creating the PMF
+\[ X = \sum_{i=1}^n a_i 1_{A_i}(\omega), \,\, \]
+where $\{A_1, A_2, ..., A_n\}$ is a partition of $[0,1]$ into subintervals such that the length of $A_i$ is $P(X = a_i)$. 
+
+\vspace{5mm}
+
+We will order the $a_i$ so that $a_i < a_{i+1}$. 
+
+}
+
+
+\frame{ \frametitle{Transforming $Unif(0,1)$ into a Discrete RV}
+
+\begin{ex}
+Let $X$ be the discrete RV with PMF 
+\[ p_X(a) = \left\{ 
+\begin{array}{ll} 
+0.4 & \text{ if } a = 4 \\
+0.25 & a = 12 \\
+0.15 & a = 25 \\
+0.2 & a = 60. 
+\end{array} \right. \]
+\end{ex} 
+
+$U$ can be used to model $X$ via the function 
+\[ X = 4 \cdot 1_{[0,0.4)}(U) + 12 \cdot 1_{[0.4,0.65)}(U) + 25 \cdot 1_{[0.65,0.8)}(U) + 60 \cdot 1_{[0.8,1)}(U). \]
+
+This is the quantile of $X$! We do have $X = g(U) = Q_X(U)$. 
+
+}
+
+
+\frame{ \frametitle{Properties of Normal Random Variables}
+
+\begin{itemize}
+\item \textbf{change of variable}: If $X \sim N(\mu, \sigma^2)$, and $a, b \in \R$, then $aX + b \sim N(a\mu + b, a^2 \sigma^2)$. 
+\item The MGF of $X \sim N(\mu, \sigma^2)$ is $m_X(t) = e^{\mu t + \frac{\sigma^2 t^2}{2}}$. 
+\item The MGF of $Z \sim N(0,1)$ is $m_Z(t) = e^{\frac{t^2}{2}}$. 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of Normal Random Variables: Chi Square}
+
+If $g(x) = x^2$, and $Z \sim N(0,1)$ is a standard normal, then $g(Z) = Z^2$ is called a \textbf{chi square} random variable with one degree of freedom.
+
+\vspace{5mm}
+
+It is denoted $\chi^2(1)$, and its PDF is 
+\[ f_{\chi^2(1)}(x) = \frac{1}{\sqrt{2\pi x}} e^{-x/2} 1_{(0,\infty)}(x), \]
+and, in general, a \textbf{chi square} random variable with $n$ degrees of freedom, denoted $\chi^2(n)$, has mean $n$, variance $2n$, and PDF 
+\[ f_{\chi^2(n)}(x) = \frac{x^{\frac{n}{2} - 1}}{2^{\frac{n}{2}} \Gamma(\frac{n}{2})} e^{-x/2} 1_{(0,\infty)}(x). \]
+
+}
+
+
+\end{document}

@@ -1,0 +1,398 @@
+\documentclass{beamer}
+
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Sums and symmetry of random variables]{Introduction to Probability \\ Sums and symmetry of random variables}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Sums of RVs}
+
+If $X_1$, $X_2$, ..., $X_n$ are $n$ random variables, then their sum
+\[ \sum_{j=1}^n X_j = X_1 + X_2 + \cdots + X_n \]
+is also a random variable. 
+
+} 
+
+
+\frame{ \frametitle{Sums of RVs}
+
+These kinds of sums are easy to deal with if $X_1$, $X_2$, ..., $X_n$ are 
+
+\begin{center}
+\textbf{independent and identically distributed (IID)}:
+\end{center}
+
+\begin{itemize}
+\item independent: $X_i \perp X_j$ for every $i \neq j$
+
+\vspace{3mm}
+
+\item identically distributed: $X_i \sim X_j$ for every $i \neq j$, \\i.e. they have the same distribution
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{Expectation of sums of RVs}
+
+The expected value of a sum of random variables can be calculated term-by-term.
+
+\[ E\left( \sum_{j=1}^n X_j \right) = \sum_{j=1}^n E\left( X_j \right). \]
+
+}
+
+
+
+\frame{ \frametitle{Example: Bin is sum of Bern}
+
+A $Bin(n,p)$ RV is the sum of $n$ independent $Bern(p)$: 
+
+\vspace{3mm}
+
+if $X_1, X_2, ..., X_n \sim Bern(p)$, all independent, then 
+
+\begin{align*} 
+E(X_1 + X_2 + ... + X_n) & = E(X_1) + E(X_2) + ... + E(X_n) \\
+ & = p + p + ... + p = np.
+\end{align*}
+
+} 
+
+
+\frame{ \frametitle{Example: NegBin is sum of Geom}
+
+A NB(n,p) RV is the sum of $n$ independent $Geom(p)$: 
+
+\vspace{3mm}
+
+if $Y_1, Y_2, ..., Y_n \sim Geom(p)$, all independent, then 
+
+\begin{align*} 
+E(Y_1 + Y_2 + ... + Y_n) & = E(Y_1) + E(Y_2) + ... + E(Y_n) \\
+ & = \frac{1}{p} + \frac{1}{p} + ... + \frac{1}{p} = \frac{n}{p}.
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Distribution of a sum is a convolution}
+
+The distribution of a sum of random variables is determined by the \textbf{convolution} of their joint PMF (or joint PDF).
+
+\vspace{5mm}
+
+If $X_1$ and $X_2$ are discrete random variables, then the PMF of the sum $Y = X_1 + X_2$ is 
+\[ p_Y(y) = P(Y = y) = P(X_1 + X_2 = y) = \sum_{n = -\infty}^{\infty} p_{(X_1, X_2)}(n, y-n). \]
+
+}
+
+
+\frame{ \frametitle{Convolution examples: uniform}
+
+If $X_1$ and $X_2$ are the values on independent die rolls, what is the probability of their sum being 9?
+
+\vspace{3mm}
+
+Since $X_1 \perp X_2$, %and each only take six values with positive probability, 
+the convolution is easy to calculate. 
+\begin{align*}
+P(X_1 + X_2 = 9) & = \sum_{n = -\infty}^{\infty} p_{(X_1, X_2)}(n, 9-n) \\
+ & = \sum_{n = 3}^{6} p_{(X_1, X_2)}(n, 9-n) \\
+  & = \sum_{n = 3}^{6} p_{X_1}(n) p_{X_2}(9-n) = \sum_{n = 3}^{6} \frac{1}{36} = \frac{4}{36}.
+\end{align*}
+This kind of RV (discrete or continuous) is called a \textbf{triangular} RV; it is \emph{not} uniform.
+}
+
+
+
+\frame{ \frametitle{Convolution examples: binomial}
+
+Consider $X_1 \sim Bin(n,p)$ and $X_2 \sim Bin(m,p)$, with $X_1 \perp X_2$. 
+
+\vspace{5mm}
+
+Then, rearranging terms and recalling the combinatorial identity\footnote{and convention ${a \choose j} = 0$ if $j \not \in \{0, ..., a\}$}
+
+\vspace{3mm}
+
+\[ \sum_{j = 0}^{r} {a \choose j}{b \choose r-j} = {a+b \choose r}, \]
+
+\vspace{3mm}
+
+the PMF of their sum is, for $k = 0, 1, 2, ..., n+m$, 
+
+\[ X_1 + X_2 \sim Bin(n+m, p). \] 
+
+}
+
+\frame{ \frametitle{Convolution examples: binomial}
+
+\pf 
+\begin{align*}
+P(X_1 + X_2 = k) & = \sum_{j = 0}^{n+m} p_{X_1}(j) p_{X_2}(k-j) \\
+ & = \sum_{j = 0}^{n+m} {n \choose j} p^j (1-p)^{n-j} {m \choose k-j} p^{k-j} (1-p)^{m-(k-j)} \\
+ & = \sum_{j = 0}^{n+m} {n \choose j} {m \choose k-j} p^k (1-p)^{n+m-k} \\
+ & = {n+m \choose k} p^k (1-p)^{n+m-k}. \,\,\, \blacksquare
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Convolution examples: Poisson}
+
+Consider $X_1 \sim Poisson(\lambda)$ and $X_2 \sim Poisson(\mu)$, with $X_1 \perp X_2$. 
+
+\vspace{3mm}
+
+Then, by the binomial theorem, $X_1 + X_2 \sim Poisson(\lambda+\mu)$.
+
+\vspace{3mm}
+
+\pf
+\begin{align*}
+P(X_1 + X_2 = k) & = \sum_{j = 0}^{k} p_{X_1}(j) p_{X_2}(k-j) \\
+ & = \sum_{j = 0}^{k} e^{-\lambda} \frac{\lambda^j}{j!} e^{-\mu}\frac{\mu^{k-j}}{(k-j)!} \\
+ & = e^{-(\lambda+\mu)} \frac{1}{k!} \sum_{j = 0}^{k}{k \choose j} \lambda^j \mu^{k-j} = e^{-(\lambda+\mu)} \frac{(\lambda + \mu)^k}{k!}. \,\, \blacksquare
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Convolution examples: geometric}
+
+Consider $X_1, X_2 \sim Geom(p)$ with $X_1 \perp X_2$. 
+
+\vspace{3mm}
+
+Then $X_1 + X_2 \sim NB(2,p)$, a negative binomial RV.
+
+\vspace{3mm}
+
+\pf
+\begin{align*}
+P(X_1 + X_2 = k) & = \sum_{j = 0}^{k} p_{X_1}(j) p_{X_2}(k-j) \\
+ & = \sum_{j = 1}^{k-1} (1-p)^{j-1} p (1-p)^{k-j-1} p \\
+ & = p^2 \sum_{j = 1}^{k-1} (1-p)^{k-2} = (k-1) (1-p)^{k-2} p^2. \,\, \blacksquare
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Convolution for continuous RVs}
+
+The PDF of the sum $X_1 + X_2$ of two continuous RVs $X_1$ and $X_2$ is calculated similarly, with the convolution of the joint PDF: 
+
+\[ f_{X_1 + X_2}(z) = \int_{-\infty}^{\infty} f_{(X_1, X_2)}(x, z-x) dx. \]
+
+\vspace{3mm}
+
+If $X_1 \perp X_2$, then their joint PDF factors, and this simplifies to 
+
+\[ f_{X_1 + X_2}(z) = \int_{-\infty}^{\infty} f_{X_1}(x) f_{X_2}(z-x) dx. \]
+
+}
+
+
+\frame{ \frametitle{Convolution examples: normal}
+
+Consider $X_1 \sim N(\mu, \sigma^2)$ and $X_2 \sim N(\nu, \tau^2)$, with $X_1 \perp X_2$. 
+
+\vspace{3mm}
+
+Then $X_1 + X_2 \sim N(\mu + \nu,\sigma^2 + \tau^2)$: 
+\begin{align*}
+f_{(X_1,X_2)}(x,y) & = f_{X_1}(x) f_{X_2}(y) = \frac{1}{2\pi \sigma \tau} e^{-\frac{(x-\mu)^2 + (y-\nu)^2}{2\tau^2}} \\
+\implies f_{X_1 + X_2}(z) & = \frac{1}{2\pi \sigma \tau} \int_{-\infty}^{\infty} e^{-\frac{(x-\mu)^2}{2\sigma^2} - \frac{((z-x)-\nu)^2}{2\tau^2}} dx \\
+ & \\
+ & = \text{ (lots of algebra: \emph{completing the square}} \\
+ & \,\,\,\,\,\,\,\,\,\,\,\, \text{ and some calculus: \emph{Gaussian integral})} \\
+ & \\
+ & = \frac{1}{\sqrt{2\pi (\sigma^2 + \tau^2)}} e^{-\frac{(z-(\mu + \nu))^2}{2(\sigma^2 + \tau^2)}}. \end{align*}
+
+}
+
+
+\frame{ \frametitle{Convolution examples: exponential}
+
+Consider $X_1, X_2 \sim Exp(\lambda)$ with $X_1 \perp X_2$. 
+
+\vspace{3mm}
+
+Then $X_1 + X_2 \sim Gamma(2,\lambda)$. 
+
+\vspace{3mm}
+
+\pf
+\begin{align*}
+f_{(X_1,X_2)}(x,y) & = f_{X_1}(x) f_{X_2}(y) = \lambda^2 e^{-\lambda(x+y)} 1_{(0,\infty)}(x) 1_{(0,\infty)}(y) \\
+ & \\
+\implies f_{X_1 + X_2}(z) & = \lambda^2 \int_{0}^{z} e^{-\lambda(x+(z-x))} dx \\
+ & = \lambda^2 e^{-\lambda z} \int_{0}^{z} dx =  \lambda^2 z e^{-\lambda z} = \frac{\lambda^2}{\Gamma(2)} z^{2-1} e^{-\lambda}. \,\, \blacksquare
+ \end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Exchangeable random variables}
+
+A sequence of $n$ random variables ($X_1$, $X_2$, ..., $X_n$) are called \textbf{exchangeable} if, for any permutation of their indices 
+\[ \sigma:\{1,2,...,n\} \to \{1, 2, ..., n\}, \] 
+the tuple ($X_{\sigma(1)}$, $X_{\sigma(2)}$, ..., $X_{\sigma(n)}$) has the same joint PMF or PDF: 
+\[ f_{(X_1, X_2, ..., X_n)}(x_1, x_2, ..., x_n) = f_{(X_{\sigma(1)}, X_{\sigma(2)}, ..., X_{\sigma(n)})}(x_1, x_2, ..., x_n). \]
+
+}
+
+
+\frame{ \frametitle{Exchangeable random variables}
+
+For example, if $X_1$, $X_2$, $X_3$, $X_4$ are exchangeable,  
+
+\vspace{3mm}
+
+then the joint PDF $f_{(X_1, X_2, X_3, X_4)}(x_1, x_2, x_3, x_4)$ is the same as: 
+\begin{itemize}
+\item $f_{(X_3, X_1, X_4, X_2)}(x_1, x_2, x_3, x_4)$
+\item $f_{(X_4, X_2, X_3, X_1)}(x_1, x_2, x_3, x_4)$
+\item $f_{(X_2, X_3, X_1, X_4)}(x_1, x_2, x_3, x_4)$
+\item any of the other 20 joint PDF permutations.
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{IIDs are exchangeable; independent only is not enough}
+
+It should be clear that, if $X_1$, $X_2$, ..., $X_n$ are IID, then they are exchangeable, since their joint PDF factors, then the factored terms can be rearranged in any order you like.
+
+\vspace{5mm}
+
+\begin{ex}
+If $X_1$, $X_2$, $X_3 \sim Exp(1)$ are IID, then 
+\begin{align*}
+f_{X_1, X_2, X_3}(x_1, x_2, x_3) & = \lambda e^{-\lambda (x_1+x_2+x_3)} = f_{X_2, X_3, X_1}(x_1, x_2, x_3).
+\end{align*}
+\end{ex}
+
+}
+
+\frame{ \frametitle{IIDs are exchangeable; independent only is not enough}
+
+However, independence alone is not enough for exchangeability.
+
+\vspace{5mm}
+
+\begin{ex}
+If $X_1$, $X_2 \sim Exp(1)$ and $X_3 \sim Unif(0,4)$ are independent, then 
+\begin{align*}
+f_{X_1, X_2, X_3}(x_1, x_2, x_3) & = \lambda e^{-\lambda x_1} \cdot \lambda e^{-\lambda x_2} \cdot 1_{(0,4)}(x_3),
+\end{align*}
+but 
+\begin{align*}
+f_{X_2, X_3, X_1}(x_1, x_2, x_3) & = \lambda e^{-\lambda x_1} \cdot 1_{(0,4)}(x_2) \cdot \lambda e^{-\lambda x_3}.
+\end{align*}
+
+\vspace{5mm}
+
+Hence, $X_1$, $X_2$, and $X_3$ are not exchangeable.
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Sampling with replacement is IID}
+
+Multiple rolls of a die, flips of a coin, or draw of a card \emph{with replacement} are all examples of IID sequences. 
+
+\vspace{5mm}
+
+For example, let $X_i$ be the value of the $i$th die roll in a sequence. 
+
+\vspace{5mm}
+
+What is the probability that the 7th roll is a 4?
+
+\[ P(X_7 = 4) = \,\, ? \]
+
+\vspace{5mm}
+
+IID sequences are exchangeable sequences.
+Hence, with no other information, the 7th roll $\sim$ the 1st roll.
+
+\[ P(X_7 = 4) = P(X_1 = 4) = \frac{1}{6}. \]
+
+}
+
+\frame{ \frametitle{Sampling without replacement: identical, not independent}
+
+Draw twelve cards from a deck, and let $X_i$ be the rank of card $i$. 
+
+\vspace{5mm}
+
+Lay them on a table in order, but do not turn them over. 
+
+\vspace{5mm}
+
+What is the probability that the eighth card on the table is a King?
+
+\vspace{5mm}
+
+\[ P(X_8 \text{ is a } K) = \,\, ? \]
+
+}
+
+\frame{ \frametitle{Sampling without replacement: identical, not independent}
+
+With no evidence, each card's rank is identically distributed, and so exchangeable: 
+\[ P(X_8 \text{ is a } K) = P(X_1 \text{ is a } K) = \frac{4}{52}. \]
+
+With evidence, conditional probability changes. 
+
+\vspace{5mm}
+
+Turning over the first card, we see the $X_i$ are not independent. 
+\begin{align*}
+P(X_8 \text{ is a } K \, | \, X_1 \text{ is a } K) & = \frac{3}{51} \neq P(X_8 \text{ is a } K) \\
+P(X_8 \text{ is a } K \, | \, X_1 \text{ is not a } K) & = \frac{4}{51} \neq P(X_8 \text{ is a } K)
+\end{align*}
+
+
+}
+
+
+\frame{ \frametitle{The same function of exchangeables are exchangeable }
+
+In general:
+
+\vspace{5mm}
+
+\begin{thm}
+If 
+\[ X_1, X_2, ..., X_n \] 
+are exchangeable random variables, and 
+\[ g: \R \to \R \] 
+is well defined, then 
+\[ g(X_1), g(X_2), ..., g(X_n) \] 
+are also exchangeable.
+\end{thm}
+
+}
+
+\end{document}

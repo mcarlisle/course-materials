@@ -1,0 +1,964 @@
+\documentclass{beamer}
+
+%\usepackage{beamerthemesidebar, fancybox}
+\usepackage{beamerthemesplit,fancybox}
+%\usepackage[pdftex]{color,graphicx}
+\usepackage{graphicx,pgfarrows,pgfnodes}
+%\usepackage{pgfarrows,pgfnodes}
+\usepackage{verbatim} % for block comments, so I can comment out entire slides easily
+
+\usepackage{mjclectureslides}
+
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Conditional probability and independence]{Introduction to Probability \\ Conditional probability and independence}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Conditional probability}
+
+The \textbf{conditional probability} of the event $E$, given the event $F$, is defined, if $P(F) > 0$, as 
+\[ P(E \, | \, F) = \frac{P(EF)}{P(F)}. \]
+
+}
+
+
+\frame{ \frametitle{Conditional probability}
+
+The interpretation of this: if you are ``given'' the information that the event $F$ has occured, then your probability structure changes to shrink the sample space down to only the outcomes in $F$. 
+
+\vspace{5mm}
+
+For uniform probabilities, this is clear in the calculation: 
+
+\vspace{5mm}
+
+\[ P(E \, | \, F) = \frac{P(EF)}{P(F)} = \frac{ \frac{|EF|}{|\Omega|} }{ \frac{|F|}{|\Omega|} } = \frac{|EF|}{|F|}. \]
+
+\vspace{5mm}
+
+(For non-uniform probabilities, the definition still holds, but this counting argument doesn't work.)
+
+}
+
+
+\frame{ \frametitle{Conditional probability is a probability!}
+
+\[ P(E \, | \, F) = \frac{P(EF)}{P(F)} \]
+
+\vspace{5mm}
+
+If we define a new function $Q_F: 2^{\Omega} \to \mathbb{R}$ by $Q_F(E) = P(E \, | \, F)$, then $Q_F$ is also a probability measure. 
+
+\vspace{5mm}
+
+We can verify this by checking the axioms of probability.
+
+}
+
+
+\frame{ \frametitle{Conditional probability is a probability!}
+
+\begin{enumerate}
+\item $\forall E \in 2^\Omega$, $0 \leq Q_F(E) = \frac{P(EF)}{P(F)} \leq 1$ \\
+since $P(EF) \leq P(F)$ by monotonicity. $\checkmark$ \\
+\item \textbf{(normalization)} $Q_F(\Omega) = \frac{P(\Omega F)}{P(F)} = \frac{P(F)}{P(F)} = 1$ $\checkmark$ \\
+\item \textbf{(countable additivity)} If $E_1$, $E_2$, ... are pairwise disjoint events, then $E_1 F$, $E_2 F$, ... are also pairwise disjoint. Hence, 
+\[ Q_F\left(\bigcup_{n=1}^{\infty} E_n \right) = \frac{P\left(\bigcup_{n=1}^{\infty} E_n F \right)}{P(F)} = \sum_{n=1}^{\infty} \frac{P\left(E_n F \right)}{P(F)}= \sum_{n=1}^{\infty} Q_F(E_n). \checkmark \]
+\end{enumerate}
+
+}
+
+
+
+\frame{ \frametitle{Example: coin flips}
+
+\begin{ex}
+I flip a fair coin twice.
+\begin{enumerate}
+\item What is the probability it flips heads twice?
+\item What is the probability it flips heads twice, \\
+\emph{given that at least one flip is heads}?
+\end{enumerate}
+
+\vspace{5mm}
+
+Let the experiment be ``flip a fair coin twice''. 
+
+\vspace{5mm}
+
+The sample space 
+\[ \Omega = \{ HH, HT, TH, TT \}. \]  
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Example: coin flips}
+
+1. \,\, What is the (classical, uniform) probability of flipping heads twice? Let $E = \{HH\}$. 
+
+\[ P(E) = \frac{1}{4}. \]
+
+2. \,\, What is the probability of flipping HH, given that at least one flip is heads? 
+
+\vspace{5mm}
+
+The event 
+\[ F = \{ \text{``at least one flip is heads''} \} = \{ HT, TH, HH \} \]
+removes the possibility of TT. Thus, $EF = \{HH\}$, and so 
+\[ P( E \, | \, F) = \frac{ P(EF) }{ P(F) } = \frac{ 1/4 }{ 3/4 } = \frac{1}{3}. \]
+Partial information about the flip conditioned our probability.
+
+}
+
+
+
+\frame{ \frametitle{Example: coin flips}
+
+\begin{ex}
+What is the probability of flipping heads twice, \emph{given that at least one flip is tails}?
+\end{ex}
+
+\vspace{5mm}
+
+Intuitively, you should know the probability is zero, since you can't have two heads and a tail when you only have two flips. 
+
+\vspace{5mm}
+
+The theory bears this out. 
+
+}
+
+
+
+\frame{ \frametitle{Example: coin flips}
+
+Let $E = \{HH\}$ and $G = \{$at least one tail$\} = \{TH, HT, TT\}$. 
+
+\vspace{5mm}
+
+$EG = \{$two heads and at least one tail in two flips$\} = \emptyset$.
+
+\vspace{5mm}
+
+Thus, $P(EG) = 0$, and therefore $P(E \, | \, G) = \frac{P(EG)}{P(G)} = 0$.
+
+
+}
+
+
+\frame{ \frametitle{Venn diagrams and conditional probability}
+
+A Venn diagram can immediately get across the notion of conditional probability: instead of considering the entire box (the ``universe'' sample space $\Omega$), we effectively shrink the sample space down to just the evidence event $F$.
+
+\vspace{5mm}
+
+
+We'll see a couple examples using the magazine survey example from last time.
+
+}
+
+
+
+\frame{ \frametitle{Examples}
+
+\begin{ex}
+In an old survey of 75 college students on their reading of three magazines, it was found that: 
+\begin{itemize}
+\item 23 read Time (and possibly more) 
+\item 18 read Newsweek (and possibly more) 
+\item 14 read US News (and possibly more) 
+\item 10 read Time and Newsweek (and possibly more) 
+\item 9 read Time and US News (and possibly more) 
+\item 8 read Newsweek and US News (and possibly more) 
+\item 5 read all three.
+\end{itemize}
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Examples}
+
+\begin{enumerate}
+\item Given that a random student reads Newsweek, what is the probability that student also reads Time?
+\item What is the probability that a student reads US News, given that the student reads only one magazine? 
+\item Given that a student reads exactly two magazines, what is the probability the one not read is Time? 
+\item Given that a random student reads Time, what is the probability that student also reads Newsweek?
+\end{enumerate}
+
+\vspace{5mm}
+
+Notice that questions 1 and 4 ask about the same events, but the conditioning is in the opposite order. We'll address this issue shortly.
+
+}
+
+
+\frame{ \frametitle{Examples}
+
+\begin{enumerate}
+\item Given that a random student reads Newsweek, what is the probability that student also reads Time? Answer: $\frac{10}{18}$
+\item What is the probability that a student reads US News, given that the student reads only one magazine? Answer: $\frac{2}{15}$
+\item Given that a student reads exactly two magazines, what is the probability the one not read is Time? Answer: $\frac{3}{12}$
+\item Given that a random student reads Time, what is the probability that student also reads Newsweek? Answer: $\frac{10}{23}$
+\end{enumerate}
+
+\vspace{5mm}
+
+Notice that questions 1 and 4 ask about the same events, but the conditioning is in the opposite order. We'll address this issue shortly.
+
+}
+
+
+
+\frame{ \frametitle{$P(EF) = P(F) P(E \, | \, F)$}
+
+If we know a conditional probability and its evidence probability, we can use these to find the intersection probability.
+
+\[ P(E \, | \, F) = \frac{P(EF)}{P(F)} \implies P(EF) = P(F) P(E \, | \, F). \]
+
+\vspace{5mm}
+
+
+Also note that, if $P(E \, | \, F) = P(E)$, then we say $E$ and $F$ are \textbf{independent events}. 
+
+\vspace{5mm}
+
+We'll come back to independence later on; for now, think of it as ``the evidence doesn't tell us anything new''.
+
+\vspace{5mm}
+
+In other words, the ``evidence'' doesn't change our ``probability''.
+
+}
+
+
+\frame{ \frametitle{Example: $P(EF) = P(F) P(E \, | \, F)$}
+
+Flip a fair coin three times. What is the probability the first flip is H, given that the third flip is T?
+
+\vspace{5mm}
+
+Intuitively: The first and third flips have nothing to do with each other! They are independent, identical trials, and so should have the same probability structure!
+
+\vspace{5mm}
+%\onslide<3->
+
+Formally: Let $S$ be the sample space of all 3-flip sequences, \\
+$A = \{$ H on flip 1 $\}$, and $B = \{$ T on flip 3 $\}$. Then 
+\begin{align*}
+S & = \{ HHH, HHT, HTH, HTT, THH, THT, TTH, TTT \},\\
+A & = \{HHH, HHT, HTH, HTT\}, \\
+B & = \{HHT, HTT, THT, TTT\}; \,\, AB = \{ HHT, HTT \}. \\
+\therefore P(A \, | \, B) & = \frac{P(AB)}{P(B)} = \frac{2/8}{4/8} = \frac{1}{2} = P(A). 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{$P(EF) = P(F) P(E \, | \, F)$ multiplication rule}
+
+In general, if $E_1, E_2, ..., E_n$ are $n$ events, with nonempty intersections for any pairing, we have the general rule 
+\[ P(E_1 E_2 \cdots E_n) = P(E_1) \cdot P(E_2 \, | E_1) \cdot P(E_3 \, | E_1 E_2) \cdots P(E_n \, | \, E_1 E_2 \cdots E_{n-1}). \]
+
+\vspace{5mm}
+
+To see this for $n=3$:
+\begin{align*}
+P(E_1) \cdot P(E_2 \, | E_1) \cdot P(E_3 \, | E_1 E_2) & = P(E_1) \cdot \frac{P(E_1 E_2)}{P(E_1)} \cdot \frac{P(E_1 E_2 E_3)}{P(E_1 E_2)} \\
+ & = P(E_1 E_2 E_3). 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{$P(E^C \, | \, F) = 1 - P(E \, | \, F)$}
+
+Recall that $Q_F(E) = P(E \, | \, F)$ is a probability measure, different from $P$. However, all the regular probability properties hold for $Q_F$. Hence, complements in $S$ give the same probability property: 
+\[ Q_F(E) + Q_F(E^C) = 1 \implies Q_F(E^C) = 1 - Q_F(E). \]
+
+\vspace{5mm}
+
+
+\begin{ex}
+Roll 2 dice. What is the probability that the roll does \emph{not} sum to 2, given that the sum is at most 4?
+\end{ex}
+
+Let $E = \{$sum is 2$\}$, $F = \{$sum is $\leq 4\} = \{$sum is 2, 3, or 4$\}$. 
+
+Then $Q_F(E^C) = 1 - Q_F(E) = 1 - \frac{P(EF)}{P(F)} = 1 - \frac{ \frac{1}{36} }{ \frac{6}{36} } = \frac{5}{6}$. 
+
+}
+
+
+\frame{ \frametitle{Partition of a Sample Space}
+
+%2-case
+Recall that an event and its complement are disjoint, and their union is the whole sample space. That is, 
+\begin{align*} 
+E \cup E^C & = \Omega \\ 
+E \cap E^C & = \emptyset
+\end{align*}
+
+Thus, if we know conditional probabilities but not a full probability, we can decompose a full probability into intersections to  calculate. 
+
+\vspace{5mm}
+
+This is the simplest case of a \textbf{partition} of a sample space. 
+
+}
+
+
+\frame{ \frametitle{Partition of a Sample Space}
+
+A \textbf{partition} of a sample space $\Omega$ is a set of disjoint subsets whose union are all of $\Omega$.
+
+\vspace{5mm}
+
+$\{E_1, E_2, ..., E_n\}$ partitions $\Omega$ if, for any $i \neq j$, $E_i \cap E_j = \emptyset$, and 
+\[ \bigcup_{k=1}^n E_k = \Omega. \]
+
+}
+
+
+\frame{ \frametitle{Law of total probability: general case}
+
+The Law of Total Probability uses a partition to decompose the probability of an event into probabilities of intersections of that event with the pieces of a partition.
+
+\vspace{5mm}
+
+\textbf{Law of Total Probability}: If $F \subseteq \Omega$ is an event, and $\{E_1, E_2, ..., E_n\}$ partitions $\Omega$, then 
+\[ P(F) = \sum_{k=1}^n P(F E_k) = \sum_{k=1}^n P(F \, | \, E_k) P(E_k). \]
+This means you can compute the probability of $F$ based on different ``pieces of evidence''. 
+
+}
+
+
+\frame{ \frametitle{Law of total probability: $n=2$}
+
+In the simplest case, $n=2$, the Law of Total Probability uses the partition $\{E, E^C\}$, and reads 
+
+\vspace{5mm}
+
+\[ P(F) = P(F E) + P(F E^C) = P(F \, | \, E) P(E) + P(F \, | \, E^C) P(E^C). \]
+
+\vspace{5mm}
+
+This simplifies further since $P(E^C) = 1 - P(E)$, although we cannot easily compare $P(F \, | \, E)$ and $P(F \, | \, E^C)$. 
+
+}
+
+
+
+\frame{ \frametitle{Example: Law of total probability: $n=2$}
+
+\begin{ex}
+I will have my umbrella 95\% of the times when it is raining. \\
+I will have my umbrella 10\% of the times when it is not raining. \\
+It rains 25\% of the time.
+
+\vspace{5mm}
+
+What is the probability I have my umbrella with me (no matter what the weather is like)?
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Example: Law of total probability: $n=2$}
+
+Let \\
+$R = $ the event that it is raining, and \\
+$U = $ the event that I have my umbrella. \\
+
+\vspace{5mm}
+
+We know: 
+
+\[ P(U \, | \, R) = 0.95, \,\, P(U \, | \, R^C) = 0.1, \,\, P(R) = 0.25. \]
+
+Then 
+\begin{align*} 
+P(U) & = P(U \, | \, R) P(R) + P(U \, | \, R^C) P(R^C) \\
+ & = 0.95(0.25) + 0.1(0.75) = 0.3125.
+\end{align*}
+
+Under these rules, I have my umbrella 31.25\% of all time.
+
+}
+
+
+
+\frame{ \frametitle{$P(E \, | \, F) \neq P(F \, | \, E)$}
+
+Note that $P(EF)$ shows up in both $P(E \, | \, F)$ and $P(F \, | \, E)$: 
+
+\vspace{5mm}
+
+
+$P(E \, | \, F) = \frac{P(EF)}{P(F)}$ is ``the probability of $E$, given $F$''. 
+
+\vspace{5mm}
+
+$P(F \, | \, E) = \frac{P(EF)}{P(E)}$ is ``the probability of $F$, given $E$''. 
+
+\vspace{5mm}
+
+These are different probabilities!
+
+}
+
+
+\frame{ \frametitle{$P(E \, | \, F) \neq P(F \, | \, E)$}
+
+In fact, there are only two special cases where $P(E \, | \, F) = P(F \, | \, E)$:
+
+\begin{align*}
+P(E \, | \, F) = P(F \, | \, E) & \implies \frac{P(EF)}{P(F)} = \frac{P(EF)}{P(E)} \\
+& \implies P(F) = P(E) \text{ or } P(EF) = 0.
+\end{align*}
+
+\vspace{5mm}
+
+We should understand the difference between these two conditional probabilities, since these special cases are not the general situaiton.
+
+}
+
+
+\frame{ \frametitle{$P(E \, | \, F) \neq P(F \, | \, E)$}
+
+\begin{ex}
+What is the probability that I have a rare disease, \\
+given that a test comes up positive? (A \emph{false positive} is possible.)
+
+\vspace{5mm}
+
+is a very different question from 
+
+\vspace{5mm}
+
+What is the probability that a test comes up positive, \\
+given that I have a rare disease? (A \emph{false negative} is possible.)
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Bayes' formula (theorem, law)}
+
+How do we compare $P(E \, | \, F)$ and $P(F \, | \, E)$ in general?
+
+
+\begin{align*} 
+P(EF) & = P(E \, | \, F) P(F) \\
+P(EF) & = P(F \, | \, E) P(E) \\
+\implies P(E \, | \, F) P(F) & = P(F \, | \, E) P(E)
+\end{align*}
+
+\vspace{5mm}
+
+\textbf{Bayes' Law}: 
+\[ P(E \, | \, F)  = P(F \, | \, E) \cdot \frac{P(E)}{P(F)}. \]
+
+\vspace{5mm}
+
+When does $P(E \, | \, F)  = P(F \, | \, E)$? 
+\[ P(E) = P(F) \text{ or } P(EF) = 0. \] 
+
+}
+
+
+
+\frame{ \frametitle{Example: Coins}
+
+Flip a fair coin three times. As usual in this case, 
+\[ \Omega = \{ HHH, HHT, HTH, HTT, THH, THT, TTH, TTT \}. \]
+
+\begin{enumerate}
+\item What is the probability that you flip at least two H, \\given that you flip at least one T?
+\item What is the probability that you flip at least one T, \\given that you flip at least two H?
+\end{enumerate}
+
+}
+
+
+\frame{ \frametitle{Example: Coins}
+
+Let $E$ = ``at least two H'' and $F$ = ``at least one T''. We'll list: 
+\begin{align*}
+E & = \{ HHH, HHT, HTH, THH \} \\
+F & = \{ HHT, HTH, HTT, THH, THT, TTH, TTT \} \\
+EF & = \{ HHT, HTH, THH \}
+\end{align*}
+
+\begin{enumerate}
+\item $P(E \, | \, F) = \frac{3}{7}$
+\item $P(F \, | \, E) = P(E \, | \, F) \cdot \frac{P(F)}{P(E)} = \frac{3}{7} \cdot \frac{7}{4} = \frac{3}{4}$.
+\end{enumerate}
+
+}
+
+
+
+\frame{ \frametitle{Example: Urns}
+
+An urn contains five green balls, seven yellow balls, and nine orange balls. Draw three without replacement.
+\[ |\Omega| = {5+7+9 \choose 3} = {21 \choose 3}. \]
+
+\begin{enumerate}
+\item What is the probability that you draw a yellow, \\given that you do not draw a green?
+\item What is the probability that you do not draw a green, \\given that you draw a yellow?
+\end{enumerate}
+
+}
+
+
+\frame{ \frametitle{Example: Urns}
+
+Let $E$ = ``draw at least one yellow'' and $F$ = ``do not draw a green''. Then $EF$ = ``at least one yellow, and no green''. 
+\begin{align*}
+|E| & = {21 \choose 3} - {21-7 \choose 3} \\
+ & = \frac{21(20)(19) - 14(13)(12)}{6}; \\ 
+|F| & = {21-5 \choose 3} = \frac{16(15)(14)}{6}; \\
+ |EF| & = {21-5 \choose 3} - {21-7-5 \choose 3} \\
+  & = \frac{16(15)(14) - 9(8)(7)}{6}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Urns}
+
+Then 
+\begin{align*}
+P(E \, | \, F) & = \frac{ 16(15)(14) - 9(8)(7) }{ 16(15)(14) }  = 1 - \frac{9}{60} = \frac{17}{20} = 0.85. \\
+P(F \, | \, E) & = P(E \, | \, F) \cdot \frac{P(F)}{P(E)} \\
+ & = \frac{16(15)(14) - 9(8)(7)}{21(20)(19) - 14(13)(12)} = \frac{34}{69} \approx 0.4928.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Fair vs Fake Coin?}
+
+I have two coins in my pocket: a fair coin and a double-headed coin. I take one out (fairly) at random and flip it. 
+
+\vspace{5mm}
+
+I tell you it came up H. 
+
+\vspace{5mm}
+
+Given this information, what is the probability I flipped the fair coin?
+
+}
+
+
+\frame{ \frametitle{Example: Fair vs Fake Coin?}
+
+Let $F =$ ``fair coin'' and $D =$ ``double-headed coin''. 
+
+\vspace{5mm}
+
+Since I pull one of the two fairly from my pocket, $D = F^C$ and 
+\[ P(F) = P(D) = \frac{1}{2}. \]
+Clearly, if I have the double-headed coin, it will always come up heads. The fair coin is ... fair. 
+\[ P(H \, | \, F) = \frac{1}{2}; \,\, P(H \, | \, D) = 1. \]
+
+}
+
+
+\frame{ \frametitle{Example: Fair vs Fake Coin?}
+
+Hence, by Bayes' Law and the {\color{red}{Law of Total Probability}}, 
+\begin{align*}
+P(F \, | \, H) & = \frac{P(H \, | \, F) P(F)}{{\color{red}{P(H)}}} \\
+ & = \frac{P(H \, | \, F) P(F)}{{\color{red}{P(H \, | \, F) P(F) + P(H \, | \, F^C) P(F^C)}}} \\
+ & = \frac{P(H \, | \, F) P(F)}{P(H \, | \, F) P(F) + P(H \, | \, D) P(D)} \\
+ & = \frac{P(H \, | \, F)}{P(H \, | \, F) + P(H \, | \, D)} \,\,\,\,\,\,\, \left(P(F) = P(D) = \frac{1}{2}\right) \\
+ & = \frac{ \frac{1}{2} }{ \frac{1}{2} + 1 } = \frac{1}{3}. 
+\end{align*}
+Note that $P(F \, | \, H) < \frac{1}{2}$, but $P(F) = \frac{1}{2}$.
+}
+
+
+\frame{ \frametitle{Example: Fair vs Fake Coin?}
+
+I flip the same coin again. H a second time... now, what is the (conditional) probability it is the fair coin? 
+
+
+\begin{align*}
+P(HH \, | \, F) & = \frac{1}{4}; \,\, P(HH \, | \, D) = 1 \\
+P(F \, | \, HH) & = \frac{P(HH \, | \, F) P(F)}{P(HH \, | \, F) P(F) + P(HH \, | \, D) P(D)} \\
+ & = \frac{P(HH \, | \, F)}{P(HH \, | \, F) + P(HH \, | \, D)} \,\,\,\,\,\,\, \left(P(F) = P(D) = \frac{1}{2}\right) \\
+ & = \frac{ \frac{1}{4} }{ \frac{1}{4} + 1 } = \frac{1}{5}. 
+\end{align*}
+
+%\onslide<3->
+$P(F \, | \, HH) < P(F \, | \, H) < P(F)$. What does this mean?
+
+\vspace{5mm}
+Can you generalize this for $n$ flips of H in a row?
+
+}
+
+
+
+\frame{ \frametitle{Example: Test Screening}
+
+A rare disease has \textbf{prevalence}, i.e. ``sick rate'', $s$ in the general population; a randomly selected person from the population has the disease with probability $s$.
+
+\vspace{5mm}
+
+A blood test to screen for the disease has the following statistics: 
+\begin{itemize}
+\item \textbf{true positive} rate \textbf{(sensitivity)} of $p$,
+\item \textbf{true negative} rate \textbf{(specificity)} of $n$,
+\item \textbf{false positive (Type I error)} rate of $1-n$,
+\item \textbf{false negative (Type II error)} rate of $1-p$.
+\end{itemize}
+
+\vspace{5mm}
+
+You are given this test; it comes up positive. Given (only) this information, what is the probability you have the disease?
+
+}
+
+
+\frame{ \frametitle{Example: Test Screening}
+
+Let 
+\begin{itemize}
+\item $S$ = ``you are sick'', 
+\item $H = S^C$ = ``you are healthy'', 
+\item $T^+$ = ``you test positive'', and 
+\item $T^- = T^{+C}$ = ``you test negative''. 
+\end{itemize}
+
+We are given  
+\begin{itemize}
+\item \textbf{prevalence}, i.e. population sick rate, is $P(S) = s$,
+\item \textbf{sensitivity}, i.e. \textbf{true positive} rate of test, is $P(T^+ \, | \, S) = p$,
+\item \textbf{specificity}, i.e. \textbf{true negative} rate of test, is $P(T^- \, | \, H) = n$,
+\end{itemize}
+and calculate 
+\begin{itemize}
+\item \textbf{false positive} rate of test, is $P(T^+ \, | \, H) = 1-n$,
+\item \textbf{false negative} rate of test, is $P(T^- \, | \, S) = 1-p$.
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{Example: Test Screening}
+
+We want to know, given a positive test result, what is the probability you are sick, i.e. $P(S \, | \, T^+)$. 
+
+\vspace{5mm} 
+
+Using Bayes' Law and the Law of Total Probability, this is  
+
+\begin{align*} 
+P(S \, | \, T^+) & = \frac{P(T^+ \, | \, S) P(S)}{P(+)} \\
+ & = \frac{P(T^+ \, | \, S)P(S)}{P(T^+ \, | \, S)P(S) + P(T^+ \, | \, H)P(H)} = \frac{ps}{ps + (1-n)(1-s)},
+\end{align*}
+a very different number than the true positive rate $p$ \\
+(which is what a person typically assumes is the correct probability to use in this situation).
+
+}
+
+
+\frame{ \frametitle{Example: Test Screening}
+
+One example of possible values are: $s = 1\%$ incidence, \\$p = 95\%$ true positive, $n = 99\%$ true negative. Then 
+\[ P(S \, | \, +) = \frac{ps}{ps + (1-n)(1-s)} = \frac{0.95(0.01)}{0.95(0.01)+(0.01)(0.99)} \approx 48.97\%.  \]
+
+\vspace{5mm}
+
+Other applications for this setting include drug tests, criminal profiling, insurance fraud, ....
+
+}
+
+
+\frame{ \frametitle{Independent events}
+
+If we know a conditional probability and its evidence probability, we can use these to find the intersection probability.
+\[ P(E \, | \, F) P(F) = P(EF) = P(F \, | \, E) P(E) \]
+
+\vspace{5mm}
+
+If $P(E \, | \, F) = P(E)$, then we call $E$ and $F$ \textbf{independent events}. \\
+This is, by symmetry, equivalent to $P(F \, | \, E) = P(F)$.
+
+}
+
+
+\frame{ \frametitle{Independent events}
+
+Think of independence as ``the evidence doesn't tell us anything new'', 
+i.e. ``the evidence doesn't change our probability''.
+
+\vspace{5mm}
+
+In general, when not considering conditioning, $E$ and $F$ are called \textbf{independent events} if 
+\[ P(EF) = P(E) \cdot P(F). \]
+
+}
+
+
+\frame{ \frametitle{Pairwise, General Independence}
+
+Two events $E$ and $F$ are \textbf{independent} if $P(EF) = P(E) P(F)$, and \emph{dependent} otherwise.
+
+\vspace{5mm}
+
+In general, $n$ events $E_1$, ..., $E_n$ are called \textbf{pairwise independent} if $P(E_i E_j) = P(E_i) P(E_j)$ for any pair $i \neq j$, $i,j=1,2,...,n$.
+
+}
+
+
+\frame{ \frametitle{Pairwise, General Independence}
+
+For $E_1$, ..., $E_n$ to be considered \textbf{independent} as a full collection of events, they need to satisfy this ``factoring'' property for any possible combination of them: all triples need to be independent:
+\[ P( E_i E_j E_k) = P(E_i) P(E_j) P(E_k) \,\, \forall i, j, k = 1, 2, ..., n, i < j < k, \]
+all sets of four, ..., all the way up to 
+\[ P( E_1 E_2 \cdots E_n ) = P(E_1) P(E_2) \cdots P(E_n). \]
+
+
+
+}
+
+
+\frame{ \frametitle{IID trials}
+
+Certain examples are obvious: any repeated, identical trials are independent. We even put that fact in their name: 
+
+\begin{center}
+\textbf{ independent, identically distributed (iid) random trials. } 
+\end{center}
+
+Any type of compound events that can be counted solely via the \textbf{multiplication principle} are independent. 
+
+\vspace{5mm}
+
+Successive coin flips, die rolls, card draws or ball-in-urn draws \emph{with replacement}, ....
+
+}
+
+
+\frame{ \frametitle{Example: independent events}
+
+\begin{ex}
+Show that, on a roll of two six-sided dice, the first roll coming up 3 and the second 4 are independent events. 
+\end{ex}
+
+\vspace{5mm}
+
+\soln Let the sample space be $\Omega = \{ (i,j) : i,j \in \{1,2,3,4,5,6\} \}$ and the events 
+\[ A = \{ (i,j) \in \Omega: i = 3\}, \,\, B = \{ (i,j) \in \Omega: j = 4\}. \]
+
+}
+
+
+\frame{ \frametitle{Example: independent events}
+
+Then $|\Omega| = 36$, $A \cap B = \{ (3,4) \}$, $|A| = 6$, $|B| = 6$, $|A \cap B| = 1$, \\
+and the probabilities in question are 
+\[ P(A) P(B) = \frac{6}{36} \cdot \frac{6}{36} = \frac{1}{36} = P(A \cap B). \]
+Therefore, $A$ and $B$ are independent.
+
+}
+
+
+\frame{ \frametitle{Examples}
+
+Show that, on a roll of two six-sided dice, the first roll coming up 3 and the \emph{sum} 5 are \emph{not} independent events. 
+
+\vspace{5mm}
+
+\soln Using $\Omega$ and $A$ from before, let 
+\[ C = \{(i,j) \in \Omega: i+j = 5\}. \]
+Then 
+\[ C = \{(1,4), (2,3), (3,2), (4,1) \}, \, A \cap C = \{ (3,2) \}, \]
+
+and $|C| = 4$ and $|A \cap C| = 1$. Hence, 
+
+\[ P(A) P(C) = \frac{6}{36} \cdot \frac{4}{36} = \frac{1}{54} \neq \frac{1}{36} = P(A \cap C). \]
+
+Therefore, $A$ and $C$ are not independent.
+
+}
+
+
+
+\frame{ \frametitle{Examples}
+
+Show that, on a roll of two six-sided dice, the first coming up 3 and the \emph{sum} 3 are \emph{not} independent events. 
+
+\vspace{5mm}
+
+\soln Using $\Omega$ and $A$ from before, let 
+\[ D = \{(i,j) \in \Omega: i+j = 3\} = \{(1,2), (2,1)\}. \]
+Then, clearly,  
+$A \cap D = \emptyset$, but $A$ and $D$ are both nonempty, so without even calculating probabilities, we can see 
+\[ P(A \cap D) = 0 \neq P(A) P(D). \]
+
+Hence, $A$ and $D$ are not independent.
+
+}
+
+
+\frame{ \frametitle{Examples}
+
+Show that, on three coin flips, show that each coming up H is independent of the others. Of course, we start with 
+\[ \Omega = \{f_1 f_2 f_3 : f_i \in \{H, T\}, i=1,2,3\}, \,\, |\Omega| = 8. \]
+
+\soln Let $A_1 = \{Hf_2 f_3\}$, $A_2 = \{f_1 H f_3\}$, $A_3 = \{ f_1 f_2 H \}$. Then 
+\begin{align*} 
+P(A_1) P(A_2) & = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} = P(A_1 \cap A_2) \\
+P(A_1) P(A_3) & = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} = P(A_1 \cap A_3) \\
+P(A_2) P(A_3) & = \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} = P(A_2 \cap A_3)
+\end{align*}
+which shows that the three are pairwise independent. For full, 
+\[ P(A_1) P(A_2) P(A_3) = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8} = P(A_1 \cap A_2 \cap A_3). \]
+
+
+}
+
+
+\frame{ \frametitle{Independence implies independence of complements}
+
+\begin{prop}
+If $E$ and $F$ are independent events, \\
+then so are the pairs $E^C$ and $F$, $E$ and $F^C$, and $E^C$ and $F^C$. 
+\end{prop}
+
+\vspace{5mm}
+
+\pf 
+\begin{align*}
+P(EF) & = \color{blue}{P(E) P(F)} \\
+\color{black}{\implies} P(E^C F) & = P(F) - P(EF) \text{ (by monotonicity) } \\
+ & = P(F) - \color{blue}{P(E) P(F)} \color{black}{\text{ (by independence) } } \\
+ & = P(F) (1 - P(E)) = P(F) P(E^C).
+\end{align*}
+The rest of the proof follows similarly to result in 
+\begin{align*}
+P(EF^C) & = P(E) P(F^C), \\
+P(E^C F^C) & = P(E^C) P(F^C). \,\, \blacksquare
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Independence via conditioning}
+
+You draw two cards face down and are told (given) that at least one card is a 2. Does this evidence affect the event that both cards are diamonds?
+
+\vspace{5mm}
+
+\soln 
+
+Let $D = \{$both cards are $\diamondsuit\}$, $T = \{$at least one card is a 2$\}$. 
+
+\vspace{5mm}
+
+We want to check if $D$ and $T$ are independent, when $T$ was given as evidence. 
+
+}
+
+
+\frame{ \frametitle{Example: Independence via conditioning}
+
+We will do this by the following reasoning: if we can show that $D$ and $T^C$ are independent, then by the previous proposition, $D$ and $T$ are independent as well. 
+
+\vspace{5mm}
+
+If $D$ and $T^C$ are not independent, then neither are $D$ and $T$.
+
+\vspace{5mm}
+
+We'll use $T^C = \{$neither card is a 2$\}$ as evidence in our calculation since it is easier to calculate.
+
+}
+
+
+\frame{ \frametitle{Example: Independence via conditioning}
+
+We know the sample space is of size 
+\[ |\Omega| = {52 \choose 2} = \frac{52(51)}{2} = 1326 \] 
+since we are drawing two cards. 
+\[ |D| = {13 \choose 2} = \frac{13(12)}{2} = 78, \,\, |T^C| = {48 \choose 2} = \frac{48(47)}{2} = 1128 \]
+\[ |D \cap T^C| = {12 \choose 2} = \frac{12(11)}{2} = 66. \]
+We check if $P(D \, | \, T^C) =$ or $\neq P(D)$: 
+\[ P(D \, | \, T^C) = \frac{P(D \cap T^C)}{P(T^C)} = \frac{66}{1128} \neq \frac{78}{1326} = P(D). \]
+Hence, $D$ and $T^C$ are not independent, and therefore $D$ and $T$ are not independent.
+
+}
+
+
+
+\frame{ \frametitle{Bernoulli random variables}
+
+$X$ is called a \textbf{Bernoulli random variable} \emph{with parameter } $p$ (written Bern($p$)) if its PMF is 
+\[ p_X(1) = p, \, p_X(0) = 1-p. \]
+This is the RV of a (biased) coin that flips 1 on H with probability $p$ and 0 on T.
+
+%
+\vspace{2mm}
+
+\begin{ex}
+``Roll a 5 on a die'' has success probability $\frac{1}{6}$, and so failure probability $\frac{5}{6}$. Thus, for $X \sim$ Bern($\frac{1}{6}$), the probability you roll a 5 is 
+\[ p_X(1) = \frac{1}{6}. \]
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Binomial random variables}
+
+$X$ is called a \textbf{binomial random variable} \emph{with parameters } $n$, $p$ (written Bin($n$, $p$)) if its PMF is 
+\[ p_X(k) = {n \choose k} p^k (1-p)^{n-k}, \, k=0,1,2,...,n. \]
+This is the RV that adds up $n$ Bernoulli RVs above: if $X_1, X_2$, ..., $X_n$ are IID Bern($p$), then $X = \sum_{i=1}^n X_i \sim Bin(n,p)$. 
+
+%
+\vspace{2mm}
+
+\begin{ex}
+``Roll a 5 on a die'' has success probability $\frac{1}{6}$, and so failure probability $\frac{5}{6}$. Thus, for $X \sim$ Bin(7, $\frac{1}{6}$), the probability you roll a 5 exactly three times out of seven is 
+\[ p_X(3) = {7 \choose 3} \left(\frac{1}{6}\right)^3 \left(\frac{5}{6}\right)^4. \]
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Geometric random variables}
+
+$X$ is called a \textbf{geometric random variable} \emph{with parameter } $p$ (written Geom($p$)) if its PMF is 
+\[ p_X(k) = p(1-p)^{k-1}, \, k = 1, 2, ....\]
+This RV represents the number of trials up to a ``success'' in a run of repeated IID experiments with ``success'' probability $p$. That is, $k-1$ ``failures'', and then ``success'' on trial $k$. 
+
+%
+\vspace{2mm}
+
+\begin{ex}
+``Roll a 5 on a die'' has success probability $\frac{1}{6}$, and so failure probability $\frac{5}{6}$. Thus, for $X \sim$ Geom($\frac{1}{6}$), the probability it takes exactly 4 rolls to get the first 5 is 
+\[ p_X(4) = \left(\frac{1}{6}\right) \left(\frac{5}{6}\right)^3. \]
+\end{ex}
+
+}
+
+
+
+
+\end{document}

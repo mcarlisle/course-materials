@@ -1,0 +1,118 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{mjclectureslides}[2016/03/12 for Michael Carlisle's lecture slides]
+
+
+%\usepackage{beamerthemesidebar, fancybox}
+\usepackage{beamerthemesplit,fancybox}
+%\usepackage[pdftex]{color,graphicx}
+\usepackage{graphicx,pgfarrows,pgfnodes}
+%\usepackage{pgfarrows,pgfnodes}
+\usepackage{verbatim} % for block comments, so I can comment out entire slides easily
+
+\usepackage{mwe}
+\usepackage{wrapfig} % both of these for wrapping text around figures
+
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{resize}[a4paper,border shrink=5mm,landscape]
+
+\beamertemplatenavigationsymbolsempty
+
+\newcommand{\pf}{\textbf{Proof  }}
+\newcommand{\soln}{\textbf{Solution  }}
+\newcommand{\contra}{\rightarrow \leftarrow}
+
+\newtheorem{notn}{Notation}[section]
+\newtheorem{notenote}{Note}[section]
+
+\def\modd{\text{mod }}
+
+\newtheorem{thm}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem*{ex}{Example}
+\newtheorem{cor}{Corollary}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{claim}{Claim}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conjec}[thm]{Conjecture}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem*{ack}{Acknowledgements}
+\def\Q{\mathbb{Q}}
+\def\F{\mathbb{F}}
+\def\Gal{{\rm Gal}}
+\newcommand{\legen}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
+\def\ord{{\rm ord}}
+\def\Tr{{\rm Tr}}
+\def\d{d}
+\def\const{\text{const}}
+\newcommand{\leg}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
+\newcommand{\bfrac}[2]{\genfrac{}{}{}{0}{#1}{#2}}
+\newcommand{\sm}[4]{\left(\begin{smallmatrix}#1&#2\\ #3&#4 \end{smallmatrix} \right)}
+\newcommand{\mfG}{\mathfrak{G}}
+\newcommand{\mfF}{\mathfrak{F}}
+\newcommand{\pr}{\text {\rm pr}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calW}{\mathcal{W}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\GG}{\mathcal{G}}
+\newcommand{\FF}{\mathcal{F}}
+\newcommand{\QQ}{\mathcal{Q}}
+\newcommand{\Mp}{\text {\rm Mp}}
+\newcommand{\frakG}{\mathfrak{G}}
+\newcommand{\Qmd}{\mathcal{Q}_{m,d}}
+\newcommand{\la}{\lambda}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Qd}{\mathcal{Q}_d}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\SL}{{\text {\rm SL}}}
+\newcommand{\GL}{{\text {\rm GL}}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\PSL}{{\text {\rm PSL}}}
+\newcommand{\Op}{\mathcal{O}_K}
+\newcommand{\h}{\mathfrak{h}}
+\newcommand{\G}{\Gamma}
+\newcommand{\g}{\gamma}
+\newcommand{\zaz}{\Z / a\Z}
+\newcommand{\znz}{\Z / n\Z}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\tr}{{\text {\rm tr}}}
+\newcommand{\odd}{{\text {\rm odd}}}
+\newcommand{\bk}{B_k}
+\newcommand{\rr}{R_r}
+\newcommand{\sump}{\sideset{}{'}\sum}
+\newcommand{\gkr}{\mathfrak{g}_{k,r}}
+\newcommand{\re}{\textnormal{Re}}
+\newcommand{\im}{\textnormal{Im}}
+\newcommand{\bd}{\partial}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+\def\H{\mathbb{H}}
+\newcommand{\ie}{\emph{i.e.}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\ols}{\overline{\sigma}}
+
+\newcommand{\hp}{\hat{\pi}_K}
+\newcommand{\hDRc}{\hp(D(0,R)^c_K)}
+\newcommand{\hTDRc}{T_{\hDRc}}
+\newcommand{\hTDrs}{T_{\hp(D(0,r+s))}}
+
+\newcommand{\EV}{\mathbb{E}}    % expected value of a random variable
+\newcommand{\de}{\delta}
+
+% vectors
+\newcommand{\rvv}[2]{\begin{pmatrix} #1 & #2 \end{pmatrix}}
+\newcommand{\rvvv}[3]{\begin{pmatrix} #1 & #2 & #3 \end{pmatrix}}
+\newcommand{\rvvvv}[4]{\begin{pmatrix} #1 & #2 & #3 & #4 \end{pmatrix}}
+\newcommand{\cvv}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+\newcommand{\cvvv}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+\newcommand{\cvvvv}[4]{\begin{pmatrix} #1 \\ #2 \\ #3 \\ #4 \end{pmatrix}}
+\newcommand{\mrr}[4]{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}
+\newcommand{\mrrr}[9]{\begin{pmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{pmatrix}}
+
+
+\endinput

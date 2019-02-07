@@ -1,0 +1,725 @@
+\documentclass{beamer}
+
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Expectation and variance in a multivariate setting]{Introduction to Probability \\ Expectation and variance in a multivariate setting}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Sums of RVs}
+
+If $X_1$, $X_2$, ..., $X_n$ are $n$ random variables, then their sum
+\[ \sum_{j=1}^n X_j = X_1 + X_2 + \cdots + X_n \]
+is also a random variable. 
+
+} 
+
+
+\frame{ \frametitle{Sums of RVs}
+
+These kinds of sums are easy to deal with if $X_1$, $X_2$, ..., $X_n$ are 
+
+\begin{center}
+\textbf{independent and identically distributed (IID)}:
+\end{center}
+
+\begin{itemize}
+\item independent: $X_i \perp X_j$ for every $i \neq j$
+
+\vspace{3mm}
+
+\item identically distributed: $X_i \sim X_j$ for every $i \neq j$, \\i.e. they have the same distribution
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{Expectation of sums of RVs is a linear operation}
+
+The expected value of a sum of random variables can be calculated term-by-term.
+
+\[ E\left( \sum_{j=1}^n X_j \right) = \sum_{j=1}^n E\left( X_j \right). \]
+
+}
+
+
+
+\frame{ \frametitle{Expectation is a linear operation}
+
+The expected value of a sum of scaled random variables can be calculated term-by-term, with constant multiples moving outside the sum. (Expectation is called a \textbf{linear} operation.)
+
+\[ E\left( \sum_{j=1}^n c_j X_j \right) = c_j \sum_{j=1}^n E\left( X_j \right). \]
+
+}
+
+
+\frame{ \frametitle{Expectation is a linear operation}
+
+This works for discrete and continuous random variables: 
+
+\vspace{3mm}
+
+\begin{itemize}
+\item If the $X_j$ are discrete, linearity is a property of summing.
+\item If the $X_j$ are continuous, linearity is a property of integrating.
+\end{itemize}
+
+\vspace{3mm}
+
+Only the \emph{finiteness} of each term's expectation is required; independence is \emph{not} required here.
+
+}
+
+
+
+\frame{ \frametitle{Variance of sums of independent RVs}
+
+The variance of a sum of random variables is easy to calculate \emph{if all the random variables are independent}; if $X_i \perp X_j$ for $i \neq j$, then 
+
+\[ Var\left( \sum_{j=1}^n X_j \right) = \sum_{j=1}^n Var\left( X_j \right). \]
+
+\vspace{3mm}
+
+If the $X_j$ are \emph{not} independent, this fails - there are extra terms. \\
+
+\vspace{3mm}
+
+(Think about the square $\left( \sum_{j=1}^n X_j \right)^2$ - what terms cancel?)
+
+}
+
+
+\frame{ \frametitle{Sample Mean}
+
+The \textbf{sample mean} of $n$ IID samples,
+
+\vspace{3mm}
+
+\[ \overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i, \] 
+
+\vspace{3mm}
+
+is the average of $n$ sample points. 
+
+}
+
+
+\frame{ \frametitle{Sample Mean}
+
+If $E(X_1) = \mu < \infty$ is the expectation of one sample, \\
+then the sample mean, by the linearity of expectation, is 
+
+\vspace{3mm}
+
+\[ E(\overline{X}_n) = E\left(\frac{1}{n} \sum_{i=1}^n X_i\right) = \frac{1}{n} \sum_{i=1}^n E(X_i) = \frac{1}{n} (n\mu) = \mu. \]
+
+\vspace{3mm}
+
+In other words, you expect the same from the sample average as you do from each sample.
+
+}
+
+
+\frame{ \frametitle{Statistics}
+
+The sample mean is an example of a \textbf{statistic}.
+
+\vspace{5mm}
+
+A \textbf{statistic} is simply a function of (IID) random variables, 
+
+\vspace{3mm}
+
+\[ Y = f(X_1, X_2, ..., X_n) \] 
+
+\vspace{5mm}
+
+which is itself a random variable.
+
+}
+
+
+\frame{ \frametitle{Statistics; Unbiased Estimator}
+
+A statistic $Y$ is called an \textbf{unbiased estimator} of a parameter $a$ of 
+\[ X_1, X_2, ..., X_n \] 
+if $E(Y) = a$. 
+
+\vspace{5mm}
+
+Thus, the sample mean $\overline{X}_n$ is an unbiased estimator of $\mu$. 
+
+}
+
+
+\frame{ \frametitle{Variance of Sample Mean}
+
+If $Var(X_1) = \sigma^2$, then the variance of the sample mean $\overline{X}_n$ is 
+\begin{align*}
+Var(\overline{X}_n) & = Var\left(\frac{1}{n} \sum_{i=1}^n X_i\right) = \frac{1}{n^2} Var\left(\sum_{i=1}^n X_i\right).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Variance of Sample Mean}
+
+Since the $X_i$ are independent, this simplifies to 
+\begin{align*}
+Var(\overline{X}_n) & = \frac{1}{n^2} \sum_{i=1}^n Var\left(X_i\right) = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}.
+\end{align*}
+Thus, the variance of the sample mean shrinks as the number of IID samples $n$ increases.
+
+\vspace{5mm}
+
+\textbf{Note: } As $n \to \infty$, since $Var(\overline{X}_n) \to 0$, $\overline{X}_n$ converges to $\mu$. 
+
+}
+
+
+\frame{ \frametitle{Sample Variance}
+
+The \textbf{sample variance}\footnote{The use of $n-1$ instead of $n$ in the definition of $s_n^2$ is called \textbf{Bessel's correction}, after Friedrich Bessel (1784-1846).} of the IID samples $X_1, ..., X_n$ is defined by 
+\[ s_n^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2. \]
+$s_n^2$ is an unbiased estimator of $\sigma^2$. 
+
+}
+
+
+\frame{ \frametitle{Sample Variance}
+
+\pf 
+First, compute   
+\begin{align*}
+E((X_i - \overline{X}_n)^2) & = \frac{n+1}{n} \sigma^2 - 2E( (\overline{X}_n - \mu)(X_i - \mu) )
+\end{align*}
+and sum from $i=1$ to $n$ to get 
+\begin{align*}
+(n-1) E(s_n^2) & = \sum_{i=1}^n \left[\frac{n+1}{n} \sigma^2 - 2E( (\overline{X}_n - \mu)(X_i - \mu) )\right] \\
+ & = (n+1) \sigma^2 - \frac{2n \sigma^2}{n} = (n-1) \sigma^2.
+\end{align*}
+Thus, 
+\begin{align*}
+E(s_n^2) & = \sigma^2. \,\, \blacksquare
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Coupon Collector's Problem: Collect 'em all!}
+
+There are $n$ collectables in a series. 
+
+\vspace{5mm}
+
+You get one per package, packaged uniformly at random. %- you have no idea which one you are getting each time you buy.
+
+\vspace{5mm}
+
+How many must you buy before you collect all $n$?
+
+}
+
+
+\frame{ \frametitle{Coupon Collector's Problem: Sum of Random Times}
+
+Let $T_n$ be the number of purchases we make before collecting all $n$. 
+
+\vspace{5mm}
+
+We will compute $E(T_n)$ and $Var(T_n)$, but not its full PMF.
+
+\vspace{10mm}
+
+Let $T_j$ be the first time we get the $j$th new item in our set \\
+(order does not matter, just novelty).
+
+\vspace{5mm}
+
+Clearly, $T_1 = 1$ since the first purchase is always new.
+
+}
+
+
+\frame{ \frametitle{Coupon Collector's Problem: Sum of Geometrics}
+
+Let $W_1$ be the amount of time after $T_1$ that it takes to reach $T_2$. 
+
+\vspace{5mm}
+
+That is, let $W_1 = T_2 - T_1$. 
+
+\vspace{5mm}
+
+Each new purchase between times $T_1$ and $T_2$, with the goal of ``getting a new collectable'', is independent, and 
+
+\vspace{3mm}
+
+\begin{itemize}
+\item a ``failure'' with probability $\frac{1}{n}$ if you repeat the item you have; 
+\item a ``success'' with probability $p_1 = \frac{n-1}{n}$ if you get a new one.
+\end{itemize}
+
+\vspace{5mm}
+
+Thus, $W_1 \sim Geom(p_1 = \frac{n-1}{n})$. 
+
+}
+
+
+\frame{ \frametitle{Coupon Collector's Problem: Sum of Geometrics}
+
+Likewise, let $W_k$ be the amount of time after $T_{k}$ until $T_{k+1}$. 
+
+\vspace{5mm}
+
+That is, let $W_k = T_{k+1} - T_k$. 
+
+\vspace{5mm}
+
+Then each purchase between times $T_k$ and $T_{k+1}$ is 
+
+\vspace{3mm}
+
+\begin{itemize}
+\item a ``failure'' with probability $\frac{k}{n}$; 
+\item a ``success'' with probability $p_k = \frac{n-k}{n}$.
+\end{itemize}
+
+\vspace{5mm}
+
+Hence, $W_k \sim Geom(p_k = \frac{n-k}{n})$, and we can conclude that 
+\begin{align*}
+T_n & = T_1 + (T_2 - T_1) + \cdots + (T_{n} - T_{n-1}) \\
+& = 1 + W_1 + \cdots + W_{n-1}. 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Coupon Collector's Problem: Sum of Geometrics}
+
+The $W_k$ are independent (but not identically distributed), and 
+\begin{align*} 
+E(T_n) & = 1 + E(W_1) + \cdots + E(W_{n-1}) \\
+ & = 1 + \frac{1}{p_1} + \cdots + \frac{1}{p_{n-1}} \\
+ & = 1 + n \sum_{k=1}^{n-1} \frac{1}{n-k} = 1 + n\sum_{j=1}^{n} \frac{1}{j} \\
+ & \\
+Var(T_n) & = n^2 \sum_{j=1}^{n-1} \frac{1}{j^2} - n\sum_{j=1}^{n-1} \frac{1}{j}. 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Coupon Collector's Problem: Logarithmic Expectation}
+
+As $n$ increases, these values both increase as well: asymptotics are 
+
+\begin{align*} 
+E(T_n) & = 1 + n\sum_{j=1}^{n} \frac{1}{j} \sim n \ln(n) \\
+ & \\
+Var(T_n) & = n^2 \sum_{j=1}^{n-1} \frac{1}{j^2} - n\sum_{j=1}^{n-1} \frac{1}{j} \sim \frac{\pi^2}{6} n^2 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Moment Generating Function of a sum of RVs}
+
+If $X \perp Y$, then the MGF of $X+Y$ factors: 
+
+\begin{align*}
+M_{X+Y}(t) & = E(e^{t(X+Y)}) \\
+ & \\
+ & = E(e^{tX} e^{tY}) \\
+ & \\
+ & = E(e^{tX}) E(e^{tY}) \,\,\,\,\,\, (X \perp Y) \\
+ & \\
+ & = M_X(t) M_Y(t).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Sums of Poissons, Normals via MGFs}
+
+This is clear in, for example, the Poisson and normal distributions.
+
+\vspace{5mm}
+
+\begin{ex}
+$X \sim Poisson(\lambda)$, $Y \sim Poisson(\mu)$, and $X \perp Y$ implies 
+\begin{align*}
+M_{X}(t) M_{Y}(t) & = e^{\lambda (e^t - 1)} e^{\mu (e^t - 1)} = e^{(\lambda + \mu) (e^t - 1)} = M_{X+Y}(t),
+\end{align*}
+i.e. $X+Y \sim Poisson(\lambda + \mu)$. 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Sums of Poissons, Normals via MGFs}
+
+\vspace{5mm}
+
+\begin{ex}
+$X \sim N(\mu_1, \sigma_1^2)$, $Y \sim N(\mu_2, \sigma_2^2)$, and $X \perp Y$ implies 
+\begin{align*}
+M_{X}(t) M_{Y}(t) & = e^{\mu_1 t + \frac{1}{2} \sigma_1^2 t^2} e^{\mu_2 t + \frac{1}{2} \sigma_2^2 t^2} \\
+ & = e^{(\mu_1 + \mu_2) t + \frac{1}{2} (\sigma_1^2 + \sigma_2^2) t^2} = M_{X+Y}(t),
+\end{align*}
+i.e. $X+Y \sim N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$. 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Variance of sums of RVs}
+
+Assume $\mu_1 = E(X_1)$, $\mu_2 = E(X_2)$. Then, expanding, 
+
+\begin{align*}
+Var(X_1 + X_2) & = E( (X_1 + X_2)^2 ) - [ E(X_1 + X_2) ]^2 \\
+ & \\
+ & = E( X_1^2 + 2 X_1 X_2 + X_2^2 ) - [\mu_1 + \mu_2]^2 \\
+ & \\
+ & = E( X_1^2 + 2 X_1 X_2 + X_2^2 ) - [\mu_1^2 + 2 \mu_1 \mu_2 + \mu_2^2] \\
+ & \\
+ & = E( X_1^2 ) + 2 E( X_1 X_2 ) + E(X_2^2) - \mu_1^2 - 2 \mu_1 \mu_2 - \mu_2^2 \\
+ & \\
+ & = [E( X_1^2 ) - \mu_1^2] + 2[E( X_1 X_2 ) - \mu_1 \mu_2] + [E( X_2^2 ) - \mu_2^2] \\
+ & \\
+ & = Var(X_1) + 2{\color{blue} [E( X_1 X_2 ) - \mu_1 \mu_2]} + Var(X_2). 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Covariance}
+
+The variance of a sum of two random variables,
+\begin{align*}
+Var(X_1 + X_2) = Var(X_1) + 2{\color{blue} [E( X_1 X_2 ) - \mu_1 \mu_2]} + Var(X_2), 
+\end{align*}
+
+has a {\color{blue}middle term} which needs a name, since it's not always zero. 
+
+\vspace{5mm}
+
+The \textbf{covariance} of two random variables $X_1$ and $X_2$, with means $\mu_1$ and $\mu_2$, respectively is denoted $Cov(X_1, X_2)$, and defined by 
+\[ Cov(X_1, X_2) = E[ (X_1 - \mu_1)(X_2 - \mu_2) ]. \]
+
+\vspace{3mm}
+
+The covariance is a measure of the \emph{linear relationship} between the two random variables $X_1$ and $X_2$. 
+
+}
+
+
+\frame{ \frametitle{Covariance}
+
+We have a computational formula for $Cov(X_1, X_2)$: 
+\begin{align*}
+Cov(X_1, X_2) & = E[ (X_1 - \mu_1)(X_2 - \mu_2) ] \\
+ & \\
+ & = E(X_1 X_2 - \mu_1 X_2 - \mu_2 X_1 + \mu_1 \mu_2) \\
+ & \\
+ & = {\color{blue} E(X_1 X_2) - \mu_1 \mu_2}. 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Covariance of Indicators}
+
+Let $X = 1_A$ and $Y = 1_B$ be indicator functions on $\Omega$. 
+
+\vspace{5mm}
+
+The covariance of $X$ and $Y$ is 
+\begin{align*}
+Cov(X, Y) & = E(XY) - E(X) E(Y) \\
+ & \\
+ & = E(1_A 1_B) - E(1_A) E(1_B) \\
+ & \\
+ & = P(AB) - P(A) P(B). 
+\end{align*}
+Thus, for indicator functions, the covariance is a measure of dependence of the events $A$ and $B$. 
+
+}
+
+
+\frame{ \frametitle{Example: roll two fair D10s}
+
+Roll two fair 10-sided dice (each uniform on $\{0,1,...,8,9\}$). Let 
+
+\vspace{3mm}
+
+\begin{itemize}
+\item $X = $ \# of evens rolled ($X \sim Bin(2, \frac{5}{10})$, $E(X) = 1$),  
+
+\vspace{3mm}
+
+\item $Y = $ \# of sixes rolled ($Y \sim Bin(2,  \frac{1}{10})$, $E(Y) = \frac{2}{10}$).
+\end{itemize}
+
+\vspace{3mm}
+
+There are $10^2 = 100$ possible rolls on 2D10 (two 10-sided dice).
+
+}
+
+
+\frame{ \frametitle{Example: roll two fair D10s}
+
+You can easily see that $X \geq Y$ 
+
+\vspace{3mm}
+
+(six $\implies$ even; not even $\implies$ not six). 
+
+\vspace{3mm}
+
+The joint PMF is 
+\[ p_{X,Y}(x,y) = \left\{ \begin{array}{ll} 
+(\frac{5}{10})^2 = 0.25 & x=0, y=0 \text{ (both odds)} \\
+ & \\
+2(\frac{4}{10})(\frac{5}{10}) = 0.40 & x=1, y=0  \text{ (1 not-six even, 1 odd)} \\
+ & \\
+(\frac{4}{10})^2 = 0.16 & x = 2, y = 0 \text{ (both not-six even)} \\
+ & \\
+2(\frac{5}{10})(\frac{1}{10}) = 0.10 & x=1,y=1 \text{ (1 six, 1 odd)} \\
+ & \\
+2(\frac{1}{10})(\frac{4}{10}) = 0.08 & x=2,y=1 \text{ (1 six, 1 not-six even)} \\
+ & \\
+(\frac{1}{10})^2 = 0.01 & x=2,y=2 \text{ (both six)}.
+\end{array}\right. \]
+
+}
+
+
+\frame{ \frametitle{Example: roll two fair D10s}
+
+The cross-expectation $E(XY)$ is 
+\[ E(XY) = 0(0.25+0.40+0.16) + 1(0.10) + 2(0.08) + 4(0.01) = 0.30 \]
+
+and so their covariance is 
+\begin{align*}
+Cov(X,Y) & = E(XY) - E(X) E(Y) = 0.30 - 0.20 = 0.10.
+\end{align*}
+These two RVs are slightly positively correlated. 
+
+}
+
+
+\frame{ \frametitle{Properties of Covariance}
+
+\begin{itemize}
+\item If $X_1 = X_2$, covariance is variance: if $E(X_1) = \mu_1$, 
+\[ Cov(X_1, X_1) = E(X_1 X_1) - \mu_1 \mu_1 = E(X_1^2) -\mu_1^2 = Var(X_1). \]
+\item Scaling: if $a, b \in \R$, then $E(aX_1) = a\mu_1$ and $E(bX_2) = b\mu_2$,
+\[ Cov(aX_1, bX_2) = E(abX_1 X_2) - ab\mu_1 \mu_2 = abCov(X_1, X_2).  \]
+\item Sums: If $X, Y, W$ are three random variables, 
+\[ Cov(X+Y, W) = Cov(X, W) + Cov(Y, W). \]
+\item Variance of a sum of $n$ RVs: 
+\[ Var(X_1 + X_2 + ... + X_n) = \sum_{j=1}^n Var(X_j) + 2\sum_{i=1}^n \sum_{j=i+1}^n Cov(X_i, X_j). \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Correlation}
+
+Covariance gives a measure of the linear relationship between two random variables, but it's not easy to understand. 
+
+\vspace{5mm}
+
+The \textbf{correlation} between two random variables $X_1, X_2$, denoted 
+\[ \rho(X_1, X_2), \]
+
+is the \emph{normalized} covariance in the following sense: let 
+\[ E(X_1) = \mu_1, \,\, E(X_2) = \mu_2, \,\, Var(X_1) = \sigma_1^2, \,\, Var(X_2) = \sigma_2^2, \]
+
+and $Cov(X_1, X_2) = \sigma_{12}$. 
+
+}
+
+
+\frame{ \frametitle{Correlation}
+
+Define the \emph{normalized} versions of $X_1$ and $X_2$ by 
+
+\[ Z_1 = \frac{X_1 - \mu_1}{\sigma_1}, \,\, Z_2 = \frac{X_2 - \mu_2}{\sigma_2}. \] 
+
+Then 
+
+\[ E(Z_1) = 0, \,\, E(Z_2) = 0, \,\, Var(Z_1) = 1, \text{ and } Var(Z_2) = 1, \]
+
+and 
+
+\[ \rho(X_1, X_2) = Cov(Z_1, Z_2) = \frac{Cov(X_1, X_2)}{\sqrt{Var(X_1) Var(X_2)}} = \frac{\sigma_{12}}{\sigma_1 \sigma_2}. \]
+
+}
+
+
+\frame{ \frametitle{Example: roll two fair D10s}
+
+Roll two fair 10-sided dice. Let 
+\begin{itemize}
+\item $X = $ \# of evens rolled ($X \sim Bin(2, \frac{5}{10})$, $E(X) = 1$),  
+\item $Y = $ \# of sixes rolled ($Y \sim Bin(2,  \frac{1}{10})$, $E(Y) = \frac{2}{10}$).
+\end{itemize}
+
+\vspace{3mm}
+
+Their covariance and variances are 
+\begin{align*}
+Cov(X,Y) & = E(XY) - E(X) E(Y) = 0.30 - 0.20 = 0.10 = \frac{1}{10} \\
+Var(X) & = E(X^2) - E(X)^2 = 2(1/2)(1/2) = 0.5 = \frac{1}{2}  \\
+Var(Y) & = E(Y^2) - E(Y)^2 = 2(1/10)(9/10) = 0.18 = \frac{9}{50}
+\end{align*}
+and so their correlation is 
+\[ \rho(X, Y) = \frac{Cov(X, Y)}{\sqrt{Var(X) Var(Y)}} = \frac{ \frac{1}{10} }{ \sqrt{ \frac{1}{2}\cdot\frac{9}{50}} } = \frac{ \frac{1}{10} }{ \frac{3}{10} } = \frac{1}{3}. \]
+
+}
+
+
+
+\frame{ \frametitle{Properties of Correlation}
+
+\begin{itemize}
+\item Correlation is always between -1 and 1: $-1 \leq \rho(X_1, X_2) \leq 1$. 
+
+\vspace{3mm}
+
+\item If $\rho(X_1, X_2) > 0$, we say $X_1$ and $X_2$ are \textbf{positively correlated}. 
+
+\vspace{3mm}
+
+\item If $\rho(X_1, X_2) < 0$, we say $X_1$ and $X_2$ are \textbf{negatively correlated}. 
+
+\vspace{3mm}
+
+\item If $\rho(X_1, X_2) = 0$, we call $X_1$ and $X_2$ \textbf{uncorrelated}. 
+
+\vspace{3mm}
+
+\item $X_2 = aX_1 + b$ $\iff$ $\rho(X_1, X_2) = \pm 1$ \\
+(the function $sign(a) = 1_{\{a > 0\}} - 1_{\{a < 0\}}$ for $a \neq 0$):
+\end{itemize}
+
+\[ \rho(X_1, aX_1 + b) = \frac{Cov(X_1, aX_1 + b)}{\sqrt{Var(X_1) Var(aX_1 + b)}} = \frac{aVar(X_1)}{|a|Var(X_1)} = sign(a). \]
+
+}
+
+
+\frame{ \frametitle{Relationship of RV independence to correlation}
+
+It is \textbf{VERY} important to remember that 
+\[ X_1 \perp X_2 \implies \rho(X_1, X_2) = Cov(X_1, X_2) = 0, \]
+but the converse is NOT true in general! 
+
+\vspace{5mm}
+
+There are plenty of pairs of random variables $X_1$ and $X_2$ that are uncorrelated, but share a higher-order relationship, and so can have $\rho(X_1, X_2) = 0$ but are NOT independent.
+
+}
+
+
+\frame{ \frametitle{Relationship of RV independence to correlation}
+
+We can see this in a very simple way: 
+
+\[ Cov(X_1, X_2) = E(X_1 X_2) - E(X_1)E(X_2) = 0 \]
+
+\[ \implies E(X_1 X_2) = E(X_1)E(X_2) \]
+
+but 
+
+\[ E(X_1 X_2) = E(X_1)E(X_2) \]
+
+does NOT alone imply $X_1 \perp X_2$. 
+
+}
+
+
+\frame{ \frametitle{Relationship of RV independence to correlation}
+
+Let $(X,Y)$ be a pair of random variables with joint PMF 
+\[ p_{X,Y}(x,y) = \left\{ \begin{array}{ll} \frac{1}{4} & (-1,1) \\ 
+ & \\
+ \frac{1}{2} & (0,-1) \\ 
+ & \\
+ \frac{1}{4} & (1,1). \end{array}\right. \]
+ 
+}
+
+
+\frame{ \frametitle{Relationship of RV independence to correlation}
+ 
+Then $X$ and $Y$ are uncorrelated but not independent: 
+\begin{align*}
+E(XY) & = -1(1/4) + 0(1/2) + 1(1/4) = 0 \\
+ & \\
+E(X) & = -1(1/4) + 0(1/2) + 1(1/4) = 0 \\
+ & \\
+E(Y) & = 1(1/2) + -1(1/2) = 0 \\
+ & \\
+\implies Cov(X,Y) & = E(XY) - E(X) E(Y) =  0, \\
+ & \\
+\text{ but } P(X = 0, Y = 1) = 0 & \neq P(X=0) P(Y = 1) = \left(\frac{1}{4}\right)\left(\frac{1}{2}\right) = \frac{1}{8}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Covariance, Correlation (Continuous)}
+
+The \textbf{covariance} and \textbf{correlation} of two continuous RVs, $X$ and $Y$, with means $\mu_X$, $\mu_Y$, come from the previous definitions and computational formulae: 
+\begin{align*} 
+Cov(X,Y) & = E(XY) - E(X) E(Y) \\
+ & = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} xy f_{X,Y}(x,y) dy dx - \mu_X \mu_Y \\
+ & \\
+\rho(X,Y) & = \frac{Cov(X,Y)}{\sqrt{Var(X) Var(Y)}}. 
+\end{align*}
+
+
+All general properties of covariance and correlation carry over. 
+
+}
+
+%\frame{ \frametitle{Multinomial Distribution}
+%}
+
+\frame{ \frametitle{Bivariate Normal Random Variables}
+
+The \textbf{bivariate normal distribution} is a pair $(X,Y)$ of normal random variables that are correlated with correlation $\rho$. 
+
+\vspace{3mm}
+
+The pair with marginals $X \sim N(\mu_X, \sigma_X^2)$, $Y \sim N(\mu_Y, \sigma_Y^2)$ can be generated by a linear transformation of a pair of independent standard normals $(Z, W)$ by 
+\begin{align*}
+X & = \sigma_X Z + \mu_X, \\
+Y & = \sigma_Y \rho Z + \sigma_Y \sqrt{1 - \rho^2} W + \mu_Y, 
+\end{align*}
+and can be represented by the joint PDF
+\begin{align*}
+f_{(X,Y)}(x,y) = \frac{1}{2\pi \sigma_X \sigma_Y\sqrt{1 - \rho^2}} e^{-\frac{1}{2 (1 - \rho^2)}\left[ (\frac{x-\mu_X}{\sigma_X})^2 - \frac{2\rho(x-\mu_X)(y-\mu_Y)}{\sigma_X \sigma_Y} + (\frac{y-\mu_Y}{\sigma_Y})^2 \right]}.
+\end{align*}
+
+}
+
+\end{document}

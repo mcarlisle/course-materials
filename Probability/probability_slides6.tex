@@ -1,0 +1,839 @@
+\documentclass{beamer}
+
+
+\usepackage{mjclectureslides}
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Joint distribution of random variables]{Introduction to Probability \\ Joint distribution of random variables}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Random vector}
+
+If $X$ and $Y$ are two discrete RVs on the same sample space $\Omega$, i.e. 
+\[ X: \Omega \to \R, \,\,\, Y: \Omega \to \R, \] 
+then the ordered pair $(X, Y)$ is a function $(X, Y): \Omega \to \R^2$, defined by 
+\[ (X,Y)(\omega) = (X(\omega), Y(\omega)). \]
+In general, we will call an ordered $n$-tuple of $n$ random variables, 
+\[ (X_1, X_2, ..., X_n): \Omega \to \R^n, \]
+a \textbf{random vector}. 
+
+}
+
+\frame{ \frametitle{Joint distributions of random variables}
+
+If $X_1, X_2, ..., X_n$ are all discrete RVs, then the \textbf{joint probability mass function} (joint PMF) of the discrete random vector $(X_1, X_2, ..., X_n)$ is defined by 
+\[ p_{X_1, X_2, ..., X_n}(k_1, k_2, ... ,k_n) = P(X_1 = k_1, X_2 = k_2, ..., X_n = k_n). \]
+
+\vspace{5mm}
+
+First, note that joint PMF probabilities are, in fact, probabilities: 
+\[ 0 \leq p_{X_1, X_2, ..., X_n}(k_1, k_2, ... ,k_n) \leq 1 \]
+\[ \sum \cdots \sum_{k_1, k_2, ..., k_n} p_{X_1, X_2, ..., X_n}(k_1, k_2, ... ,k_n) = 1. \]
+
+}
+
+
+\frame{ \frametitle{Expectation of a function of a random vector}
+
+If $g: \R^n \to \R$, then the \textbf{expectation} of the discrete function $g(X_1, X_2, ..., X_n)$ of the random vector with joint PMF $p$ is 
+\[ E(g(X_1, X_2, ..., X_n)) = \sum \cdots \sum_{k_1, k_2, ..., k_n} g(k_1, k_2, ... ,k_n) p(k_1, k_2, ... ,k_n) \]
+if this sum is well defined.
+
+}
+
+
+\frame{ \frametitle{Marginal distributions of random variables}
+
+From the joint PMF, we can recover each RV's individual PMF, called its \textbf{marginal PMF}, by summing over all possible values of the other RV. 
+
+\vspace{5mm}
+
+For each $i=1,2,...,n$, and fixed $x$, the marginal PMF of $X_i$ is 
+\begin{align*}
+p_{X_i}(x) & = \sum \cdots \sum_{\stackrel{k_1, k_2, ..., k_{i-1},}{k_{i+1}, ..., k_n}} p(k_1, k_2, ..., k_{i-1}, x, k_{i+1}, ..., k_n). \\
+\end{align*}
+The joint PMF of the first $m < n$ random variables is found using the same marginal summing technique: 
+\begin{align*}
+p_{X_1, X_2, ..., X_m}(x_1, x_2, ..., x_m) & = \sum \cdots \sum_{k_{m+1}, ..., k_n} p(x_1, x_2, ..., x_{m}, k_{m+1}, ..., k_n). 
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Joint distributions of random variables: example}
+
+An urn contains two red, one yellow, and three white marbles. Draw three marbles without replacement (all at once). 
+
+\vspace{5mm}
+
+What is the probability you draw $x$ red and $y$ white marbles?
+
+\vspace{5mm}
+
+To answer this question, we'll build a table of the joint PMF $p_{X,Y}(x,y)$, where 
+\begin{itemize}
+\item $X= $ number of red drawn 
+\item $Y= $ number of white drawn.
+\end{itemize}
+
+\vspace{5mm}
+
+Note that we can also say $Z = $ number of yellow drawn, but this value is \emph{determined by $X$ and $Y$}: 
+\[ Z = 3 - X - Y. \]
+
+}
+
+
+\frame{ \frametitle{Joint distributions of random variables: example}
+
+2 red $\implies X(\omega) = \{0, 1, 2\}$. 3 white $\implies Y(\omega) = \{0,1,2,3\}$. 
+
+\vspace{3mm}
+
+Certainly, $0 \leq X+Y \leq 3$. 
+
+\vspace{2mm} 
+
+There are two cases: $X+Y = 2$ if you draw the yellow marble, and $X+Y = 3$ if you don't draw the yellow marble. 
+
+\vspace{2mm} 
+
+We'll break these two cases down in the table below, noting that there are $|\Omega| = {2+3+1 \choose 3} = {6 \choose 3} = 20$ different draws possible. 
+\begin{center}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+ & Y=0 & Y=1 & Y=2 & Y=3 & $p_X(x)$ \\
+\hline
+X=0 & 0 & 0 & $\frac{{3 \choose 2}{1 \choose 1}}{20} = \frac{3}{20}$ & $\frac{{3 \choose 3}}{20} = \frac{1}{20}$ &  \\
+\hline
+X=1 & 0 & $\frac{{2 \choose 1}{3 \choose 1}}{20} = \frac{6}{20}$ & $\frac{{2 \choose 1}{3 \choose 2}}{20} = \frac{6}{20}$ & 0 &  \\
+\hline
+X=2 & $\frac{{2 \choose 2}{1 \choose 1}}{20} = \frac{1}{20}$ & $\frac{{2 \choose 2}{3 \choose 1}}{20} = \frac{3}{20}$ & 0 & 0 &  \\
+\hline
+\hline
+$p_Y(y)$ &  &  &  &  &  \\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Joint distributions of random variables: example}
+
+2 red $\implies X(\omega) = \{0, 1, 2\}$. 3 white $\implies Y(\omega) = \{0,1,2,3\}$. 
+
+\vspace{3mm}
+
+Certainly, $0 \leq X+Y \leq 3$. 
+
+\vspace{2mm} 
+
+There are two cases: $X+Y = 2$ if you draw the yellow marble, and $X+Y = 3$ if you don't draw the yellow marble. 
+
+\vspace{2mm} 
+
+We'll break these two cases down in the table below, noting that there are $|\Omega| = {2+3+1 \choose 3} = {6 \choose 3} = 20$ different draws possible. \begin{center}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+ & Y=0 & Y=1 & Y=2 & Y=3 & $p_X(x)$ \\
+\hline
+X=0 & 0 & 0 & $\frac{{3 \choose 2}{1 \choose 1}}{20} = \frac{3}{20}$ & $\frac{{3 \choose 3}}{20} = \frac{1}{20}$ & $\frac{4}{20}$ \\
+\hline
+X=1 & 0 & $\frac{{2 \choose 1}{3 \choose 1}}{20} = \frac{6}{20}$ & $\frac{{2 \choose 1}{3 \choose 2}}{20} = \frac{6}{20}$ & 0 & $\frac{12}{20}$ \\
+\hline
+X=2 & $\frac{{2 \choose 2}{1 \choose 1}}{20} = \frac{1}{20}$ & $\frac{{2 \choose 2}{3 \choose 1}}{20} = \frac{3}{20}$ & 0 & 0 & $\frac{4}{20}$ \\
+\hline
+\hline
+$p_Y(y)$ & $\frac{1}{20}$ & $\frac{9}{20}$ & $\frac{9}{20}$ & $\frac{1}{20}$ & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+
+
+\frame{ \frametitle{Multinomial distribution}
+
+The random vector $(X_1, X_2, ..., X_r)$ is said to have the \textbf{multinomial distribution} with parameters $(n, r, p_1, p_2, ..., p_r)$ if the joint PMF $p$ of the vector is 
+\[ p(k_1, k_2, ..., k_r) = {n \choose k_1, k_2, ..., k_r} p_1^{k_1} p_2^{k_2} \cdots p_r^{k_r}, \]
+when $k_i \geq 0$ for $i=1,2,...,r$ and $k_1 + k_2 + ... + k_r = n$. 
+
+\vspace{5mm}
+
+Denote such a random vector by 
+\[ (X_1, X_2, ..., X_r) \sim Mult(n, r, p_1, p_2, ..., p_r). \]
+
+
+}
+
+
+\frame{ \frametitle{Jointly continuous random vector}
+
+$n$ random variables $X_1, X_2, ..., X_n$ are called \textbf{jointly continuous} if there exists a \textbf{joint density function (joint PDF)} $f: \R^n \to \R$ such that\footnote{Again, Borel sets $B$, not \emph{any} subset.}, for $B \subseteq \R^n$, 
+\[ P( (X_1, X_2, ..., X_n) \in B ) = \int \cdots \int_B f(x_1, x_2, ..., x_n) dx_1 ... dx_n \]
+such that 
+\[ f(x_1, x_2, ..., x_n) \geq 0 \text{ and } \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} f(x_1, x_2, ..., x_n) dx_1 ... dx_n = 1. \]
+
+}
+
+
+\frame{ \frametitle{Expectation, marginal densities}
+
+\textbf{Expectation} of this random vector works as you might expect: \\if $g: \R^n \to \R$ and the integral are well defined, then 
+
+$E( g(X_1, X_2, ..., X_n) ) = $
+\[  \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} g(x_1, x_2, ..., x_n) f(x_1, x_2, ..., x_n) dx_1 ... dx_n. \]
+
+The \textbf{marginal density function} of $X_j$ is found in a similar fashion, by integrating the joint PDF along all variables except $X_j$: for fixed $x$, the marginal PDF of $X_j$ at $x$ is denoted $f_{X_j}(x)$ and equals 
+\[  \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} f(x_1, x_2, x_{j-1}, x, x_{j+1}, ..., x_n) dx_1 ... dx_{j-1} dx_{j+1} ... dx_n, \]
+where the integral is over $n-1$ variables. 
+
+}
+
+
+\frame{ \frametitle{Expectation, marginal densities}
+
+Also as in the discrete case, a joint density of $k < n$ of the variables can be found by integrating over the other $n-k$ variables: 
+\begin{align*}
+ f_{(X_1, X_2, ..., X_k)}&(x_1, x_2, ..., x_k) \\
+ = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} &f(x_1, x_2, ..., x_{k-1}, x_{k}, y_{k+1}, ..., y_n) dy_{k+1} ... dy_{n}. 
+\end{align*}
+
+
+}
+
+
+\frame{ \frametitle{Uniform distribution on a subset of $\R^2$}
+
+The \textbf{uniform distribution} over a finite-area subset $D \subseteq \R^2$ can have its probabilities measured by integrating over any event subset and dividing by the area of $D$. 
+
+\vspace{3mm}
+
+\begin{ex}
+Let $(X,Y) \sim Unif(D)$, where 
+\[ D = \{(x,y) \in \R^2: \,\, 0 \leq x \leq 2, \,\, 1 \leq y \leq 5\}. \]
+What is $P( X \geq Y^2 )$?
+\end{ex}
+
+\vspace{5mm}
+
+Note that the area of $D$ is 8. Thus, the joint PDF of $(X,Y)$ is 
+\[ f(x,y) = \frac{1}{8} 1_{D}(x,y). \]
+
+}
+
+
+\frame{ \frametitle{Uniform distribution on a subset of $\R^2$}
+
+To calculate $P( X \geq Y^2 )$, we need to craft the variables $x$ and $y$ to be able to integrate over the event 
+\[ E = \{(x,y) \in D: x \geq y^2 \} = \{(x,y) \in D: \sqrt{x} \leq y \}. \]
+That integral can be done in two ways: integrating over $x$ first, or over $y$ first. We must be careful to only integrate over the portion of $D$ where the inequality holds.
+\begin{align*}
+P(E) & = \int_{1}^{\sqrt{2}} \int_{y^2}^{2} \frac{1}{8} dx \, dy = \frac{4\sqrt{2}-5}{24} \approx 0.0273689
+\end{align*}
+or 
+\begin{align*}
+P(E) & = \int_{1}^{2} \int_{1}^{\sqrt{x}} \frac{1}{8} dy \, dx = \frac{4\sqrt{2}-5}{24} \approx 0.0273689.
+\end{align*}
+
+}
+
+
+
+\frame{ \frametitle{Non-uniform distribution on a subset of $\R^2$}
+
+A non-uniform distribution on a subset of $\R^n$ is handled similarly, with the joint pdf. 
+
+\begin{ex}
+Let the random pair $(X,Y)$ have joint PDF 
+\[ f(x,y) = cx e^{-2xy} 1_{(0,10)}(x) 1_{(0,\infty)}(y). \]
+\end{ex}
+
+\begin{enumerate}
+\item What is the normalizing constant $c$ that makes $f$ a joint pdf? % $c = \frac{1}{5}$
+\item What is $P(X \leq 6)$?
+\end{enumerate}
+
+}
+
+
+\frame{ \frametitle{Non-uniform distribution on a subset of $\R^2$}
+
+\begin{enumerate}
+\item Integrating the PDF, we see that we require 
+\begin{align*} 
+1 = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x,y) dy \, dx & = c \int_{0}^{10} \int_{0}^{\infty} x e^{-2xy} dy \, dx = 5c,
+\end{align*}
+so we conclude $c = \frac{1}{5}$.
+
+\vspace{3mm}
+
+\item What is $P(X \leq 6 \text{ and } Y > 2)$?
+\begin{align*}
+\frac{1}{5} \int_{0}^{6} \int_{2}^{\infty} x e^{-2xy} dy \, dx & = \frac{1}{40}(1 - e^{-24}) \approx \frac{1}{40}. 
+\end{align*}
+\end{enumerate}
+
+
+}
+
+
+% 6.3 
+
+\frame{ \frametitle{Independent random variables}
+
+Recall, two events $E$ and $F$ are called \textbf{independent} (and use the notation $E \perp F$) if one's introduction as evidence does not affect the other's probability: 
+\[ P(E \, | \, F) = P(E), \, \text{ or } P(F \, | \, E) = P(F). \]
+Equivalently, this has an easier computational form: \\
+the probability of the intersection $EF$ equals the product of the individual probabilities: 
+\[ P(EF) = P(E) P(F). \]
+
+}
+
+
+\frame{ \frametitle{Independent random variables}
+
+Random variables work in a similar fashion. 
+
+\vspace{5mm}
+
+Two discrete random variables, $X$ and $Y$, are called \textbf{independent} and use the notation 
+
+\[ X \perp Y \]
+
+if evidence about one does not affect the other's probabilities: 
+\[ P(X = x \, | \, Y = y) = P(X = x), \, \text{ or } P(Y = y \, | \, X = x) = P(Y = y). \]
+
+(We'll discuss conditional distributions in detail at the end of the course, but preview them here.)
+
+}
+
+
+\frame{ \frametitle{Conditional PMF}
+
+To use this definition, we define the \emph{conditional PMF} of $X$, given $Y = y$, by the conditional probability definition for events (such that $P(Y = y) > 0$): 
+\[ P(X = x \, | \, Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)} = \frac{p_{X,Y}(x,y)}{p_Y(y)}. \]
+Note that this definition uses the joint PMF of $X$ and $Y$ and the marginal PMF of $Y$. 
+
+}
+
+
+\frame{ \frametitle{Independent RVs: checking joint vs marginal PMF}
+
+Thus, $X \perp Y$ means the joint PMF factors into the marginals: \\if 
+\[ P(X = x \, | \, Y = y) = P(X = x), \]
+then 
+\begin{align*} 
+p_{X,Y}(x,y) & = P(X = x, Y = y) \\
+ & = P(X = x) P(Y = y) = p_X(x) p_Y(y).
+ \end{align*}
+We will often use this criterion to determine if two random variables are independent.
+
+}
+
+
+\frame{ \frametitle{Independent RVs: checking joint vs marginal PMF}
+
+The experiment: flip a fair coin 4 times. Let
+
+\vspace{3mm}
+
+\begin{itemize}
+\item $X = $ number of H flipped on all four flips and 
+\item $Y = $ number of T flipped in the first three flips. 
+\end{itemize}
+
+\vspace{3mm}
+
+$X \sim Bin(4, \frac{1}{2})$, and $Y \sim Bin(3, \frac{1}{2})$, so we know the marginal PMFs. 
+
+\vspace{5mm}
+
+$X$ and $Y$ are clearly dependent since they consider the same flips.
+
+\vspace{5mm}
+
+We will build the joint PMF for $X$ and $Y$ to formally verify this dependence.
+
+}
+
+
+\frame{ \frametitle{Independent RVs: checking joint vs marginal PMF}
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+ & Y=0 & Y=1 & Y=2 & Y=3 & $p_X(x)$ \\
+\hline
+X=0 &  &  &  &  & \\
+\hline
+X=1 &  &  &  &  &  \\
+\hline
+X=2 &  &  &  &  &  \\
+\hline
+X=3 &  &  &  &  &  \\
+\hline
+X=4 &  &  &  &  &  \\
+\hline
+\hline
+$p_Y(y)$ &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{5mm}
+
+To fill out the chart, first fill in the marginal PDFs on the edges. 
+
+\end{center}
+
+}
+\frame{ \frametitle{Independent RVs: checking joint vs marginal PMF}
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+ & Y=0 & Y=1 & Y=2 & Y=3 & $p_X(x)$ \\
+\hline
+X=0 &  &  &  &  & $\frac{1}{16}$ \\
+\hline
+X=1 &  &  &  &  & $\frac{4}{16}$ \\
+\hline
+X=2 &  &  &  &  & $\frac{6}{16}$ \\
+\hline
+X=3 &  &  &  &  & $\frac{4}{16}$ \\
+\hline
+X=4 &  &  &  &  & $\frac{1}{16}$ \\
+\hline
+\hline
+$p_Y(y)$ & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ & 1 \\
+\hline
+\end{tabular}
+
+\vspace{5mm}
+
+Next, think about how $X$ and $Y$ are related.
+
+\vspace{5mm}
+
+For example, where does the flip sequence {\color{red} HTHT} go in this chart?
+
+\vspace{5mm}
+
+Once all the sequences are placed, count to verify the marginals.
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Independent RVs: checking joint vs marginal PMF}
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+ & Y=0 & Y=1 & Y=2 & Y=3 & $p_X(x)$ \\
+\hline
+X=0 & 0 & 0 & 0 & TTTT & $\frac{1}{16}$ \\
+\hline
+ & &  & TTHT, & &  \\
+X=1 & 0 & 0 & THTT, & TTTH & $\frac{4}{16}$ \\
+ & &  & HTTT &  &  \\
+\hline
+ & & THHT, & TTHH, & & \\
+X=2 & 0 & {\color{red} HTHT}, & THTH, & 0 & $\frac{6}{16}$ \\
+ & & HHTT & HTTH & & \\
+\hline
+ & & THHH, & & &  \\
+X=3 & HHHT & HTHH, & 0 & 0 & $\frac{4}{16}$ \\
+ & & HHTH & & &  \\
+\hline
+X=4 & HHHH & 0 & 0 & 0 & $\frac{1}{16}$ \\
+\hline
+\hline
+$p_Y(y)$ & $\frac{2}{16} = \frac{1}{8}$ & $\frac{6}{16} = \frac{3}{8}$ & $\frac{6}{16} = \frac{3}{8}$ & $\frac{2}{16} = \frac{1}{8}$ & 1 \\
+\hline
+\end{tabular}
+
+\vspace{5mm}
+
+Now replace the sequences with their counts to get the joint PMF.
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Independent RVs: checking joint vs marginal PMF}
+
+\begin{center}
+\begin{tabular}{|c||c|c|c|c||c|}
+\hline
+ & Y=0 & Y=1 & Y=2 & Y=3 & $p_X(x)$ \\
+\hline
+X=0 & 0 & 0 & 0 & $\frac{1}{16}$ & $\frac{1}{16}$ \\
+\hline
+ & & & & &  \\
+X=1 & 0 & 0 & $\frac{3}{16}$ & $\frac{1}{16}$ & $\frac{4}{16}$ \\
+ & & & & &  \\
+\hline
+ & & & & &  \\
+X=2 & 0 & $\frac{3}{16}$ & $\frac{3}{16}$ & 0 & $\frac{6}{16}$ \\
+ & & & & &  \\
+\hline
+ & & & & &  \\
+X=3 & $\frac{1}{16}$ & $\frac{3}{16}$ & 0 & 0 & $\frac{4}{16}$ \\
+ & & & & &  \\
+\hline
+X=4 & $\frac{1}{16}$ & 0 & 0 & 0 & $\frac{1}{16}$ \\
+\hline
+\hline
+$p_Y(y)$ & $\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$ & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Conditional probabilities with random variables: example}
+
+
+\begin{itemize}
+\item $X$ = number of H in 4 fair coin flips, 
+\item $Y$ = number of T in the first 3 of those 4 flips, 
+\end{itemize}
+
+\vspace{5mm}
+
+We can see that $X$ and $Y$ are not independent, since, for example,  
+
+\[ p_{X,Y}(0,0) = 0 \neq \frac{1}{16} \cdot \frac{1}{8} = p_X(0) p_Y(0). \]
+
+}
+
+
+\frame{ \frametitle{Independent random variables: example}
+
+Let $X$ = the number of fair die rolls it takes for a 1 to appear, and $Y$ = the number of rolls after $X$ it takes for an even to appear. 
+
+\vspace{3mm}
+
+\[ X \sim geom\left(\frac{1}{6}\right) \text{ and } Y \sim geom\left(\frac{1}{2}\right) \]
+
+\vspace{5mm}
+
+and their (marginal) CDFs are, for $a, b \in \{1, 2, 3, ...\}$,  
+
+\[ F_X(a) = P(X \leq a) = \sum_{j=1}^a P(X = j) = \sum_{j=1}^a \left(\frac{5}{6}\right)^{j-1}\left(\frac{1}{6}\right) = 1 - \left(\frac{5}{6}\right)^{a}\]
+
+\[ F_Y(b) = P(Y \leq b) = 1 - \left(\frac{1}{2}\right)^{b}. \]
+
+}
+
+
+\frame{ \frametitle{Independent random variables: example}
+
+Since $X$ and $Y$ consider independent die rolls, $X \perp Y$.
+
+\vspace{5mm}
+
+Thus, the joint CDF of the pair $(X, Y)$ is the product of the marginal CDFs: 
+
+\[ F_{X, Y}(a, b) = \left[ 1 - \left(\frac{5}{6}\right)^{a} \right] \left[ 1 - \left(\frac{1}{2}\right)^{b} \right] = F_X(a) F_Y(b). \]
+
+}
+
+
+
+\frame{ \frametitle{Independent random variables implies expectation factors}
+
+If two random variables, $X$ and $Y$, are independent, then the expected value of their product splits: 
+\[ X \perp Y \implies E(XY) = E(X) E(Y). \]
+THE CONVERSE IS NOT TRUE IN GENERAL!
+
+\[ E(XY) = E(X) E(Y) \text{ does NOT imply that } X \perp Y. \]
+
+}
+
+
+\frame{ \frametitle{Independent random variables implies expectation factors}
+
+\begin{ex}
+Let $X$ be a random variable, and $Y = X$. Clearly, $X$ and $Y$ are dependent on each other. In fact, the only way we get 
+\[ E(XY) = E(X^2) = E(X) E(Y) = E(X)^2 \]
+is if $X$ is a constant. (Why?)
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Functions of random variables}
+
+A function of two random variables is also a random variable. 
+
+\vspace{5mm}
+
+If $W = g(X,Y)$, then we can calculate the expectation, variance, etc. of $W$ with the joint PMF of $X$ and $Y$: 
+\begin{align*} 
+E(W) & = \sum_{x \in X(\Omega)} \sum_{y \in Y(\Omega)} g(x,y) p_{X,Y}(x,y) \\
+Var(W) & = E(W^2) - E(W)^2
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Functions of random variables}
+
+\begin{ex}
+Let $X \sim Bin(2,\frac{1}{3})$ and $Y \sim Bern(\frac{1}{5})$ be independent. 
+
+\vspace{5mm}
+
+What is the expected value of $W = X - Y$? 
+\end{ex}
+\[ E(W) = E(X - Y) = E(X) - E(Y) = \frac{3}{2} - \frac{1}{5} = \frac{13}{10}. \]
+
+}
+
+
+\frame{ \frametitle{Joint cumulative distribution function (joint CDF)}
+
+The \textbf{joint CDF} of the random vector $(X_1, X_2, ..., X_n)$ is the function such that for any $s_1, s_2, ..., s_n \in \R$,  
+\[ F(s_1, s_2, ..., s_n) = P(X_1 \leq s_1, X_2 \leq s_2, ..., X_n \leq s_n). \]
+
+\vspace{5mm}
+
+This joint CDF can be attained by integrating a joint PDF: 
+\[ F(s_1, s_2, ..., s_n) = \int_{-\infty}^{s_n} \cdots \int_{-\infty}^{s_1} f(x_1, x_2, ..., x_n) dx_1 ... dx_n. \]
+
+}
+
+
+\frame{ \frametitle{Joint cumulative distribution function (joint CDF)}
+
+Some properties of joint and marginal CDFs: 
+\begin{align*}
+\lim_{a \to -\infty} F_{X,Y}(a,b) & = \lim_{b \to -\infty} F_{X,Y}(a,b) = 0 \\
+\lim_{a \to \infty} F_{X,Y}(a,b) & = F_{X,Y}(\infty,b) = F_Y(b) \\
+\lim_{b \to \infty} F_{X,Y}(a,b) & = F_{X,Y}(a,\infty) = F_X(a) \\
+\lim_{b \to \infty} \lim_{a \to \infty} F_{X,Y}(a,b) & = 1
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Joint cumulative distribution function (joint CDF)}
+
+To get the probability of a RV $X$ being in an interval, take the difference of its CDF at those two values (note the difference in the inequalities): 
+\[ P(a < X \leq b) = P(X \leq b) - P(X \leq a) = F_X(b) - F_X(a). \]
+
+}
+
+
+\frame{ \frametitle{Joint cumulative distribution function (joint CDF)}
+
+The joint probability of two RVs, $X$ and $Y$, both being in intervals, is calculated similarly:
+\begin{align*}
+P(a < & \, X \leq b, \, c < Y \leq d) \\
+ & \\
+ & =  P(X \leq b, c < Y \leq d) - P(X \leq a, c < Y \leq d) \\
+ & \\
+ & = [P(X \leq b, Y \leq d) - P(X \leq b, Y \leq c)] \\
+  & \,\,\,\,\,\, - [P(X \leq a, Y \leq d) - P(X \leq a, Y \leq c)] \\
+ & \\
+  & = [F_{X,Y}(b,d) - F_{X,Y}(b,c)] - [F_{X,Y}(a,d) - F_{X,Y}(a,c)].
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Joint CDF into joint PDF}
+
+We can, as in the one-dimensional version, recover the joint PDF from the joint CDF by differentiating along every variable. 
+
+\vspace{5mm}
+
+If $F_{(X_1, X_2, ..., X_n)}(x_1, x_2, ..., x_n)$ is the joint CDF of $(X_1, X_2, ..., X_n)$, and the joint PDF $f_{(X_1, X_2, ..., X_n)}(x_1, x_2, ..., x_n)$  exists, then 
+
+\[  f_{(X_1, X_2, ..., X_n)}(x_1, x_2, ..., x_n) = \frac{\partial^n F}{\partial x_1 \partial x_2 \cdots \partial x_n}(x_1, x_2, ..., x_n). \]
+
+}
+
+
+\frame{ \frametitle{$X \perp Y$ $\iff$ joint CDF, PMF (or PDF), MGF factor}
+
+\begin{thm}
+The following are equivalent statements: 
+\begin{align*}
+X \perp Y \iff & \forall a, b \in \R, F_{X,Y}(a,b) = F_X(a) F_Y(b) \\
+ & \\
+\iff & \forall x, y, \,  p_{X,Y}(x,y) = p_X(x) p_Y(y) \text{ (discrete)}, \\
+ & \text{ or } f_{X,Y}(x,y) = f_X(x) f_Y(y) \text{ (continuous)} \\
+ & \\
+\iff & m_{X,Y}(t,s) = E(e^{tX+sY}) = E(e^{tX}) E(e^{sY}) = m_X(t) m_Y(s).
+\end{align*}
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{$X \perp Y$ $\iff$ joint CDF, PMF (or PDF), MGF factor}
+
+This is NOT true if only $E(XY) = E(X) E(Y)$! 
+
+\vspace{5mm}
+
+\[ E(XY) = E(X) E(Y) \implies \rho(X,Y) = 0, \]
+
+\vspace{3mm}
+
+i.e. $X$ and $Y$ are \emph{uncorrelated}, but not necessarily independent. 
+
+\vspace{5mm}
+
+(However, $\rho(X,Y) \neq 0$ does mean $X$ and $Y$ are dependent.)
+
+}
+
+
+\frame{ \frametitle{Transformation of a joint PDF}
+
+How do we transform a joint PDF in 
+\[ (X_1, X_2, ..., X_n) \] 
+into a joint PDF in 
+\[ (Y_1, Y_2, ..., Y_n) \]
+where
+\[ y = g(x)? \]
+
+\vspace{5mm}
+
+If this is possible, we can use the \textbf{Jacobian matrix} to do so. 
+
+}
+
+
+\frame{ \frametitle{Transformation of a joint PDF}
+
+Recall that, if $y = g(x)$ is an invertible function, then we can write 
+\[ x = g^{-1}(y). \]
+
+Generalizing the 1-dimensional transform the PDF of a continuous RV $X$ into $Y = g(X)$, 
+\[ f_Y(y) = f_x(g^{-1}(y)) |(g^{-1})'(y)| = \frac{f_x(g^{-1}(y))}{|g'(g^{-1}(y))|}, \]
+the Jacobian is a matrix that holds all partial derivatives between the transformations. We'll examine the $2 \times 2$ case.
+
+}
+
+
+
+\frame{ \frametitle{Jacobian matrix, determinant}
+
+The \textbf{Jacobian matrix} $J$ of a coordinate transformation is the matrix that holds all partial derivatives of the transformation. 
+
+\vspace{5mm}
+
+If we want to transform the RV $(X_1, X_2)$ into $(Y_1, Y_2) = g(X_1, X_2)$, then we examine the coordinate functions and inverses 
+\[ y_1 = g_1(x_1, x_2), \,\, y_2 = g_2(x_1, x_2); \,\, x_1 = h_1(y_1, y_2), \,\, x_2 = h_2(y_1, y_2). \]
+
+If this is possible, we can use the \textbf{Jacobian determinant} (the determinant of the Jacobian matrix) to transform $(X_1, X_2)$ into $(Y_1, Y_2)$. The joint PDF of $(Y_1, Y_2)$ is 
+\[ f_{(Y_1, Y_2)}(y_1, y_2) = f_{(X_1, X_2)}( h_1(y_1, y_2), h_2(y_1, y_2) )
+ \cdot \Bigg| \begin{array}{cc} 
+\frac{\partial h_1}{\partial y_1} & \frac{\partial h_1}{\partial y_2} \\
+\frac{\partial h_2}{\partial y_1} & \frac{\partial h_2}{\partial y_2} \\
+\end{array} \Bigg|. \]
+
+}
+
+
+\frame{ \frametitle{Rectangular and Polar Coordinates}
+
+We usually write points on the plane in 
+\begin{center}
+\textbf{rectangular coordinates} $(x,y)$ 
+\end{center}
+(our ``usual'' Cartesian coordinate plane). 
+
+\vspace{3mm}
+
+However, we can transform these rectangular coordinates into 
+\begin{center}
+\textbf{polar coordinates} $(r, \theta)$, 
+\end{center}
+where 
+\begin{itemize}
+\item $0 \leq \theta < 2\pi$ is the angle between the positive $x$-axis and the vector $(x,y)$, and 
+\item $r \geq 0$ is the length of the vector (and the radius of the circle centered at the origin on which $(x,y)$ is a point). 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Rectangular and Polar Coordinates}
+
+From polar to rectangular: 
+
+\[ x = r \cos \theta, \,\, y = r \sin \theta \]
+
+\vspace{5mm}
+
+From rectangular to polar: 
+
+\[ r = \sqrt{x^2 + y^2}, \,\, \theta = \arctan\left(\frac{y}{x}\right) \, (x \neq 0). \]
+
+}
+
+
+\frame{ \frametitle{Example: Box-Muller transformation}
+
+The \textbf{Box-Muller transformation} converts two independent uniforms into independent normals: 
+
+\[ U_1, U_2 \sim Unif(0,1), U_1 \perp U_2 \longrightarrow X, Y \sim N(0,1), X \perp Y. \]
+
+\vspace{5mm}
+
+The transformation is 
+
+\begin{align*} 
+X & = \sqrt{-2 \ln U_1} \cos(2 \pi U_2), \\
+ & \\
+Y & = \sqrt{-2 \ln U_1} \sin(2 \pi U_2).
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Box-Muller transformation}
+
+Using the polar coordinate transform
+\begin{align*} 
+X = R \cos \Theta, \,\,\, Y = R \sin \Theta,
+\end{align*}
+
+\vspace{3mm}
+
+we can find the distributions of $R$ and $\Theta$ in terms of $U_1$, $U_2$: 
+\begin{align*} 
+R = \sqrt{-2 \ln U_1}, \,\,\, \Theta = 2 \pi U_2, 
+\end{align*}
+
+which yields 
+\begin{align*} 
+R & \sim \chi^2(2) \sim Exp\left(\lambda = \frac{1}{2}\right), \,\,\, \Theta \sim Unif(0,2\pi). 
+\end{align*}
+
+
+}
+
+
+\end{document}

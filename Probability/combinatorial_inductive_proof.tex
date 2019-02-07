@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+\setlength{\oddsidemargin}{.5in}
+\setlength{\evensidemargin}{.5in}
+\setlength{\textwidth}{6.0in}
+\setlength{\topmargin}{0.0in}
+\addtolength{\topmargin}{-1.0in}
+\setlength{\footskip}{.5in}
+\setlength{\textheight}{9.5in}
+\linespread{1.1}
+
+\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\prop}{\noindent \textbf{Proposition} }
+\newcommand{\pf}{\noindent \textbf{Proof} }
+
+
+\begin{document}
+
+\pagenumbering{arabic}
+
+%---:----1----:----2----:----3----:----4----:----5----:----6----:----7----:---
+
+\prop For whole numbers $n$, $k$ such that $n \geq k \geq 1$, 
+\begin{align} 
+{n \choose k} = \sum_{j=k-1}^{n-1} {j \choose k-1}.  \label{prove}
+\end{align}
+(In words: the number of ways to choose $k$ of $n$ things is the sum of all the ways to choose the first $k-1$ of them out of $j$ things, then make the last one the $n$th, out of all the $j$ that make sense (which is $j = k-1, k, k+1, ..., n-2, n-1$). 
+\\\\
+\pf We prove this via induction on $n$. The base case is $n=1$, $k=1$: 
+\[ {1 \choose 1} = \sum_{j=0}^{0} {j \choose 0} = 1. \]
+
+Now, assume 
+\[ {n \choose k} = \sum_{j=k-1}^{n-1} {j \choose k-1}. \]
+is true for a given $n$, and all $k \leq n$. We prove the result for $n+1$, i.e. we will prove 
+\begin{align} 
+{n+1 \choose k} = \sum_{j=k-1}^{(n+1)-1} {j \choose k-1} = \sum_{j=k-1}^{n} {j \choose k-1} \label{proveme}
+\end{align}
+using \eqref{prove}. This requires use of an identity we already know: 
+\begin{align} 
+{n+1 \choose k} = {n \choose k} + {n \choose k-1}. \label{know}
+\end{align}
+We'll also assume $k > 1$ (the $k=1$ case is obvious -- what is it?). Using \eqref{know}, we get 
+\begin{align*}
+{n+1 \choose k} & = {n \choose k} + {n \choose k-1} \\
+ & = \sum_{j=k-1}^{n-1} {j \choose k-1} + \sum_{j=k-2}^{n-1} {j \choose k-2} \text{ using \eqref{prove} twice} \\
+ & = \sum_{j=k-1}^{n-1} \left[ {j \choose k-1} + {j \choose k-2}\right] + {k-2 \choose k-2} \\
+ & = \sum_{j=k-1}^{n-1} {j+1 \choose k-1} + {k-2 \choose k-2} \text{ using \eqref{know} } \\
+ & = \sum_{l=k}^{n} {l \choose k-1} + {k-2 \choose k-2} \text{ by re-indexing } l = j + 1 \\
+ & = \sum_{l=k}^{n} {l \choose k-1} + {k-1 \choose k-1} \text{ since } {i \choose i} = 1 \text{ for ANY } i \\
+ & = \sum_{l=k-1}^{n} {l \choose k-1} \text{ by adding that term onto the sum. }
+\end{align*}
+Thus, the inductive step \eqref{proveme} is proven using the inductive hypothesis \eqref{prove} and we are done.
+
+\end{document}

@@ -1,0 +1,95 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{mjcquiz}[2018/01/30 for Michael Carlisle's quizzes and exams]
+
+
+\newcommand{\EV}{\mathbb{E}}    % expected value of a random variable
+\newcommand{\de}{\delta}
+\newcommand{\R}{\mathbb{R}}
+
+
+% vectors
+\newcommand{\rvv}[2]{\begin{pmatrix} #1 & #2 \end{pmatrix}}
+\newcommand{\rvvv}[3]{\begin{pmatrix} #1 & #2 & #3 \end{pmatrix}}
+\newcommand{\rvvvv}[4]{\begin{pmatrix} #1 & #2 & #3 & #4 \end{pmatrix}}
+\newcommand{\cvv}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+\newcommand{\cvvv}[3]{\begin{pmatrix} #1 \\ #2 \\ #3 \end{pmatrix}}
+\newcommand{\cvvvv}[4]{\begin{pmatrix} #1 \\ #2 \\ #3 \\ #4 \end{pmatrix}}
+\newcommand{\cvvvvv}[5]{\begin{pmatrix} #1 \\ #2 \\ #3 \\ #4 \\ #5 \end{pmatrix}}
+\newcommand{\mrr}[4]{\begin{pmatrix} #1 & #2 \\ #3 & #4 \end{pmatrix}}
+\newcommand{\mrrr}[9]{\begin{pmatrix} #1 & #2 & #3 \\ #4 & #5 & #6 \\ #7 & #8 & #9 \end{pmatrix}}
+
+
+% exam-specific things
+\newcommand{\prob}[1]{\vspace{5mm} \noindent \textbf{Problem #1} \,\,}
+
+
+\newcommand{\header}[2]{
+\begin{center}
+#1 \\ Quiz #2
+\end{center}
+
+\vspace{2mm}
+
+}
+
+
+\newcommand{\headerexam}[2]{
+\begin{center}
+#1 \\ #2
+\end{center}
+
+\vspace{2mm}
+
+}
+
+
+\newcommand{\namefield}{
+\noindent Printed Name \underline{\hspace{45mm}} \,\,\, Signature \underline{\hspace{45mm}}
+}
+
+
+\newcommand{\instexam}[2]{
+Show your work and clearly label your answers on this exam. 
+
+\emph{No scrap paper or notes are allowed}, but you may use a scientific or accounting calculator (no phones or computers). Use 6 digits of precision throughout your calculations (and answers), although fractions will likely make for more intelligible answers. 
+
+This quiz is scored out of #1 points. 
+
+(There are #2 points possible.) 
+
+To get credit on a problem, you \emph{must} give a clear, well-written explanation, justifying each step.
+}
+
+
+
+\newcommand{\instcalc}[3]{
+Show your work and clearly label your answers on this quiz. 
+
+\emph{No scrap paper or notes are allowed}, but you may use a scientific or accounting calculator (no phones or computers). 
+Use 6 digits of precision throughout your calculations (and answers), although fractions and roots will likely make for more intelligible answers. 
+
+This quiz is scored out of #1 points. (There are #2 points possible.) 
+
+You have #3 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} give a clear, well-written explanation, justifying each step.
+}
+
+
+\newcommand{\instnocalc}[3]{
+Show your work and clearly label your answers on this quiz. 
+
+\emph{No scrap paper or notes are allowed}. 
+
+This quiz is scored out of #1 points. (There are #2 points possible.) 
+
+You have #3 minutes to complete the quiz.
+
+To get credit on a problem, you \emph{must} give a clear, well-written explanation, justifying each step.
+}
+
+
+
+
+
+\endinput

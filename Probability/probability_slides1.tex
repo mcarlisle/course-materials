@@ -1,0 +1,760 @@
+\documentclass{beamer}
+
+%\usepackage{beamerthemesidebar, fancybox}
+\usepackage{beamerthemesplit,fancybox}
+%\usepackage[pdftex]{color,graphicx}
+\usepackage{graphicx,pgfarrows,pgfnodes}
+%\usepackage{pgfarrows,pgfnodes}
+\usepackage{verbatim} % for block comments, so I can comment out entire slides easily
+
+\usepackage{mjclectureslides}
+
+
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Experiments with random outcomes]{Introduction to Probability \\ Experiments with random outcomes}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2018}
+\date{}
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{What is a ``probability''?}
+
+\textbf{Probability} is an attempt to quantify the idea that an event may occur.
+
+\vspace{5mm}
+
+\begin{center}
+An \emph{attempt}. 
+\end{center}
+
+\vspace{5mm}
+
+For this attempt to be mathematically rigorous, we need to define several terms precisely, and grossly restrict our playing field.
+
+}
+
+
+\frame{ \frametitle{What is a ``probability''?}
+
+
+``[A]n event may occur'' will mean that, in some \textbf{random experiment} in an observed setting (a controlled setting or not - the experiment could be ``flip a coin'' or ``Google reports an increase in profit''), there is a ``measure'' out of the possible events, that this one will occur. 
+
+\vspace{5mm}
+
+Certainly, the controlled setting is easier to codify and observe, and our examples of coin flips, die rolls, card deals, etc. come from this comfort level and ease of computation.
+
+}
+
+
+
+\frame{ \frametitle{Definition of probability}
+
+\begin{defn}
+The \textbf{sample space} of an experiment is a set. \\(Most texts call this set $\Omega$ or $S$.) 
+
+\vspace{5mm}
+The elements in a sample space are called \textbf{outcomes} or \textbf{sample points}. (We usually refer to outcomes by $\omega$, $s$, or $x$.) 
+
+\vspace{5mm}
+A subset of outcomes is called an \textbf{event}. \\
+We often refer to events by $E$, $F$, etc. Note that 
+\[ E \in \mc{F} \subseteq 2^\Omega \implies E \subseteq \Omega. \]
+\end{defn}
+
+%\vspace{5mm}
+%\onslide<2->
+}
+
+
+\frame{ \frametitle{Definition of $\sigma$-algebra of sets}
+
+
+Let $\Omega$ be the sample space of an experiment.
+
+\vspace{5mm}
+
+A \textbf{$\sigma$-algebra} of subsets $\mc{F}$ of $\Omega$ satisfies three properties: 
+\begin{itemize}
+\item $\Omega \in \mc{F}$
+\item $A \in \mc{F} \implies A^C \in \mc{F}$
+\item $A_1, A_2, ... \in \mc{F} \implies \cup_{n=1}^{\infty} A_n \in \mc{F}$ (the $\sigma$-property).
+\end{itemize}
+
+\vspace{5mm}
+
+Note that $\mc{F} \subseteq 2^{\Omega}$, and $\emptyset \in \mc{F}$.
+}
+
+
+\frame{ \frametitle{Definition of probability measure}
+
+For a sample space $\Omega$ and a $\sigma$-algebra $\mc{F}$ of subsets of $\Omega$, a \textbf{probability measure} (or, simply, \textbf{probability}) is a function 
+\[ P: \mc{F} \to \mathbb{R} \] 
+that satisfies certain properties called the \emph{axioms of probability}. 
+
+\vspace{5mm}
+
+We call the triple $(\Omega, \mc{F}, P)$ a \textbf{probability space}, since this triple precisely describes the outcomes, events, and probabilities of the random experiment(s) being considered.
+
+}
+
+
+
+\frame{ \frametitle{Kolmogorov's axioms of probability}
+
+\begin{enumerate}
+\item $\forall E \in \mc{F}$, $0 \leq P(E) \leq 1$ \\
+\textbf{(probability is a percentage between 0\% and 100\%)}
+\item $P(\Omega) = 1$ (and so $P(\emptyset) = 0$) \\
+\textbf{(normalization: probability of ``anything happening'' is 1)}
+\item If $E_1$, $E_2$, ... are an infinite sequence of \textbf{pairwise disjoint} events, that is, $E_i \cap E_j = E_i E_j = \emptyset$ for any $i, j = 1, 2, 3, ...$, then 
+\[ P\left(\bigcup_{n=1}^{\infty} E_n \right) = \sum_{n=1}^{\infty} P(E_n) \]
+\textbf{(countable additivity: probability of a bunch of different things happening is the sum of those things' individual probabilities)}
+\end{enumerate}
+
+}
+
+
+\frame{ \frametitle{Examples in Discrete Probability}
+
+Our first two examples of sample spaces and events are examples in 
+
+\begin{center}
+\textbf{discrete probability}, 
+\end{center}
+
+where the methods of calculating probabilities are \emph{combinatorial}, i.e. deal with counting. 
+
+
+}
+
+
+\frame{ \frametitle{Example: fair coin flips}
+
+The most basic example of a random experiment is a \emph{fair coin flip}. 
+\[ \Omega = \{H, T\}; \,\, P(\{H\}) = \frac{1}{2}, P(\{T\}) = \frac{1}{2}. \]
+
+A more complex example is infinite sequences of fair coin flips: 
+\[ \Omega = \{ f_1 f_2 f_3... \, : \, f_i \in \{H, T\}, i=1,2,3,... \} \]
+What is the probability that the third flip in a sequence is H?
+\[ P(\{**H***...\}) = \frac{1}{2} \]
+since you're only considering one fair flip from the infinite sequence.
+
+}
+
+
+\frame{ \frametitle{Example: die rolls}
+
+Experiment: roll two six-sided dice. 
+
+\vspace{5mm}
+
+What is the sample space? It consists of ordered pairs 
+\[ \Omega = \bigg\{(i,j): i,j \in \{1,2,3,4,5,6\}\bigg\}. \]
+How many possible outcomes are there in this experiment? 
+
+}
+
+
+\frame{ \frametitle{Example: die rolls}
+
+Each die can roll 6 different ways, and there are 2 independent dice, so the total possible outcomes, by the Multiplication Principle, count up to $|\Omega| = 6^2 = 36$. 
+
+\vspace{5mm}
+
+What is the event that you roll a 5 on the second die? 
+\begin{align*} 
+E & = \text{``5 on 2nd die''} \\
+ & = \{(i,5): i \in \{1,2,3,4,5,6\}\} \\
+ &  = \{(1,5), (2,5), (3,5), (4,5), (5,5), (6,5)\}. 
+ \end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: die rolls}
+
+How many outcomes are in $E$? We can easily count $|E| = 6$. 
+
+\vspace{5mm}
+
+Therefore, a good first guess for the question \\
+
+\begin{center}
+``What is the probability of rolling a 5 on the second die?''
+\end{center}
+
+is the ratio (fraction) 
+\[ P(E) = \frac{6}{36} = \frac{1}{6}, \]
+and we notice that this matches the probability of just rolling a 5 on one die (ignoring the first die). 
+
+}
+
+
+
+\frame{ \frametitle{Properties of a probability}
+
+Some properties of all probability functions: 
+\begin{itemize}
+\item \textbf{(\emph{something} happens in an experiment)} $P(\emptyset) = 0$
+\item \textbf{(complements)} $P(E^C) = 1 - P(E)$ for any event $E$.
+\item \textbf{(finite additivity)} For events $E_1, ..., E_n$ mutually disjoint, 
+\[ P\left( \bigcup_{i=1}^{n} E_i\right) = \sum_{i=1}^{n} P(E_i). \]
+%(Yes, this is a \emph{result}, and not \emph{completely} obvious. However, it is simple to prove: use countable additivity and set 
+\[ \text{(Hint: countable additivity with } E_{n+1} = E_{n+2} = ... = \emptyset.) \]
+\item \textbf{(monotonicity)} If $E \subseteq F$, then $P(E) \leq P(F)$. 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Inclusion-Exclusion Principle}
+
+Recall the \textbf{inclusion-exclusion principle} of cardinality of sets: if $E, F \subseteq \Omega$ for some finite-sized universe $\Omega$, then 
+\[ |E \cup F| = |E| + |F| - |E \cap F|. \]
+
+This applies directly to probabilities: if $E, F$ are events in some experiment on the same sample space, then 
+\[ P(E \cup F) = P(E) + P(F) - P(EF). \]
+
+We can use Venn diagrams, similarly to the way we used them to count elements in sets, to figure out probabilities.
+
+}
+
+
+\frame{ \frametitle{Inclusion-Exclusion Principle}
+
+
+Also, just as before, inclusion-exclusion generalizes: here it is for three events, $E$, $F$, $G$: 
+\begin{align*} 
+P(E \cup F \cup G) = & P(E) + P(F) + P(G) \\
+ & - P(EF) - P(EG) - P(FG) \\
+ & + P(EFG). 
+ \end{align*}
+
+}
+
+
+\frame{ \frametitle{Examples}
+
+\begin{ex}
+Let's say the probability that it will rain on Wednesday is 34\%, and \\
+the probability that I will have a sandwich on Wednesday is 75\%. 
+
+\vspace{5mm}
+
+The probability that at least one of those things happens on Wednesday is 90\%. 
+
+\vspace{5mm}
+
+What is the probability that both happen? 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Example: rain and sandwich?}
+
+Let $E$ = ``it will rain on Wednesday'' and \\
+$F$ = ``I will have a sandwich on Wednesday''. 
+
+\vspace{5mm}
+
+We are given $P(E) = 0.34$, $P(F) = 0.75$, and $P(E \cup F) = 0.90$. 
+Hence,
+\[ P(EF) = P(E) + P(F) - P(E \cup F) = 0.34 + 0.75 - 0.90 = 0.19. \]
+
+The probability it will rain \emph{and} I'll have a sandwich on Wed is 19\%.
+}
+
+
+
+\frame{ \frametitle{Boole's inequality}
+
+The inclusion-exclusion principle yields an inequality called\\
+ \textbf{Boole's inequality}: for any events $E, F$, 
+\[ P(E \cup F) \leq P(E) + P(F). \]
+Why? Because $0 \leq P(E \cap F) \leq 1$. 
+
+\vspace{5mm} 
+
+This generalizes, just like inclusion-exclusion, and motivates the countable additivity axiom and finite additivity result: for any events $E_1$, $E_2$, ..., $E_n$, 
+\[ P\left( \bigcup_{i=1}^{n} E_i\right) \leq \sum_{i=1}^{n} P(E_i), \]
+with equality if the events are pairwise disjoint (finite additivity). 
+
+}
+
+
+\frame{ \frametitle{ But really... \emph{what is} a ``probability''? What does it \emph{mean}?}
+
+There are various \emph{interpretations} as to the \emph{meaning} of \textbf{probability} (as opposed to the mathematical treatment we are attempting, which ascribes no \emph{meaning}, only a reasonable methodology).
+
+\vspace{5mm}
+
+There are several ways that the notion of probability is interpreted, which can affect how they can be computed, used, or ignored. 
+
+
+}
+
+
+
+\frame{ \frametitle{Classical probability = uniform sample space}
+
+The first, most common in the simple, discrete experiment setting, is often called \emph{classical probability}. 
+
+\vspace{5mm}
+
+In this setting, if the sample space $\Omega$ is finite, and all outcomes are considered ``equally likely'', then the probability of an event $E$ on $\Omega$ is simply 
+\[ P(E) = \frac{|E|}{|\Omega|}, \]
+the ratio of the size of $E$ to the size of $\Omega$. 
+
+\vspace{5mm}
+
+This is the type of probability we use in all our game-based probabilities where the game is \emph{fair} in the sense that, say, rolling a 4 on a die is just as likely as rolling a 6 or a 1. 
+
+}
+
+
+\frame{ \frametitle{Classical probability = equally likely outcomes}
+
+%\textbf{Probability theory} began (as a \emph{theory}, rather than some calculational techniques) with questions of \emph{gambling}; in particular, a discussion between Fermat and Pascal on the ``problem of points'' (1654), a question of \emph{fairly} settling the stakes of a game that two players wanted to quit before the game was over. 
+
+%\vspace{5mm}
+
+\textbf{Classical probability} allows for immediate calculation of probabilities in many simple games of chance and other simple experiments where ``equally likely outcomes'' seems a very reasonable idea.
+
+\begin{itemize}
+\item coin flip: $\Omega = \{ H, T \}$, each outcome with probability $\frac{1}{2}$
+\item 1D6 roll: $\Omega = \{ 1, 2, 3, 4, 5, 6 \}$, each with probability $\frac{1}{6}$
+\item drawing a single card: 
+\[ \Omega = \{ (x,y): \, x \in \{A, 2, 3, ..., 9, 10, J, Q, K\}, \, y \in \{\heartsuit, \clubsuit, \diamondsuit, \spadesuit\} \}, \]
+each card drawn with probability $\frac{1}{52}$. 
+\end{itemize}
+
+However, there is a severe drawback: \emph{why} is it ``reasonable'' to think all these outcomes are ``equally likely''?
+}
+
+
+\frame{ \frametitle{Frequency probability = statistical probability}
+
+An alternative way to define these is the \textbf{relative frequency} approach, appreciated by statisticians, of counting the number of times wach outcome appears in \emph{repeated}, independent trials of the experiment. 
+
+\vspace{5mm}
+
+Then, we have a real, physical reason why one would believe the values used are ``reasonable''.
+
+\vspace{5mm}
+
+Define $n(E)$ as the number of times $E$ occurs in $n$ trials. Then 
+\[ P(E) = \lim_{n \to \infty} \frac{n(E)}{n}. \]
+Problems with this approach: 
+\begin{itemize}
+\item Can you run an \emph{infinite} number of trials to calculate this limit?
+\item Why would we believe this limit converges, and doesn't oscillate, or fall to 0? How can we know?
+\end{itemize}
+
+%\vspace{5mm}
+
+%While results called the \emph{Law of Large Numbers} support the idea, assuming we actually know the ``true average'' ratio of the number of times the event occurs relative to the number of experiments done (which we don't), we will discard it as a historical curiousity for a bit, since we're interested in a rigorous theory.
+
+}
+
+
+\frame{ \frametitle{Frequency probability = statistical probability}
+
+Here is a sample run of 500 simulated die rolls in Python: 
+
+\vspace{5mm}
+
+12133263265413165615566136521153126335632345335633\\
+55632323651662342164564526446512243365664155364433\\
+53625311662235252522555566422135353514323162532255\\
+42151624543133435444566624135425265345335246414335\\
+31352621152423146255615656121522542544146614364313\\
+42515132113454114164651434414444422443423611326611\\
+31211514632114162243326216256431266535434432126266\\
+31414366462326234661612316355316135522416413334246\\
+55641421424361155664326115163246455326531366332551\\
+12635652262563455261636516444134116123425335552146
+
+
+\vspace{5mm}
+
+There are 88 sixes in this run. Using this run as a frequency experiment, I could say $P(\text{roll a 6 in Python}) \approx \frac{88}{500} = 0.176$, which is getting close to $\frac{1}{6} = 0.1\overline{6}$... 
+
+}
+
+
+\frame{ \frametitle{Law of Large Numbers}
+
+The \textbf{Law of Large Numbers} states that, as the number of independent, identically-run experimental trials $n \to \infty$, the \emph{sample frequency ratio} $\frac{n(E)}{n}$ converges to a ``\emph{true probability}'', which we will call $P(E)$. 
+
+\vspace{5mm}
+
+So, there is a mathematical reason to believe that $P(E)$ exists as a limit, but not necessarily that we can \emph{compute} it. Also, while we can try to make sure all trials are ``identical'', physical constraints make that issue difficult.
+
+\vspace{5mm}
+
+However, we can approximate with a large number of trials, and trust experimental design and tools, which is good enough for most, and really all we can do if we want results.
+
+
+}
+
+
+\frame{ \frametitle{Subjective probability = ``measure of belief''}
+
+We call the type of probabilities coming from intuition, hunches, made up numbers and whatnot ``subjective probability''. 
+
+\vspace{5mm}
+
+When the mathematical tools of probability theory are used in making public policy decisions, life-affecting medical choices, large gambles on Wall St., it is important to understand where the numbers being plugged into those decisions are coming from: history, study, or whim?
+
+\vspace{5mm}
+
+Unfortunately, most people do not understand basic probability or statistics. (We may see particularly controversial examples when we reach Bayes' Law.)
+
+}
+
+
+
+\frame{ \frametitle{Uniform probability (finite sample space)}
+
+If the sample space of an experiment is $\Omega = \{1, 2, ..., N\}$, then the \textbf{uniform (classical) probability} of any individual outcome, i.e. the event $E_i = \{i\}$, is 
+\[ P(E_i) = P(\{i\}) = \frac{1}{N}. \]
+
+\vspace{5mm}
+
+In general, for any event $E \subset \Omega$, if $P$ is the ``equally likely'' (i.e. \emph{classical}) probability, then 
+\[ P(E) = \frac{|E|}{|\Omega|} = \frac{\#\text{ of outcomes in } E}{\#\text{ possible outcomes in } \Omega} = \frac{|E|}{N}. \]
+Obviously, then, counting is the name of the game here.
+
+}
+
+
+\frame{ \frametitle{Coin flips}
+
+\begin{ex}
+For a ``fair'' coin flip, $\Omega = \{H, T\}$, and $P(\{H\}) = P(\{T\}) = \frac{1}{2}$. 
+\end{ex}
+
+\vspace{5mm}
+
+\begin{ex}
+For a sequence of three ``fair'' coin flips, 
+\[ \Omega = \{H, T\}^3 = \{H, T\} \times \{H, T\} \times \{H, T\}. \] 
+What is the probability of getting three tails in a row: the sequence TTT?
+\[ P(\{TTT\}) = \frac{1}{2^3} = \frac{1}{8}. \]
+\end{ex}
+
+}
+
+
+
+\frame{ \frametitle{Die rolls}
+
+\begin{ex}
+Two fair dice (2D6) are rolled. What is $P(\{\text{sum is } 7\})$?
+\[ \Omega = \{ (i, j): \, i,j \in \{1, 2, 3, 4, 5, 6\} \}, \]
+ordered pairs of individual die rolls: (3,5) and (5,3) are two ways to roll a 3 and a 5. Thus, $|\Omega| = 6^2 = 36$. 
+
+\vspace{5mm}
+
+Next, note that our event is 
+\[ E = \{ (i,j) \in \Omega: \, i+j=7\} = \{ (1,6), (2,5), (3,4), (4,3), (5,2), (6,1) \}. \] 
+There are $|E| = 6$ possible outcomes for this event.  Thus, 
+\[ P(E) = \frac{|E|}{|\Omega|} = \frac{6}{36} = \frac{1}{6}. \]
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Venn diagrams can help in uniform probability}
+
+\begin{ex}
+In an old survey of 75 college students on their reading of three magazines, it was found that: 
+\begin{itemize}
+\item 23 read Time (and possibly more) 
+\item 18 read Newsweek (and possibly more) 
+\item 14 read US News (and possibly more) 
+\item 10 read Time and Newsweek (and possibly more) 
+\item 9 read Time and US News (and possibly more) 
+\item 8 read Newsweek and US News (and possibly more) 
+\item 5 read all three.
+\end{itemize}
+Question: If a student is selected at random from the survey to win a subscription, what is the probability they read none of the above? 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Balls in urns: without replacement}
+
+``Balls in urns'' is a typical type of counting / probability problem when asking about indistinguishable items (balls). 
+
+\vspace{5mm}
+
+\begin{ex}
+Say I have an urn with 6 blue and 5 yellow balls in it. I draw 3 balls at the same time, \emph{without replacement} (I keep all 3 out). What is the probability that I draw 1 blue and 2 yellow?
+\end{ex} 
+
+\vspace{5mm}
+
+$\Omega$ is the space of all possible ball draws \emph{without replacement}. \\
+First, we'll consider this without ordering. 
+There are 11 items total, and I am drawing 3 of them. How many ways are there to do that? 
+
+\[ |\Omega| = {11 \choose 3} = 165. \]
+
+}
+
+
+\frame{ \frametitle{Balls in urns: without replacement: without order}
+
+The event in question is $E = \{$ 1 blue, 2 yellow drawn $\}$. 
+
+\vspace{5mm}
+
+How many ways are there to do this? 
+
+\vspace{5mm}
+
+There are 6 blue and 5 yellow, so there are 
+\[ |E| = {6 \choose 1} {5 \choose 2} = 60 \]
+ ways. Thus, the probability of this event is 
+\[ P(E) = \frac{ {6 \choose 1} {5 \choose 2} }{ {11 \choose 3} } = \frac{60}{ 165 } = \frac{4}{11}. \]
+
+}
+
+
+\frame{ \frametitle{Balls in urns: without replacement: with order}
+
+Now, we'll consider the problem with ordering, i.e. draw the first ball, then second, then third, instead of all three at once. 
+
+\vspace{5mm}
+
+With ordering, the number of possible draws is 
+\[ |\Omega| = P(11,3) = \frac{11!}{8!} = 11 \cdot 10 \cdot 9 = 990. \] 
+
+}
+
+\frame{ \frametitle{Balls in urns: without replacement: with order}
+
+There are 3 orders in $E = \{$ 1 blue, 2 yellow drawn $\}$ to consider: 
+\[ BYY, YBY, YYB. \]
+There are 
+\begin{itemize}
+\item $6 \cdot 5 \cdot 4 = 120$ ways to draw BYY, 
+\item $5 \cdot 6 \cdot 4 = 120$ ways to draw YBY, and 
+\item $5 \cdot 4 \cdot 6 = 120$ ways to draw YYB. 
+\end{itemize}
+
+\vspace{5mm}
+
+Therefore, $|E| = 360$, and so 
+\[ P(E) = \frac{360}{990} = \frac{4}{11}. \]
+
+}
+
+
+\frame{ \frametitle{Balls in urns: with replacement}
+
+\begin{ex}
+Same urn, different experiment: draw 3 balls, \emph{with replacement} (draw 1, note its color, put it back in the urn, repeat).
+
+\vspace{5mm} 
+
+Now, what is the probability of drawing 1 blue and 2 yellow? 
+\end{ex}
+
+\vspace{5mm}
+
+$\Omega$ is now the space of all possible draws \emph{with replacement}. \\
+With replacement, each draw comes from 11 balls, so $|\Omega| = 11^3$. \\
+With replacement, there are ${3 \choose 1} = 3$ positions the blue ball could show up (in ordering): BYY, YBY, YYB. Thus, 
+
+\[ E = \{BYY, YBY, YYB\}, \text{ so } |E| = 3(6)(5)(5). \]
+
+Therefore, 
+\[ P(E) = \frac{ 3(6)(5)(5) }{11^3} = \frac{450}{1331}. \] 
+
+}
+
+
+\frame{ \frametitle{Preview: Binomial Random Variables}
+
+Say $X$ = the number of blue balls drawn in the example. 
+
+\vspace{5mm}
+
+Then the event $E = \{$ exactly 1 blue drawn $\}$ can be written 
+
+\[ E = \{X = 1\}. \]
+
+\vspace{5mm}
+
+$X$ is an example of a \textbf{binomial random variable}. 
+
+\vspace{5mm}
+
+What are the probabilities of each different value of $X$ showing up? 
+
+\vspace{5mm}
+
+Think about the binomial theorem.
+
+}
+
+
+\frame{ \frametitle{Preview: Binomial Random Variables}
+
+As before, the total number of possible draws with replacement is $|\Omega| = 11^3$. Then, the possible cases for $X$ are 
+\begin{align*}
+P(X = 0) & = \frac{{3 \choose 0} 6^0 5^3}{11^3} & & P(X = 1) = \frac{{3 \choose 1} 6^1 5^2}{11^3} \\
+P(X = 2) & = \frac{{3 \choose 2} 6^2 5^1}{11^3} & & P(X = 3) = \frac{{3 \choose 3} 6^3 5^0}{11^3} 
+\end{align*}
+which total up to, by the binomial theorem,  
+\[ \sum_{i=0}^3 \frac{{3 \choose i} 6^i 5^{3-i}}{11^3} = \frac{(6+5)^3}{11^3} = 1. \]
+
+}
+
+
+\frame{ \frametitle{Random variables}
+
+In general, a \textbf{random variable} $X$ is a function from a sample space $\Omega$ into the real numbers $\R$: 
+
+\[ X: \Omega \to \R. \]
+
+Thus, if $E$ is an event describing certain values of $X$, we can write the event in terms of a \textbf{pre-image} of $X$. 
+
+\vspace{5mm}
+
+For example, the event 
+\[ \{X \in \{2, 5\}\} = \{ \omega \in \Omega: \,\, X(\omega) \in \{2, 5\} \} = X^{-1}(\{2, 5\}). \] 
+
+}
+
+
+
+\frame{ \frametitle{Infinitely many outcomes? They cannot be ``equally likely''.}
+
+Notice that, for a probability to have equally likely outcomes, there must only be a finite number of outcomes possible. 
+
+\vspace{5mm}
+
+\begin{ex}
+Flip a fair coin until tails appears. What is the probability distribution of the number of flips it takes until this happens? 
+\end{ex}
+
+\vspace{5mm}
+
+The sample space $\Omega = \{\infty, 1, 2, 3, ... \}$ are the possible flip count outcomes. We put $\infty$ in the sample space because there is an infinitely-long sequence: 
+\[ HHHHHH... \]
+where T \emph{never} shows up. (We will see that the probability of this happening is 0.)
+
+}
+
+
+\frame{ \frametitle{How many flips until T appears? }
+
+Let $Y = $ the number of flips counted (another example of a \textbf{random variable}). 
+
+\vspace{5mm}
+
+What is the probability $P(Y = 4)$, that it takes 4 flips for T to show up? That is, what is the probability of getting the event 
+\[ \{ Y = 4 \} =  \{ \omega \in \Omega: \,\, Y(\omega) = 4 \} = \{HHHT\}? \]
+
+\[ P(HHHT) = \frac{1}{2^4} = \frac{1}{16}. \]
+
+}
+
+
+\frame{ \frametitle{How many flips until T appears? Geometric distribution.}
+
+In general, $P(Y = k) = \left(\frac{1}{2}\right)^k$ for $k=1,2,3,...$. $Y$ is called a \textbf{geometric random variable}, and as the geometric series yields 
+\[ \sum_{k=1}^{\infty} \left(\frac{1}{2}\right)^k = 1, \]
+this accounts for all probability in this experiment; thus, 
+
+\[ P(Y = \infty) = 0. \]
+
+}
+
+
+
+\frame{ \frametitle{Discrete random variable, probability mass function (pmf)}
+
+A random variable is called \textbf{discrete} if there is a countable or finite set of values it may take with positive probability. 
+
+\vspace{5mm}
+
+The function $p_X$ defined by 
+\[ p_X(k) = P(X = k) \]
+is called the \textbf{probability mass function (pmf)} of $X$. 
+
+\vspace{5mm}
+
+If $\{ k_1, k_2, k_3, ... \}$ is the set of all possible values of $X$, then 
+
+\[ \sum_{k = 1}^{\infty} p_X(k_i) = 1. \]
+
+We will see more details of pmfs later in the semester.
+
+}
+
+
+\frame{ \frametitle{Uncountably many outcomes? We need intervals.}
+
+If the sample space of an experiment has \emph{uncountably} many outcomes, our distribution will not be summable as a series. 
+
+\vspace{5mm}
+
+In this case, as we will see with \textbf{continuous random variables} later on, you will need to check the probability that a random variable lands in an interval of possible values.
+
+}
+
+
+\frame{ \frametitle{Uncountably many outcomes? We need intervals.}
+
+\begin{ex}
+Pick a number $X$ ``uniformly'' from the unit interval (a,b). 
+
+\vspace{5mm}
+
+($X$ here is called a \textbf{uniform random variable}.)
+
+\vspace{5mm}
+
+Then the sample space $\Omega = (a,b)$, and the probability that $X \in (c,d)$, where $a \leq c \leq d \leq b$, is 
+\[ P(X \in (c,d)) = \frac{d-c}{b-a}. \]
+\end{ex}
+
+Note that, for any point $x \in (a,b)$, $P(X = x) = \frac{x-x}{b-a} = 0$. 
+
+}
+
+
+\frame{ \frametitle{Example: dart throwing}
+
+If the sample space of a uniform rv is multidimensional, then the probability of landing in a particular region is the relative area or volume of that region.
+
+\vspace{5mm}
+
+If $X$ is uniformly distributed on the set B, then 
+\[ P(X \in C) = \frac{volume(C \cap B)}{volume(B)}. \]
+
+\begin{ex} 
+Throw a dart uniformly at random at a circular dart board of radius 9 in. If the bullseye is a disc of radius 1 in in the center of the board, what is the probability of hitting the bullseye?
+\end{ex}
+
+\[ P(bullseye) = \frac{area(bullseye)}{area(board)} = \frac{\pi(1)^2}{\pi(9)^2} = \frac{1}{81}. \]
+}
+
+
+
+\end{document}
