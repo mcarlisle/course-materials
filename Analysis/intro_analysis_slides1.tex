@@ -1,0 +1,1237 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Logic and Proof]
+{Introduction to Analysis: \\
+Logic and Proof}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Fall 2017}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Statements}
+
+First, we talk about how to talk about truth. 
+
+\vspace{5mm}
+
+We use the term 
+
+\begin{center}
+\textbf{statement} 
+\end{center}
+to refer to any declarative sentence that has a truth value. 
+
+\vspace{5mm}
+
+By ``truth value'' we are referring to 
+\begin{center}
+\textbf{bivalent logic}
+\end{center}
+here: ``true'' and ``false'' are the \emph{only} truth values we consider.
+
+}
+
+
+\frame{ \frametitle{Conventions of Notation}
+
+Certain mathematical objects have ``default'' letters used in mathematical literature to represent them. 
+
+\vspace{5mm}
+
+It is reasonable that ANY letter can be used to refer to ANY type of mathematical object.
+
+\vspace{5mm}
+
+These are merely conventions that many textbooks and papers use. 
+
+}
+
+
+\frame{ \frametitle{Conventions of Notation}
+
+\begin{itemize}
+\item real numbers $\mathbb{R}$: variables, $x, y, z$; constants, $a, b, c$. 
+\vspace{3mm}
+\item rational numbers $\mathbb{Q}$: $q, r$
+\vspace{3mm}
+\item integers $\mathbb{Z}$: $n, m$
+\vspace{3mm}
+\item real numbers \emph{representing time}: $t, s$
+\vspace{3mm}
+\item \emph{functions} of real numbers: $f, g$
+\vspace{3mm}
+\item statements: $P, Q, R$, $\phi$, $\psi$, $p, q, r$
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Logical Connectives}
+
+There are several operators that allow you to combine statements into new (\emph{compound}) statements. 
+
+\vspace{5mm}
+
+The simplest ones are, with notation: 
+
+\vspace{5mm}
+
+\begin{itemize}
+\item NOT (\textbf{negation}) ($\sim P$, $\lnot P$, $\overline{P}$)
+\vspace{3mm}
+\item OR (inclusive or - \textbf{disjunction}) ($P \lor Q$)
+\vspace{3mm}
+\item XOR (exclusive or - ``either or'') ($P \oplus Q$, $P \veebar Q$)
+\vspace{3mm}
+\item AND (\textbf{conjunction}) ($P \land Q$)
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Logical Connectives}
+
+\begin{itemize}
+\item IMPLIES (\textbf{implication}, \textbf{conditional}) 
+\[ \text{ if } P, \text{ then } Q, \hspace{20mm} P \implies Q \]
+\item converse implication 
+\[ \text{ if } Q, \text{ then } P, \hspace{10mm} P \text{ only if } Q, \hspace{10mm} Q \implies P, \hspace{10mm} P \Leftarrow Q \]
+\item IFF (\textbf{logical equivalence}, \textbf{biconditional}) (if and only if)
+\[ P \iff Q, \hspace{20mm} P \equiv Q \]
+\end{itemize}
+
+\vspace{5mm}
+
+You may also see the conditional arrows in a single-bar format:
+\[ \rightarrow \hspace{25mm} \leftarrow \hspace{25mm} \longleftrightarrow \]
+
+}
+
+
+
+\frame{ \frametitle{Order of Precedence}
+
+Precedence of logical operators is similar to elementary arithmetic:  
+
+\begin{align*} 
+P,E & & M,D & & A,S \\
+(), x^y & & \times, \div & & +, -
+\end{align*}
+
+becomes 
+\begin{align*} 
+& P, NOT & & AND & & OR \\
+& (), \lnot & & \land & & \lor
+\end{align*}
+
+
+}
+
+
+
+\frame{ \frametitle{Truth Tables}
+
+A \textbf{truth table} gives the truth values of a compound statement.
+
+\vspace{5mm}
+
+It does so  by checking every possible case of truth values for the simple statements in the compound statement. 
+
+\vspace{5mm}
+
+If there are $n$ elementary statements in a compound statement, \\the truth table must have $2^n$ rows.
+
+}
+
+
+\frame{ \frametitle{Truth Tables}
+
+The truth tables for the basic logical connectives are: 
+
+\vspace{5mm}
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c|c|c|c}
+$P$ & $Q$ & $\lnot P$ & $P \lor Q$ & $P \land Q$ & $P \implies Q$ & $P \iff Q$ \\
+\hline
+T & T & F & T & T & T & T \\
+T & F & F & T & F & F & F \\
+F & T & T & T & F & T & F \\
+F & F & T & F & F & T & T
+\end{tabular} 
+\end{center}
+
+\vspace{5mm}
+
+Note that every column here is different.
+
+}
+
+
+\frame{ \frametitle{Truth Tables: Make them simpler to write}
+
+To easily write a truth table, add columns for substatements.
+
+\vspace{10mm}
+
+For example, the truth table for $(P \lor Q) \land \lnot Q$ can be written 
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c|c}
+$P$ & $Q$ & $P \lor Q$ & \,\, $\land$ \,\, & $\lnot Q$ \\
+\hline
+T & T & T & {\color{red} F} & F \\
+T & F & T & {\color{red} T} & T \\
+F & T & T & {\color{red} F} & F \\
+F & F & F & {\color{red} F} & T
+\end{tabular} 
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Logical Equivalence}
+
+
+If two statements have the same exact column entries in a truth table, they are called 
+
+\begin{center}
+\textbf{logically equivalent}
+\end{center}
+
+and this fact is denoted by $\equiv$. 
+
+\vspace{10mm}
+
+Using the previous example, we can deduce
+
+\[ ((P \lor Q) \land \lnot Q) \equiv \lnot (P \implies Q). \]
+
+}
+
+
+\frame{ \frametitle{Tautology (Always True)}
+
+A statement is called a
+\begin{center}
+\textbf{tautology} 
+\end{center}
+if its truth table column is all T.
+
+\vspace{10mm}
+
+The simplest tautology is the \textbf{law of excluded middle}: 
+\[ P \, \lor \sim P \]
+
+A tautology may be represented by the symbol $\top$ (\emph{verum}).
+
+}
+
+
+\frame{ \frametitle{Contradiction (Always False)}
+
+A statement is called a
+\begin{center}
+\textbf{contradiction} 
+\end{center}
+if its truth table column is all F.
+
+\vspace{10mm}
+
+The simplest contradiction is the \textbf{law of non-contradiction}: 
+\[ P \, \land \sim P \]
+
+A contradiction may be represented by the symbol $\bot$ (\emph{falsum}).
+
+}
+
+
+\frame{ \frametitle{Satisfiable (Not Always False)}
+
+
+\vspace{5mm}
+
+A statement is called 
+\begin{center}
+\textbf{satisfiable} 
+\end{center}
+if there exists a T in its truth table column.
+
+\vspace{10mm}
+
+A contradiction is the only \textbf{nonsatisfiable} type of statement.
+
+}
+
+
+\frame{ \frametitle{DeMorgan's Laws}
+
+\textbf{DeMorgan's Laws} in logic give the negations of AND and OR.
+
+\vspace{5mm}
+
+Symbolically, for two statements $P$ and $Q$, these laws are: 
+
+\begin{align*}
+\lnot (P \land Q) & \equiv \lnot P \lor \lnot Q \\
+ & \\
+\lnot (P \lor Q) & \equiv \lnot P \land \lnot Q \\
+\end{align*}
+
+For proof, simply build truth tables.
+
+\vspace{5mm}
+
+We will see a set version of DeMorgan's Laws in the next section.
+
+}
+
+
+
+\frame{ \frametitle{DeMorgan's Laws}
+
+Here is the truth table for DeMorgan's disjunction law.
+
+\[ \lnot (P \lor Q) \equiv \lnot P \land \lnot Q \]
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c||c|c|c}
+$P$ & $Q$ & $\lnot$ & $(P \lor Q)$ & $\lnot P$ & \, $\land$ \, & $\lnot Q$ \\
+\hline
+ &  & {\color{red} } &  &  & {\color{red} } &  \\
+ &  & {\color{red} } &  &  & {\color{red} } &  \\
+ &  & {\color{red} } &  &  & {\color{red} } &  \\
+ &  & {\color{red} } &  &  & {\color{red} } &  
+\end{tabular} 
+\end{center}
+
+}
+
+
+
+\frame{ \frametitle{DeMorgan's Laws}
+
+Here is the truth table for DeMorgan's disjunction law.
+
+\[ \lnot (P \lor Q) \equiv \lnot P \land \lnot Q \]
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c||c|c|c}
+$P$ & $Q$ & $\lnot$ & $(P \lor Q)$ & $\lnot P$ & \, $\land$ \, & $\lnot Q$ \\
+\hline
+T & T & {\color{red} } & T & F & {\color{red} } & F \\
+T & F & {\color{red} } & T & F & {\color{red} } & T \\
+F & T & {\color{red} } & T & T & {\color{red} } & F \\
+F & F & {\color{red} } & F & T & {\color{red} } & T
+\end{tabular} 
+\end{center}
+
+}
+
+
+
+\frame{ \frametitle{DeMorgan's Laws}
+
+Here is the truth table for DeMorgan's disjunction law.
+
+\[ \lnot (P \lor Q) \equiv \lnot P \land \lnot Q \]
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c||c|c|c}
+$P$ & $Q$ & $\lnot$ & $(P \lor Q)$ & $\lnot P$ & \, $\land$ \, & $\lnot Q$ \\
+\hline
+T & T & {\color{red} F} & T & F & {\color{red} F} & F \\
+T & F & {\color{red} F} & T & F & {\color{red} F} & T \\
+F & T & {\color{red} F} & T & T & {\color{red} F} & F \\
+F & F & {\color{red} T} & F & T & {\color{red} T} & T
+\end{tabular} 
+\end{center}
+
+}
+
+
+
+\frame{ \frametitle{Predicates}
+
+\textbf{Predicates} are statements that contain variables. 
+
+\vspace{5mm}
+
+Predicates are functions that take input, and output a truth value.
+
+\vspace{5mm}
+
+For a simple example predicate with integer input, define 
+
+\[ e: \Z \to \{T, F\} \]
+
+by 
+
+\[ e(x) := ``x \text{ is even.'' } \]
+
+}
+
+
+\frame{ \frametitle{Predicates}
+
+Predicates can be 
+\begin{center}
+\emph{always true}, \emph{sometimes true}, or \emph{never true}, 
+\end{center}
+depending on the domain of definition. 
+
+\vspace{10mm}
+
+For the predicate $e(x)$ defined earlier, $e(2)$ is T and $e(-13)$ is F.
+
+\vspace{5mm}
+
+We could try to build a truth table for $e$ with all values $x \in \Z$, ... \\
+\hspace{65mm} but it wouldn't go well.
+
+}
+
+
+\frame{ \frametitle{Predicates}
+
+The predicate 
+
+\[ p: \Z \to \{T, F\} \]
+
+defined by 
+
+\[ p(n) := ``n^2 - 4 = 0" \]
+
+\vspace{3mm}
+
+is true for $n = \pm 2$, but false for all other $n \in \Z$. 
+
+\vspace{5mm}
+
+In the usual situation, we will not write out the functional notation, 
+
+\vspace{3mm}
+
+but we should specify what domain our statements are defined on.
+
+}
+
+
+\frame{ \frametitle{Predicates}
+
+The predicate $q$ defined by 
+
+\[ q(x) := ``x^2 - 5 = 0" \]
+
+\vspace{3mm}
+
+is never true for $x \in \Z$. 
+
+\vspace{5mm}
+
+However, if $q$ defined on $\R$, $q$ is true for $x = \pm \sqrt{5}$. 
+
+}
+
+
+\frame{ \frametitle{Quantifiers}
+
+With predicates come two more logical connectives called 
+\begin{center}
+\textbf{quantifiers}.
+\end{center}
+These symbols declare the 
+\begin{center}
+\emph{quantity} of \emph{elements} of a \emph{set} 
+\end{center}
+that a statement is about. 
+
+}
+
+
+\frame{ \frametitle{Existential Quantifier}
+
+The \textbf{existential quantifier} $\exists$ means ``there exists''. 
+
+\vspace{10mm}
+
+Computationally, $\exists$ means 
+
+\begin{center}
+``there is at least one of these'' 
+\end{center}
+elements in a given set satisfies a certain property. 
+
+
+}
+
+
+\frame{ \frametitle{Existential Quantifier}
+
+The existentially-quantified statement $P$ defined by 
+
+\vspace{5mm}
+
+\[ P = ``\exists x \in \Z: \,\, x^2 - 5 = 0" \]
+
+\vspace{8mm}
+
+is false, since no $x \in \Z$ satisfies $x^2 - 5 = 0$. 
+
+}
+
+
+\frame{ \frametitle{Existential Quantifier}
+
+Note that $P$ defined by 
+\[ P = ``\exists x \in \Z: \,\, x^2 - 5 = 0" \]
+
+\vspace{5mm}
+
+is \emph{not} a predicate, but if we rewrite $P$ using $\phi$ as 
+\[ \phi(x) = ``x^2 - 5 = 0" \]
+\[ P = ``\exists x \in \Z: \,\, \phi(x)" \]
+
+then $\phi(x)$ \emph{is} a predicate. ($P$ is still a single false statement.)
+
+}
+
+
+\frame{ \frametitle{Existential Quantifier}
+
+The statement 
+
+\[ Q = ``\exists x \in \R: \,\, x^2 - 5 = 0" \]
+
+\vspace{3mm}
+
+is true since there does exist such an $x \in \R$; namely, $x = \sqrt{5}$. 
+
+\vspace{10mm}
+
+Note that the existence of just one such value $x$ suffices for truth.
+
+}
+
+
+\frame{ \frametitle{Universal Quantifier}
+
+The \textbf{universal quantifier} $\forall$ means ``for all''. 
+
+\vspace{10mm}
+
+Computationally, $\forall$ means 
+\begin{center}
+``every one of these''
+\end{center}
+elements in a given set satisfies a certain property. 
+
+}
+
+
+\frame{ \frametitle{Universal Quantifier}
+
+The universally-quantified statement $E$ defined by 
+\[ E = ``\forall n \in \Z: \,\, e(n)" \]
+where $e(x) =$ ``$x$ is even'' 
+is false, since there exists an odd integer.
+
+\vspace{10mm}
+
+Note that existence of just one such value $x$ suffices for falsehood.
+
+}
+
+
+\frame{ \frametitle{Universal Quantifier}
+
+The statement $Q$ defined by 
+\[ Q = ``\forall x \in \Z: \,\, x+y = 6 \text{ has a solution for } y \in \Z" \]
+is true.
+
+\vspace{10mm}
+
+Can you \emph{prove} this statement?
+}
+
+
+
+\frame{ \frametitle{Speaking English With Quantifiers}
+
+Define the predicate \\
+
+\begin{center} 
+$W(x) =$ ``I have watched episode $x$ of \emph{The X-Files}'' \\
+
+\vspace{2mm}
+
+over the domain \\
+
+\vspace{2mm}
+
+$E = \{x: \,\, x$ is an episode of \emph{The X-Files}$\}$.
+\end{center}
+
+Then the statement 
+
+\[ \exists x \in E: \, W(x) \]
+
+could be spoken as 
+
+\begin{center}
+``There exists an episode $x$ of \emph{The X-Files} such that I have watched episode $x$.'' 
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Speaking English With Quantifiers}
+
+However, that's not usually how people speak.
+
+\vspace{3mm}
+
+\begin{center}
+``There exists an episode $x$ of \emph{The X-Files} such that I have watched episode $x$'' 
+\end{center}
+
+is more likely to be said 
+
+\begin{center}
+``I have watched an episode of \emph{The X-Files}.'' 
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Speaking English With Quantifiers}
+
+Likewise, the statement 
+
+\[ \forall x \in E, \, W(x) \]
+
+could be spoken as 
+
+\begin{center}
+``For every episode $x$ of \emph{The X-Files}, I have watched episode $x$'' 
+\end{center}
+
+but would much more likely be said 
+
+\begin{center}
+``I have watched every episode of \emph{The X-Files}''.
+\end{center}
+
+}
+
+
+
+\frame{ \frametitle{Negating a Quantifier}
+
+
+To negate a quantified statement,
+
+ \begin{center}
+ negate the predicate and switch the quantifier. 
+\end{center}
+
+\vspace{5mm}
+
+Notice in English: the negation of 
+
+\begin{center}
+``I have watched every episode of \emph{The X-Files}''\\
+
+\vspace{2mm}
+
+is \\
+
+\vspace{2mm}
+
+``I have not watched every episode of \emph{The X-Files}''. \\
+
+\vspace{5mm}
+
+This negation is logically equivalent to the statement 
+
+\vspace{5mm}
+
+``There is an episode of \emph{The X-Files} that I have not watched''. \\
+
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Negating a Quantifier}
+
+A logical equivalent to a quantified statement with the other quantifier can be attained by 
+\begin{itemize}
+\item negating the predicate 
+\item and both switching and negating the quantifier.
+\end{itemize}
+ 
+\vspace{5mm}
+
+Notice in English: 
+
+\begin{center}
+``I have watched every episode of \emph{The X-Files}''\\
+
+\vspace{5mm}
+
+is logically equivalent to \\
+
+\vspace{5mm}
+
+``There is not an episode of \emph{The X-Files} that I have not watched''. \\
+
+\vspace{5mm}
+
+Why is that so? 
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Negating a Quantifier}
+
+Compare the following statements.  Which are equivalent?
+
+\vspace{5mm}
+
+\begin{tabular}{c|r}
+$\forall x \in E, \, W(x)$ & ``I have watched every episode \\
+ & of \emph{The X-Files}''  \\
+ & \\
+$\lnot( \forall x \in E, \, W(x) )$ & ``I have not watched every episode \\
+ & of \emph{The X-Files}'' \\
+ & \\
+$\exists x \in E \, : \, \lnot W(x)$ & ``There is an episode of \emph{The X-Files} \\
+ & that I have not watched'' \\
+ & \\
+$\lnot( \exists x \in E \, : \, \lnot W(x) )$ & ``There is not an episode of \emph{The X-Files} \\
+ & that I have not watched'' \\
+\end{tabular}
+
+
+}
+
+
+\frame{ \frametitle{Axiomatic Proof}
+
+We establish mathematical truth via \textbf{mathematical proof}.
+
+\vspace{10mm}
+
+\begin{defn}
+A \textbf{mathematical proof} of a proposition is a chain of logical deductions leading from a base set of \textbf{axioms} to the proposition.
+\end{defn}
+
+}
+
+
+\frame{ \frametitle{Axiomatic Proof}
+
+... so what is an axiom? 
+
+\vspace{10mm}
+
+\begin{defn}
+\textbf{Axioms} are statements that are given as true and used, with logical connectives, as the basis of a mathematical proof system.
+\end{defn}
+
+}
+
+
+\frame{ \frametitle{Propositions to Prove: Terminology}
+
+Some specialized terms for logical / mathematical statements: 
+
+\vspace{10mm}
+
+A \textbf{proposition} is a logical statement (typically a \emph{conditional} (``implication'') or \emph{biconditional} (``if and only if'', or ``iff'')), \\
+that states \textbf{antecedents} (hypotheses) and yields a \textbf{consequent} (conclusion) as its result, which has a mathematical proof. 
+
+\vspace{10mm}
+
+We use 
+\[ \implies \] 
+to denote \emph{logical implication}, and 
+\[ \therefore \] 
+as the word ``therefore".
+
+}
+
+
+\frame{ \frametitle{Propositions to Prove: Terminology}
+
+All of the following are special names for propositions.
+
+\vspace{5mm}
+
+\begin{itemize}
+\item A \textbf{theorem} is an ``important'' proposition. A typical mathematical research paper will feature just a few theorems (sometimes only one) as its focal content.
+\vspace{3mm}
+\item A \textbf{lemma} is a supporting proposition used to prove a theorem. 
+\vspace{3mm}
+\item A \textbf{corollary} is a proposition, interesting enough to state on its own, that follows quickly (``for free'') from a lemma or theorem. 
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Types of Proof}
+
+Your antecedent is the statement $P$. \\How can you reach the conclusion $Q$?
+
+\begin{itemize}
+\item direct proof \#1: 
+\[ \text{ (modus ponens) } \,\,\,\, P, \, (P \implies Q). \,\, \therefore \,\, Q \]
+\item direct proof \#2: \textbf{contrapositive}:
+\[ \text{(modus tollens) } \,\,\,\,\lnot Q, (P \implies Q). \,\,\therefore \,\, \lnot P \]
+\item indirect proof: \textbf{proof by contradiction}: 
+\[ \text{(reductio ad absurdum) } \,\,\,\, (\lnot P \implies Q), \, (\lnot P \implies \lnot Q). \,\,\therefore \,\, P \]
+\end{itemize}
+
+In any case, when writing a proof, make sure you spell out the methods you are using for maximum clarity of comprehension.
+
+}
+
+
+
+\frame{ \frametitle{Proof by Cases}
+
+Many propositions are complicated enough that they have several \emph{cases} to cover. 
+
+\vspace{10mm}
+
+By proving smaller pieces of a proposition, it becomes manageable to generate an overall proof. 
+
+}
+
+
+\frame{ \frametitle{Proof by Cases}
+
+For example, perhaps you discover different techniques to prove 
+\[ P \implies Q \]
+depending on whether a certain value $a$ in $P$ is even or odd.
+
+\vspace{5mm}
+
+Rewriting 
+\[ P = (P \land ``a \text{ is even}") \lor (P \land ``a \text{ is odd}"), \]
+you can write two separate proofs, proving 
+\[ (P \land ``a \text{ is even}") \implies Q, \,\,\,\, (P \land ``a \text{ is odd}") \implies Q, \]
+and, taken together, these prove $P \implies Q$. 
+
+}
+
+
+\frame{ \frametitle{Direct Proof \#1}
+
+A \textbf{direct proof} of the implication 
+\[ P \implies Q \] 
+is the most straightforward approach. 
+
+\vspace{5mm}
+
+How this is done: First, assume $P$ is true. Then, use logic and all the mathematics you can muster to show that $Q$ logically follows from $P$ being true.
+
+\vspace{5mm}
+
+(Simple, right?)
+
+}
+
+
+\frame{ \frametitle{Direct Proof \#1: Some Notes}
+
+\begin{notenote}
+If you assume $P$ is false, then, by the implication truth table, $P \implies Q$ is true already. This doesn't tell us anything - the only logical case that matters is starting from $P$ being true. 
+\end{notenote}
+
+
+\begin{center}
+\begin{tabular}[c]{c|c||c}
+$P$ & $Q$ & $P \implies Q$  \\
+\hline
+{\color{red} T} & {\color{red} T} & {\color{red} T}  \\
+T & F & F  \\
+F & T & T  \\
+F & F & T  
+\end{tabular} 
+\end{center}
+
+%\begin{notenote}
+%Technically, proving any proposition is implicitly done as an implication, where the $P$ in this case is ``all the axioms and rules you know already, bound up in one giant conjunction''.  Then you show that, logically, from ``what you know'', $Q$ follows.
+%\end{notenote}
+
+}
+
+
+\frame{ \frametitle{Direct Proof \#1: Example}
+
+\begin{prop}
+For any $n \in \Z$, if $n$ ends in 0, then $n$ is even.
+\end{prop}
+
+\vspace{5mm}
+
+\pf Recall the definition of an even integer: $n$ is called even if 
+\[ \exists m \in \Z: \,\, n = 2m. \]
+
+\vspace{3mm}
+
+But if $n$ ends in 0, then $n$ is a multiple of 10; thus 
+\[ \exists k \in \Z: \,\, n = 10k = 2(5k). \]
+With $m = 5k$, we have that $n$ is even. \,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Direct Proof \#1: Example}
+
+\begin{prop}
+For any even $n \in \Z$, $5n + 2$ is even.
+\end{prop}
+
+\vspace{5mm}
+
+\pf Since $n$ is even, we know $\exists m \in \Z:$  $n = 2m$. We derive:
+\begin{align*}
+n & = 2m \\
+\implies 5n+2 & = 5(2m) + 2 \\
+ & = 2(5m) + 2 \\
+ & = 2(5m+1).
+\end{align*}
+Since $5m+1 \in \Z$, we know $5n+2$ is even. \,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Direct Proof \#2: Contrapositive}
+
+The \textbf{contrapositive} of an implication is logically equivalent to the implication itself: 
+\[ (P \implies Q) \equiv (\lnot Q \implies \lnot P) \]
+
+\begin{center}
+\begin{tabular}[c]{c|c||c||c}
+$P$ & $Q$ & $P \implies Q$ & $\lnot Q \implies \lnot P$ \\
+\hline
+T & T & T & T \\
+T & F & F & F \\
+F & T & T & T \\
+F & F & T & T 
+\end{tabular} 
+\end{center}
+
+Thus, you can do a direct proof of $P \implies Q$ by assuming that $Q$ is false (i.e. $\lnot Q$ is true) and showing that $\lnot P$ logically follows. 
+
+\vspace{3mm}
+
+(Contrapositive proofs \emph{might} require a bit more cleverness.)
+
+}
+
+
+\frame{ \frametitle{Direct Proof \#2: Example}
+
+\begin{prop}
+For any even $n \in \Z$, $5n + 2$ is even.
+\end{prop}
+
+\vspace{5mm}
+
+\pf Assume $5n+2$ is not even. Since we know every integer is either even or odd, then $5n+2$ is odd. 
+
+\vspace{3mm}
+
+We will prove that $n$ is odd. Since $5n+2$ is odd, we know $\exists m \in \Z$: 
+\begin{align*}
+5n+2 = 2m+1 & \implies & 5n & = 2m - 1 \\
+& \implies & n & = 2m - 1 - 4n \\
+& & & = (2m - 4n - 2) + 1 = 2(m - 2n - 1) + 1.
+\end{align*}
+Since $m - 2n - 1 \in \Z$, we know $n$ is odd. \,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Traps to Watch For (Logical Fallacies)}
+
+There are a number of logical mistakes that can be made in setting up a proof. 
+
+\vspace{5mm}
+
+Be aware of basic implication structure, and know your logic. 
+
+\vspace{5mm}
+
+Starting with the implication $P \implies Q$: 
+
+\vspace{5mm}
+
+\begin{itemize}
+\item The \textbf{logical converse} is not equivalent to the implication:
+\[ (Q \implies P) \not \equiv (P \implies Q) \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Traps to Watch For (Logical Fallacies)}
+
+\begin{itemize}
+\item The \textbf{contrapositive} is not equivalent to the negation of the implication, but is equivalent to the implication itself: 
+\[ (\lnot Q \implies \lnot P) \not \equiv \lnot (P \implies Q) \]
+\[ (\lnot Q \implies \lnot P) \equiv (P \implies Q) \]
+
+\vspace{5mm}
+
+\item The contrapositive is not equivalent to the \textbf{logical inverse} of the implication (compare this to the first statement): 
+\[ (\lnot Q \implies \lnot P) \not \equiv (\lnot P \implies \lnot Q) \]
+\end{itemize}
+
+}
+
+
+
+\frame{ \frametitle{Negation of the Implication}
+
+The negation of the implication has a non-implication form that can be useful in proof by contradiction.
+
+%\vspace{5mm}
+
+\begin{center}
+\begin{tabular}[c]{c|c||c||c||c}
+$P$ & $Q$ & $P \implies Q$ & $\lnot (P \implies Q)$ & $P \land \lnot Q$ \\
+\hline
+T & T & T & {\color{red} F} & {\color{red} F}\\
+T & F & F & {\color{red} T} & {\color{red} T}\\
+F & T & T & {\color{red} F} & {\color{red} F}\\
+F & F & T & {\color{red} F} & {\color{red} F}
+\end{tabular} 
+\end{center}
+
+Therefore, 
+\[ \lnot (P \implies Q) \equiv (P \land \lnot Q). \]
+
+}
+
+
+
+\frame{ \frametitle{Indirect Proof, by Contradiction (reductio ad absurdum)}
+
+\textbf{Proof by contradiction} (\emph{reductio ad absurdum}: ``reduction to absurdity'') is called an \textbf{indirect proof} because, instead of proving an implication, you show that some form of the negation of the implication leads to a contradiction. 
+
+%\[ ((P \implies Q) \land (P \implies \lnot Q)) \implies \lnot P \]
+\[ (P \implies \bot) \equiv \lnot P \]
+\[ ((P \land \lnot Q) \implies \bot) \equiv (P \implies Q) \]
+\[ ((P \implies Q) \land (P \implies \lnot Q)) \implies \lnot P \]
+
+\vspace{3mm}
+
+We will often use a pair of facing arrows $\contra$ to denote the deduction of a contradiction. 
+
+\vspace{3mm}
+
+Know that \textbf{any} logical contradiction can be used to prove 0 = 1.
+
+%Why does this work? If, through an argument, the premises $P$ can show both the conclusion $Q$ and the conclusion $\lnot Q$, then the premises $P$ must not be true. Hence, $\lnot P$ is true since $P$ is false.
+
+}
+
+
+\frame{ \frametitle{Indirect Proof: Example}
+
+\begin{prop}
+For any even $n \in \Z$, $5n + 2$ is even.
+\end{prop}
+
+\vspace{5mm}
+
+\pf Assume, for a contradiction, that $n$ is even and $5n+2$ is not even\footnote{We are using the second structure on the previous slide: 
+\begin{center}
+$((P \land \lnot Q) \implies \bot) \equiv (P \implies Q)$
+\end{center}}. Thus, $5n+2$ is odd. 
+
+\vspace{3mm}
+
+But if $n$ is even, then $-5n$ is also even, and so by the familiar rule odd + even = odd, 
+\begin{align*}
+5n + 2 + -5n = 2
+\end{align*}
+is odd. $\contra$  \,\, $\therefore$ if $n$ is even, $5n+2$ is even. \,\, $\blacksquare$
+
+}
+
+\frame{ \frametitle{Reductio ad absurdum}
+
+We will see a proof by contradiction, \textcolor{red}{labeling the statements along the way} to show how to use logical connectives and inference rules in constructing the proof.
+
+\vspace{5mm}
+
+\begin{thm}
+There are infinitely many prime numbers. (Euclid, circa 300 BCE)
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Euclid's proof of the infinitude of primes}
+
+\begin{thm}
+There are infinitely many prime numbers. (Euclid, circa 300 BCE)
+\end{thm}
+
+\vspace{10mm}
+
+\pf Label the set of primes $A$. We start by assuming there are only finitely many prime numbers, and will prove by contradiction. 
+
+\begin{center}
+\textcolor{red}{$\phi =$ ``$\exists n \in \N$: $|A| = n$''} 
+\end{center}
+
+
+Write this set of primes as $A = \{ p_1, p_2, ..., p_n \} \subset \mathbb{N}$. 
+
+}
+
+
+\frame{ \frametitle{Euclid's proof of the infinitude of primes}
+
+Let 
+\[ q = 1 + \prod_{i=1}^n p_i = 1 + p_1 p_2 \cdots p_{n-1} p_n. \]
+
+\vspace{3mm}
+
+Since $p_1, p_2, ..., p_n$ are presumed to be all of the primes, then by the Fundamental Theorem of Arithmetic, 
+%[the prime factorization theorem, that states that every $q \in \mathbb{N}$ has a unique prime factorization], 
+$q$ must be divisible by at least one of them.
+
+ \vspace{3mm}
+ 
+Why? $q$ must be composite (as $q > p_i$ for all $i=1,2,...,n$).
+
+\begin{center}
+\textcolor{red}{$\psi =$ ``$\exists i \in \{1, 2, ..., n\}: \frac{q}{p_i} \in \mathbb{N}$''} \\
+\textcolor{red}{$\phi \implies \psi$} 
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Euclid's proof of the infinitude of primes}
+
+But $q$ is not divisible by $p_i$ for any $i=1,2,..,n$, since any division $q \div p_i$ results in a remainder of 1 -- more precisely, 
+\[ \frac{q}{p_i} = p_1 p_2 \cdots p_{i-1} p_{i+1} \cdots p_{n-1} p_n + \frac{1}{p_i}. \]
+
+\begin{center}
+\textcolor{red}{$\lnot \psi =$ ``$\forall i \in \{1, 2, ..., n\}, \frac{q}{p_i} \not \in \mathbb{N}$''} \\
+\textcolor{red}{$\phi \implies \lnot \psi$} 
+\end{center}
+
+Since $q$ is larger than all $n$ primes that exist, it must also either be prime or a multiple of a prime we didn't consider. Thus, there is at least one more prime than the $n$ primes we believed were the only ones. But $n$ was arbitrarily chosen as the number of existing primes. Therefore, there must be an infinite number of primes.
+
+\begin{center}
+\textcolor{red}{$\lnot \phi =$ ``$\forall n \in \N$, $|A| \neq n$ ''}\\
+\textcolor{red}{$\phi \implies \psi$, $\phi \implies \lnot \psi$. \,\,\,\,\, $\therefore$ \,\,\,\,\, $\lnot \phi$. } 
+\,\,\,\,\, $\blacksquare$
+\end{center}
+
+}
+
+
+\frame{ \frametitle{Best Practices for Good Proof-writing}
+
+\begin{itemize}
+\item State your plan. 
+\vspace{3mm}
+\item Keep the proof linear. 
+\vspace{3mm}
+\item \emph{Write} and \emph{explain}, don't merely symbolize. 
+\vspace{3mm}
+\item Spell things out: give clear definitions, and don't think things are ``obvious''.
+\vspace{3mm}
+\item Finish the proof (don't leave details to the reader).
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{BONUS: ALL $2^4 = 16$ BINARY TRUTH COLUMNS}
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c|c|c|}
+ & & 0 & 1 & 2 & 3 \\
+\hline
+$P$ & $Q$ & $\bot$ & $\lnot(P \land Q)$ & $\lnot (Q \implies P)$ & $\lnot P$ \\
+\hline
+T & T & F & F & F & F \\
+T & F & F & F & F & F \\
+F & T & F & F & T & T \\
+F & F & F & T & F & T \\
+\hline
+\hline
+\hline
+ & & 4 & 5 & 6 & 7 \\
+\hline
+$P$ & $Q$ & $\lnot (P \implies Q)$ & $\lnot Q$ & $\lnot(P \iff Q)$ & $\lnot(P \lor Q)$ \\
+\hline
+T & T & F & F & F & F \\
+T & F & T & T & T & T \\
+F & T & F & F & T & T \\
+F & F & F & T & F & T \\
+\hline
+\end{tabular}
+\end{center}
+
+(If you are computer science-oriented, think of $T$ as 1 and $F$ as 0.)
+
+}
+
+
+\frame{ \frametitle{BONUS: ALL $2^4 = 16$ BINARY TRUTH COLUMNS}
+
+\begin{center}
+\begin{tabular}[c]{c|c||c|c|c|c|}
+ & & 8 & 9 & 10 & 11 \\
+\hline
+$P$ & $Q$ & $P \land Q$ & $P \iff Q$ & $Q$ & $P \implies Q$ \\
+\hline
+T & T & T & T & T & T \\
+T & F & F & F & F & F \\
+F & T & F & F & T & T \\
+F & F & F & T & F & T \\
+\hline
+\hline
+\hline
+ & & 12 & 13 & 14 & 15 \\
+\hline
+$P$ & $Q$ & $P$ & $Q \implies P$ & $P \lor Q$ & $\top$ \\
+\hline
+T & T & T & T & T & T \\
+T & F & T & T & T & T \\
+F & T & F & F & T & T \\
+F & F & F & T & F & T \\
+\hline
+\end{tabular}
+\end{center}
+
+(If you are computer science-oriented, think of $T$ as 1 and $F$ as 0.)
+
+}
+
+
+
+\end{document}
