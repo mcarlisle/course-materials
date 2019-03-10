@@ -1,0 +1,1148 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[Sequences]
+{Introduction to Analysis: \\ Sequences}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle} 
+%\institute{Baruch College, CUNY}
+%\date{Fall 2017}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+
+\frame{ \frametitle{Sequences}
+
+Dedekind cuts are a way to define $\R$ via partitions on the order $<$. 
+
+\vspace{5mm}
+
+We will now develop some theory about \textbf{sequences} of rationals and reals. 
+
+\vspace{5mm}
+
+With this theory of sequences, we develop another definition of the real numbers. 
+
+}
+
+
+\frame{ \frametitle{Sequences}
+
+\begin{defn}
+A \textbf{sequence} of numbers is an ordered infinite list 
+\[ (a_1, a_2, a_3, ...), \]
+a 1-1 correspondence between an ordered set of numbers and $\N$. 
+
+\vspace{3mm}
+
+We can shorten the notation to, simply, $(a_n)$. 
+\end{defn}
+
+\vspace{5mm}
+
+This is different from the \emph{set} of numbers 
+\[ \{a_1, a_2, a_3, ...\} \] 
+which has no ordering, and cannot contain duplicates. 
+
+}
+
+
+\frame{ \frametitle{Limit of a Sequence; Convergent Sequences}
+
+\begin{defn}
+The sequence $(a_n)$ of real numbers has a \textbf{limit} $a \in \R$ if, 
+
+\vspace{5mm}
+
+for any %\footnote{The definition truly means ``any'', but in practice, $\varepsilon$ means ``small''.} 
+real number $\varepsilon > 0$,
+
+\vspace{5mm}
+
+there is some index $N$, a function of $\varepsilon$, in the sequence,
+
+\vspace{5mm}
+
+such that for all terms beyond $N$, 
+
+\vspace{5mm}
+
+the value of the sequence is ``close'' (within $\varepsilon$) of the limit $a$.
+\end{defn}
+
+}
+
+
+\frame{ \frametitle{Limit of a Sequence; Convergent Sequences}
+
+Symbolically, this fits on one line.
+
+\[ \forall \varepsilon > 0, \,\, \exists N = N(\varepsilon) \in \N: \,\, \forall n > N, \,\,|a_n - a| < \varepsilon. \] 
+
+\vspace{5mm}
+
+If a sequence $(a_n)$ has a limit $a$, we denote this 
+
+\[ \lim_{n \to \infty} a_n = a,  \]
+
+and say $(a_n)$ \textbf{converges to} (or \textbf{tends to}) $a$. 
+
+}
+
+
+\frame{ \frametitle{Convergent Sequences}
+
+\begin{ex}
+The sequence $(a_n) = (5, 5, 5, 5, ...)$ obviously converges to 5: 
+
+\vspace{3mm}
+
+if $\varepsilon > 0$, then $N = 1$ is a possible $N(\varepsilon)$ such that, for all $n > N$, 
+
+\[ |a_n - 5| = \left| 5 - 5 \right| = 0 < \varepsilon. \]
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Convergent Sequences}
+
+\begin{ex}
+The sequence $(a_n) = \left( \frac{4}{n^2 - 0.2} \right)$ converges, with 
+
+\[ \lim_{n \to \infty} a_n = 0. \]
+
+\vspace{3mm}
+
+We can prove this by showing that, if $\varepsilon > 0$, then 
+
+\[ N = \left\lceil\sqrt{\frac{4}{\varepsilon} + 0.2}\right\rceil \] 
+
+is a possible $N(\varepsilon)$ such that, for all $n > N$, 
+
+\[ |a_n - 0| = \left| \frac{4}{n^2 - 0.2} \right| < \varepsilon. \]
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Relating Convergence and Accumulation}
+
+\begin{ex}
+Let $A$ be the set of points in the sequence $(a_n) = \left( \frac{4}{n^2 - 0.2} \right)$: 
+\[ A = \left\{ a_n = \frac{4}{n^2 - 0.2} \,\, \bigg| \,\, n \in \N \right\}. \]
+Then, since $(a_n)$ converges, the set $A$ has an accumulation point at the limit of the sequence. 
+
+\vspace{5mm}
+
+The order of the points in the sequence describes how \\
+``taking a limit'' gets ``closer'' to the accumulation point 
+\[ \lim_{n \to \infty} a_n = 0. \]
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Limit of a Sequence; Divergent Sequences}
+
+If $(a_n)$ does not converge to a limit, we say $(a_n)$ \textbf{diverges}. 
+
+\vspace{5mm}
+
+A divergent sequence is \textbf{unbounded} if 
+
+\[ \forall M > 0, \,\, \exists N = N(\varepsilon) \in \N: \,\, \forall n > N, \,\, |a_n| > M. \]
+
+\vspace{5mm}
+
+(We will refine the notion of unboundedness later.)
+
+\vspace{5mm}
+
+A divergent sequence may oscillate amongst multiple \textbf{convergent subsequences} with different limits. 
+
+}
+
+
+\frame{ \frametitle{Divergent Sequences}
+
+\begin{ex}
+The sequence 
+
+\[ (a_n) = (n) \] 
+
+diverges. Any choice of $a \in \R$ as a possible limit yields, 
+
+\vspace{5mm}
+
+for all $n > \lceil a \rceil + 1$, that 
+
+\[ |a_{n} - a| > 1, \]
+
+and so it is not true that $|a_{n} - a|< \varepsilon$ for any $0 < \varepsilon < 1$. 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Divergent Sequences}
+
+\begin{ex}
+The sequence 
+\[ (a_n) = \left( \sin\left( \frac{n \pi}{2} \right) \right) \] 
+
+diverges. It oscillates among three convergent subsequences: 
+
+\[ (b_n) = (a_{2n}) = (0),  \,\, (c_n) = (a_{4n+1}) = (1), \,\, (d_n) = (a_{4n+3}) = (-1). \]
+
+\vspace{3mm}
+
+For any $0 < \varepsilon < 1$, there are no $N \in \N$ or $a$ such that $| a_n - a | < \varepsilon$. 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Convergent Sequences: When?}
+
+We will develop some theorems to help determine whether a sequence is convergent or divergent. 
+
+\vspace{5mm}
+
+A key to proving several \emph{real analysis} theorems is \emph{bounding}.
+
+\vspace{5mm}
+
+Since the definition of convergence allows \emph{any} $\ve > 0$, \\
+we will use a \emph{function} of $\ve$ that vanishes\footnote{Some common examples of functions of $\ve$ in this context are $\frac{\ve}{2}$, $\frac{\ve}{k}$, $|c| \ve$.... You may see in the literature the phrase ``$\frac{\varepsilon}{2}$ argument'' as a standard, popular in analysis proofs.} to 0 as $\ve$ vanishes to 0. 
+
+\vspace{5mm}
+
+Then, use the Triangle Inequality to trap absolute values by the original $\ve$.
+
+}
+
+
+\frame{ \frametitle{Convergent Sequences: When?}
+
+\begin{thm}
+Let $(s_n)$ and $(a_n)$ be sequences of real numbers, and $s \in \R$. 
+
+\vspace{3mm}
+
+If for some constant $k > 0$ and $m \in \N$ we have 
+\[ \forall n \geq m, \,\, |s - s_n| \leq k|a_n|, \]
+then 
+\[ \lim_{n \to \infty} a_n = 0 \implies \lim_{n \to \infty} s_n = s. \]
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Convergent Sequences: When?}
+
+\pf We go to the definition of the limit of a sequence. 
+
+\vspace{3mm}
+
+Given an arbitrary $\ve > 0$, we can incorporate fixed $k$ with $\varepsilon$ to say 
+\[ \lim_{n \to \infty} a_n = 0 \] 
+means $\exists N_1 \in \N$ such that 
+\[ n \geq N_1 \implies |a_n - 0| = |a_n| < \frac{\ve}{k}. \]
+Let $N = \max\{m, N_1\}$. Then, for $n \geq N$, %we have $n \geq m$ and $n \geq N_1$, so that 
+\[ |s_n - s| \leq k|a_n| < k \cdot \frac{\ve}{k} = \ve. \]
+Therefore, $\lim_{n \to \infty} s_n = s$. \,\, $\blacksquare$
+
+
+}
+
+
+\frame{ \frametitle{Bounded Sequence}
+
+A sequence is called \textbf{bounded} if, as a set, it has both upper and lower bounds.
+
+\vspace{5mm}
+
+Formally, $(a_n)$ is a \textbf{bounded sequence} if $\exists L, U \in \R$ such that 
+\[ \forall n \in \N, \,\, L \leq a_n \leq U. \]
+Note that we can use a single value to give bounds: 
+
+%\vspace{5mm}
+
+\[ M = \max\{|L|, |U|\} \implies |a_n| \leq M. \]
+
+\vspace{5mm}
+
+An immediate truth is that all convergent sequences are bounded. 
+
+}
+
+
+\frame{ \frametitle{Convergent Sequence $\implies$ Bounded Sequence}
+
+\begin{thm}
+If $(a_n)$ is a convergent sequence, with 
+\[ a = \lim_{n \to \infty} a_n, \]
+then $(a_n)$ is a bounded sequence.
+\end{thm}
+
+\vspace{3mm}
+
+\pf Pick $\varepsilon > 0$. Then $\exists N \in \N$ such that $\forall n > N, \,\,|a_n - a| < \varepsilon$.
+
+\vspace{3mm}
+ 
+Hence, $\forall n > N$, $a - \varepsilon < a_n < a + \varepsilon$. 
+
+\vspace{3mm}
+ 
+Setting $M = \max\{|a_1|, |a_2|, ..., |a_N|, |a|\} + \ve$, we therefore have that 
+\[ \forall n \in \N, \,\,  |a_n| \leq M. \,\,\,\,\,\, \blacksquare \]
+
+}
+
+
+\frame{ \frametitle{Convergent Sequence $\implies$ Unique Limit}
+
+\begin{thm}
+If $(a_n)$ is a convergent sequence, then 
+\[ \lim_{n \to \infty} a_n \] 
+is unique. 
+\end{thm}
+
+\vspace{5mm}
+
+(This may seem obvious; the theorem allows the notation.)
+
+}
+
+
+\frame{ \frametitle{Convergent Sequence $\implies$ Unique Limit}
+
+\pf Say $a$ and $b$ are both limits of the sequence $(a_n)$. 
+
+\vspace{5mm}
+
+Pick an arbitrary $\varepsilon > 0$. Then $\exists N_1, N_2 \in \N$ such that 
+
+\[ \forall n > N_1, \,\,|a_n - a| < \frac{\varepsilon}{2} \text{ and } \forall n > N_2, \,\,|a_n - b| < \frac{\varepsilon}{2}. \]
+
+\vspace{5mm}
+
+Thus, by the Triangle Inequality, $\forall n > \max\{N_1, N_2\}$, 
+
+\[  |a - b| = |a - a_n + a_n - b| \leq |a - a_n| + |a_n - b| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon. \]
+
+$\therefore$ \,  $a = b$. \,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Limits Commute With Arithmetic}
+
+Let $(a_n)$ and $(b_n)$ be convergent sequences, with 
+
+\[ \lim_{n \to \infty} a_n = a, \,\, \lim_{n \to \infty} b_n = b. \]
+
+\vspace{5mm}
+
+We can prove the following: 
+
+\begin{itemize}
+\item linear combinations (sums, differences, constant multiples): \\if $c, d \in \R$, then the sequence $(ca_n + db_n)$ is also convergent: 
+\begin{align*} 
+\lim_{n \to \infty} (ca_n + db_n) & = \lim_{n \to \infty} ca_n + \lim_{n \to \infty} db_n \\
+ & = c \lim_{n \to \infty} a_n + d\lim_{n \to \infty} b_n = ca + db. 
+\end{align*}
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Limits Commute With Arithmetic}
+
+\begin{itemize}
+\item products: $(a_n b_n)$ is also convergent: 
+
+\[ \lim_{n \to \infty} a_n b_n = \left( \lim_{n \to \infty} a_n \right) \left( \lim_{n \to \infty} b_n \right) = ab, \]
+
+\vspace{5mm}
+
+\item quotients: if $b_n \neq 0$ and $b \neq 0$, then $(\frac{a_n}{b_n})$ is also convergent: 
+
+\[ \lim_{n \to \infty} \frac{a_n}{b_n} = \frac{\lim_{n \to \infty} a_n}{\lim_{n \to \infty} b_n} = \frac{a}{b}. \]
+
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Proof: Linear Combos of Convergent Sequences Converge}
+
+\textbf{Linear Combinations: }
+\begin{align*} 
+c, d \in \R \setminus \{0\}, \,\,\, \lim_{n \to \infty} a_n & = a, \,\, \lim_{n \to \infty} b_n = b \\
+\implies \lim_{n \to \infty} (ca_n + db_n) & = ca + db. 
+\end{align*}
+
+\vspace{5mm}
+
+\pf Pick $\varepsilon > 0$. Then $\exists N \in \N$ such that, for all $n > N$, 
+
+\[ |a_n - a| < \frac{\varepsilon}{2|c|} \text{ and } |b_n - b| < \frac{\varepsilon}{2|d|}. \]
+
+}
+
+
+\frame{ \frametitle{Proof: Linear Combos of Convergent Sequences Converge}
+
+Hence, by the Triangle Inequality, 
+\begin{align*} 
+|(ca_n + db_n) - (ca + db)| & \leq |ca_n - ca| + |db_n - db| \\
+ & \\
+ & \leq |c||a_n - a| + |d||b_n - b| \\
+ & \\
+ & \leq \frac{\varepsilon|c|}{2|c|} + \frac{\varepsilon|d|}{2|d|} = \varepsilon. \,\, \blacksquare
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Limits Preserve $\leq$}
+
+\begin{thm} 
+If one convergent sequence's values are always greater than or equal to another's, then their limits are ordered similarly.
+\[ \lim_{n \to \infty} s_n = s, \,\, \lim_{n \to \infty} t_n = t, \,\, s_n \leq t_n \,\, \forall n \in \N \implies s \leq t. \]
+\end{thm}
+
+\vspace{5mm}
+
+\pf Suppose (for a contradiction) that $s > t$. Let $\varepsilon = \frac{s-t}{2} > 0$. 
+
+\vspace{5mm}
+
+Then $2\ve = s-t$ and $t + \ve = s - \ve$. Thus $\exists N_1 \in \N$: for all $n > N_1$, 
+
+\[ s - \ve < s_n < s + \ve. \]
+
+}
+
+
+\frame{ \frametitle{Limits Preserve $\leq$}
+
+Similarly, $\exists N_2 \in \N$ such that, for all $n > N_2$, 
+
+\[ t - \ve < t_n < t + \ve. \]
+
+\vspace{3mm}
+
+Let $N = \max\{N_1, N_2\}$. Then for $n > N$ we have 
+
+\[ t_n < t + \ve = s - \ve < s_n, \]
+
+\vspace{3mm}
+
+contradicting $s_n \leq t_n$. $\contra$ \,\, $\therefore$ $s \leq t$. $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Sequence Convergence: Ratio Test}
+
+\begin{thm} Suppose $s_n > 0$ for all $n \in \N$ and 
+\[ \lim_{n \to \infty} \frac{s_{n+1}}{s_n} = L. \]
+If $L < 1$, then 
+\[ \lim_{n \to \infty} s_n = 0. \] 
+\end{thm}
+
+\vspace{5mm}
+
+\pf The previous theorem implies that $L \geq 0$. Suppose $L < 1$. 
+
+\vspace{3mm}
+
+Then $\exists c \in \R$ such that $0 \leq L < c < 1$. Let $\ve = c - L > 0$. 
+
+}
+
+
+\frame{ \frametitle{Sequence Convergence: Ratio Test}
+
+Then, since $\frac{s_{n+1}}{s_n} \to L$, $\exists N \in \N$ such that 
+\[ \forall n > N, \,\, \bigg| \frac{s_{n+1}}{s_n} - L \bigg| < \ve. \]
+
+\vspace{3mm}
+
+Let $k = N+1$. Then $\forall n \geq k$ we have $n-1 \geq N$, so that 
+
+\[ \frac{s_{n+1}}{s_n} < L + \ve = L + (c-L) = c. \]
+
+}
+
+
+\frame{ \frametitle{Sequence Convergence: Ratio Test}
+
+Thus, it follows that 
+
+\[ \forall n \geq k, \,\, 0 < s_n < s_{n-1} c < s_{n-2} c^2 < \cdots < s_k c^{n-k}. \]
+
+\vspace{3mm}
+
+Letting $M = \frac{s_k}{c^k}$, we obtain $0 < s_n < Mc^n$ for all $n \geq k$. 
+
+\vspace{5mm}
+
+Since $0 < c < 1$, we can see that 
+
+\[ \lim_{n \to \infty} c^n = 0 \implies \lim_{n \to \infty} s_n = 0. \,\,\, \blacksquare \]
+
+}
+
+
+\frame{ \frametitle{Sequence Divergence: Infinite Limits}
+
+A sequence \textbf{diverges to $+\infty$}, i.e. 
+
+\[ \lim_{n \to \infty} s_n = +\infty, \]
+
+\vspace{3mm}
+
+if and only if for any $M \in \R$, 
+
+\[ \exists N \in \N \ni n \geq N \implies s_n > M. \]
+
+}
+
+
+\frame{ \frametitle{Sequence Divergence: Infinite Limits}
+
+Likewise, a sequence \textbf{diverges to $-\infty$}, i.e. 
+
+\[ \lim_{n \to \infty} s_n = -\infty, \]
+
+\vspace{3mm}
+
+if and only if for any $M \in \R$, 
+
+\[ \exists N \in \N \ni n \geq N \implies s_n < M. \]
+
+\vspace{3mm}
+
+(Here, $+\infty$ and $-\infty$ are not real numbers and merely act as notation describing unboundedness.)
+
+}
+
+
+\frame{ \frametitle{Sequence Divergence: Infinite Limits}
+
+\begin{thm}
+Suppose that $s_n \leq t_n$ for all $n \in \N$. 
+\begin{align*}
+\text{(a) } & \lim_{n \to \infty} s_n = +\infty \implies \lim_{n \to \infty} t_n = +\infty. \\
+\\
+\text{(b) } & \lim_{n \to \infty} t_n = -\infty \implies \lim_{n \to \infty} s_n = -\infty. \\
+\end{align*}
+\end{thm}
+
+\begin{thm}
+Let $s_n > 0$ for all $n \in \N$. Then 
+\[ \lim_{n \to \infty} s_n = +\infty \iff \lim_{n \to \infty} \frac{1}{s_n} = 0. \]
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Increasing, Decreasing Sequences}
+
+Let $(a_n)$ be a sequence of real numbers.
+
+\vspace{3mm}
+
+\begin{itemize}
+\item If $a_{n+1} \geq a_n$ for all $n \in \N$, we call $(a_n)$ \\a \textbf{monotonically increasing} (or \textbf{nondecreasing}) sequence. 
+\vspace{3mm}
+\item If $a_{n+1} > a_n$ for all $n \in \N$, we call $(a_n)$ \\a \textbf{strictly increasing} sequence. 
+\vspace{3mm}
+\item Likewise, \\$a_{n+1} \leq a_n$ is a \textbf{monotonically decreasing} (\textbf{nonincreasing}), 
+\\and $a_{n+1} < a_n$ is a \textbf{strictly decreasing}, sequence.
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Increasing, Bounded Sequence $\implies$ Convergent Sequence}
+
+The fact that a sequence is increasing or decreasing is a property that gives a partial converse to the fact that convergent sequences are bounded.
+
+\vspace{5mm}
+
+\begin{thm}
+If $(a_n)$ is a monotone (increasing or decreasing), bounded sequence, \\then $(a_n)$ is a convergent sequence.
+\end{thm}
+
+\vspace{5mm}
+
+\pf If $(a_n)$ is increasing, then $(-a_n)$ is decreasing, and so the ``decreasing'' version of the theorem follows immediately from the ``increasing'' version. 
+
+}
+
+
+\frame{ \frametitle{Increasing, Bounded Sequence $\implies$ Convergent Sequence}
+
+Suppose $(a_n)$ is increasing. Then, as a set 
+
+\[ A = \{a_n: \,\, n \in \N\}, \]
+
+$A$ has upper and lower bounds: 
+\begin{itemize}
+\item $a_1$ is a lower bound, and 
+\item we will call an upper bound $u$. 
+\end{itemize}
+
+\vspace{5mm}
+
+By the Completeness Axiom, $A$ has a $\sup$: we will call it 
+
+\[ \sup(A) = a. \] 
+
+\vspace{3mm}
+
+We need to show that $\sup(A) = a$ is, in fact, the limit of $(a_n)$.
+
+}
+
+\frame{ \frametitle{Increasing, Bounded Sequence $\implies$ Convergent Sequence}
+
+For any $\varepsilon > 0$, $a = \sup(A)$, so $a - \varepsilon$ is not an upper bound of $(a_n)$.
+
+\vspace{5mm}
+
+Thus, 
+\[ \exists N \in \N: \, a - \varepsilon < a_N. \] 
+
+But $a$ is an upper bound, so $a_N \leq a$. 
+
+\vspace{3mm}
+
+Since $(a_n)$ is increasing, then we have 
+\[ \forall n > N, \,\,\,\, a - \varepsilon < a_N \leq a_n \leq a. \]
+This implies 
+\[ \forall n > N, \,\,\,\, |a_n - a| < \varepsilon, \]
+which means that, since $\varepsilon > 0$ was chosen arbitrarily, 
+\[ \lim_{n \to \infty} a_n = a. \,\,\,\, \blacksquare \]
+
+}
+
+
+\frame{ \frametitle{Monotone Convergence Theorem}
+
+Together, the two theorems
+\begin{thm}
+If $(a_n)$ is a convergent sequence, then $(a_n)$ is a bounded sequence.
+\end{thm}
+
+\vspace{3mm}
+
+and 
+
+\vspace{3mm}
+
+\begin{thm}
+If $(a_n)$ is a monotone and bounded sequence, then $(a_n)$ converges.
+\end{thm}
+
+\vspace{3mm}
+
+yield the 
+
+\vspace{3mm}
+
+\begin{thm}
+\textbf{(Monotone Convergence Theorem)} Suppose $(a_n)$ is monotone.
+
+Then $(a_n)$ converges $\iff$ $(a_n)$ is bounded. 
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Monotone Divergence}
+
+\begin{thm} Suppose $(s_n)$ is an unbounded sequence. Then 
+
+\begin{align*}
+\text{(a) } & (s_n) \text{ increasing } \implies \lim_{n \to \infty} s_n = +\infty. \\
+ & \\
+\text{(b) } & (s_n) \text{ decreasing }\implies \lim_{n \to \infty} s_n = -\infty. 
+\end{align*}
+\end{thm}
+
+\pf We will prove (a). 
+
+\vspace{3mm}
+
+If $(s_n)$ is increasing and unbounded, then $(-s_n)$ is decreasing and unbounded, and so (b) can be deduced from (a). 
+
+}
+
+
+\frame{ \frametitle{Monotone Divergence}
+
+$(s_n)$ increasing $\implies$ $s_1$ is a lower bound for
+\[ S = \{ s_n: \, n \in \N\}, \]
+
+the set of the elements of the sequence, devoid of order. 
+
+\vspace{3mm}
+
+Thus, $S$ is unbounded above (as a set). 
+
+\vspace{3mm}
+
+Hence, for any $M \in \R$, $\exists N \in \N$ such that $s_N > M$. 
+
+\vspace{3mm}
+
+Thus, for any $n \geq N$, $s_n > S_N > M$, and so 
+
+\[ \lim_{n \to \infty} s_n = +\infty. \,\, \blacksquare \]
+
+}
+
+
+\frame{ \frametitle{Subsequences}
+
+A \textbf{subsequence} of a sequence $(x_n)$ is a sequence $(y_k)$ consisting of some\footnote{but not necessarily all} of the terms of $(x_n)$, in the same order.
+
+\vspace{5mm}
+
+Formally, a subsequence $(y_k)$ of $(x_n)$ is generated by a strictly increasing function 
+\[ k: \N \to \N: \,\,\, y_k = x_{n(k)} \text{ for every } k=1,2,3,.... \] 
+
+}
+
+
+\frame{ \frametitle{Subsequences}
+
+\begin{ex}
+If $(x_n) = (\frac{1}{n})$, then the subsequence consisting of only perfect square denominators is 
+\[ (y_k): \,\, y_k = \frac{1}{k^2} = x_{k^2}, \,\, k=1,2,3,... \]
+i.e. the subsequence index function is $n(k) = k^2$. 
+\end{ex}
+
+}
+
+
+\frame{ \frametitle{Convergent Subsequences}
+
+\begin{thm}
+Assume $(a_n)$ converges. \\
+Then every subsequence of $(a_n)$ also converges, to the same limit.
+\end{thm}
+
+\vspace{5mm}
+
+It is not obvious that some divergent sequences may contain convergent subsequences.
+
+\vspace{5mm}
+
+\begin{thm}
+$(x_n)$ is bounded $\implies$ $(x_n)$ contains a convergent subsequence.
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Convergent Subsequences}
+
+\pf Let $S$ be the set of distinct values from the sequence. 
+
+\vspace{3mm}
+
+There are two cases: 
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item If $S$ is a finite set, then at least one of the values in $S$ is repeated infinitely often in the sequence (call it $x$). 
+
+\vspace{3mm}
+
+Select the subsequence $s_{n(k)} = x$ for every $k$.
+
+\vspace{3mm}
+
+\item If $S$ is an infinite set, then by the Bolzano-Weierstrass Theorem, $S$ has an accumulation point (call it $y$). 
+
+\end{enumerate}
+
+}
+
+
+\frame{ \frametitle{Convergent Subsequences}
+
+We now construct a subsequence of $(y_k)$ converging to $y$. 
+
+\vspace{5mm}
+
+For each $k \in \N$, let 
+\[ A_k = \left(y - \frac{1}{k}, y + \frac{1}{k}\right) = N\left(y, \frac{1}{k}\right) \] 
+be the neighborhood about $y$ of radius $\frac{1}{k}$. 
+
+}
+
+
+\frame{ \frametitle{Convergent Subsequences}
+
+Since $y$ is an accumulation point of $S$, there are an infinite number of distinct points 
+
+\[ s_{n(k)} \in A_k \subseteq S. \] 
+
+\vspace{3mm}
+
+Pick one and call it $y_k$. Repeating the process, making sure  
+
+\[ n(k+1) > n(k) \] 
+
+\vspace{3mm}
+
+for every $k$, yields a sequence $(y_k)$ that converges to $y$, since 
+
+\[ \forall k \in \N, \,\, |y_k - y| < \frac{1}{k}.  \,\, \blacksquare \]
+
+
+}
+
+
+\frame{ \frametitle{Unbounded $\implies$ Monotone Unbounded Subsequence}
+
+\begin{thm}
+Let $(s_n)$ be an unbounded sequence. 
+
+\vspace{3mm}
+
+Then $(s_n)$ contains a monotone subsequence that converges to $+\infty$ (if unbounded above) or $-\infty$ (if unbounded below). 
+\end{thm}
+
+\vspace{5mm}
+
+\pf We will prove this for $(s_n)$ that is unbounded above, and $(s_n)$ unbounded below follows from $(-s_n)$ being unbounded above.
+
+}
+
+
+\frame{ \frametitle{Unbounded $\implies$ Monotone Unbounded Subsequence}
+
+Given any $M \in \R$, there are infinitely many $s_n$ such that $s_n > M$. 
+
+\vspace{3mm}
+
+Since the set of indices 
+
+\[ I_M = \{ n: s_n > M \} \subseteq \N \] 
+
+\vspace{3mm}
+
+(and are nested, since $M_1 > M_2$ implies $I_{M_1} \subseteq I_{M_2}$), \\then by well ordering, $I_M$ has a smallest element. 
+
+\vspace{3mm}
+
+}
+
+
+\frame{ \frametitle{Unbounded $\implies$ Monotone Unbounded Subsequence}
+
+Select 
+\[ n(k) = \min (I_k \setminus \{n(1), n(2), ..., n(k-1)\}) \]  
+
+\vspace{3mm}
+
+for each $k \in \N$ as your index set. 
+
+\vspace{5mm}
+
+Also, $I_M$ is infinite, so there will always be more $n(k)$ to choose. 
+
+\vspace{5mm}
+
+Then the subsequence $(s_{n(k)})$ is monotonically increasing and unbounded, and $\lim_{k \to \infty} s_{n(k)} = +\infty$. 
+  \,\, $\blacksquare$
+
+
+}
+
+
+\frame{ \frametitle{Limit Superior}
+
+The \textbf{limit superior}, or \textbf{upper limit}, of a sequence $(s_n)$ is the supremum of the limits of all convergent subsequences of $(s_n)$. 
+
+\vspace{5mm}
+
+Symbolically, 
+\[ \limsup s_n = \lim_{n \to \infty} \sup_{k \geq n} s_k. \]
+
+\vspace{3mm}
+
+The sequence 
+\[ (y_n): \,\, y_n = \sup_{k \geq n} s_k \] 
+is a monotone decreasing sequence.
+
+}
+
+
+\frame{ \frametitle{Limit Inferior}
+Likewise, the \textbf{limit inferior}, or \textbf{lower limit}, of a sequence $(s_n)$ is the infimum of the limits of all convergent subsequences of $(s_n)$. 
+
+\vspace{5mm}
+
+Symbolically, 
+\[ \liminf s_n = \lim_{n \to \infty} \inf_{k \geq n} s_k. \]
+
+\vspace{3mm}
+
+The sequence 
+\[ (z_n): \,\, z_n = \inf_{k \geq n} s_k \] 
+is a monotone increasing sequence.
+
+}
+
+
+\frame{ \frametitle{Subsequential Limits, Oscillation}
+
+A \textbf{subsequential limit} is the limit of a subsequence of $(s_n)$. 
+
+\vspace{5mm}
+
+If $S$ is the set of subsequential limits of $(s_n)$, then 
+\[ \liminf s_n = \inf S \leq \sup S = \limsup s_n. \]
+
+\vspace{3mm}
+
+If
+\[ -\infty < \liminf s_n = \limsup s_n < \infty, \]
+
+\vspace{3mm}
+
+then $(s_n)$ converges and these values match $\lim_{n \to \infty} s_n$. 
+
+\vspace{3mm}
+
+If 
+\[ \liminf s_n < \limsup s_n, \]
+we say that the sequence $(s_n)$ \textbf{oscillates}. 
+
+}
+
+
+\frame{ \frametitle{Metric}
+
+Recall, a \textbf{metric} $d(x,y)$ generalizes the notion of distance. 
+
+\vspace{5mm}
+
+We most commonly use \emph{absolute value (the Euclidean metric)}  
+
+\[ d(x,y) = |x-y| \text{ for } x, y \in \R \]
+
+\vspace{3mm}
+
+to describe distance, but there are other metrics.
+
+}
+
+
+\frame{ \frametitle{Metric}
+
+A metric on $\R$ has four properties: $\forall x, y, z \in \R$,  
+
+\vspace{3mm}
+
+\begin{itemize}
+\item $d(x,y) \geq 0$ (distance is nonnegative)
+\vspace{3mm}
+\item $d(x,x) = 0$ (distance from a point to itself is 0)
+\vspace{3mm}
+\item $d(x,y) = d(y,x)$ (distance is symmetric)
+\vspace{3mm}
+\item $d(x,z) \leq d(x,y) + d(y,z)$ (Triangle Inequality)
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Cauchy Sequences}
+
+\vspace{3mm}
+
+\begin{defn}
+A \textbf{Cauchy sequence}\footnote{named after Augustin-Louis Cauchy (1789-1857)} of reals is a sequence $(a_n)$ such that, 
+
+\vspace{5mm}
+
+for any distance, there is an index in the sequence where all the following points are that close, or closer, together.
+
+\vspace{5mm}
+
+Symbolically,
+\[ \forall \varepsilon > 0, \, \exists N \in \N: \, \forall m,n>N, \, d(a_m, a_n) < \varepsilon. \]
+\end{defn}
+
+}
+
+
+\frame{ \frametitle{Convergent sequences are Cauchy sequences}
+
+\begin{thm}
+Every convergent sequence $(a_n)$ is a Cauchy sequence. 
+\end{thm}
+
+\vspace{3mm}
+
+\pf If 
+\[ \lim_{n \to \infty} a_n = a, \] 
+
+\vspace{3mm}
+
+then, for any $\varepsilon > 0$, $\exists N \in \N$ such that 
+\[ \forall n > N, \,\,\,\, d(a_n, a) < \frac{\varepsilon}{2}. \]
+
+\vspace{3mm}
+
+Hence, by the Triangle Inequality, 
+\begin{align*}
+\forall m,n > N, \,\,\,\, d(a_n, a_m) 
+ & \leq d(a_n, a) + d(a, a_m) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon. \,\,\,\, \blacksquare
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Cauchy sequences are convergent sequences}
+
+\begin{thm}
+Every Cauchy sequence $(a_n)$ is a convergent sequence. 
+\end{thm}
+
+\vspace{5mm}
+
+\pf Let $(a_n)$ be a Cauchy sequence. Fix  $\varepsilon > 0$. 
+
+\vspace{5mm}
+
+We use an $\frac{\varepsilon}{2}$ argument. Since $(a_n)$ is Cauchy,  
+\[ \exists N = N(\varepsilon) \in \N: \,\, \forall m,n > N, \,\,\,\, d(a_n, a_m) < \frac{\varepsilon}{2}. \]
+
+In particular, for all $n > N$, 
+\[ \d(a_n, a_N) < \frac{\varepsilon}{2}. \]
+
+}
+
+
+\frame{ \frametitle{Cauchy sequences are convergent sequences}
+
+Thus, the sequence $(a_n)$ is bounded, since 
+\[ \forall n > N, \,\, a_n \in B_{\varepsilon/2}(a_N), \]
+and the points $a_1, a_2, ..., a_N$ are a finite number of points. 
+
+\vspace{5mm}
+
+The sequence $(a_n)$ is bounded, so it has a convergent subsequence.
+
+\vspace{5mm}
+
+Call this subsequence $(a_{i(n)})$ for some index $i(n)$, with limit $a$: 
+\[ \lim_{n \to \infty} a_{i(n)} = a. \]
+
+}
+
+
+\frame{ \frametitle{Cauchy sequences are convergent sequences}
+
+We need to show that $a$ is the limit of the entire sequence $(a_n)$. 
+
+\vspace{5mm}
+
+Since $a$ is the limit of $(a_{i(n)})$, there are an infinite number of 
+\[ a_{i(n)} \in B_{\varepsilon/2}(a_N). \]
+
+\vspace{3mm}
+
+Hence, since $(a_n)$ is Cauchy, then by the triangle inequality, 
+\[ \forall m, i(n) > N: \,\, d(a_m, a) \leq d(a_m, a_{i(n)}) + d(a_{i(n)}, a) < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon. \]
+
+}
+
+
+\frame{ \frametitle{Cauchy sequences are convergent sequences}
+
+But $\varepsilon > 0$ was chosen arbitrarily, so this is precisely the definition of a convergent sequence: 
+\[ \forall \varepsilon > 0, \,\, \exists N \in \N: \,\, \forall m > N, \, d(a_m, a) < \varepsilon. \] 
+
+\[ \therefore \,\, \lim_{m \to \infty} a_m = a. \,\, \blacksquare\]
+
+}
+
+
+\frame{ \frametitle{Cauchy $\iff$ convergent}
+
+Combining these two theorems, we can identify convergence of a sequence with ``Cauchy-ness''.
+
+\vspace{5mm}
+
+\begin{thm}
+A sequence $(a_n)$ is Cauchy if and only if $(a_n)$ converges. 
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Another definition of the real numbers: Cauchy sequences}
+
+The Cauchy criterion for sequences allows for a definition of the real numbers $\R$ as constructed from sequences of rationals.
+
+\vspace{10mm}
+
+\begin{defn}
+The \textbf{real numbers} $\R$ are the set of equivalence classes of Cauchy sequences of rational numbers, whose equivalence is determined by their limits being equal.
+\end{defn}
+
+}
+
+
+\frame{ \frametitle{Another definition of the real numbers: Cauchy sequences}
+
+For each Cauchy sequence of rationals $(a_n)$, define its equivalence class by 
+\[ [(a_n)] = \left\{ (b_n): \,\, b_n \in \Q, \, (b_n) \text{ Cauchy}, \lim_{n \to \infty} a_n = \lim_{n \to \infty} b_n\right\}. \]
+
+\vspace{5mm}
+
+Then the real numbers are defined by 
+\[ \R = \{ [(a_n)]: \,\, a_n \in \Q, \, (a_n) \text{ Cauchy}\}. \]
+
+}
+
+
+\frame{ \frametitle{The real numbers ``complete'' the rationals, limit-wise.}
+
+This definition of the real numbers, like Dedekind's, is motivated by the notion of \textbf{completion} of the rationals.
+
+ \vspace{5mm} 
+ 
+There are numbers, like $\sqrt{2}$ and $\pi$, that sit in the ``gaps'' between rationals, representing real lengths, but are not themselves rational.
+
+\vspace{5mm}
+
+$\R$ is the smallest set that ``fills the gaps'' of $\Q$, making a \textbf{complete} metric space in the sense of containing its sequences' limits.\footnote{Note that this is not the same as being \emph{algebraically closed}, in the sense of solving polynomials with coefficients from the same field you wish to solve with.\\
+$\R$ is not algebraically closed; the set of \textbf{complex numbers}, $\C$ is.}
+
+}
+
+
+
+
+\end{document}
