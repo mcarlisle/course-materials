@@ -779,7 +779,7 @@ The second equation is the first equation multiplied by 3 on both sides. They ar
 
 \vspace{5mm}
 
-Adding $\frac{1}{3}$ times ``row (equation) 1'' to row 2, the system ``reduces'': 
+Adding $-3$ times ``row (equation) 1'' to row 2, the system ``reduces'': 
 \begin{align*}
 3x + 4y + 5z & = 6 \\
 0 & = 0
@@ -986,10 +986,10 @@ An elementary matrix changes the \emph{rows} of a matrix if multiplying \emph{on
 An elementary matrix changes the \emph{columns} of a matrix if multiplying \emph{on the right}. 
 
 \[ \text{row } 2 \rightarrow -3 \cdot \text{row }1 + \text{row } 2: \]
-\[ E_{1,2,-3} A = \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} = \mrrr{3}{4}{5}{-8}{-13}{-13}{-6}{-8}{-8}. \]
+\[ E_{1,2,-3} A = \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} = \mrrr{3}{4}{5}{{\color{blue}-8}}{{\color{blue}-13}}{{\color{blue}-13}}{-6}{-8}{-8}. \]
 
 \[ \text{col } 1 \rightarrow -3 \cdot \text{col }2 + \text{col } 1: \]
-\[ A E_{1,2,-3} = \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} = \mrrr{-9}{4}{5}{4}{-1}{2}{18}{-8}{-8}. \]
+\[ A E_{1,2,-3} = \mrrr{3}{4}{5}{1}{-1}{2}{-6}{-8}{-8} \mrrr{1}{0}{0}{-3}{1}{0}{0}{0}{1} = \mrrr{{\color{blue}-9}}{4}{5}{{\color{blue}4}}{-1}{2}{{\color{blue}18}}{-8}{-8}. \]
 
 }
 
@@ -1175,10 +1175,25 @@ In general, the \textbf{transpose} of the $m \times n$ matrix $A$ is the $n \tim
 
 \begin{itemize}
 \item $(A^t)^t = A$
+
+\vspace{3mm}
+
 \item $(A + B)^t = A^t + B^t$
+
+\vspace{3mm}
+
 \item $A$ is called a \textbf{symmetric matrix} if $A^t = A$. 
+
+\vspace{3mm}
+
 \item Diagonal matrices are clearly symmetric: $D^t = D$. 
+
+\vspace{3mm}
+
 \item If the product $AB$ exists, then $(AB)^t = B^t A^t$.
+
+\vspace{3mm}
+
 \item $A\vec{x} = b$ is the same system as $\vec{x}^t A^t = b^t$.
 \end{itemize}
 
@@ -1189,11 +1204,29 @@ In general, the \textbf{transpose} of the $m \times n$ matrix $A$ is the $n \tim
 
 \begin{itemize}
 \item $(A^{-1})^{-1} = A$
+
+\vspace{3mm}
+
 \item $(A^{-1})^{t} = (A^t)^{-1}$
+
+\vspace{3mm}
+
 \item $A$ is called an \textbf{involution} if $A^{-1} = A$. This means $A^2 = I$. 
+
+\vspace{3mm}
+
 \item If the product $AB$ exists, and $A$ and $B$ are both invertible, then $(AB)^{-1} = B^{-1} A^{-1}$.
+
+\vspace{3mm}
+
 \item $A\vec{x} = b$ is solved by $\vec{x} = A^{-1} b$, if $A^{-1}$ exists.
+
+\vspace{3mm}
+
 \item If $A = LDU$ and $A$ is symmetric, then $U = L^t$, yielding the factorization $A = LDL^t$. 
+
+\vspace{3mm}
+
 \item Call an invertible square matrix $A$ \textbf{orthogonal} if $A^t = A^{-1}$. Then the columns $a_1, a_2, ..., a_n$ of $A$ are all orthonormal:
 \[ A = \rvvvv{a_1}{a_2}{...}{a_n} \implies A^{-1} A = A^t A = I. \]
 \end{itemize}
@@ -1205,7 +1238,13 @@ In general, the \textbf{transpose} of the $m \times n$ matrix $A$ is the $n \tim
 
 \begin{itemize}
 \item All permutation matrices $P$ are square. 
+
+\vspace{3mm}
+
 \item Permutation matrices are orthogonal.
+
+\vspace{3mm}
+
 \item If a square matrix $A$ is invertible, but does not allow our elimination process to work to factor $A = LDU$, then some permutation of the system $PA$ will. 
 
 \vspace{3mm}
