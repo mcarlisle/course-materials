@@ -171,26 +171,54 @@ Some examples of vector subspaces are:
 
 \begin{itemize}
 \item $C(\R) \subseteq F(\R, \R)$, the subspace of continuous real-valued functions, is a vector subspace of all real-valued functions.
-\item The space of $n \times n$ \emph{diagonal} matrices is a subspace of $M_{n \times n}(\R)$.
-\item Any line through the origin is a vector subspace of $\R^n$.
-\item Any plane through the origin is a vector subspace of $\R^n$.
-\end{itemize}
 
+\vspace{3mm}
+
+\item The space of $n \times n$ \emph{diagonal} matrices is a subspace of $M_{n \times n}(\R)$.
+
+\vspace{3mm}
+
+\item Any line in $\R^n$ through the origin is a vector subspace of $\R^n$.
+
+\vspace{3mm}
+
+\item Any plane in $\R^n$ through the origin is a vector subspace of $\R^n$.
+\end{itemize}
 
 }
 
 
+\frame{ \frametitle{Vector Subspaces of $\R^n$}
+
+Consider a plane through the origin of $\R^3$. 
+
+\vspace{3mm}
+
+This plane can be described as a two-dimensional subspace, \\since the plane can be represented by one equation, with fixed $a, b, c \in \R$, $a \neq 0$: 
+
+\[ ax_1 + bx_2 + cx_3 = 0. \]
+
+\vspace{3mm}
+
+This one equation only needs two variables to describe its set of vectors. Call this plane P. 
+
+}
+
 
 \frame{ \frametitle{Vector Subspaces of $\R^n$}
 
-Consider a plane through the origin of $\R^3$. This plane can be described as a two-dimensional subspace, since the plane can be represented by one equation, with fixed $a, b, c \in \R$, $a \neq 0$: 
-\[ ax_1 + bx_2 + cx_3 = 0. \]
-This one equation only needs two variables to describe its set of vectors. Call this plane P. Then,
+Then, $P$ is the plane 
+
 \begin{align*}
 P & = \{ (x_1, x_2, x_3) \in \R^3 \, | \, ax_1 + bx_2 + cx_3 = 0 \} \\
+ & \\
  & = \left\{ (x_1, x_2, x_3) \in \R^3 \, | \, x_1 = \frac{1}{a}(-bx_2 + -cx_3) \right\} \\
+ & \\
  & = \left\{ \left(\frac{1}{a}(-bx_2 + -cx_3), x_2, x_3\right) \in \R^3 \right\}.
 \end{align*}
+
+\vspace{3mm}
+
 We will call $x_1$ a \textbf{pivot variable}, and $x_2$ and $x_3$ \textbf{free variables}. 
 
 }
@@ -222,12 +250,24 @@ This type of subspace is crucial to our analysis.
 Back to our example plane: 
 \begin{align*}
 P & = \{ (x_1, x_2, x_3) \in \R^3 \, | \, ax_1 + bx_2 + cx_3 = 0 \} \\
- & = \left\{ \left(\frac{1}{a}(-bx_2 + -cx_3), x_2, x_3\right) \in \R^3 \right\}.
+ & \\
+  & = \left\{ \left(-\frac{b}{a}x_2 + -\frac{c}{a}x_3, x_2, x_3\right) \in \R^3 \right\}.
 \end{align*}
 
-We can decompose this representation of vectors in $P$ by rewriting per variable, getting $P$ as the span of two vectors in $\R^3$. We call these two vectors \textbf{special solutions}. 
+}
+
+
+\frame{ \frametitle{A vector subspace is a linear span}
+
+We can decompose this representation of vectors in $P$ by rewriting per variable, getting $P$ as the span of two vectors in $\R^3$. 
+
+\vspace{3mm}
+
+We call these two vectors \textbf{special solutions}. 
+
 \begin{align*}
 P & = \left\{ x_2 \cvvv{-\frac{b}{a}}{1}{0} + x_3 \cvvv{-\frac{c}{a}}{0}{1} \, \bigg| \, x_2, x_3 \in \R \right\} \\
+ & \\
  & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right).
 \end{align*}
 
@@ -238,11 +278,11 @@ P & = \left\{ x_2 \cvvv{-\frac{b}{a}}{1}{0} + x_3 \cvvv{-\frac{c}{a}}{0}{1} \, \
 \frame{ \frametitle{Any vector (sub)space is a linear span}
 
 Seeing the original space $\R^3$ in the same fashion, using the \textbf{standard basis vectors}, we have 
+
 \begin{align*}
 \R^3 & = \left\{ x_1 \cvvv{1}{0}{0} + x_2 \cvvv{0}{1}{0} + x_3 \cvvv{0}{0}{1} \, \bigg| \, x_1, x_2, x_3 \in \R \right\} \\
- & = span\left(\left\{\cvvv{1}{0}{0}, \cvvv{0}{1}{0}, \cvvv{0}{0}{1}\right\} \right). \\
-P & = \left\{ x_2 \cvvv{-\frac{b}{a}}{1}{0} + x_3 \cvvv{-\frac{c}{a}}{0}{1} \, \bigg| \, x_2, x_3 \in \R \right\} \\
- & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right).
+ & \\
+ & = span\left(\left\{\cvvv{1}{0}{0}, \cvvv{0}{1}{0}, \cvvv{0}{0}{1}\right\} \right). 
 \end{align*}
 
 }
@@ -256,6 +296,7 @@ Consider a real-entry $m \times n$ matrix $A$.
 
 We can use the ``column view'' of $A$ to write $A$ as 
 \[ A = \rvvvv{a_1}{a_2}{\cdots}{a_n}, \]
+
 an ordered collection of $n$ column vectors, $a_1, a_2, ..., a_n \in \R^m$. 
 
 }
@@ -265,8 +306,10 @@ an ordered collection of $n$ column vectors, $a_1, a_2, ..., a_n \in \R^m$.
 
 The column view of $A$ turns the matrix equation 
 \[ A \vec{x} = b \] %; \,\, \vec{x} = \cvvvv{x_1}{x_2}{\vdots}{x_n}, \,\, b \in \R^m \]
+
 with vector $\vec{x} = \cvvvv{x_1}{x_2}{\ddots}{x_n} \in \R^n$, vector $b \in \R^m$, into 
 \[ x_1 a_1 + x_2 a_2 + \cdots + x_n a_n = b, \]
+
 a linear combination equation. 
 
 \vspace{5mm}
@@ -280,7 +323,10 @@ Note that $x_1, x_2, ..., x_n \in \R$ are the scalars here.
 
 When does $A \vec{x} = b$ have a solution? Precisely when 
 \[ x_1 a_1 + x_2 a_2 + \cdots + x_n a_n = b. \]
-In other words, if $b$ is a linear combination of the columns of $A$, then $\vec{x}$ is a solution to $A \vec{x} = b$. 
+
+\vspace{3mm}
+
+In other words, if $b$ is a linear combination of the columns of $A$, with coefficients $x_1$, $x_2$, ..., $x_n$, then $\vec{x}$ is a solution to $A \vec{x} = b$. 
 
 }
 
@@ -289,6 +335,9 @@ In other words, if $b$ is a linear combination of the columns of $A$, then $\vec
 
 Define the \textbf{column space} $C(A)$ of the matrix $A$ as the set of all linear combinations of the columns of $A$; that is, 
 \[ C(A) := span(\{a_1, a_2, ..., a_n\}). \]
+
+\vspace{3mm}
+
 $C(A)$ is a subspace of $\R^m$. 
 
 }
@@ -334,7 +383,9 @@ Define the \textbf{null space} $N(A)$ of the matrix $A$ as the set of all soluti
 
 \vspace{5mm}
 
-$N(A)$ is a subspace of $\R^n$. 
+$N(A)$ is a subspace\footnote{There is some annoying notation here: $\vec{x}_n$ is typically used to denote a vector in a null space (using the subscript $n$ to mean ``null"). \\Don't confuse $\vec{x}_n$ with $x_n$, the $n$th coordinate of a vector called $\vec{x}$.} of $\R^n$.
+
+\[ If \, \vec{x}_n \in N(A), \, then \, A \vec{x}_n = 0. \]
 
 }
 
@@ -345,13 +396,13 @@ If $\vec{x}_n \in N(A)$, then $A \vec{x}_n = 0$.
 
 \vspace{5mm}
 
-If $\vec{x}_p$ solves $A \vec{x} = b$, we will call $\vec{x}_p$ a \textbf{particular solution} of the equation. 
+If $\vec{x} = \vec{x}_p$ solves $A \vec{x} = b$, we will call $\vec{x}_p$ a \textbf{particular solution} of the equation. 
 
 \vspace{5mm}
 
 By linearity, we have 
 \[ A (\vec{x}_n + \vec{x}_p) = A \vec{x}_n + A \vec{x}_p = 0 + b = b. \]
-Hence, $\vec{x}_n + \vec{x}_p$ is \emph{also} a solution to $A \vec{x} = b$. 
+Hence, $\vec{x} = \vec{x}_n + \vec{x}_p$ is \emph{also} a solution to $A \vec{x} = b$. 
 
 \vspace{5mm}
 
@@ -368,11 +419,26 @@ What are the solutions to $A \vec{x} = 0$?
 
 We will solve using the same augmented matrix technique we used to solve square systems of equations, generalizing to a matrix $A$ of any rectangular shape. Start with 
 \[ [ A \, | \, 0 ]. \]
-Use downward, forward elimination, starting in the upper-left corner. Pivot on the digonal. If you ever zero out a diagonal entry, pivot to the right of that diagonal and continue.
+
+}
+
+
+\frame{ \frametitle{To solve $A \vec{x} = 0$: }
+
+Use downward, forward elimination, starting in the upper-left corner. 
 
 \vspace{5mm}
 
-If you zero out any of the bottom rows, that's okay.
+Pivot on the digonal. 
+
+\vspace{5mm}
+
+If you ever zero out a diagonal entry, pivot to the right of that diagonal and continue.
+
+\vspace{5mm}
+
+If you zero out any of the bottom rows, that's okay.\footnote{The only unique solution possible here is $\vec{x} = 0$.}
+
 }
 
 
@@ -382,7 +448,7 @@ Then, scale the pivots to 1, and back substitute to get as close as possible to 
 
 \vspace{5mm}
 
-The bottom left portion of the matrix should only have pivot 1s, and 0s below. The upper right portion ideally has only 0s above pivots; some nonzero entries above pivots may be unavoidable.\footnote{We will see several numerical examples in class.}
+The bottom left portion of the matrix should only have pivot 1s, and 0s below. The upper right portion ideally has only 0s above pivots; some nonzero entries above pivots may be unavoidable.
 
 \vspace{5mm}
 
@@ -415,9 +481,12 @@ To construct solutions $\vec{x}$ to $R\vec{x} = 0$, solve each pivot variable as
 
 Looking back at our $1 \times 3$ system $ax_1 + bx_2 + cx_3 = 0$: 
 \begin{align*}
-P & = \left\{ \cvvv{-\frac{b}{a}x_2 + -\frac{c}{a} x_3}{x_2}{x_3} \, \bigg| \, x_2, x_3 \in \R \right\}.
+P & = \left\{ \cvvv{-\frac{b}{a}x_2 + -\frac{c}{a} x_3}{x_2}{x_3} \, \bigg| \, x_2, x_3 \in \R \right\} 
 \end{align*}
-There is $r=1$ pivot variable and $n-r=2$ free variables. 
+
+\vspace{3mm}
+
+has $r=1$ pivot variable ($x_1$) and $n-r=2$ free variables ($x_2, x_3$). 
 
 }
 
@@ -430,7 +499,7 @@ For each free variable in $\vec{x}$ solving $R \vec{x} = 0$, set that free varia
 
 Looking back at our example of a plane in space: 
 \begin{align*}
-P & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right).
+P & = span\left(\left\{\cvvv{-\frac{b}{a}}{1}{0}, \cvvv{-\frac{c}{a}}{0}{1}\right\} \right)
 \end{align*}
 
 \vspace{5mm}
@@ -449,11 +518,17 @@ We relate the rank $r$ to the dimensions $m \times n$ of $A$:
 
 \begin{itemize}
 \item $1 \leq r \leq \min(m,n)$
+
 \vspace{3mm}
+
 \item $C(A)$ is spanned by $r$ vectors; $C(A) = \R^m$ if $r=m$
+
 \vspace{3mm}
+
 \item $R$ has $n-r$ zero rows if $r < n$
+
 \vspace{3mm}
+
 \item $N(A)$ is the span of $n-r$ special solutions; \\$N(A) = \{0\}$ if $r=n$
 \end{itemize}
 
@@ -558,6 +633,55 @@ There are infinitely many bases of $\R^m$, and all contain exactly $m$ vectors. 
 }
 
 
+\frame{ \frametitle{An example of a non-orthonormal basis of $\R^3$}
+
+The basis 
+\[ B = \left\{ \cvvv{-3}{5}{1}, \cvvv{6}{6}{2}, \cvvv{0}{-4}{2} \right\} \]
+of $\R^3$ is not orthonormal:
+\begin{itemize}
+\item This basis is clearly not unit length: 
+\[ \left|\left|\cvvv{-3}{5}{1}\right|\right| = \sqrt{9 + 25 + 1} = \sqrt{35} \neq 1. \]
+\item This basis is clearly not orthogonal: 
+\[ \cvvv{6}{6}{2} \cdot \cvvv{0}{-4}{2} = 0 - 24 + 4 = -20 \neq 0. \]
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{An example of a non-orthonormal basis of $\R^3$}
+
+Yet, $B$ is a basis of $\R^3$, as any vector in $\R^3$ can be uniquely represented as a linear combination of vectors in $B$.
+
+\vspace{5mm}
+
+Letting $A$ be the matrix whose columns are the basis vectors in $B$, we can calculate\footnote{WolframAlpha: \texttt{inverse of [[ -3, 6, 0], [5, 6, -4], [1, 2, -2]] }} $A^{-1}$ and give the linear combination of columns of $A$ that will make a given vector $b \in \R^3$.
+
+\vspace{5mm}
+
+\[ A = \begin{pmatrix} -3 & 6 & 0 \\ 5 & 6 & -4 \\ 1 & 2 & -2 \end{pmatrix} 
+\implies A^{-1} = \begin{pmatrix}
+ -\frac{1}{12} & \frac{1}{4} & -\frac{1}{2} \\
+ \frac{1}{8} & \frac{1}{8} & -\frac{1}{4} \\
+ \frac{1}{12} & \frac{1}{4} & -1
+\end{pmatrix}. \]
+
+}
+
+
+\frame{ \frametitle{An example of a non-orthonormal basis of $\R^3$}
+
+Thus, if $A \vec{x} = b = \cvvv{b_1}{b_2}{b_3}$, then 
+\[ \vec{x} = \cvvv{x}{y}{z} = A^{-1} b
+ = \cvvv{ -\frac{1}{12} b_1 + \frac{1}{4} b_2 - \frac{1}{2} b_3}
+{\frac{1}{8} b_1 + \frac{1}{8} b_2 - \frac{1}{4} b_3}
+{\frac{1}{12} b_1 + \frac{1}{4} b_2 - b_3}. \]
+
+These very $x$, $y$, $z$ give us the linear combination 
+\[ A \vec{x} = x \cvvv{-3}{5}{1} + y \cvvv{6}{6}{2} + z \cvvv{0}{-4}{2} = b = \cvvv{b_1}{b_2}{b_3}. \]
+
+}
+
+
 \frame{ \frametitle{The Four Fundamental Subspaces of a Matrix $A$}
 
 Recall that the \textbf{transpose} of an $m \times n$ matrix $A$, denoted $A^t$, is the $n \times m$ matrix where the rows of $A$ are the columns of $A^t$. 
@@ -591,7 +715,7 @@ The transpose $A^t$ also has a column space and a null space; in reference to th
 \end{itemize} 
 
 \vspace{3mm}
-These can both be stated in terms of the matrix $A$ with left-multiplication by the vector $\vec{y}^t$ by applying the transpose: 
+These can both be stated in terms of the matrix $A$ with left-multiplication\footnote{Left-multiplication affects rows; right-multiplication affects columns.} by the vector $\vec{y}^t$ by applying the transpose: 
 \[ A^t \vec{y} = c \iff \vec{y}^t A = c^t. \]
 
 }
@@ -599,12 +723,27 @@ These can both be stated in terms of the matrix $A$ with left-multiplication by 
 
 \frame{ \frametitle{The Four Fundamental Subspaces of a Matrix $A$: Why?}
 
-Why mention $A^t$ in describing how to solve systems using $A$? Because the two systems 
+Why mention $A^t$ in describing how to solve systems using $A$? 
+
+\vspace{3mm}
+
+Because the two systems 
 \[ A\vec{x} = b \text{ and } A^t \vec{y} = c \]
-are deeply related; in particular, 
-\[ \vec{x}^t c = b^t \vec{y}, \text{ or, equivalently, } c^t \vec{x} = \vec{y}^t b. \]
+
+\vspace{3mm}
+
+are deeply related; rewriting by transposing the second equation as 
+\[ A\vec{x} = b \text{ and } y^t A = c^t \]
+
+\vspace{3mm}
+
+we can see
+\[ c^t \vec{x} = \vec{y}^t b. \]
+
+\vspace{3mm}
+
 Notice that $\vec{x}, c \in \R^n$ but $b, \vec{y} \in \R^m$. In dot product notation, 
-\[ \vec{x} \cdot c = b \cdot \vec{y}. \]
+\[ c \cdot \vec{x} = \vec{y} \cdot b. \]
 
 }
 
@@ -658,11 +797,17 @@ $v_2 = b e_2 \in V$, $w_2 = a e_1 + c e_3 \in W$:
 
 \frame{ \frametitle{Direct Sum of Two Independent Vector Subspaces}
 
-Let $V$ and $W$ be two vector subspaces of the same space $Z$ such that $V \cap W = \{0\}$. 
+Let $V$ and $W$ be two vector subspaces of the same space $Z$ such that 
+\[ V \cap W = \{0\}. \]
 
-\vspace{5mm}
+\vspace{3mm}
 
-Then any vector $z \in Z$ has a \emph{unique} representation as a sum $z = v + w$ with $v \in V$ and $w \in W$. When this is the case, we call $V + W$ the \textbf{direct sum} of $V$ and $W$, and denote it $V \oplus W$.
+Then any vector $z \in Z$ has a \emph{unique} representation as a sum 
+\[ z = v + w: \,\,  v \in V, w \in W. \]
+
+\vspace{3mm}
+
+When this is the case, we call $V + W$ the \textbf{direct sum} of $V$ and $W$, and denote it $V \oplus W$.
 
  
 }
@@ -744,10 +889,6 @@ If the function $A: \R^n \to \R^m$ is an $m \times n$ matrix with rank $r$, then
 \item $C(A) \perp N(A^t)$ and $C(A^t) \perp N(A)$.
 \end{itemize}
 
-\vspace{5mm}
-
-The two direct sums above are orthogonal. 
-
 }
 
 
@@ -785,7 +926,7 @@ If $\vec{x}_n \neq 0$, then $dim(N(A)) > 0$, $A$ is not invertible, and there is
 
 \vspace{5mm}
 
-We will explore this notion in the next chapter, under the concept of \textbf{projection}. 
+We will explore this notion in the next section, under the concept of \textbf{projection}. 
 
 }
 
