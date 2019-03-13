@@ -109,7 +109,14 @@ det\mrr{2}{0}{0}{2} = 4 \neq det\mrr{1}{0}{0}{1} +  det\mrr{1}{0}{0}{1} = 1 + 1 
 \item Generalizing, if one row is a linear combination of any of the other rows of $A$, then $det(A) = 0$. (Same reason.)
 \vspace{3mm}
 \item An all-zero row makes $det(A) = 0$. (Same reason.)
-\vspace{3mm}
+\end{itemize}
+
+}
+
+
+\frame{ \frametitle{Properties of determinants of matrices}
+
+\begin{itemize}
 \item Row addition (\emph{not} scaling) operations do \emph{not} change $det(A)$. 
 \vspace{3mm}
 \item $det(A) = det(A^t)$: any ``row'' property is also for ``columns''.
@@ -185,7 +192,13 @@ To construct the ``big formula'' for the determinant of an $n \times n$ matrix $
 \[ \sigma: \{1, 2, ..., n\} \to \{1, 2, ..., n\} \]
 We denote the set of all permutations\footnote{also known as the \textbf{symmetric group} on $n$ elements} on $\{1, 2, ..., n\}$ by $S_n$. 
 
-There are $n!$ different permutation matrices of size $n \times n$, corresponding to the $n!$ elements of $S_n$. Thus, we will denote the permutation matrix corresponding to $\sigma$ by $P_{\sigma}$.
+\vspace{5mm}
+
+There are $n!$ different permutation matrices of size $n \times n$, corresponding to the $n!$ elements of $S_n$. 
+
+\vspace{5mm}
+
+We will denote the permutation matrix corresponding to $\sigma$ by $P_{\sigma}$.
 
 \vspace{5mm}
 
@@ -231,11 +244,12 @@ The vast number of ways to factor terms in the big formula hints at the fact tha
 
 \vspace{5mm}
 
-Define $M_{ij}$ as the $n-1 \times n-1$ submatrix of $A$ constructed by deleting row $i$ and column $j$, and let $C_{ij} = (-1)^{i+j} det(M_{ij})$. 
+Define $M_{ij}$ as the $n-1 \times n-1$ submatrix of $A$ constructed by deleting row $i$ and column $j$, and let 
+\[ C_{ij} = (-1)^{i+j} det(M_{ij}). \]
 
-\vspace{5mm}
+\vspace{3mm}
 
-$det(M_{ij})$ is called the $(i,j)$-\textbf{minor} of $A$; $C_{ij}$ is the $(i,j)$-\textbf{cofactor}.
+$C_{ij}$ is called the $(i,j)$-\textbf{cofactor}, and $det(M_{ij})$ the $(i,j)$-\textbf{minor}, of $A$.
 
 \vspace{5mm}
 
@@ -271,7 +285,11 @@ Throughout this section, we assume $det(A) \neq 0$, so our square system has a u
 
 \vspace{5mm}
 
-If $ax = b$ is a standard basic algebra product, then the \textbf{cofactor} of the factor $a$ is $x = \frac{b}{a}$. We generalize this method of solution with the cofactors seen earlier.
+If $ax = b$ is a standard basic algebra product, then the \textbf{cofactor} of the factor $a$ is $x = \frac{b}{a}$. 
+
+\vspace{5mm}
+
+We generalize this method of solution with the cofactors seen earlier.
 
 }
 
@@ -286,7 +304,6 @@ Let $X_j$ be the square matrix that replaces column $j$ in $I$ with $\vec{x}$.
 Let $B_j$ be the square matrix that replaces column $j$ in $A$ with $b$. 
 
 \begin{ex}
-
 $$A = \mrrr{1}{-4}{5}{-3}{2}{0}{6}{-11}{9}, \,\, {\color{blue} b = \cvvv{10}{20}{30} }
 \implies B_3 = \mrrr{1}{-4}{ {\color{blue}10}}{-3}{2}{ {\color{blue}20}}{6}{-11}{ {\color{blue}30}}.$$
 
@@ -330,7 +347,7 @@ Setting $C$ as the \textbf{cofactor matrix} with $C_{ij}$ as entry $(i,j)$, we h
 
 \frame{ \frametitle{Application: cross product}
 
-Let $u, v \in \R^3$. The \textbf{cross product} of $u$ and $v$, denoted $u \times v$, is defined by 
+Let $u, v \in \R^3$. Define the \textbf{cross product} of $u$ and $v$ by 
 \[ u \times v = (||u|| \cdot ||v|| \cdot \sin(\theta)) \cdot n, \]
 where $n \in \R^3$ has the following properties:
 \begin{itemize}
