@@ -3,7 +3,7 @@
 \usepackage{mjclectureslides}
 
 
-\title[Intro to Vectors, Solving Linear Equations]{Linear Algebra and Matrix Methods \\ Chapters 1-2: \\
+\title[Intro to Vectors, Solving Linear Equations]{Linear Algebra and Matrix Methods \\ 
 Introduction to Vectors, \\ Solving Linear Equations }
 %\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
 %\institute{Baruch College, CUNY}
@@ -1042,12 +1042,29 @@ Now we will outline the process to solve an arbitrarily large square system of l
 If this process works, not only will we solve the system of equations 
 \[ A \vec{x} = b, \] 
 but we will have a \textbf{factorization} of the matrix $A$ into the product of three matrices: 
-\[ A = LDU, \]
-where 
+\[ A = LDU. \]
+
+}
+
+
+\frame{ \frametitle{Solving a system of linear equations}
+
+This trio of matrices 
+\[ A = LDU \]
+have the following properties:
+
+\vspace{5mm}
+
 \begin{itemize}
-\item $L$ is a \textbf{lower triangular} matrix with diagonal 1s and 0s above;
-\item $D$ is a \textbf{diagonal} matrix, with nonzeros on the diagonal and 0s elsewhere;
-\item $U$ is an \textbf{upper triangular} matrix with diagonal 1s and 0s below.
+\item $L$ is \textbf{lower triangular}, with diagonal 1s and 0s above;
+
+\vspace{3mm}
+
+\item $D$ is \textbf{diagonal}, with 0s off the diagonal;
+
+\vspace{3mm}
+
+\item $U$ is \textbf{upper triangular}, with diagonal 1s and 0s below.
 \end{itemize}
 
 }
@@ -1055,9 +1072,11 @@ where
 
 \frame{ \frametitle{Solving a system of linear equations}
 
-First, we will assume this process works, and so there exists a factorization 
+First, we will assume the process works, so there exists a factorization 
 \[ A = LDU. \]
-If this process fails at any point, then the rows of $A$ must be rearranged, or there is not a unique solution to the system.
+If the process fails at any point, then the rows of $A$ must be rearranged, or there is not a unique solution to the system.
+
+\vspace{3mm}
 
 \begin{itemize}
 \item[1. ] Commit forward, downward elimination of variables by left multiplying elementary matrices on the equation 
@@ -1074,9 +1093,12 @@ until it is in the form
 \begin{itemize}
 \item[2. ] Scale each equation so that the leading variable on each is 1. 
 This will change the system from 
-\[ DU \vec{x} = L^{-1} c \]
+\[ DU \vec{x} = L^{-1} b \]
 into 
 \[ U \vec{x} = D^{-1} L^{-1} b. \]
+
+\vspace{3mm}
+
 \item[3. ] Upward, backward substitution of variables, starting at the bottom, yielding the  solution 
 \[ \vec{x} = U^{-1} D^{-1} L^{-1} b. \]
 \end{itemize}
@@ -1092,6 +1114,9 @@ and apply it to
 \[ A \vec{x} = b \]
 to get 
 \[ \vec{x} = A^{-1} b. \]
+
+\vspace{3mm}
+
 Since $L^{-1}$, $D^{-1}$, and $U^{-1}$ are all products of elementary matrices, we can find their inverses $L$, $D$, and $U$ to find the factorization 
 \[ A = LDU. \]  
 
@@ -1151,7 +1176,7 @@ occurs, then \emph{no} reorganization of the rows of $A$ will work, and the syst
 
 \frame{ \frametitle{Transposes}
 
-If $v$ is a row vector, then its \textbf{transpose}, denoted $v^t$, is a column vector with the same entries. 
+If $v$ is a row vector, then its \textbf{transpose}\footnote{Sometimes denoted $v^T$... I just went with the lowercase $t$ in these notes.}, denoted $v^t$, is a column vector with the same entries. 
 
 \vspace{5mm}
 
@@ -1223,7 +1248,7 @@ In general, the \textbf{transpose} of the $m \times n$ matrix $A$ is the $n \tim
 
 \vspace{3mm}
 
-\item If $A = LDU$ and $A$ is symmetric, then $U = L^t$, yielding the factorization $A = LDL^t$. 
+\item $A = LDU$ and $A$ is symmetric $\implies$ $U = L^t$ $\implies$ $A = LDL^t$. 
 
 \vspace{3mm}
 
