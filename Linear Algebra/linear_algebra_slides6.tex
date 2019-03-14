@@ -580,6 +580,141 @@ The scaling of $u_{\infty}$ that yields a probability vector is called $\pi$, th
 }
 
 
+\frame{ \frametitle{Markov matrix example}
+
+Consider a finite-state machine consisting of three states: 1, 2, 3.
+
+\vspace{5mm}
+
+The Markov matrix associated with this machine is 
+\[ A = \begin{pmatrix}
+0.2 & 0.1 & 0.5 \\ 0.4 & 0.5 & 0.5 \\ 0.4 & 0.4 & 0
+\end{pmatrix}. \]
+
+For example, the probability that, from state $X_k = 3$ at time $k$, the machine moves at time $k+1$ to state $X_{k+1} = 2$ is 
+\[ p_{23} = P(X_{k+1} = 2 \, | \, X_k = 3) = 0.5. \]
+and the probability the machine moves from state $X_k = 2$ to $X_{k+1} = 3$ is 
+\[ p_{32} = P(X_{k+1} = 3 \, | \, X_k = 2) = 0.4. \]
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+If this machine keeps running, what is the long-term distribution?
+
+\vspace{5mm}
+
+In other words, far out in time, what are the probabilities the machine is in each state?
+
+\vspace{5mm}
+
+We can calculate the long-term state by examining the eigenproblem for $A$.
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+The Markov matrix associated with this machine is 
+\begin{align*}
+A\vec{x} & = \lambda \vec{x} \\
+ & \\
+\begin{pmatrix} 0.2 & 0.1 & 0.5 \\ 0.4 & 0.5 & 0.5 \\ 0.4 & 0.4 & 0 \end{pmatrix} \vec{x} & = \lambda \vec{x} \\
+ & \\
+\det \begin{pmatrix} 0.2 - \lambda & 0.1 & 0.5 \\ 0.4 & 0.5 - \lambda & 0.5 \\ 0.4 & 0.4 &  - \lambda \end{pmatrix} & = 0 \\
+ & \\
+-\lambda^3 + 0.7 \lambda^2 + 0.34 \lambda - 0.04 & = 0.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+At this point, it would be tedious to compute the roots of the characteristic equation 
+\[ -\lambda^3 + 0.7 \lambda^2 + 0.34 \lambda - 0.04 = 0, \]
+or, multiplying both sides by -100, 
+\[ 100\lambda^3 - 70 \lambda^2 - 34 \lambda + 4 = 0, \]
+but since $A$ is a Markov matrix, we can easily see $\lambda_1 = 1$. 
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+This simplifies our work significantly; we can use the trace and determinant formulas
+\[ \det(A) = \lambda_1 \lambda_2 \lambda_3, \,\,\,\, \tr(A) = \lambda_1 + \lambda_2 + \lambda_3 \]
+to get the other two eigenvalues on top of $\lambda_1 = 1$: 
+
+\begin{align*} 
+\det(A) & = 0.2(0-0.2) - 0.1(0 - 0.2) + 0.5(0.16 - 0.2) \\
+ & = -0.04 + 0.02  - 0.02 = -0.04 \\
+\tr(A) & = 0.2 + 0.5 + 0 = 0.7 \\
+ & \\
+\implies \lambda_2 \lambda_3 & = -0.04, \,\, \lambda_2 + \lambda_3 = -0.3 \implies \lambda_2 = 0.1, \,\, \lambda_3 = -0.4.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+Thus, our three eigenvalues are 
+\[ \lambda_1 = 1, \,\, \lambda_2 = 0.1, \,\, \lambda_3 = -0.4, \]
+and we now need the eigenvector $\vec{x_1}$ for $\lambda_1 = 1$. 
+\begin{align*} 
+(A - I)\vec{x_1} & = 0 \\
+ & \implies & \begin{pmatrix} -0.8 & 0.1 & 0.5 \\ 0.4 & -0.5 & 0.5 \\ 0.4 & 0.4 & -1 \end{pmatrix} \vec{x_1} & = 0 \\
+ & \implies &  \begin{pmatrix} 1 & 0 & -\frac{5}{6} \\ 0 & 1 & -\frac{5}{3} \\ 0 & 0 & 0 \end{pmatrix} \vec{x_1} & = 0
+  \implies \vec{x} = \cvvv{5/6}{5/3}{1} x_3. 
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+As our steady state long-term distribution needs to be a \textbf{probability vector} (a vector of nonnegative values that sum to 1), we choose the appropriate value for $x_3$ to make it so: this is 
+\[ \frac{5}{6} + \frac{5}{3} + 1 = \frac{21}{6} \implies \vec{x_1} = \cvvv{5/21}{10/21}{6/21}. \] 
+
+\vspace{5mm}
+
+Note that the other two eigenvectors have terms that sum to 0: 
+\[ \vec{x_2} = \cvvv{1}{1/4}{-5/4} x_3, \,\, \vec{x_3} = \cvvv{1}{-1}{0} x_3. \]
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+Let's say we start the machine at time 0 with initial distribution 
+\[ u_0 = \cvvv{1}{0}{0}, \]
+in state 1 with probability 1.
+
+\vspace{5mm}
+
+At time 0, 
+\[ u_0 = c_1 \vec{x_1} + c_2 \vec{x_2} + c_3 \vec{x_3} \]
+for some constants $c_1$, $c_2$, $c_3$. 
+
+}
+
+
+\frame{ \frametitle{Markov matrix example}
+
+We can compute $c_1 = 1$, $c_2 = \frac{24}{105}$, $c_3 = \frac{56}{105}$ to get 
+\[ u_0 = \cvvv{5/21}{10/21}{6/21} + \frac{24}{105} \cvvv{1}{1/4}{-5/4} + \frac{56}{105} \cvvv{1}{-1}{0} \]
+
+At time $k$, the probabilities of the machine being in each state are 
+\begin{align*} 
+u_k & = \cvvv{5/21}{10/21}{6/21} + \frac{24}{105} (0.4)^k \cvvv{1}{1/4}{-5/4} + \frac{56}{105} (-0.1)^k \cvvv{1}{-1}{0},
+\end{align*}
+which, as $k \to \infty$, converges to $\vec{x_1} = \cvvv{5/21}{10/21}{6/21}$.
+
+}
+
+
 \frame{ \frametitle{The exponential of a square matrix}
 
 We can compute power series-like objects using exponentiation.
@@ -925,11 +1060,340 @@ Factoring the matrix $A = Q \Lambda Q^t$ yields a way to ``standardize'' the ell
 \vec{x}^t A \vec{x} = (\vec{x}^t Q) \Lambda (Q^t \vec{x}) = 1.
 \end{align*}
 
-Writing $C = \cvv{c_1}{c_2} = Q^t \vec{x}$, the change into ``ellipse coordinates'', we get 
+Writing $C = \cvv{c_1}{c_2} = Q^t \vec{x}$, the change into ``ellipse coordinates'', 
 \begin{align*} 
 \vec{x}^t A \vec{x} = C^t \Lambda C = \lambda_1 c_1^2 + \lambda_2 c_2^2 = 1.
 \end{align*}
-This implies that, if $\vec{x}_1$ and $\vec{x}_2$ the eigenvectors of $A$, the axes are in the directions of $\vec{x}_1$ and $\vec{x}_2$, with axis half-lengths $\frac{1}{\sqrt{\lambda_1}}$ and $\frac{1}{\sqrt{\lambda_2}}$.
+
+This implies that, if $\vec{x}_1$ and $\vec{x}_2$ the eigenvectors of $A$, and $\lambda_1 \leq \lambda_2$, then the semi-minor axis is in the directions of $\vec{x}_1$ with length $\frac{1}{\sqrt{\lambda_1}}$, and the semi-major axis is in the direction of $\vec{x}_2$, with length $\frac{1}{\sqrt{\lambda_2}}$.
+
+}
+
+
+\frame{ \frametitle{Example: principal axis theorem}
+
+Consider the ellipse in the plane defined by 
+\[ 10x^2 + 8xy + 7y^2 = 1. \]
+
+\begin{figure}[!ht]
+  \centering
+    \includegraphics[width=2in]{ellipsewolframalpha.png}
+    \caption{$10x^2 + 8xy + 7y^2 = 1$, WolframAlpha}
+\end{figure}
+
+}
+
+
+\frame{ \frametitle{Example: principal axis theorem}
+
+\[ 10x^2 + 8xy + 7y^2 = 1 \]
+can be represented by the matrix equation $\vec{x}^t A \vec{x} = 1$: 
+\[ \rvv{x}{y} \mrr{10}{4}{4}{7} \cvv{x}{y} = 1. \]
+
+Factoring $A = Q\Lambda Q^t$ yields 
+\[ Q = \mrr{0.822}{-0.570}{0.570}{0.822}, \,\, \Lambda = \mrr{12.772}{0}{0}{4.228}. \]
+
+The semi-minor axis has length $0.280$ in the direction $\cvv{0.822}{0.570}$; \\
+the semi-major axis is in direction $\cvv{-0.570}{0.822}$ with length $0.486$.
+
+}
+
+
+\frame{ \frametitle{BONUS: Applications to Ordinary Differential Equations}
+
+Recall that 
+\[ \frac{d}{dt} (e^{\lambda t}) = \lambda e^{\lambda t}. \]
+
+\vspace{5mm}
+
+$\frac{d}{dt}$, the \textbf{differential operator} with respect to the variable $t$, can be considered a \emph{matrix} applied to a vector of functions $u$. 
+
+\vspace{5mm}
+
+We will thus examine ODEs via linear algebra.
+
+}
+
+
+\frame{ \frametitle{Ordinary Differential Equation $\frac{du}{dt} = \lambda u$: $1 \times 1$ case}
+
+The single-variable initial condition ODE 
+\[ \frac{du}{dt} = \lambda u, \,\, u(0) = C \text{ with solution } u(t) \]
+is solved by the function $u(t) = Ce^{\lambda t}$.
+
+\vspace{5mm}
+
+This is a $1 \times 1$ matrix version of a linear constant coefficient system of ODEs with initial conditions. We will generalize. 
+
+}
+
+
+\frame{ \frametitle{Ordinary Differential Equation $\frac{du}{dt} = Au$: $n \times n$ case}
+
+The $n \times n$ linear constant coefficient ODE system looks like 
+
+\[ \frac{du}{dt} = A u, \,\, u(0) = \cvvvv{u_1(0)}{u_2(0)}{\vdots}{u_n(0)} \text{ with solution } u(t) = \cvvvv{u_1(t)}{u_2(t)}{\vdots}{u_n(t)} \]
+
+\vspace{3mm}
+
+and is solvable via eigenproblem methods. 
+
+}
+
+
+\frame{ \frametitle{Ordinary Differential Equation $\frac{du}{dt} = Au$: $n \times n$ case}
+
+If we can solve the eigenproblem 
+\[ A \vec{x} = \lambda \vec{x} \]
+
+with $n$ pairs of distinct eigenvalues and independent eigenvectors 
+\[ (\lambda_1, \vec{x_1}), (\lambda_2, \vec{x_2}), ..., (\lambda_n, \vec{x_n}), \]
+
+then we can rewrite the initial conditions of the ODE as 
+\[ u(0) = \sum_{i=1}^n c_i \vec{x_i} \]
+and solve the system with the solution 
+\[ u(t) = \sum_{i=1}^n c_i e^{\lambda_i t} \vec{x_i}. \]
+
+}
+
+
+\frame{ \frametitle{Example: ODE $\frac{du}{dt} = Au$: $n \times n$ case}
+
+Solve the ODE system 
+\[ \frac{du}{dt} = \begin{pmatrix}
+1 & 1 & 1 \\ 0 & 2 & 1 \\ 0 & 0 & 3
+\end{pmatrix} u, \,\, u(0) = \cvvv{6}{5}{4} \text{ for } u(t) = \cvvv{u_1(t)}{u_2(t)}{u_3(t)}. \]
+
+The associated eigenproblem is 
+\[ \begin{pmatrix}
+1 & 1 & 1 \\ 0 & 2 & 1 \\ 0 & 0 & 3
+\end{pmatrix} \vec{x} = \lambda \vec{x}. \]
+
+}
+
+
+\frame{ \frametitle{Example: ODE $\frac{du}{dt} = Au$: $n \times n$ case}
+
+This triangular system has eigenvalues 
+\[ \lambda_1 = 1, \,\, \lambda_2 = 2, \,\, \lambda_3 = 3. \]
+
+The associated eigenvectors are 
+\[ \vec{x_1} = \cvvv{1}{0}{0}, \,\, \vec{x_2} = \cvvv{1}{1}{0}, \,\, \vec{x_3} = \cvvv{1}{1}{1}. \]
+
+}
+
+
+\frame{ \frametitle{Example: ODE $\frac{du}{dt} = Au$: $n \times n$ case}
+
+Solving the initial condition for its coefficients $c_1$, $c_2$, $c_3$ yields 
+\begin{align*}
+ u(0) & = c_1 \vec{x_1} + c_2 \vec{x_2} + c_3 \vec{x_3} \\
+  & \\
+ \implies \cvvv{6}{5}{4} & = \begin{pmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix} \cvvv{c_1}{c_2}{c_3} \\
+ & \\
+ \implies \cvvv{c_1}{c_2}{c_3} & = \cvvv{1}{1}{4} \\
+ & \\
+  \implies u(0) & = \vec{x_1} + \vec{x_2} + 4\vec{x_3}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: ODE $\frac{du}{dt} = Au$: $n \times n$ case}
+
+Thus, the solution to the ODE system is 
+\begin{align*}
+ u(t) & = c_1 e^{\lambda_1 t} \vec{x_1} + c_2 e^{\lambda_2 t} \vec{x_2} + c_3 e^{\lambda_3 t} \vec{x_3} \\
+ & \\
+ & = e^{t} \cvvv{1}{0}{0} + e^{2 t} \cvvv{1}{1}{0} + 4 e^{3 t} \cvvv{1}{1}{1} \\
+ & \\
+ & = \cvvv{e^t + e^{2t} + 4e^{3t}}{e^{2t} + 4e^{3t}}{4e^{3t}} = \cvvv{u_1(t)}{u_2(t)}{u_3(t)}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Check: ODE $\frac{du}{dt} = Au$: $n \times n$ case}
+
+We check the solution: 
+
+\begin{align*}
+ \frac{d}{dt} u(t) & = \frac{d}{dt} \cvvv{e^t + e^{2t} + 4e^{3t}}{e^{2t} + 4e^{3t}}{4e^{3t}} \\
+  & \\
+  & = \cvvv{e^t + 2e^{2t} + 12e^{3t}}{2e^{2t} + 12e^{3t}}{12e^{3t}} \\
+  & \\
+  & = \begin{pmatrix} 1 & 1 & 1 \\ 0 & 2 & 1 \\ 0 & 0 & 3 \end{pmatrix} \cvvv{e^t + e^{2t} + 4e^{3t}}{e^{2t} + 4e^{3t}}{4e^{3t}} = Au. \,\, \checkmark
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Second Order ODEs}
+
+A $1 \times 1$ second order linear ODE has form 
+\[ m y'' + by' + ky = 0, \,\, y = y(t), \]
+with constants $m, b, k \in \R$. 
+
+\vspace{5mm}
+
+We typically solve this kind of ODE by first assuming the form $y(t) = C e^{\lambda t}$ and checking the coefficient equation 
+\[ m \lambda^2 + b\lambda + k = 0, \]
+which comes from the derivatives 
+\[ y' = \lambda y, \,\, y'' = \lambda^2 y. \]
+
+
+}
+
+
+\frame{ \frametitle{Second Order ODEs}
+
+It should be clear that the quadratic equation yields the solutions 
+\[ \lambda_1 = \frac{-b + \sqrt{b^2 - 4mk}}{2m}, \,\, \lambda_2 = \frac{-b - \sqrt{b^2 - 4mk}}{2m}. \]
+
+\vspace{5mm}
+
+Then, the solution to the second order ODE is 
+\[ y(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t}, \]
+where $c_1$ and $c_2$ are given by initial conditions. 
+
+}
+
+
+\frame{ \frametitle{Second Order ODEs}
+
+How can we use linear algebra to solve a second order linear ODE?
+
+\vspace{5mm}
+
+WLOG we will set $m=1$ to make the calcuations easier.
+
+\vspace{5mm}
+
+Setting $u = \cvv{y}{y'}$, the ODE 
+\[ y'' + by' + ky = 0 \]
+is transformed into the linear system 
+\[ \frac{du}{dt} = Au, \,\, A = \mrr{0}{1}{-k}{-b}. \]
+
+
+}
+
+
+\frame{ \frametitle{Second Order ODEs}
+
+We solve the system as before. 
+
+\vspace{5mm}
+
+Note that the characteristic equation of $A$ is precisely the quadratic we used earlier: 
+\[ \det(A - \lambda I) = \lambda^2 + b \lambda + k = 0. \]
+
+Thus $\lambda_1$ and $\lambda_2$ are as we calculated, and the eigenvectors are 
+\[ \vec{x_1} = \cvv{1}{\lambda_1}, \,\, \vec{x_2} = \cvv{1}{\lambda_2}. \]
+
+}
+
+
+\frame{ \frametitle{Second Order ODEs}
+
+We get the system solution 
+\begin{align*} 
+u(t) & = c_1 e^{\lambda_1 t} \vec{x_1} + c_2 e^{\lambda_2 t} \vec{x_2} \\
+ & = c_1 e^{\lambda_1 t} \cvv{1}{\lambda_1} + c_2 e^{\lambda_2 t} \cvv{1}{\lambda_2} \\
+ & \\
+\implies \cvv{y(t)}{y'(t)} & = \cvv{c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t}}{c_1 \lambda_1 e^{\lambda_1 t} + c_2 \lambda_2 e^{\lambda_2 t}}.
+\end{align*}
+
+\vspace{5mm}
+
+Note that, for this to work, we require $\lambda_1 \neq \lambda_2$. 
+
+\vspace{5mm}
+
+If any eigenvalues match, we need to add solutions of form $Ct^k e^{\lambda t}$. 
+
+}
+
+
+\frame{ \frametitle{Example: Second Order ODE: General Solution}
+
+Solve for $y = y(t)$: 
+\[ y'' - 6y' + 5y = 0, \,\, y(0) = 10, \,\, y'(0) = 4. \]
+\begin{align*}
+\text{characteristic equation} & & \lambda^2 - 6\lambda + 5 & = 0 \\
+\implies & & \lambda_1 = 1, \,\, \lambda_2 & = 5 \\
+\implies & & \vec{x_1} = \cvv{1}{1}, \,\, \vec{x_2} & = \cvv{1}{5} \\
+\implies & & u(t) = \cvv{y(t)}{y'(t)} & = \cvv{c_1 e^t + c_2 e^{5t}}{c_1 e^t + 5 c_2 e^{5t}}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Second Order ODE: Initial Conditions}
+
+\begin{align*}
+\text{initial conditions} & & u(0) = \cvv{y(0)}{y'(0)} & = \cvv{10}{4} \\
+\implies & & \cvv{c_1 + c_2}{c_1 + 5c_2} & = \cvv{10}{4} \\
+\implies & & c_1 = \frac{23}{2}, \,\, c_2 & = -\frac{3}{2}. \\
+\therefore & & y(t) = \frac{23}{2} e^t & - \frac{3}{2} e^{5t}.
+\end{align*}
+
+\begin{align*}
+\text{ Check: } y'(t) & = \frac{23}{2} e^t - \frac{15}{2} e^{5t}, \,\, y''(t) = \frac{23}{2} e^t - \frac{75}{2} e^{5t} \\
+\implies y'' & - 6y' + 5y = 0. \,\, \checkmark
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Second Order ODE: Matching Eigenvalues}
+
+Solve for $y = y(t)$: 
+\[ y'' - 8y' + 16y = 0, \,\, y(0) = 10, \,\, y'(0) = 4. \]
+\begin{align*}
+\text{char eqn} & & \lambda^2 - 8\lambda + 16 & = 0 \\
+\implies & & \lambda_1 = \lambda_2 & = 4 \\
+\implies & & \vec{x_1} = \vec{x_2} & = \cvv{1}{4} \\
+\implies & & u(t) = \cvv{y(t)}{y'(t)} & = \cvv{(c_1 + c_2 t) e^{4t}}{(4c_1 + c_2 + 4c_2 t) e^{4t}}.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Example: Second Order ODE: Matching Eigenvalues}
+
+\begin{align*}
+\text{init cond} & & u(0) = \cvv{y(0)}{y'(0)} & = \cvv{10}{4} \\
+\implies & & \cvv{c_1}{4c_1 + c_2} & = \cvv{10}{4} \\
+\implies & & c_1 = 10, \,\, c_2 & = -36. \\
+\therefore & & y(t) & = \left(10 - 36t\right) e^{4t}. \\
+& \\
+\text{ Check: } & & y'(t) & = (4 - 144t) e^{4t}, \\
+ & & y''(t) & = (-128 - 576t) e^{4t} \\
+\implies & & y'' - 8y' + 16y & = 0. \,\, \checkmark
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Long-Term Stability of ODE Solutions via Eigenvalues}
+
+As $t \to \infty$, what happens to $u(t)$? Does the ODE solution: 
+
+\begin{itemize}
+\item stabilize ($u(t) \to c \in \R$)? (``vanish" if $c=0$)
+\item explode ($|u(t)| \to \infty$)?
+\item cycle ($0 < |u(t)| < \infty$ but $u(t)$ continues to vary)?
+\end{itemize}
+
+\vspace{5mm}
+
+Since $e^{\lambda t}$ is the structure of the terms of a typical ODE solution, we examine the eigenvalues as complex: $\lambda = r + is \in \C$. 
+
+\begin{itemize}
+\item stabilize: \emph{all} eigenvalues have $r < 0$ (exponential decay)
+\item explode: \emph{any} eigenvalue has $r > 0$ (exponential growth)
+\item cycle: $r = 0$, $s \neq 0$
+\end{itemize}
 
 }
 
