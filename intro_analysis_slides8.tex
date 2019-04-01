@@ -1,0 +1,501 @@
+\documentclass{beamer}
+
+\usepackage{mjclectureslides}
+
+\definecolor{Dblue}{rgb}{.255,.41,.884}
+
+\title[infinite series]{Introduction to Analysis: \\
+Infinite Series of \\
+Real Numbers and \\
+Real-Valued Functions}
+%\author[Prof. Michael Carlisle]{Prof. Michael Carlisle}
+%\institute{Baruch College, CUNY}
+%\date{Spring 2017}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\frame{ \frametitle{Series Notation (reminder)}
+
+Let $(a_n)$ be a sequence of real numbers. If $m \leq n$, we use the sigma (summing) notation 
+\[ \sum_{k=m}^n a_k = a_m + a_{m+1} + \cdots + a_{n-1} + a_n \]
+to denote the sum shown. 
+
+\vspace{5mm}
+
+If we wish to ignore / suppress the indexing of the sum, we can more simply write 
+\[ \sum a_k \]
+to denote a sum indexed over the variable $k$.
+
+}
+
+
+\frame{ \frametitle{Partial Sums, Convergence of Partial Sums}
+
+Using $(a_n)$, we can define a new sequence $(s_n)$ of \textbf{partial sums}, defined by 
+\[ s_n = \sum_{k=1}^n a_k. \]
+If the sequence of partial sums has limit 
+\[ \lim_{n \to \infty} s_n = \sum_{n=1}^{\infty} a_n = s, \]
+we call the series \textbf{convergent} to the \textbf{sum} $s$.
+
+\vspace{5mm}
+
+Otherwise, the sum \textbf{diverges}, to $+\infty$ or $-\infty$ if the sum grows without bound, or \textbf{oscillates}, or otherwise has no value.
+
+}
+
+
+\frame{ \frametitle{Example: Riemann-Zeta}
+
+The \textbf{harmonic series} diverges: 
+\[ \sum_{n=1}^{\infty} \frac{1}{n} = +\infty. \]
+In general, the \textbf{Riemann-zeta}, or \textbf{Riemann}-$\zeta$, function, 
+\[ \zeta(x) = \sum_{n=1}^{\infty} \frac{1}{n^x} = \sum_{n=1}^{\infty} n^{-x}, \]
+diverges when $x \leq 1$ and converges when $x > 1$. 
+
+}
+
+
+% thm: linearity
+% thm: $\sum a_n$ converges implies $\lim a_n = 0$
+\frame{ \frametitle{Summing is a Linear Operation; Series Convergence}
+
+\begin{thm}
+\textbf{(linearity of sums)} 
+
+\vspace{3mm}
+
+Suppose $\sum a_n = s$ and $\sum b_n = t$. Then, if $c_1, c_2 \in \R$, 
+\[ \sum (c_1 a_n + c_2 b_n) = c_1 \sum a_n + c_2 \sum b_n = c_1 s + c_2 t. \]
+\end{thm}
+
+\begin{thm}
+\textbf{(Series convergence implies terms shrink)} \\
+
+\vspace{3mm}
+
+If $\sum a_n$ converges, then $\lim a_n = 0$. 
+\end{thm}
+
+}
+
+
+% thm: Cauchy criterion for series
+\frame{ \frametitle{Cauchy criterion for series}
+
+\begin{thm}
+\textbf{(Cauchy criterion for series)} \\
+$\sum a_n$ converges $\iff$ for each $\ve > 0$, $\exists N \in \N$ such that 
+\[ n \geq m \geq N \implies \bigg| \sum_{k=m}^n a_k \bigg| < \ve. \]
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Cauchy criterion for series}
+
+\pf $(\implies)$: $\sum a_n$ converges \\
+$\implies$ the sequence of partial sums $(s_n)$ converges \\
+$\implies$ $(s_n)$ is Cauchy \\
+$\implies$ for any $\ve > 0$, $\exists N \in \N$ such that 
+\[ n \geq m+1 \geq N \implies |s_n - s_{m-1}| = \bigg| \sum_{k=m}^n a_k \bigg| < \ve. \]
+
+}
+
+
+\frame{ \frametitle{Cauchy criterion for series}
+
+\pf $(\Longleftarrow)$: Let $\ve > 0$, and suppose $\exists N \in \N$ such that 
+\[ n \geq m \geq N \implies \bigg| \sum_{k=m}^n a_k \bigg| < \ve. \]
+Then 
+\[ |s_n - s_{m+1}| < \ve, \]
+which is precisely the Cauchy criterion for $(s_n)$. 
+
+\vspace{3mm}
+
+Hence, $(s_n = \sum a_n)$ converges. \,\,\,\, $\blacksquare$
+
+}
+
+
+% eg: geometric series: $|r| < 1$ implies 
+% \[ \sum_{n=0}^{\infty} r^n = \frac{1}{1-r} \]
+% eg: alternating geometric series: $|r| < 1$ implies 
+% \[ \sum_{n=0}^{\infty} (-1)^n r^n = \frac{1}{1+r} \]
+\frame{ \frametitle{Geometric Series, Alternating Geometric Series}
+
+The \textbf{geometric series} with base $r$ is defined by 
+\[ \sum_{n=0}^{\infty} r^n, \]
+and the \textbf{alternating geometric series} is defined by 
+\[ \sum_{n=0}^{\infty} (-1)^n r^n. \]
+
+}
+
+
+\frame{ \frametitle{Geometric Series, Alternating Geometric Series}
+
+If $r \neq 1$, then the partial sums are 
+\[ \sum_{k=0}^{n} r^k = \frac{1 - r^{n+1}}{1-r}, \,\,\,\,\,\,  \sum_{k=0}^{n} (-1)^k r^k = \frac{1 - (-1)^{n+1} r^{n+1}}{1+r}. \]
+
+\vspace{3mm}
+
+If $|r| \geq 1$, the sums diverge. 
+
+\vspace{3mm}
+
+If $|r| < 1$, the sums converge: 
+\[ \sum_{n=0}^{\infty} r^n = \frac{1}{1-r}, \,\,\,\,\,\,  \sum_{n=0}^{\infty} (-1)^n r^n = \frac{1}{1+r}. \]
+
+}
+
+
+% thm: comparison test (i.e. domination)
+\frame{ \frametitle{Comparison Test (Dominated Convergence)}
+
+Now we see several results about convergence. 
+
+\vspace{5mm}
+
+\begin{thm}
+\textbf{(Comparison Test)} Let $\sum a_n$ and $\sum b_n$ be infinite series of nonnegative terms. Then 
+\begin{itemize}
+\item[(a) ] $\sum a_n$ converges and $0 \leq b_n \leq a_n$ $\forall n$ $\implies$ $\sum b_n$ converges. 
+\item[(b) ] $\sum a_n = +\infty$ and $0 \leq a_n \leq b_n$ $\forall n$ $\implies$ $\sum b_n = +\infty$. 
+\end{itemize}
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Comparison Test (Dominated Convergence)}
+
+\pf 
+\begin{itemize}
+\item[(a) ] $\sum a_n = a < \infty$ and $0 \leq b_n \leq a_n$ $\forall n$ $\implies$ 
+\[ \forall n, \,\,\,\, 0 \leq \sum_{k=1}^n b_k \leq \sum_{k=1}^n a_k \leq a \implies \sum b_n = b \leq a \] 
+by the Monotone Convergence Theorem.
+\item[(b) ] $(\sum a_n)$ is unbounded $\implies$ $(\sum b_n)$ is unbounded. \,\,\,\, $\blacksquare$ 
+\end{itemize}
+
+}
+
+
+% defn: abs conv, cond conv
+\frame{ \frametitle{Absolute, Conditional Convergence}
+
+If $\sum |a_n|$ converges, we call the series $\sum a_n$ \\
+\textbf{absolutely convergent}. 
+
+\vspace{5mm}
+
+If $\sum a_n$ converges but $\sum |a_n|$ diverges, we call the series $\sum a_n$ \textbf{conditionally convergent}. 
+
+\vspace{5mm}
+
+There are relationships between these two types of convergence. 
+
+\vspace{5mm}
+
+\begin{thm}
+$\sum a_n$ converges absolutely $\implies$ $\sum a_n$ converges.
+\end{thm}
+
+\pf Triangle inequality + Cauchy criterion. 
+
+}
+
+
+% thm: ratio test
+\frame{ \frametitle{Ratio Test}
+
+\begin{thm}
+\textbf{(Ratio Test)} Let $\sum a_n$ be a series of nonzero terms. 
+\begin{itemize}
+\item[(a) ] If $\limsup |\frac{a_{n+1}}{a_n}| < 1$, then $(\sum a_n)$ converges absolutely. 
+\item[(b) ] If $\liminf |\frac{a_{n+1}}{a_n}| > 1$, then $(\sum a_n)$ diverges. 
+\item[(c) ] Otherwise, $\liminf |\frac{a_{n+1}}{a_n}| \leq 1 \leq \limsup |\frac{a_{n+1}}{a_n}|$ and the test gives no information. 
+\end{itemize}
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Ratio Test}
+
+\pf Let 
+\[ \limsup |\frac{a_{n+1}}{a_n}| = L. \]
+
+If $L < 1$, then pick $r$ such that $L < r < 1$. 
+
+\vspace{3mm}
+
+Then $\exists N \in \N$ such that, if $n \geq N$, 
+\begin{align*}
+\bigg|\frac{a_{n+1}}{a_n}\bigg| & \leq r \implies |a_{n+1}| \leq r|{a_n}| \implies \forall k \in \N, \,\, |a_{N+k}| \leq r^k |{a_N}|.
+\end{align*}
+
+}
+
+
+\frame{ \frametitle{Ratio Test}
+
+Then 
+\begin{align*}
+\sum_{k=1}^{\infty} |a_k| & = \sum_{k=1}^{N-1} |a_k| + \sum_{k=N}^{\infty} |a_k| \\
+ & \leq \sum_{k=1}^{N-1} |a_k| + |{a_N}| \sum_{k=0}^{\infty} r^k \\
+ & = \sum_{k=1}^{N-1} |a_k| + \frac{|a_N|}{1-r} < \infty,
+\end{align*}
+and so $\sum a_n$ converges. 
+
+\vspace{5mm}
+}
+
+
+\frame{ \frametitle{Ratio Test}
+
+If $\liminf |\frac{a_{n+1}}{a_n}| > 1$, then $|a_{n+1}| \geq |a_n|$ for all $n$ sufficiently large. Then $a_n \not \to 0$ and so $\sum a_n$ must diverge. 
+
+\vspace{5mm}
+
+Finally, we can give an example of two series such that 
+\[ \lim \bigg|\frac{a_{n+1}}{a_n}\bigg| = 1, \]
+
+with one converging and one diverging: recalling the Riemann-zeta function, $\zeta(2)$ converges and $\zeta(0)$ diverges. \,\,\,\, $\blacksquare$
+
+}
+
+
+% thm: root test
+\frame{ \frametitle{Root Test}
+
+\begin{thm}
+\textbf{(Root Test)} Let $\sum a_n$ be a series, and let $\alpha = \limsup |a_n|^{1/n}$.  
+\begin{itemize}
+\item[(a) ] If $\alpha < 1$, then $\sum a_n$ converges absolutely. 
+\item[(b) ] If $\alpha > 1$, then $\sum a_n$ diverges. 
+\item[(c) ] Otherwise, $\alpha = 1$ and the test gives no information. 
+\end{itemize}
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Root Test}
+
+\pf If $\alpha < 1$, pick $r$ such that $\alpha < r < 1$. 
+
+\vspace{3mm}
+
+Then $\exists N \in \N$ such that $\forall n \geq N$, 
+\begin{align*}
+|a_n|^{1/n} \leq r \implies |a_n| & \leq r^n \\
+ \implies \sum_{k=1}^{\infty} |a_k| & = \sum_{k=1}^{N-1} |a_k| + \sum_{k=N}^{\infty} |a_k| \\
+ & \leq \sum_{k=1}^{N-1} |a_k| + \sum_{k=0}^{\infty} r^k \\
+ & = \sum_{k=1}^{N-1} |a_k| + \frac{1}{1-r} < \infty.
+\end{align*}
+
+}
+
+
+% eg
+\frame{ \frametitle{Root Test}
+
+If $\alpha > 1$, then $|a_n|^{1/n} \geq 1$ for infinitely many $n$, so $|a_n| \geq 1$ for infinitely many $n$. Thus, $(a_n)$ diverges. 
+
+\vspace{5mm}
+
+We can once again give an example of a convergent series 
+\[ \zeta(2) = \sum_{n=1}^{\infty} \frac{1}{n^2} \] 
+and a divergent sequence 
+\[ \zeta(0) = \sum_{n=1}^{\infty} \frac{1}{n^0} = \sum_{n=1}^{\infty} 1, \]
+both having $\alpha = 1$, to show its ineffectiveness in this test. \,\,\,\, $\blacksquare$
+
+
+}
+
+
+% thm: integral test
+\frame{ \frametitle{Integral Test}
+
+\begin{thm}
+Let $f$ be continuous on $[0,\infty)$, and suppose that $f$ is positive and decreasing. 
+Then 
+\[ \sum f(n) \text{ converges } \iff \lim_{n \to \infty} \left( \int_1^n f(x) dx \right) \in \R. \] 
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Integral Test}
+
+\pf Let $a_n = f(n)$ and 
+\[ b_n = \int_n^{n+1} f(x) dx. \] 
+
+$f$ is decreasing, so for any $n \in \N$, 
+\[ f(n+1) \leq \int_n^{n+1} f(x) dx \leq f(n). \]
+
+Thus, by the comparison test, since $0 < a_{n+1} \leq b_n \leq a_n$, 
+
+\vspace{3mm}
+
+$\sum a_n$ converges $\iff$ $\sum b_n$ converges. \,\,\,\, $\blacksquare$
+
+}
+
+
+% thm: alternating series test
+\frame{ \frametitle{Alternating Series Test}
+
+\begin{thm}
+\textbf{(Alternating Series Test)} If $(a_n)$ is a decreasing sequence of positive numbers and 
+\[ \lim a_n = 0, \]
+then the series 
+\[ \sum (-1)^n a_n \] 
+converges. 
+\end{thm}
+
+}
+
+
+\frame{ \frametitle{Alternating Series Test}
+
+\pf Since $(a_n)$ is decreasing, the differences 
+\[ a_{2n-1} - a_{2n-2} \geq 0, \]
+and every partial sum $s_n \leq a_1$ (we can show this via induction). 
+
+\vspace{3mm}
+
+Hence, by the Monotone Convergence Theorem, the increasing, bounded subsequence 
+\[ s_{2n} = (a_1 - a_2) + (a_3 - a_4) + \cdots + (a_{2n-1} - a_{2n}) \to s \] 
+for some $s \in \R$. 
+
+\vspace{5mm}
+
+For the odd subsequence $s_{2n+1}$, it is clear that since $a_{2n+1} \to 0$, $s_{2n+1} = s_{2n} + a_{2n+1} \to s$ as well.
+
+\vspace{3mm}
+
+Therefore, the interleaved sequence $s_n \to s$. \,\,\,\, $\blacksquare$
+
+}
+
+
+\frame{ \frametitle{Rearrangements}
+
+Let $f: \N \to \N$ be a bijection, i.e. a \textbf{rearrangement} of $\N$. 
+
+\vspace{5mm} 
+
+A \textbf{rearrangement} of the series of real numbers $\sum a_n$ is the series 
+\[ \sum b_n = \sum a_{f(n)}. \]
+
+\begin{thm}
+\textbf{(Dirichlet's Theorem)}: If $\sum a_n$ converges absolutely, then any rearrangement $\sum b_n$ converges absolutely, and $\sum a_n = \sum b_n$. 
+\end{thm}
+
+\begin{thm}
+Let $s \in \R$. If $\sum a_n$ converges conditionally, then there exists a rearrangement of $\sum a_n$ that converges to $s$.
+
+\vspace{3mm}
+
+There also exists a rearrangement that diverges. 
+\end{thm}
+
+}
+
+
+% defn: power series, coefficient
+\frame{ \frametitle{Power Series (reminder)}
+
+Given a sequence $(a_n)$, $n=0,1,2,...$, the infinite series
+\[ \sum_{n=0}^{\infty} a_n x^n \]
+is called a \textbf{power series}. The number $a_n$ is called the $n$th \textbf{coefficient} of the series.
+
+\vspace{5mm}
+
+Depending on the convergence properties of the sequence $(a_n)$, \\the power series may exist as a function of the variable $x$, or may simply be a formal set of symbols. 
+
+\vspace{3mm}
+
+(We call the power series a \textbf{generating function} in either case.)
+
+}
+
+
+
+% defn/thm: radius, interval of convergence
+\frame{ \frametitle{Radius, Interval of Convergence of a Power Series}
+
+\begin{thm}
+Let $\sum a_n x^n$ be a power series, and $\alpha = \limsup |a_n|^{1/n}$. Define $R$ by 
+\[ R = \left\{ \begin{array}{ll}
+\frac{1}{\alpha} & \text{ if } 0 < \alpha < \infty, \\
++\infty & \text{ if } \alpha = 0, \\
+0 & \text{ if } \alpha < +\infty.
+\end{array}\right. \]
+Then the series converges absolutely whenever $|x| < R$ and diverges whenever $|x| > R$. 
+\end{thm}
+
+\vspace{3mm}
+
+\pf Apply the root test to the sequence $(b_n) = (a_n x^n)$. Then 
+\[ \beta = \limsup |b_n|^{1/n} = \limsup |a_n x^n|^{1/n} = |x| \alpha. \,\,\,\, \blacksquare \]
+
+}
+
+
+
+% thm: ratio criterion
+\frame{ \frametitle{Ratio criterion of Radius of Convergence}
+
+We call $R$ the \textbf{radius of convergence} of the series, and the interval $C$ around 0 of the $x$ where $\sum a_n x^n$ converges is called the \textbf{interval of convergence}. 
+
+\vspace{3mm}
+
+$C$ may equal $(-R, R)$, $[-R, R)$, $(-R, R]$, or $[-R, R]$, depending on convergence at the endpoints. 
+
+\vspace{5mm}
+
+\begin{thm}
+The radius of convergence $R$ of the power series $\sum a_n x^n$ equals 
+\[ R = \lim_{n \to \infty} \bigg|\frac{a_n}{a_{n+1}}\bigg|, \]
+if the limit exists. 
+\end{thm}
+
+}
+
+
+% eg 
+
+% Taylor series is a power series with int of conv $\R$
+% (mention Bolzano-Weierstrass?)
+\frame{ \frametitle{Taylor series is a power series (reminder)}
+
+A power series of the form $\sum_{n=0}^{\infty} a_n x^n$ has a radius of convergence centered at 0. 
+
+\vspace{5mm}
+
+We can talk about more general power series centered at other values: a power series centered at $x_0$ has form 
+\[ \sum_{n=0}^{\infty} a_n (x - x_0)^n. \]
+This form should be familiar: if, for some function $f$, 
+\[ a_n = \frac{f^{(n)}(x_0)}{n!}, \]
+then the power series above is the Taylor series of $f$ centered at $x_0$. 
+
+}
+
+
+
+
+% Fourier series is a power series, but in complex numbers, not reals... 
+% using cos and sin, for periodic functions
+% (mention Bolzano-Weierstrass?)
+
+% eg: show sin(x) as a power series polynomial,
+% then show x (on [0,L)) as a Fourier series?
+% 
+
+
+
+\end{document}
