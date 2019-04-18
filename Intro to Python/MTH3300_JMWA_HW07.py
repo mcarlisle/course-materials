@@ -100,8 +100,10 @@ def OneTerm(coeff, degree):
         
     if coeff == 0.0:
         return "0"  # don't print anything else if coeff = 0
-    elif coeff in {1.0, -1.0} and xStr != "":
+    elif coeff == 1.0 and xStr != "":
         return xStr # don't print coeff if coeff in {1,-1} and x shows up
+    elif coeff == -1.0 and xStr != "":
+        return "-" + xStr # don't print coeff if coeff in {1,-1} and x shows up
     else:
         return str(coeff) + xStr  # usual look: a_n x^n
 
