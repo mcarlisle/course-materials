@@ -100,8 +100,8 @@ def OneTerm(coeff, degree):
         
     if coeff == 0.0:
         return "0"  # don't print anything else if coeff = 0
-    elif coeff == 1.0:
-        return xStr # don't print coeff if coeff = 1
+    elif coeff == 1.0 and xStr != "":
+        return xStr # don't print coeff if coeff = 1 but x shows up
     elif coeff == -1.0 and xStr != "":
         return "-" + xStr  # don't print -1 if x should show up, just -x^n
     else:
@@ -119,15 +119,18 @@ class Polynomial(object):
     def __str__(self):
         polyStr = ""
         firstTerm = True
-        # Sort the powers from greatest to smallest.
-        largestPowerFirst = sorted(self.coeffs.keys(),reverse=True)
+        f = self.clean() # don't print any 0 coefficients
+        # Sort the powers from greatest to least.
+        largestPowerFirst = sorted(f.coeffs.keys(),reverse=True)
         if len(largestPowerFirst) == 0:
             return "0"  # need to deal with 'empty' Polynomial
         for k in largestPowerFirst:
-            if not firstTerm:
-                polyStr += " + "  # add terms
-            polyStr += OneTerm(self.coeffs[k], k)
-            firstTerm = False  # so what, keep setting it  :p
+            thisTerm = OneTerm(f.coeffs[k], k)
+            if not firstTerm and thisTerm != "":
+                thisTerm = " + " + thisTerm
+            polyStr += thisTerm   # add term
+            if firstTerm:
+                firstTerm = False  # find a better way to deal with firstTerm!
         return polyStr
 
     def clean(self):
