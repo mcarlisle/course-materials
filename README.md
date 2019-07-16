@@ -15,4 +15,4 @@ For lecture slides, occasionally information seems "missing" - this was intentio
 
 All materials have been greatly generalized to remove all displayed course-specific information (rooms, times, grading procedures, etc.). What remains is suitable for self-study.
 
-Amidst all the other freely-available materials online, I hope these help a few of you students looking for more practice problems, or some professors that want some prepared materials their students haven't seen yet.
+Amidst all the other available materials online, I hope these help a few of you students looking for more practice problems, or some professors that want some prepared materials their students haven't seen yet.
